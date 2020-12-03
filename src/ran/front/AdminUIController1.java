@@ -18,9 +18,7 @@ public class AdminUIController1 {
     private Button click;
     @FXML
     private Button click1;
-    @FXML
-    private TableView<?> table;
-
+   
     // Event Listener on Button[#click].onAction
     @FXML
     public void jump(ActionEvent event) {
@@ -29,9 +27,5 @@ public class AdminUIController1 {
 
     @FXML
     private void jumppp(ActionEvent event) {
-    }
-
-    @FXML
-    private void clic(SortEvent<C> event) {
     }
 }
