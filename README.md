@@ -1,2 +1,0 @@
-# HospitalMS
-by aakash
