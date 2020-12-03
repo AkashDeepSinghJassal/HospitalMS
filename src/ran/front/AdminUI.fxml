@@ -16,11 +16,6 @@
       </Text>
       <Button fx:id="click" layoutX="588.0" layoutY="502.0" mnemonicParsing="false" onAction="#jump" text="Button" />
       <Button fx:id="click1" layoutX="795.0" layoutY="471.0" mnemonicParsing="false" onAction="#jumppp" text="Button" />
-      <TableView fx:id="table" layoutX="137.0" layoutY="85.0" onSort="#clic" prefHeight="200.0" prefWidth="200.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
-        </columns>
-      </TableView>
+      
    </children>
 </AnchorPane>

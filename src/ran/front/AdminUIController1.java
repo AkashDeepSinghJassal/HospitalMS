@@ -30,8 +30,4 @@ public class AdminUIController1 {
     @FXML
     private void jumppp(ActionEvent event) {
     }
-
-    @FXML
-    private void clic(SortEvent<C> event) {
-    }
 }
