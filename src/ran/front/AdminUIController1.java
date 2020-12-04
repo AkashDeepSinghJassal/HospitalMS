@@ -28,4 +28,11 @@ public class AdminUIController1 {
     @FXML
     private void jumppp(ActionEvent event) {
     }
+    
+    @FXML
+    void addDoctor(ActionEvent event) {
+    	System.out.println("This ");
+    	
+    }
+    
 }

@@ -12,14 +12,11 @@
             <Font size="56.0" />
          </font>
       </Text>
-<<<<<<< HEAD
-      <Button fx:id="click" layoutX="321.0" layoutY="377.0" mnemonicParsing="false" onAction="#jump" text="Button" />
-      <Button fx:id="click1" layoutX="804.0" layoutY="408.0" mnemonicParsing="false" onAction="#jumppp" text="Button" />
-      <Button fx:id="click2" layoutX="525.0" layoutY="393.0" mnemonicParsing="false" onAction="#jump" text="Button" />
-=======
+      <Button fx:id="click" layoutX="321.0" layoutY="377.0" mnemonicParsing="false" onAction="#addDoctor" text="Add Doctor" />
+      <Button fx:id="click1" layoutX="837.0" layoutY="377.0" mnemonicParsing="false" onAction="#jumppp" text="Add Admin" />
+      <Button fx:id="click2" layoutX="539.0" layoutY="377.0" mnemonicParsing="false" onAction="#jump" text="Add Patient" />
       <Button fx:id="click" layoutX="588.0" layoutY="502.0" mnemonicParsing="false" onAction="#jump" text="Button" />
       <Button fx:id="click1" layoutX="795.0" layoutY="471.0" mnemonicParsing="false" onAction="#jumppp" text="Button" />
->>>>>>> 0fdb059d1c0754f6537897e8acc102d81f428eff
       
    </children>
 </AnchorPane>

@@ -21,7 +21,6 @@ public class HospitalMS extends Application{
 			// TODO Auto-generated catch block
 			System.out.println(e);
 		}
-
 	}
 
 	public static void main(String[] args) {
