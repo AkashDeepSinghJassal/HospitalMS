@@ -1,5 +1,5 @@
 package ran.elem;
 
-public class Doctor {
+public class Doctor extends User {
 
 }

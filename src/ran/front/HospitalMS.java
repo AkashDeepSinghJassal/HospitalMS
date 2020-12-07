@@ -6,20 +6,22 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class HospitalMS extends Application{
+public class HospitalMS extends Application {
+	public static Stage stage = null;
+	public static Boolean isWelcomeLoaded = false;
 
 	@Override
-	public void start(Stage stage) {
+	public void start(Stage primaryStage) {
+		stage = primaryStage;
 		Parent root;
 		try {
 			root = FXMLLoader.load(getClass().getResource("AdminUI.fxml"));
 			Scene scene = new Scene(root);
-			
-			stage.setScene(scene);
-			stage.show();
+			primaryStage.setFullScreen(true);
+			primaryStage.setScene(scene);
+			primaryStage.show();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			System.out.println(e);
+			e.printStackTrace();
 		}
 	}
 

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image ?>
+<?import javafx.scene.image.ImageView ?>
+<?import javafx.scene.layout.BorderPane ?>
+<?import javafx.scene.layout.StackPane ?>
+<?import javafx.scene.text.Font ?>
+<?import javafx.scene.text.Text ?>
+
+<BorderPane fx:id="borderPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ran.front.WelcomeController">
+   <center>
+      <StackPane BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fx:id="imageView" opacity="0.75" pickOnBounds="false" smooth="false">
+               <image>
+                  <Image url="@../../img/Welcome-BG.jpg" />
+               </image>
+            </ImageView>
+            <Text fx:id="fullName" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome">
+               <font>
+                  <Font size="100.0" />
+               </font>
+            </Text>
+         </children>
+      </StackPane>
+   </center>
+</BorderPane>
