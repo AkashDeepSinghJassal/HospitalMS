@@ -18,31 +18,6 @@ import javafx.util.Duration;
 public class AdminUIController implements Initializable {
 	@FXML
 	private AnchorPane anchorPane;
-	@FXML
-	private Text header;
-	@FXML
-	private Button click;
-	@FXML
-	private Button click1;
-	@FXML
-	Button click2;
-
-	// Event Listener on Button[#click].onAction
-	@FXML
-	public void jump(ActionEvent event) {
-
-	}
-
-	// Event Listener on Button[#click1].onAction
-	@FXML
-	public void jumppp(ActionEvent event) {
-
-	}
-
-	@FXML
-	public void addDoctor(ActionEvent event) {
-
-	}
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
