@@ -15,8 +15,9 @@ public class HospitalMS extends Application {
 		stage = primaryStage;
 		Parent root;
 		try {
-			root = FXMLLoader.load(getClass().getResource("AdminUI.fxml"));
+			root = FXMLLoader.load(getClass().getResource("Login.fxml"));
 			Scene scene = new Scene(root);
+			scene.getStylesheets().add("ran/front/Main.css");
 			primaryStage.setFullScreen(true);
 			primaryStage.setScene(scene);
 			primaryStage.show();

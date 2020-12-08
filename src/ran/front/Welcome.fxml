@@ -13,7 +13,7 @@
          <children>
             <ImageView fx:id="imageView" opacity="0.75" pickOnBounds="false" smooth="false">
                <image>
-                  <Image url="@../../img/Welcome-BG.jpg" />
+                  <Image url="@../../img/Hospital-BG.jpg" />
                </image>
             </ImageView>
             <Text fx:id="fullName" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome">

@@ -15,9 +15,34 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
-public class AdminUIController implements Initializable {
+public class HomePageController implements Initializable {
 	@FXML
 	private AnchorPane anchorPane;
+	@FXML
+	private Text header;
+	@FXML
+	private Button click;
+	@FXML
+	private Button click1;
+	@FXML
+	Button click2;
+
+	// Event Listener on Button[#click].onAction
+	@FXML
+	public void jump(ActionEvent event) {
+
+	}
+
+	// Event Listener on Button[#click1].onAction
+	@FXML
+	public void jumppp(ActionEvent event) {
+
+	}
+
+	@FXML
+	public void addDoctor(ActionEvent event) {
+
+	}
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
@@ -52,7 +77,7 @@ public class AdminUIController implements Initializable {
 
 			fadeOut.setOnFinished((e) -> {
 				try {
-					Parent parent = FXMLLoader.load(getClass().getResource("AdminUI.fxml"));
+					Parent parent = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
 					anchorPane.getChildren().setAll(parent);
 				} catch (IOException e1) {
 					e1.printStackTrace();

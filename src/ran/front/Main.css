@@ -1,0 +1,9 @@
+.login-form {
+	-fx-background-color: rgba(0, 0, 0, 0.5);
+}
+
+.form-input {
+	-fx-height: 50px;
+	-fx-padding: 5px 8px;
+	-fx-width: 70%;
+}
