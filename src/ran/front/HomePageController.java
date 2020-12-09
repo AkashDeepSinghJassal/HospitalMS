@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.animation.FadeTransition;
+import javafx.animation.Interpolator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -62,12 +63,14 @@ public class HomePageController implements Initializable {
 			fadeIn.setFromValue(0);
 			fadeIn.setToValue(1);
 			fadeIn.setCycleCount(1);
+			fadeIn.interpolatorProperty().set(Interpolator.EASE_OUT);
 
 			FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), root);
 			fadeOut.setFromValue(1);
 			fadeOut.setToValue(0);
 			fadeOut.setCycleCount(1);
 			fadeOut.setDelay(Duration.seconds(1));
+			fadeIn.interpolatorProperty().set(Interpolator.EASE_IN);
 
 			fadeIn.play();
 
