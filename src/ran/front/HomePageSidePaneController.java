@@ -15,6 +15,7 @@ public class HomePageSidePaneController {
 
 	@FXML
 	void logout(ActionEvent e) {
+		HospitalMS.isWelcomeLoaded = false;
 		AnchorPane root;
 		try {
 			root = FXMLLoader.load(getClass().getResource("Login.fxml"));
