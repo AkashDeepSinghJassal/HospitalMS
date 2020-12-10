@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 public class HomePageController implements Initializable {
@@ -31,11 +32,25 @@ public class HomePageController implements Initializable {
 		if (!HospitalMS.isWelcomeLoaded) {
 			loadWelcomePage();
 		}
+
+		try {
+			VBox sidePane = FXMLLoader.load(getClass().getResource("HomePageSidePane.fxml"));
+			drawer.setSidePane(sidePane);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+
 		HamburgerBasicCloseTransition transition = new HamburgerBasicCloseTransition(hamburger);
 		transition.setRate(-1);
 		hamburger.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			transition.setRate(transition.getRate() * -1);
 			transition.play();
+
+			if (drawer.isOpened()) {
+				drawer.close();
+			} else {
+				drawer.open();
+			}
 		});
 	}
 

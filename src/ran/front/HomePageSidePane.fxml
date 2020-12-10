@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton ?>
+<?import javafx.scene.layout.VBox ?>
+
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="300.0" style="-fx-background-color: #1F1F1F;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" text="Users" textFill="#f7f7ff" />
+   </children>
+</VBox>
