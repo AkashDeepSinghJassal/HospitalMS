@@ -4,39 +4,52 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.jfoenix.controls.JFXDrawer;
-import com.jfoenix.controls.JFXHamburger;
-import com.jfoenix.transitions.hamburger.HamburgerBasicCloseTransition;
-
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 public class HomePageController implements Initializable {
 	@FXML
 	private AnchorPane anchorPane;
 	@FXML
-	private JFXHamburger hamburger;
+	private Text header;
 	@FXML
-	private JFXDrawer drawer;
+	private Button click;
+	@FXML
+	private Button click1;
+	@FXML
+	Button click2;
+
+	// Event Listener on Button[#click].onAction
+	@FXML
+	public void jump(ActionEvent event) {
+
+	}
+
+	// Event Listener on Button[#click1].onAction
+	@FXML
+	public void jumppp(ActionEvent event) {
+
+	}
+
+	@FXML
+	public void addDoctor(ActionEvent event) {
+
+	}
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		if (!HospitalMS.isWelcomeLoaded) {
 			loadWelcomePage();
 		}
-		HamburgerBasicCloseTransition transition = new HamburgerBasicCloseTransition(hamburger);
-		transition.setRate(-1);
-		hamburger.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-			transition.setRate(transition.getRate() * -1);
-			transition.play();
-		});
 	}
 
 	void loadWelcomePage() {
