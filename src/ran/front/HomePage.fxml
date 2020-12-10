@@ -1,25 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXDrawer?>
-<?import com.jfoenix.controls.JFXHamburger?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.StackPane?>
+<?import com.jfoenix.controls.JFXDrawer ?>
+<?import com.jfoenix.controls.JFXHamburger ?>
+<?import javafx.scene.Cursor ?>
+<?import javafx.scene.layout.AnchorPane ?>
 
 <AnchorPane fx:id="anchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #1F1F1F;" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ran.front.HomePageController">
    <children>
-      <StackPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <AnchorPane />
-            <AnchorPane>
-               <children>
-                  <JFXDrawer fx:id="drawer" defaultDrawerSize="300.0" prefHeight="1080.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0" />
-               </children>
-            </AnchorPane>
-            <AnchorPane>
-               <children>
-                  <JFXHamburger fx:id="hamburger" style="-fx-background-color: #1F1F1F;" styleClass="jfx-hamburger" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0" />
-               </children></AnchorPane>
-         </children>
-      </StackPane>
+      <AnchorPane />
+      <JFXDrawer fx:id="drawer" defaultDrawerSize="300.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="1080.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <JFXHamburger fx:id="hamburger" layoutX="135.1999969482422" layoutY="530.4000244140625" maxHeight="-Infinity" maxWidth="-Infinity" style="-fx-background-color: #1F1F1F;" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXHamburger>
    </children>
 </AnchorPane>

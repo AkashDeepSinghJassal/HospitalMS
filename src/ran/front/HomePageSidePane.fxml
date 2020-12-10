@@ -1,11 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton ?>
+<?import javafx.geometry.Insets ?>
+<?import javafx.scene.Cursor ?>
+<?import javafx.scene.layout.Region ?>
 <?import javafx.scene.layout.VBox ?>
+<?import javafx.scene.text.Font ?>
 
-
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="300.0" style="-fx-background-color: #1F1F1F;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" prefHeight="1080.0" prefWidth="300.0" spacing="10.0" style="-fx-background-color: #1F1F1F;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" text="Users" textFill="#f7f7ff" />
+      <Region layoutX="10.0" layoutY="215.0" prefHeight="200.0" prefWidth="200.0" />
+      <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="sidepane-buttons" text="Staff" textFill="#f7f7ff">
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </JFXButton>
+      <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="sidepane-buttons" text="Patients" textFill="#f7f7ff">
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </JFXButton>
+      <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="sidepane-buttons" text="Buildings" textFill="#f7f7ff">
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </JFXButton>
+      <Region prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+      <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="sidepane-buttons" text="Logout" textFill="#f7f7ff">
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </JFXButton>
+      <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="sidepane-buttons" text="Exit" textFill="#f7f7ff">
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+         <VBox.margin>
+            <Insets bottom="10.0" />
+         </VBox.margin>
+      </JFXButton>
    </children>
 </VBox>

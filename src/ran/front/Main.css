@@ -11,3 +11,7 @@
 .jfx-hamburger StackPane {
 	-fx-background-color: #F7F7FF!important;
 }
+
+.sidepane-buttons:hover {
+	-fx-background-color: #3D3D3D;
+}
