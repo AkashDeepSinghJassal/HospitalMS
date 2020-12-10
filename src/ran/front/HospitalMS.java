@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 public class HospitalMS extends Application {
 	public static Stage stage = null;
-	public static Boolean isWelcomeLoaded = false;
+	public static Boolean isWelcomeLoaded = true;
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -16,6 +16,7 @@ public class HospitalMS extends Application {
 		Parent root;
 		try {
 			root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+			root = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add("ran/front/Main.css");
 			primaryStage.setFullScreen(true);
