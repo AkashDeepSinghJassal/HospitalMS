@@ -3,10 +3,23 @@
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #1F1F1F;" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ran.front.HomePageController">
+<AnchorPane fx:id="anchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #1F1F1F;" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ran.front.HomePageController">
    <children>
-      <JFXHamburger fx:id="hamburger" layoutX="556.0" layoutY="14.0" style="-fx-background-color: #1F1F1F;" styleClass="jfx-hamburger" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0" />
-      <JFXDrawer fx:id="drawer" defaultDrawerSize="300.0" layoutY="185.0" prefHeight="1080.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <StackPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane />
+            <AnchorPane>
+               <children>
+                  <JFXDrawer fx:id="drawer" defaultDrawerSize="300.0" prefHeight="1080.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane>
+               <children>
+                  <JFXHamburger fx:id="hamburger" style="-fx-background-color: #1F1F1F;" styleClass="jfx-hamburger" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0" />
+               </children></AnchorPane>
+         </children>
+      </StackPane>
    </children>
 </AnchorPane>

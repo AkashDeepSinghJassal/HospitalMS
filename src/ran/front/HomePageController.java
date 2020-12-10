@@ -82,8 +82,8 @@ public class HomePageController implements Initializable {
 
 			fadeOut.setOnFinished((e) -> {
 				try {
-					Parent parent = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
-					anchorPane.getChildren().setAll(parent);
+					AnchorPane newRoot = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
+					anchorPane.getChildren().setAll(newRoot.getChildren());
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
