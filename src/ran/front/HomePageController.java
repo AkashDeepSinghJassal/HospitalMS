@@ -101,8 +101,7 @@ public class HomePageController implements Initializable {
 						case "logout":
 							node.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 								loader.toFront();
-								RotateTransition r1 = setRotate(c1, true, 360, 1500);
-								r1.setOnFinished((e2) -> {
+								setRotate(c1, true, 360, 1500).setOnFinished((e1) -> {
 									logout();
 								});
 								setRotate(c2, true, -360, 2500);
