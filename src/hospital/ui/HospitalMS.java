@@ -18,7 +18,7 @@ public class HospitalMS extends Application {
 		try {
 			root = FXMLLoader.load(getClass().getResource("Login.fxml"));
 			Scene scene = new Scene(root);
-			scene.getStylesheets().add("hospital/ui/Main.css");
+			scene.getStylesheets().add("hospital/ui/css/Main.css");
 			primaryStage.setFullScreen(true);
 			primaryStage.setHeight(1080);
 			primaryStage.setWidth(1920);
