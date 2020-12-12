@@ -15,11 +15,12 @@
    <children>
       <StackPane>
          <children>
-            <ImageView fx:id="imageView" nodeOrientation="INHERIT" opacity="0.75" pickOnBounds="false" preserveRatio="false">
+            <ImageView fx:id="imageView" nodeOrientation="INHERIT" pickOnBounds="false" preserveRatio="false" smooth="true">
                <image>
                   <Image url="@../../img/Hospital-BG.jpg" />
                </image>
             </ImageView>
+            <AnchorPane opacity="0.25" style="-fx-background-color: #FFF;" />
             <VBox alignment="TOP_CENTER" maxHeight="600.0" maxWidth="717.0" prefHeight="600.0" prefWidth="3870.0" styleClass="login-form" StackPane.alignment="CENTER">
                <children>
                   <Label alignment="CENTER" graphicTextGap="14.0" text="LOGIN" textFill="#b9c255">

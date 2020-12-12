@@ -2,6 +2,7 @@
 
 <?import javafx.scene.image.Image ?>
 <?import javafx.scene.image.ImageView ?>
+<?import javafx.scene.layout.AnchorPane ?>
 <?import javafx.scene.layout.BorderPane ?>
 <?import javafx.scene.layout.StackPane ?>
 <?import javafx.scene.text.Font ?>
@@ -11,11 +12,12 @@
    <center>
       <StackPane BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="imageView" opacity="0.75" pickOnBounds="false" smooth="false">
+            <ImageView fx:id="imageView" pickOnBounds="false" smooth="true">
                <image>
                   <Image url="@../../img/Hospital-BG.jpg" />
                </image>
             </ImageView>
+            <AnchorPane opacity="0.25" style="-fx-background-color: #FFF;" />
             <Text fx:id="fullName" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome">
                <font>
                   <Font size="100.0" />
