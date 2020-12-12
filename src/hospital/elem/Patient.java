@@ -1,4 +1,4 @@
-package ran.elem;
+package hospital.elem;
 
 public class Patient extends User {
 
