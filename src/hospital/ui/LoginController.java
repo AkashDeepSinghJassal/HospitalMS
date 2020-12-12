@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import hospital.ui.main.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,7 +32,7 @@ public class LoginController implements Initializable {
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		primaryStage = HospitalMS.stage;
+		primaryStage = Main.stage;
 		imageView.fitWidthProperty().bind(primaryStage.widthProperty());
 		imageView.fitHeightProperty().bind(primaryStage.heightProperty());
 	}

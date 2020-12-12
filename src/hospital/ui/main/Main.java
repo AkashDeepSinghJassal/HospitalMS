@@ -1,4 +1,4 @@
-package hospital.ui;
+package hospital.ui.main;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class HospitalMS extends Application {
+public class Main extends Application {
 	public static Stage stage = null;
 	public static Boolean isWelcomeLoaded = false;
 
@@ -16,7 +16,7 @@ public class HospitalMS extends Application {
 		stage = primaryStage;
 		Parent root;
 		try {
-			root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+			root = FXMLLoader.load(getClass().getResource("../Login.fxml"));
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add("hospital/ui/css/Main.css");
 			primaryStage.setFullScreen(true);

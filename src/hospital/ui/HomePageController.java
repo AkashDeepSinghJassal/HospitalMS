@@ -8,6 +8,7 @@ import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBasicCloseTransition;
 
+import hospital.ui.main.Main;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
@@ -42,7 +43,7 @@ public class HomePageController implements Initializable {
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		if (!HospitalMS.isWelcomeLoaded) {
+		if (!Main.isWelcomeLoaded) {
 			loadWelcomePage();
 		}
 
@@ -54,7 +55,7 @@ public class HomePageController implements Initializable {
 	}
 
 	void loadWelcomePage() {
-		HospitalMS.isWelcomeLoaded = true;
+		Main.isWelcomeLoaded = true;
 
 		try {
 			Parent newRoot = FXMLLoader.load(getClass().getResource("Welcome.fxml"));
@@ -139,7 +140,7 @@ public class HomePageController implements Initializable {
 	}
 
 	void logout() {
-		HospitalMS.isWelcomeLoaded = false;
+		Main.isWelcomeLoaded = false;
 		AnchorPane root;
 		try {
 			root = FXMLLoader.load(getClass().getResource("Login.fxml"));

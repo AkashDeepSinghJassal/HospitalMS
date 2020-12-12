@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import hospital.elem.User;
+import hospital.ui.main.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
@@ -23,7 +24,7 @@ public class WelcomeController implements Initializable {
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		primaryStage = HospitalMS.stage;
+		primaryStage = Main.stage;
 		user = new User();
 		user.setFirstName("abc");
 		user.setLastName("def");
