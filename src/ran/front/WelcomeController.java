@@ -1,14 +1,14 @@
-package hospital.ui;
+package ran.front;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import hospital.elem.User;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import ran.elem.User;
 
 public class WelcomeController implements Initializable {
 

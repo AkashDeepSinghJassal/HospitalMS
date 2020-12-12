@@ -1,4 +1,4 @@
-package hospital.back;
+package ran.back;
 
 public class DoctorSql {
 

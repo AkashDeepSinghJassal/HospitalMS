@@ -1,4 +1,4 @@
-package hospital.control;
+package ran.control;
 
 public class Administrator {
 

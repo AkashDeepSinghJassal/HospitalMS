@@ -1,4 +1,4 @@
-package hospital.ui;
+package ran.front;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +18,7 @@ public class HospitalMS extends Application {
 		try {
 			root = FXMLLoader.load(getClass().getResource("Login.fxml"));
 			Scene scene = new Scene(root);
-			scene.getStylesheets().add("hospital/ui/Main.css");
+			scene.getStylesheets().add("ran/front/Main.css");
 			primaryStage.setFullScreen(true);
 			primaryStage.setHeight(1080);
 			primaryStage.setWidth(1920);

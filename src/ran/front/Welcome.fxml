@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font ?>
 <?import javafx.scene.text.Text ?>
 
-<BorderPane fx:id="borderPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.ui.WelcomeController">
+<BorderPane fx:id="borderPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ran.front.WelcomeController">
    <center>
       <StackPane BorderPane.alignment="CENTER">
          <children>

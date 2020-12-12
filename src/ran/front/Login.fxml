@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox ?>
 <?import javafx.scene.text.Font ?>
 
-<AnchorPane fx:id="anchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.ui.LoginController">
+<AnchorPane fx:id="anchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ran.front.LoginController">
    <children>
       <StackPane>
          <children>

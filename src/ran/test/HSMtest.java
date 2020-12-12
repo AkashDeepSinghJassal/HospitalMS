@@ -1,4 +1,4 @@
-package hospital.test;
+package ran.test;
 
 public class HSMtest {
 
