@@ -1,4 +1,4 @@
-package ran.elem;
+package hospital.elem;
 
 public class User {
 	private String firstName, lastName, userName, password;

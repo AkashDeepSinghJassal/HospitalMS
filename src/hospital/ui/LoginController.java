@@ -1,4 +1,4 @@
-package ran.front;
+package hospital.ui;
 
 import java.io.IOException;
 import java.net.URL;
