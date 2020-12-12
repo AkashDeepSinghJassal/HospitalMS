@@ -8,25 +8,29 @@
 <?import javafx.scene.layout.StackPane ?>
 <?import javafx.scene.shape.Circle ?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #1F1F1F;" stylesheets="@Main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ran.front.HomePageController">
+<AnchorPane fx:id="root" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ran.front.HomePageController">
    <children>
-      <HBox fx:id="loader" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="anchorPane" layoutX="330.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #1F1F1F;" stylesheets="@Main.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <StackPane prefHeight="150.0" prefWidth="200.0">
+            <HBox fx:id="loader" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Circle fx:id="c1" fill="TRANSPARENT" layoutX="110.0" layoutY="86.0" radius="100.0" stroke="#14a1ff" strokeType="INSIDE" strokeWidth="9.0" style="-fx-stroke-dash-array: 50;" />
-                  <Circle fx:id="c2" fill="TRANSPARENT" layoutX="110.0" layoutY="110.0" radius="75.0" stroke="#2a17dd" strokeType="INSIDE" strokeWidth="7.0" style="-fx-stroke-dash-array: 25;" />
-                  <Circle fx:id="c3" fill="TRANSPARENT" layoutX="110.0" layoutY="110.0" radius="50.0" stroke="#14a1ff" strokeType="INSIDE" strokeWidth="5.0" style="-fx-stroke-dash-array: 19;" />
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <Circle fx:id="c1" fill="TRANSPARENT" layoutX="110.0" layoutY="86.0" radius="100.0" stroke="#14a1ff" strokeType="INSIDE" strokeWidth="9.0" style="-fx-stroke-dash-array: 50;" />
+                        <Circle fx:id="c2" fill="TRANSPARENT" layoutX="110.0" layoutY="110.0" radius="75.0" stroke="#2a17dd" strokeType="INSIDE" strokeWidth="7.0" style="-fx-stroke-dash-array: 25;" />
+                        <Circle fx:id="c3" fill="TRANSPARENT" layoutX="110.0" layoutY="110.0" radius="50.0" stroke="#14a1ff" strokeType="INSIDE" strokeWidth="5.0" style="-fx-stroke-dash-array: 19;" />
+                     </children>
+                  </StackPane>
                </children>
-            </StackPane>
+            </HBox>
+            <AnchorPane />
+            <JFXDrawer fx:id="drawer" defaultDrawerSize="300.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="1080.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <JFXHamburger fx:id="hamburger" layoutX="135.1999969482422" layoutY="530.4000244140625" maxHeight="-Infinity" maxWidth="-Infinity" style="-fx-background-color: #1F1F1F;" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXHamburger>
          </children>
-      </HBox>
-      <AnchorPane />
-      <JFXDrawer fx:id="drawer" defaultDrawerSize="300.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="1080.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <JFXHamburger fx:id="hamburger" layoutX="135.1999969482422" layoutY="530.4000244140625" maxHeight="-Infinity" maxWidth="-Infinity" style="-fx-background-color: #1F1F1F;" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </JFXHamburger>
+      </AnchorPane>
    </children>
 </AnchorPane>

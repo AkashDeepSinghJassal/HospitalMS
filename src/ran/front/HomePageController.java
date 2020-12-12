@@ -59,7 +59,6 @@ public class HomePageController implements Initializable {
 								RotateTransition r1 = setRotate(c1, true, 360, 1500);
 								r1.setOnFinished((e2) -> {
 									logout();
-									System.out.println(anchorPane.getScene());
 								});
 								setRotate(c2, true, -360, 2500);
 								setRotate(c3, true, 360, 3000);
