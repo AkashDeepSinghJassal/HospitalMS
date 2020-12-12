@@ -19,6 +19,7 @@ import javafx.scene.Parent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
@@ -30,6 +31,8 @@ public class HomePageController implements Initializable {
 	private JFXHamburger hamburger;
 	@FXML
 	private JFXDrawer drawer;
+	@FXML
+	private HBox loader;
 	@FXML
 	private Circle c1;
 	@FXML
@@ -97,6 +100,7 @@ public class HomePageController implements Initializable {
 					switch (node.getAccessibleText()) {
 						case "logout":
 							node.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+								loader.toFront();
 								RotateTransition r1 = setRotate(c1, true, 360, 1500);
 								r1.setOnFinished((e2) -> {
 									logout();
