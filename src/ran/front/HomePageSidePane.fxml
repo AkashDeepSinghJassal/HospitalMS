@@ -7,10 +7,10 @@
 <?import javafx.scene.layout.VBox ?>
 <?import javafx.scene.text.Font ?>
 
-<VBox fx:id="vBox" alignment="CENTER" prefHeight="1080.0" prefWidth="300.0" spacing="10.0" style="-fx-background-color: #1F1F1F;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ran.front.HomePageSidePaneController">
+<VBox fx:id="vBox" alignment="CENTER" prefHeight="1080.0" prefWidth="300.0" spacing="10.0" style="-fx-background-color: #1F1F1F;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Region layoutX="10.0" layoutY="215.0" prefHeight="200.0" prefWidth="200.0" />
-      <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="sidepane-buttons" text="Staff" textFill="#f7f7ff">
+      <JFXButton fx:id="staff" accessibleText="staff" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="sidepane-buttons" text="Staff" textFill="#f7f7ff">
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
@@ -21,7 +21,7 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </JFXButton>
-      <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="sidepane-buttons" text="Patients" textFill="#f7f7ff">
+      <JFXButton fx:id="patients" accessibleText="patients" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="sidepane-buttons" text="Patients" textFill="#f7f7ff">
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
@@ -32,7 +32,7 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </JFXButton>
-      <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="sidepane-buttons" text="Buildings" textFill="#f7f7ff">
+      <JFXButton fx:id="buildings" accessibleText="buildings" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="sidepane-buttons" text="Buildings" textFill="#f7f7ff">
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
@@ -44,7 +44,7 @@
          </font>
       </JFXButton>
       <Region prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
-      <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" onAction="#logout" styleClass="sidepane-buttons" text="Logout" textFill="#f7f7ff">
+      <JFXButton fx:id="logout" accessibleText="logout" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="sidepane-buttons" text="Logout" textFill="#f7f7ff">
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
@@ -55,7 +55,7 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </JFXButton>
-      <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" onAction="#exit" styleClass="sidepane-buttons" text="Exit" textFill="#f7f7ff">
+      <JFXButton fx:id="exit" accessibleText="exit" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="sidepane-buttons" text="Exit" textFill="#f7f7ff">
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
