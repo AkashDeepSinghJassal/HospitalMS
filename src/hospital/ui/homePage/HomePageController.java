@@ -1,4 +1,4 @@
-package hospital.ui;
+package hospital.ui.homePage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -58,7 +58,7 @@ public class HomePageController implements Initializable {
 		Main.isWelcomeLoaded = true;
 
 		try {
-			Parent newRoot = FXMLLoader.load(getClass().getResource("Welcome.fxml"));
+			Parent newRoot = FXMLLoader.load(getClass().getResource("../welcome/Welcome.fxml"));
 			anchorPane.getChildren().setAll(newRoot);
 
 			FadeTransition fadeIn = new FadeTransition(Duration.seconds(1), newRoot);
@@ -143,7 +143,7 @@ public class HomePageController implements Initializable {
 		Main.isWelcomeLoaded = false;
 		AnchorPane root;
 		try {
-			root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+			root = FXMLLoader.load(getClass().getResource("../login/Login.fxml"));
 			anchorPane.getScene().setRoot(root);
 		} catch (IOException e) {
 			e.printStackTrace();

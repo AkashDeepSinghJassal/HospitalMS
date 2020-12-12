@@ -1,4 +1,4 @@
-package hospital.ui;
+package hospital.ui.login;
 
 import java.io.IOException;
 import java.net.URL;
@@ -23,7 +23,7 @@ public class LoginController implements Initializable {
 	@FXML
 	void login(ActionEvent event) {
 		try {
-			AnchorPane root = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
+			AnchorPane root = FXMLLoader.load(getClass().getResource("../homePage/HomePage.fxml"));
 			anchorPane.getScene().setRoot(root);
 		} catch (IOException e) {
 			e.printStackTrace();

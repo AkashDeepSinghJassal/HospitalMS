@@ -16,7 +16,7 @@ public class Main extends Application {
 		stage = primaryStage;
 		Parent root;
 		try {
-			root = FXMLLoader.load(getClass().getResource("../Login.fxml"));
+			root = FXMLLoader.load(getClass().getResource("../login/Login.fxml"));
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add("hospital/ui/css/Main.css");
 			primaryStage.setFullScreen(true);

@@ -8,13 +8,13 @@
 <?import javafx.scene.text.Font ?>
 <?import javafx.scene.text.Text ?>
 
-<BorderPane fx:id="borderPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.ui.WelcomeController">
+<BorderPane fx:id="borderPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.ui.welcome.WelcomeController">
    <center>
       <StackPane BorderPane.alignment="CENTER">
          <children>
             <ImageView fx:id="imageView" pickOnBounds="false" smooth="true">
                <image>
-                  <Image url="@img/Hospital-BG.jpg" />
+                  <Image url="@../img/Hospital-BG.jpg" />
                </image>
             </ImageView>
             <AnchorPane opacity="0.25" style="-fx-background-color: #FFF;" />

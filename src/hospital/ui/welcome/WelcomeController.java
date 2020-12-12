@@ -1,4 +1,4 @@
-package hospital.ui;
+package hospital.ui.welcome;
 
 import java.net.URL;
 import java.util.ResourceBundle;
