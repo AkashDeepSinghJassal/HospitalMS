@@ -15,3 +15,8 @@
 .sidepane-buttons:hover {
 	-fx-background-color: #3D3D3D;
 }
+
+.cursor
+{
+	-fx-cursor: pointer !important;
+}

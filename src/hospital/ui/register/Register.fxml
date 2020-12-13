@@ -30,24 +30,34 @@
       </AnchorPane>
       <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="960.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <AnchorPane layoutY="-84.0" prefHeight="1080.0" prefWidth="960.0" AnchorPane.bottomAnchor="84.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-84.0">
+            <AnchorPane layoutY="-87.0" prefHeight="1080.0" prefWidth="960.0" AnchorPane.bottomAnchor="87.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-87.0">
                <children>
-                  <JFXTextField layoutX="244.0" layoutY="426.0" prefHeight="75.0" prefWidth="465.0" promptText="Username" unFocusColor="#17449e" AnchorPane.rightAnchor="250.39999999999998" AnchorPane.topAnchor="426.0">
+                  <JFXTextField layoutX="224.0" layoutY="314.0" prefHeight="75.0" prefWidth="465.0" promptText="Username" unFocusColor="#17449e" AnchorPane.rightAnchor="270.4" AnchorPane.topAnchor="314.0">
                      <font>
                         <Font size="36.0" />
                      </font>
                   </JFXTextField>
-                  <JFXTextField layoutX="278.0" layoutY="557.0" prefHeight="75.0" prefWidth="465.0" promptText="Password" unFocusColor="#17449e" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="550.0">
+                  <JFXTextField layoutX="224.0" layoutY="408.0" prefHeight="75.0" prefWidth="465.0" promptText="Password" unFocusColor="#17449e" AnchorPane.rightAnchor="270.4" AnchorPane.topAnchor="408.0">
                      <font>
                         <Font size="36.0" />
                      </font>
                   </JFXTextField>
-                  <JFXButton buttonType="RAISED" layoutX="389.0" layoutY="684.0" onAction="#login" prefHeight="75.0" prefWidth="170.0" style="-fx-background-color: #17449e;" text="Login" textFill="WHITE" AnchorPane.rightAnchor="400.6" AnchorPane.topAnchor="684.0">
+                  <JFXTextField layoutX="224.0" layoutY="596.0" prefHeight="75.0" prefWidth="465.0" promptText="Confirm Password" unFocusColor="#17449e" AnchorPane.rightAnchor="270.4" AnchorPane.topAnchor="501.0">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </JFXTextField>
+                  <JFXTextField layoutX="224.0" layoutY="602.0" prefHeight="75.0" prefWidth="465.0" promptText="Admin Code" unFocusColor="#17449e" AnchorPane.rightAnchor="270.4" AnchorPane.topAnchor="602.0">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </JFXTextField>
+                  <JFXButton buttonType="RAISED" layoutX="371.0" layoutY="725.0" prefHeight="78.0" prefWidth="216.0" style="-fx-background-color: #17449e;" text="Register" textFill="WHITE" AnchorPane.rightAnchor="373.0" AnchorPane.topAnchor="725.0">
                      <font>
                         <Font size="36.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton layoutX="365.0" layoutY="783.0" onAction="#addAccount" styleClass="cursor" text="Didn't have an account? Register" AnchorPane.rightAnchor="372.6" AnchorPane.topAnchor="783.0">
+                  <JFXButton layoutX="371.0" layoutY="815.0" onAction="#login" styleClass="cursor" text="Already have an account? Login" AnchorPane.rightAnchor="373.0" AnchorPane.topAnchor="815.0">
                   	 <cursor>
 			            <Cursor fx:constant="HAND" />
 			         </cursor>

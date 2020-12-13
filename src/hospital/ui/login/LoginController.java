@@ -20,6 +20,7 @@ public class LoginController implements Initializable {
 	@FXML
 	private ImageView imageView;
 
+
 	@FXML
 	void login(ActionEvent event) {
 		try {
@@ -29,6 +30,17 @@ public class LoginController implements Initializable {
 			e.printStackTrace();
 		}
 	}
+	
+    @FXML
+    void addAccount(ActionEvent event) {
+    	System.out.println("Add account is clicked!");
+    	try {
+    		AnchorPane root = FXMLLoader.load(getClass().getResource("../register/Register.fxml"));
+    		anchorPane.getScene().setRoot(root);
+    	} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
