@@ -7,19 +7,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.ui.login.LoginController">
    <children>
       <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <AnchorPane prefHeight="1080.0" prefWidth="960.0" style="-fx-background-color: #17449d;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane style="-fx-background-color: #17449d;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <ImageView fitHeight="1080.0" fitWidth="960.0" opacity="0.7" pickOnBounds="true" AnchorPane.leftAnchor="0.0">
+                  <ImageView fitHeight="900.0" fitWidth="800.0" opacity="0.75" pickOnBounds="true" AnchorPane.leftAnchor="0.0">
                      <image>
                         <Image url="@../img/healthcare.jpg" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="152.0" layoutY="445.0" pickOnBounds="true" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="400.0">
+                  <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="152.0" layoutY="445.0" pickOnBounds="true" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="300.0">
                      <image>
                         <Image url="@../img/MainLogo.png" />
                      </image>
@@ -28,21 +27,21 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="960.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="800.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <AnchorPane prefHeight="1080.0" prefWidth="960.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <JFXTextField layoutX="256.0" layoutY="322.0" prefHeight="75.0" prefWidth="465.0" promptText="Username" unFocusColor="#17449e" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="400.0">
+                  <JFXTextField layoutX="167.0" layoutY="244.0" prefHeight="75.0" prefWidth="465.0" promptText="Username" unFocusColor="#17449e" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="250.0">
                      <font>
                         <Font size="36.0" />
                      </font>
                   </JFXTextField>
-                  <JFXTextField layoutX="278.0" layoutY="557.0" prefHeight="75.0" prefWidth="465.0" promptText="Password" unFocusColor="#17449e" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="550.0">
+                  <JFXTextField layoutX="169.0" layoutY="362.0" prefHeight="78.0" prefWidth="457.0" promptText="Password" unFocusColor="#17449e" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="400.0">
                      <font>
                         <Font size="36.0" />
                      </font>
                   </JFXTextField>
-                  <JFXButton buttonType="RAISED" layoutX="391.0" layoutY="732.0" onAction="#login" prefHeight="75.0" prefWidth="170.0" style="-fx-background-color: #17449e;" text="Login" textFill="WHITE" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="750.0">
+                  <JFXButton buttonType="RAISED" layoutX="313.0" layoutY="526.0" onAction="#login" prefHeight="75.0" prefWidth="170.0" style="-fx-background-color: #17449e;" text="Login" textFill="WHITE" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="550.0">
                      <font>
                         <Font size="36.0" />
                      </font>
