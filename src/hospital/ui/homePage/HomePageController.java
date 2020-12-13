@@ -46,7 +46,6 @@ public class HomePageController implements Initializable {
 		if (!Main.isWelcomeLoaded) {
 			loadWelcomePage();
 		}
-
 		loadSidePane();
 		setHamburger();
 
@@ -95,7 +94,6 @@ public class HomePageController implements Initializable {
 		try {
 			VBox sidePane = FXMLLoader.load(getClass().getResource("HomePageSidePane.fxml"));
 			drawer.setSidePane(sidePane);
-
 			for (Node node : sidePane.getChildren()) {
 				if (node.getAccessibleText() != null) {
 					switch (node.getAccessibleText()) {

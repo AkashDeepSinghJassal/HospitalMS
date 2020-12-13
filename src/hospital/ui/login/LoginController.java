@@ -32,8 +32,8 @@ public class LoginController implements Initializable {
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		primaryStage = Main.stage;
-		imageView.fitWidthProperty().bind(primaryStage.widthProperty());
-		imageView.fitHeightProperty().bind(primaryStage.heightProperty());
+//		primaryStage = Main.stage;
+//		imageView.fitWidthProperty().bind(primaryStage.widthProperty());
+//		imageView.fitHeightProperty().bind(primaryStage.heightProperty());
 	}
 }
