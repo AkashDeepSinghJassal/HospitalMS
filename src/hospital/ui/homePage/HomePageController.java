@@ -51,6 +51,11 @@ public class HomePageController implements Initializable {
 		loadSidePane();
 		setHamburger();
 
+		drawerOverlay.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+			hamburger.fireEvent(new MouseEvent(MouseEvent.MOUSE_CLICKED, 1, 2, 3, 4, MouseButton.PRIMARY, 5, true, true,
+					true, true, true, true, true, true, true, true, null));
+		});
+
 		hamburger.fireEvent(new MouseEvent(MouseEvent.MOUSE_CLICKED, 1, 2, 3, 4, MouseButton.PRIMARY, 5, true, true,
 				true, true, true, true, true, true, true, true, null));
 	}
