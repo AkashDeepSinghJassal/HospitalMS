@@ -29,6 +29,8 @@ public class HomePageController implements Initializable {
 	@FXML
 	private AnchorPane anchorPane;
 	@FXML
+	private AnchorPane drawerOverlay;
+	@FXML
 	private JFXHamburger hamburger;
 	@FXML
 	private JFXDrawer drawer;
@@ -124,14 +126,35 @@ public class HomePageController implements Initializable {
 
 	public void setHamburger() {
 		HamburgerBasicCloseTransition transition = new HamburgerBasicCloseTransition(hamburger);
-		transition.setRate(-1);
 		hamburger.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-			transition.setRate(transition.getRate() * -1);
-			transition.play();
 
 			if (drawer.isOpened()) {
+				transition.setRate(-1);
+
+				FadeTransition fadeOut = new FadeTransition(Duration.seconds(0.25), drawerOverlay);
+				fadeOut.setFromValue(1);
+				fadeOut.setToValue(0);
+				fadeOut.setOnFinished((e2) -> {
+					AnchorPane.clearConstraints(drawerOverlay);
+				});
+
+				transition.play();
+				fadeOut.play();
 				drawer.close();
-			} else {
+			} else if (drawer.isClosed()) {
+				transition.setRate(1);
+
+				FadeTransition fadeIn = new FadeTransition(Duration.seconds(0.25), drawerOverlay);
+				AnchorPane.setTopAnchor(drawerOverlay, 0.0);
+				AnchorPane.setRightAnchor(drawerOverlay, 0.0);
+				AnchorPane.setBottomAnchor(drawerOverlay, 0.0);
+				AnchorPane.setLeftAnchor(drawerOverlay, 0.0);
+
+				fadeIn.setFromValue(0);
+				fadeIn.setToValue(1);
+
+				transition.play();
+				fadeIn.play();
 				drawer.open();
 			}
 		});
