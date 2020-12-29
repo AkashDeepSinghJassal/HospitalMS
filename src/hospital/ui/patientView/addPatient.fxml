@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane style="-fx-background-color: #041e32;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.ui.patientView.addPatientController">
+   <children>
+      <AnchorPane layoutX="6.0" layoutY="2.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="650.0" prefWidth="500.0">
+         <children>
+            <Label layoutX="148.0" layoutY="90.0" text="Add Patient" textFill="#eeeeee">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="89.0" layoutY="173.0" prefWidth="138.0" text="Patient Name:" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <JFXTextField focusColor="WHITE" layoutX="252.0" layoutY="170.0" prefHeight="26.0" prefWidth="144.0" promptText="John Doe" style="-fx-color: #ffffff;" unFocusColor="#d4d4d4" />
+            <Label alignment="CENTER" layoutX="89.0" layoutY="208.0" prefHeight="20.0" prefWidth="138.0" text="Doctor Name:" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <JFXTextField focusColor="WHITE" layoutX="252.0" layoutY="205.0" prefHeight="26.0" prefWidth="144.0" promptText="Dr. Strange" unFocusColor="#d4d4d4" />
+            <Label alignment="CENTER" layoutX="89.0" layoutY="244.0" prefWidth="138.0" text="Patient Age:" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <JFXTextField focusColor="WHITE" layoutX="252.0" layoutY="240.0" prefHeight="26.0" prefWidth="144.0" promptText="20" unFocusColor="#d4d4d4" />
+            <Label alignment="CENTER" layoutX="89.0" layoutY="279.0" prefWidth="138.0" text="Diagnosis Date:" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <JFXDatePicker defaultColor="#eeeeee" layoutX="252.0" layoutY="275.0" promptText="30/12/2020" />
+            <Label alignment="CENTER" layoutX="89.0" layoutY="313.0" prefWidth="138.0" text="Address:" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <JFXTextField focusColor="WHITE" layoutX="252.0" layoutY="310.0" prefHeight="26.0" prefWidth="144.0" promptText="#123,Wall Street, London" unFocusColor="#d4d4d4" />
+            <Label alignment="CENTER" layoutX="89.0" layoutY="348.0" prefWidth="138.0" text="Contact: " textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <JFXTextField focusColor="WHITE" layoutX="252.0" layoutY="345.0" prefHeight="26.0" prefWidth="144.0" promptText="9876543210" unFocusColor="#d4d4d4" />
+            <Label alignment="CENTER" layoutX="89.0" layoutY="394.0" prefHeight="20.0" prefWidth="141.0" text="Treatment Description:" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <JFXTextArea focusColor="WHITE" layoutX="252.0" layoutY="385.0" prefHeight="38.0" prefWidth="154.0" unFocusColor="#d4d4d4" />
+            <JFXButton buttonType="RAISED" layoutX="194.0" layoutY="472.0" onAction="#addPatient" prefHeight="26.0" prefWidth="110.0" ripplerFill="#2b76cd" style="-fx-background-color: #eee;" text="Add" textFill="#17449e">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+         </children></AnchorPane>
+   </children>
+</AnchorPane>

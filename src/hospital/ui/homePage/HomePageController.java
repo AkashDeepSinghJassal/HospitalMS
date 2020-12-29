@@ -119,6 +119,10 @@ public class HomePageController implements Initializable {
 								exit();
 							});
 							break;
+						case "patients":
+							node.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+								addPatientView();
+							});
 						default:
 							break;
 					}
@@ -127,6 +131,17 @@ public class HomePageController implements Initializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void addPatientView() {
+		AnchorPane root;
+		try {
+			root = FXMLLoader.load(getClass().getResource("../patientView/addPatient.fxml"));
+			anchorPane.getScene().setRoot(root);
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	public void setHamburger() {
