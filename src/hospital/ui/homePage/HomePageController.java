@@ -106,6 +106,7 @@ public class HomePageController implements Initializable {
 						case "home":
 							node.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 								triggerHamburger();
+								showHome();
 							});
 							break;
 						case "patient":
@@ -148,6 +149,10 @@ public class HomePageController implements Initializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void showHome() {
+		modelView.getChildren().clear();
 	}
 
 	public void showPatientView() {
