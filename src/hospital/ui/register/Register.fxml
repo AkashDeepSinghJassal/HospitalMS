@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXTextField?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.JFXButton ?>
+<?import com.jfoenix.controls.JFXTextField ?>
+<?import javafx.scene.Cursor ?>
+<?import javafx.scene.image.Image ?>
+<?import javafx.scene.image.ImageView ?>
+<?import javafx.scene.layout.AnchorPane ?>
+<?import javafx.scene.text.Font ?>
 
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.ui.login.LoginController">
    <children>
@@ -30,7 +30,7 @@
       </AnchorPane>
       <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="960.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <AnchorPane layoutY="-87.0" prefHeight="1080.0" prefWidth="960.0" AnchorPane.bottomAnchor="87.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-87.0">
+            <AnchorPane layoutY="-87.0" prefHeight="1080.0" prefWidth="960.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <JFXTextField layoutX="224.0" layoutY="314.0" prefHeight="75.0" prefWidth="465.0" promptText="Username" unFocusColor="#17449e" AnchorPane.rightAnchor="270.4" AnchorPane.topAnchor="314.0">
                      <font>
@@ -56,15 +56,18 @@
                      <font>
                         <Font size="36.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </JFXButton>
                   <JFXButton layoutX="371.0" layoutY="815.0" onAction="#login" styleClass="cursor" text="Already have an account? Login" AnchorPane.rightAnchor="373.0" AnchorPane.topAnchor="815.0">
-                  	 <cursor>
-			            <Cursor fx:constant="HAND" />
-			         </cursor>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                      <font>
                         <Font size="14.0" />
                      </font>
-                     
+
                   </JFXButton>
                </children>
             </AnchorPane>
