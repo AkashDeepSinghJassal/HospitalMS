@@ -1,5 +1,6 @@
 package hospital.ui.patientView;
 
+import hospital.ui.main.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -48,7 +50,9 @@ public class PatientOverviewController {
 			Scene scene = new Scene(root);
 			Stage stage = new Stage();
 			stage.setScene(scene);
+			stage.initOwner(Main.stage);
 			stage.initStyle(StageStyle.UNDECORATED);
+			stage.initModality(Modality.WINDOW_MODAL);
 			stage.showAndWait();
 		} catch (Exception e) {
 			e.printStackTrace();
