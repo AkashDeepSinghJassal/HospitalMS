@@ -29,8 +29,6 @@ public class HomePageController implements Initializable {
 	@FXML
 	private AnchorPane anchorPane;
 	@FXML
-	private AnchorPane mainPane;
-	@FXML
 	private AnchorPane drawerOverlay;
 	@FXML
 	private JFXHamburger hamburger;
@@ -139,7 +137,7 @@ public class HomePageController implements Initializable {
 		AnchorPane root;
 		try {
 			root = FXMLLoader.load(getClass().getResource("../patientView/addPatient.fxml"));
-			mainPane.getChildren().setAll(root);
+			anchorPane.getScene().setRoot(root);
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
