@@ -54,12 +54,10 @@ public class HomePageController implements Initializable {
 		setHamburger();
 
 		drawerOverlay.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-			hamburger.fireEvent(new MouseEvent(MouseEvent.MOUSE_CLICKED, 1, 2, 3, 4, MouseButton.PRIMARY, 5, true, true,
-					true, true, true, true, true, true, true, true, null));
+			triggerHamburger();
 		});
 
-		hamburger.fireEvent(new MouseEvent(MouseEvent.MOUSE_CLICKED, 1, 2, 3, 4, MouseButton.PRIMARY, 5, true, true,
-				true, true, true, true, true, true, true, true, null));
+		triggerHamburger();
 	}
 
 	void loadWelcomePage() {
@@ -74,7 +72,6 @@ public class HomePageController implements Initializable {
 			fadeIn.setToValue(1);
 			fadeIn.setCycleCount(1);
 			fadeIn.interpolatorProperty().set(Interpolator.EASE_OUT);
-
 			FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), newRoot);
 			fadeOut.setFromValue(1);
 			fadeOut.setToValue(0);
@@ -106,8 +103,30 @@ public class HomePageController implements Initializable {
 			for (Node node : sidePane.getChildren()) {
 				if (node.getAccessibleText() != null) {
 					switch (node.getAccessibleText()) {
+						case "home":
+							node.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+								triggerHamburger();
+							});
+							break;
+						case "patient":
+							node.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+								triggerHamburger();
+								showPatientView();
+							});
+							break;
+						case "doctor":
+							node.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+								triggerHamburger();
+							});
+							break;
+						case "appointment":
+							node.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+								triggerHamburger();
+							});
+							break;
 						case "logout":
 							node.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+								triggerHamburger();
 								loader.toFront();
 								setRotate(c1, true, 360, 1500).setOnFinished((e1) -> {
 									logout();
@@ -118,14 +137,9 @@ public class HomePageController implements Initializable {
 							break;
 						case "exit":
 							node.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-								exit();
+								System.exit(0);
 							});
 							break;
-						case "patient":
-							System.out.println("patient");
-							node.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-								showPatientView();
-							});
 						default:
 							break;
 					}
@@ -139,17 +153,16 @@ public class HomePageController implements Initializable {
 	public void showPatientView() {
 		AnchorPane root;
 		try {
-			System.out.println("in model view");
 			root = FXMLLoader.load(getClass().getResource("../patientView/PatientOverview.fxml"));
 			modelView.getChildren().add(root);
 			AnchorPane.setTopAnchor(root, 0.0);
 			AnchorPane.setRightAnchor(root, 0.0);
 			AnchorPane.setBottomAnchor(root, 0.0);
 			AnchorPane.setLeftAnchor(root, 0.0);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	public void setHamburger() {
@@ -188,6 +201,11 @@ public class HomePageController implements Initializable {
 		});
 	}
 
+	void triggerHamburger() {
+		hamburger.fireEvent(new MouseEvent(MouseEvent.MOUSE_CLICKED, 1, 2, 3, 4, MouseButton.PRIMARY, 5, true, true,
+				true, true, true, true, true, true, true, true, null));
+	}
+
 	void logout() {
 		Main.isWelcomeLoaded = false;
 		AnchorPane root;
@@ -197,10 +215,6 @@ public class HomePageController implements Initializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	void exit() {
-		System.exit(0);
 	}
 
 	RotateTransition setRotate(Circle circle, boolean reverse, int angle, int duration) {

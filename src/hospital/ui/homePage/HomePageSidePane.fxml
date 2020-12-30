@@ -10,7 +10,7 @@
 <VBox fx:id="vBox" alignment="CENTER" prefHeight="1080.0" prefWidth="300.0" spacing="10.0" style="-fx-background-color: #1F1F1F;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Region layoutX="10.0" layoutY="215.0" prefHeight="200.0" prefWidth="200.0" />
-      <JFXButton accessibleText="patients" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="10.0" layoutY="221.0" maxWidth="1.7976931348623157E308" styleClass="sidepane-buttons" text="Home" textFill="#f7f7ff">
+      <JFXButton accessibleText="home" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="10.0" layoutY="221.0" maxWidth="1.7976931348623157E308" styleClass="sidepane-buttons" text="Home" textFill="#f7f7ff">
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
@@ -32,7 +32,7 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </JFXButton>
-      <JFXButton accessibleText="staff" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="sidepane-buttons" text="Doctor" textFill="#f7f7ff">
+      <JFXButton accessibleText="doctor" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="sidepane-buttons" text="Doctor" textFill="#f7f7ff">
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
@@ -43,7 +43,7 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </JFXButton>
-      <JFXButton accessibleText="buildings" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="sidepane-buttons" text="Appointment" textFill="#f7f7ff">
+      <JFXButton accessibleText="appointment" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="sidepane-buttons" text="Appointment" textFill="#f7f7ff">
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
