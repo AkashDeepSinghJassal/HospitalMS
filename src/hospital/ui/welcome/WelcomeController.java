@@ -25,12 +25,10 @@ public class WelcomeController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		primaryStage = Main.stage;
-		user = new User();
-		user.setFirstName("abc");
-		user.setLastName("def");
+		user = new User("abc def", "", "", "", "");
 		imageView.fitWidthProperty().bind(primaryStage.widthProperty());
 		imageView.fitHeightProperty().bind(primaryStage.heightProperty());
-		fullName.setText("Welcome, " + user.getFullName());
+		fullName.setText("Welcome, " + user.getName());
 	}
 
 }

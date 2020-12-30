@@ -1,34 +1,25 @@
 package hospital.model;
 
 public class User {
-	private String firstName, lastName, userName, password;
+	private String name, password, age, address, contactNO;
 
-	public String getFirstName() {
-		return this.firstName;
+	public User() {
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public User(String name, String password, String age, String address, String contactNO) {
+		this.name = name;
+		this.password = password;
+		this.age = age;
+		this.address = address;
+		this.contactNO = contactNO;
 	}
 
-	public String getLastName() {
-		return this.lastName;
+	public String getName() {
+		return this.name;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getFullName() {
-		return this.firstName + " " + this.lastName;
-	}
-
-	public String getUserName() {
-		return this.userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getPassword() {
@@ -38,4 +29,40 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public String getAge() {
+		return this.age;
+	}
+
+	public void setAge(String age) {
+		this.age = age;
+	}
+
+	public String getAddress() {
+		return this.address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getContactNO() {
+		return this.contactNO;
+	}
+
+	public void setContactNO(String contactNO) {
+		this.contactNO = contactNO;
+	}
+
+	@Override
+	public String toString() {
+		return "{" +
+			" name='" + getName() + "'" +
+			", password='" + getPassword() + "'" +
+			", age='" + getAge() + "'" +
+			", address='" + getAddress() + "'" +
+			", contactNO='" + getContactNO() + "'" +
+			"}";
+	}
+
 }
