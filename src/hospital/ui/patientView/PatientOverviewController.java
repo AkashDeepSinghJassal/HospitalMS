@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -53,9 +54,11 @@ public class PatientOverviewController {
 			Parent root = FXMLLoader.load(getClass().getResource("PatientDialog.fxml"));
 			PatientDialogController.user = null;
 			Stage stage = new Stage();
-			stage.setScene(new Scene(root));
+			Scene scene = new Scene(root);
+			scene.setFill(Color.TRANSPARENT);
+			stage.setScene(scene);
 			stage.initOwner(Main.stage);
-			stage.initStyle(StageStyle.UNDECORATED);
+			stage.initStyle(StageStyle.TRANSPARENT);
 			stage.initModality(Modality.WINDOW_MODAL);
 			stage.showAndWait();
 
