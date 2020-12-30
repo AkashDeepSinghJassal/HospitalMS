@@ -31,6 +31,8 @@ public class HomePageController implements Initializable {
 	@FXML
 	private AnchorPane drawerOverlay;
 	@FXML
+	private AnchorPane modelView;
+	@FXML
 	private JFXHamburger hamburger;
 	@FXML
 	private JFXDrawer drawer;
@@ -119,9 +121,10 @@ public class HomePageController implements Initializable {
 								exit();
 							});
 							break;
-						case "patients":
+						case "patient":
+							System.out.println("patient");
 							node.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-								addPatientView();
+								showPatientView();
 							});
 						default:
 							break;
@@ -133,12 +136,17 @@ public class HomePageController implements Initializable {
 		}
 	}
 
-	public void addPatientView() {
+	public void showPatientView() {
 		AnchorPane root;
 		try {
-			root = FXMLLoader.load(getClass().getResource("../patientView/addPatient.fxml"));
-			anchorPane.getScene().setRoot(root);
-		}catch(IOException e) {
+			System.out.println("in model view");
+			root = FXMLLoader.load(getClass().getResource("../patientView/PatientOverview.fxml"));
+			modelView.getChildren().add(root);
+			AnchorPane.setTopAnchor(root, 0.0);
+			AnchorPane.setRightAnchor(root, 0.0);
+			AnchorPane.setBottomAnchor(root, 0.0);
+			AnchorPane.setLeftAnchor(root, 0.0);
+		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		

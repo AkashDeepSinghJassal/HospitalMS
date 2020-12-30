@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXDrawer ?>
-<?import com.jfoenix.controls.JFXHamburger ?>
-<?import javafx.scene.Cursor ?>
-<?import javafx.scene.layout.AnchorPane ?>
-<?import javafx.scene.layout.HBox ?>
-<?import javafx.scene.layout.StackPane ?>
-<?import javafx.scene.shape.Circle ?>
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Circle?>
 
 <AnchorPane fx:id="root" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.ui.homePage.HomePageController">
    <children>
@@ -23,10 +23,10 @@
                   </StackPane>
                </children>
             </HBox>
-            <AnchorPane style="-fx-background-color: #1f1f1f;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <AnchorPane fx:id="modelView" style="-fx-background-color: #1f1f1f;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
             <AnchorPane fx:id="drawerOverlay" style="-fx-background-color: rgba(255, 255, 255, 0.15);" />
             <JFXDrawer fx:id="drawer" defaultDrawerSize="300.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="1080.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-            <JFXHamburger fx:id="hamburger" layoutX="135.1999969482422" layoutY="530.4000244140625" maxHeight="-Infinity" maxWidth="-Infinity" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
+            <JFXHamburger fx:id="hamburger" layoutX="135.1999969482422" layoutY="530.4000244140625" maxHeight="-Infinity" maxWidth="-Infinity" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="30.0">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

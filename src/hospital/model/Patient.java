@@ -1,4 +1,4 @@
-package hospital.elem;
+package hospital.model;
 
 public class Patient extends User {
 

@@ -10,7 +10,7 @@ import javafx.stage.StageStyle;
 
 public class Main extends Application {
 	public static Stage stage = null;
-	public static Boolean isWelcomeLoaded = false;
+	public static Boolean isWelcomeLoaded = true;
 
 	@Override
 	public void start(Stage primaryStage) {

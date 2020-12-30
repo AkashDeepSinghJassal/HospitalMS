@@ -3,7 +3,7 @@ package hospital.ui.welcome;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import hospital.elem.User;
+import hospital.model.User;
 import hospital.ui.main.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
