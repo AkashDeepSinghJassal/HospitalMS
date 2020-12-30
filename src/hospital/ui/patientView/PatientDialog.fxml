@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXDatePicker?>
-<?import com.jfoenix.controls.JFXTextField?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.JFXButton ?>
+<?import com.jfoenix.controls.JFXTextField ?>
+<?import javafx.scene.Cursor ?>
+<?import javafx.scene.control.Label ?>
+<?import javafx.scene.layout.AnchorPane ?>
+<?import javafx.scene.text.Font ?>
 
 <AnchorPane style="-fx-background-color: #041e32;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.ui.patientView.PatientDialogController">
    <children>
@@ -29,12 +28,12 @@
                </font>
             </Label>
             <JFXTextField focusColor="WHITE" layoutX="249.0" layoutY="224.0" prefHeight="26.0" prefWidth="144.0" promptText="20" unFocusColor="#d4d4d4" />
-            <Label layoutX="89.0" layoutY="283.0" prefWidth="138.0" text="Diagnosis Date:" textFill="WHITE">
+            <!-- <Label layoutX="89.0" layoutY="283.0" prefWidth="138.0" text="Diagnosis Date:" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <JFXDatePicker defaultColor="WHITE" layoutX="249.0" layoutY="279.0" promptText="30/12/2020" />
+            <JFXDatePicker defaultColor="WHITE" layoutX="249.0" layoutY="279.0" promptText="30/12/2020" /> -->
             <Label layoutX="90.0" layoutY="326.0" prefWidth="138.0" text="Address:" textFill="WHITE">
                <font>
                   <Font size="14.0" />
@@ -47,7 +46,7 @@
                </font>
             </Label>
             <JFXTextField focusColor="WHITE" layoutX="249.0" layoutY="371.0" prefHeight="26.0" prefWidth="144.0" promptText="9876543210" unFocusColor="#d4d4d4" />
-            <JFXButton buttonType="RAISED" layoutX="194.0" layoutY="444.0" onAction="#addPatient" prefHeight="26.0" prefWidth="110.0" ripplerFill="#2b76cd" style="-fx-background-color: #eee;" text="Add" textFill="#17449e">
+            <JFXButton buttonType="RAISED" layoutX="265.0" layoutY="444.0" onAction="#addPatient" prefHeight="26.0" prefWidth="110.0" ripplerFill="#2b76cd" style="-fx-background-color: #eee;" text="Add" textFill="#17449e">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -55,6 +54,15 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-         </children></AnchorPane>
+            <JFXButton buttonType="RAISED" layoutX="102.0" layoutY="444.0" onAction="#closeWindow" prefHeight="26.0" prefWidth="110.0" ripplerFill="#2b76cd" style="-fx-background-color: #eee;" text="Cancel" textFill="#17449e">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

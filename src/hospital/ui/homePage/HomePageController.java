@@ -23,6 +23,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class HomePageController implements Initializable {
@@ -138,7 +139,7 @@ public class HomePageController implements Initializable {
 							break;
 						case "exit":
 							node.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-								System.exit(0);
+								((Stage)node.getScene().getWindow()).close();
 							});
 							break;
 						default:
