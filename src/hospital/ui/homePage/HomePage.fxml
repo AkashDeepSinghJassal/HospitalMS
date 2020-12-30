@@ -23,7 +23,7 @@
                   </StackPane>
                </children>
             </HBox>
-            <AnchorPane style="-fx-background-color: #1f1f1f;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <AnchorPane fx:id="mainPane" style="-fx-background-color: #1f1f1f;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
             <AnchorPane fx:id="drawerOverlay" style="-fx-background-color: rgba(255, 255, 255, 0.15);" />
             <JFXDrawer fx:id="drawer" defaultDrawerSize="300.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="1080.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
             <JFXHamburger fx:id="hamburger" layoutX="135.1999969482422" layoutY="530.4000244140625" maxHeight="-Infinity" maxWidth="-Infinity" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
