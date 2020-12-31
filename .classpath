@@ -51,5 +51,7 @@
 			<attribute name="javadoc_location" value="https://javadoc.io/static/com.jfoenix/jfoenix/9.0.10/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="lib/ojdbc6-11.2.0.3.jar"/>
+	<classpathentry kind="lib" path="lib/mysql-connector-java-8.0.22.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

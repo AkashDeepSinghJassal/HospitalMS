@@ -1,5 +1,29 @@
 package hospital.model;
 
-public class Patient extends User {
+public class Patient extends Person {
+	private String id;
+	
+	public Patient(){
+		
+	}
+	
+	public Patient(String id, String name, int age, String address, String contact) {
+		super(name, age, address, contact);
+		this.id = id;
+	}
+	
+	public String getId() {
+		return id;
+	}
+	
+	public void setId(String id) {
+		this.id = id;
+	}
 
+	@Override
+	public String toString() {
+		return "Patient [getId()=" + getId() + ", getName()=" + getName() + ", getAge()=" + getAge() + ", getAddress()="
+				+ getAddress() + ", getContact()=" + getContact() + "]";
+	}
+	
 }

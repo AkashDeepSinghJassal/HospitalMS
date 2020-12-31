@@ -1,6 +1,6 @@
 package hospital.ui.patientView;
 
-import hospital.model.User;
+import hospital.model.Patient;
 import hospital.ui.main.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,7 +17,7 @@ import javafx.stage.StageStyle;
 
 public class PatientOverviewController {
 
-	private User user = null;
+	private Patient patient = null;
 
 	@FXML
 	private TableView personTable;
@@ -52,7 +52,7 @@ public class PatientOverviewController {
 	public void handleAddPerson(ActionEvent event) {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("PatientDialog.fxml"));
-			PatientDialogController.user = null;
+			PatientDialogController.patient = null;
 			Stage stage = new Stage();
 			Scene scene = new Scene(root);
 			scene.setFill(Color.TRANSPARENT);
@@ -62,8 +62,8 @@ public class PatientOverviewController {
 			stage.initModality(Modality.WINDOW_MODAL);
 			stage.showAndWait();
 
-			user = PatientDialogController.user;
-			System.out.println(user);
+			patient = PatientDialogController.patient;
+			System.out.println(patient);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

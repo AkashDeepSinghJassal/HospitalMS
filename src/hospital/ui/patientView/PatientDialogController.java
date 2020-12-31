@@ -3,7 +3,7 @@ package hospital.ui.patientView;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import hospital.model.User;
+import hospital.model.Patient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 public class PatientDialogController implements Initializable {
 
-	public static User user;
+	public static Patient patient;
 	@FXML
 	TextField name;
 	@FXML
@@ -25,9 +25,10 @@ public class PatientDialogController implements Initializable {
 
 	@FXML
 	void addPatient(ActionEvent event) {
-		user = new User(name.getText(), "", age.getText(), address.getText(), contact.getText());
+		patient = new Patient("", name.getText(), Integer.parseInt(age.getText()), address.getText(), contact.getText());
 		((Stage) ((Node) (event.getSource())).getScene().getWindow()).close();
 	}
+	
 
 	@FXML
 	void closeWindow(ActionEvent event) {
