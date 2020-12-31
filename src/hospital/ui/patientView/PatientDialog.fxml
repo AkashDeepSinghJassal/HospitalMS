@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.VBox ?>
 <?import javafx.scene.text.Font ?>
 
-
 <VBox alignment="CENTER" prefHeight="800.0" prefWidth="600.0" spacing="25.0" style="-fx-background-color: #041e32;" styleClass="rootpane" stylesheets="@../css/Stage.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.ui.patientView.PatientDialogController">
    <children>
       <Label text="Add Patient" textFill="#eeeeee">
@@ -24,7 +23,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <JFXTextField fx:id="name" focusColor="WHITE" prefHeight="26.0" prefWidth="144.0" promptText="John Doe" style="-fx-color: #ffffff;" unFocusColor="#d4d4d4" />
+            <JFXTextField fx:id="name" focusColor="WHITE" prefHeight="26.0" prefWidth="144.0" promptText="John Doe" style="-fx-text-fill: #ffffff;" unFocusColor="#d4d4d4" />
          </children>
          <padding>
             <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
@@ -37,7 +36,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <JFXTextField fx:id="age" focusColor="WHITE" prefHeight="26.0" prefWidth="144.0" promptText="20" unFocusColor="#d4d4d4" />
+            <JFXTextField fx:id="age" focusColor="WHITE" prefHeight="26.0" prefWidth="144.0" promptText="20" style="-fx-text-fill: #ffffff;" unFocusColor="#d4d4d4" />
          </children>
          <padding>
             <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
@@ -56,7 +55,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <JFXTextField fx:id="address" focusColor="WHITE" prefHeight="26.0" prefWidth="144.0" promptText="#123,Wall Street, London" unFocusColor="#d4d4d4" />
+            <JFXTextField fx:id="address" focusColor="WHITE" prefHeight="26.0" prefWidth="144.0" promptText="#123,Wall Street, London" style="-fx-text-fill: #ffffff;" unFocusColor="#d4d4d4" />
          </children>
          <padding>
             <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
@@ -69,7 +68,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <JFXTextField fx:id="contact" focusColor="WHITE" prefHeight="26.0" prefWidth="144.0" promptText="9876543210" unFocusColor="#d4d4d4" />
+            <JFXTextField fx:id="contact" focusColor="WHITE" prefHeight="26.0" prefWidth="144.0" promptText="9876543210" style="-fx-text-fill: #ffffff;" unFocusColor="#d4d4d4" />
          </children>
          <padding>
             <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
