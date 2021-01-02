@@ -7,8 +7,8 @@ public class Doctor extends Person {
 		
 	}
 	
-	public Doctor(String id, String name, int age, String address, String contact, String speciality) {
-		super(name, age, address, contact);
+	public Doctor(String id, String name, int age,GENDER gender, String address, String contact, String speciality) {
+		super(name, age,gender, address, contact);
 		this.id = id;
 		this.speciality = speciality;
 	}

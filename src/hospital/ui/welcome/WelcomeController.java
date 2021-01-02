@@ -14,7 +14,6 @@ import javafx.stage.Stage;
 public class WelcomeController implements Initializable {
 
 	Stage primaryStage;
-	Person user;
 
 	@FXML
 	ImageView imageView;
@@ -25,10 +24,9 @@ public class WelcomeController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		primaryStage = Main.stage;
-		user = new Person("John Doe", 20, "#123, Wallen Street", "9876543210");
 		imageView.fitWidthProperty().bind(primaryStage.widthProperty());
 		imageView.fitHeightProperty().bind(primaryStage.heightProperty());
-		fullName.setText("Welcome, " + user.getName());
+		fullName.setText("Welcome, HSM");
 	}
 
 }

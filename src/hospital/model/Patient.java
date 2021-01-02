@@ -7,8 +7,8 @@ public class Patient extends Person {
 		
 	}
 	
-	public Patient(String id, String name, int age, String address, String contact) {
-		super(name, age, address, contact);
+	public Patient(String id, String name, int age,GENDER gender, String address, String contact) {
+		super(name, age,gender, address, contact);
 		this.id = id;
 	}
 	

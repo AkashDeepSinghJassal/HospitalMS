@@ -1,17 +1,19 @@
 package hospital.model;
 
 public class Person {
-	private String name, address, contact, gender;
+	private String name, address, contact;
+	private GENDER gender;
 	private int age;
 
 	public Person() {
 	}
 
-	public Person(String name, int age, String address, String contact) {
+	public Person(String name, int age,GENDER gender, String address, String contact) {
 		this.name = name;
 		this.age = age;
 		this.address = address;
 		this.contact = contact;
+		this.gender = gender;
 	}
 
 	public String getName() {
@@ -34,7 +36,7 @@ public class Person {
 		return this.address;
 	}
 	
-	public String getGender() {
+	public GENDER getGender() {
 		return this.gender;
 	}
 
@@ -50,7 +52,7 @@ public class Person {
 		this.contact = contact;
 	}
 	
-	public void setGender(String gender) {
+	public void setGender(GENDER gender) {
 		this.gender = gender;
 	}
 

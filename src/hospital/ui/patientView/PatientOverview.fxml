@@ -22,13 +22,14 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <TableView fx:id="personTable" layoutX="-12.0" layoutY="49.0" prefHeight="298.0" prefWidth="175.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="patientTable" layoutX="-12.0" layoutY="49.0" prefHeight="298.0" prefWidth="175.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn fx:id="firstNameColumn" prefWidth="179.46667051315308" text="ID" />
-                      <TableColumn fx:id="lastNameColumn" prefWidth="266.6665954589844" text="Name" />
-                        <TableColumn prefWidth="186.93344116210938" text="Age" />
-                        <TableColumn prefWidth="75.0" text="Contact" />
-                        <TableColumn prefWidth="75.0" text="Address" />
+                      <TableColumn fx:id="patientIDTableColumn" prefWidth="179.46667051315308" text="ID" />
+                      <TableColumn fx:id="nameTableColumn" prefWidth="266.6665954589844" text="Name" />
+                        <TableColumn fx:id="ageTableColumn" prefWidth="164.80001831054688" text="Age" />
+                        <TableColumn fx:id="genderTableColumn" prefWidth="216.0" text="Gender" />
+                        <TableColumn fx:id="contactTableColumn" prefWidth="75.0" text="Contact" />
+                        <TableColumn fx:id="addressTableColumn" prefWidth="75.0" text="Address" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -50,28 +51,28 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
                         <Label text="ID" />
                         <Label text="Name" GridPane.rowIndex="1" />
-                        <Label text="Age" GridPane.rowIndex="2" />
-                        <Label text="Contact" GridPane.rowIndex="3" />
-                        <Label text="Address" GridPane.rowIndex="4" />
-                        <Label text="Date of something" GridPane.rowIndex="5" />
+                        <Label text="Age" GridPane.rowIndex="3" />
+                        <Label text="Contact" GridPane.rowIndex="4" />
+                        <Label text="Address" GridPane.rowIndex="5" />
                         <Label fx:id="IDLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="1" />
                         <Label fx:id="nameLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label fx:id="ageLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label fx:id="contactLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label fx:id="addressLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <Label fx:id="birthdayLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label fx:id="ageLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label fx:id="contactLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label fx:id="addressLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label layoutX="10.0" layoutY="73.0" text="Gender" GridPane.rowIndex="2" />
+                        <Label fx:id="genderLabel" layoutX="341.0" layoutY="73.0" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
                   <ButtonBar layoutX="54.0" layoutY="250.0" prefHeight="75.0" prefWidth="470.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
                     <buttons>
-                        <Button mnemonicParsing="false" onAction="#handleEditPerson" prefHeight="40.0" prefWidth="300.0" text="Edit" />
-                        <Button mnemonicParsing="false" onAction="#handleDeletePerson" prefHeight="40.0" prefWidth="300.0" text="Delete" />
-                      <Button mnemonicParsing="false" onAction="#handleAddPerson" prefHeight="40.0" prefWidth="300.0" text="New" />
+                        <Button mnemonicParsing="false" onAction="#handleEditPatient" prefHeight="40.0" prefWidth="300.0" text="Edit" />
+                        <Button mnemonicParsing="false" onAction="#handleDeletePatient" prefHeight="40.0" prefWidth="300.0" text="Delete" />
+                      <Button mnemonicParsing="false" onAction="#handleAddPatient" prefHeight="40.0" prefWidth="300.0" text="New" />
                     </buttons>
                   </ButtonBar>
                </children>
