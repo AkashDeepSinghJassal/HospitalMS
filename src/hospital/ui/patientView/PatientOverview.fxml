@@ -15,10 +15,10 @@
    <children>
       <AnchorPane prefHeight="100.0" prefWidth="1920.0" styleClass="background" stylesheets="@../css/DarkTheme.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label layoutX="946.0" layoutY="20.0" styleClass="label-header" text="Patient Overview" />
+            <Label layoutX="842.0" layoutY="22.0" styleClass="label-header" text="Patient Overview" />
          </children>
       </AnchorPane>
-      <SplitPane dividerPositions="0.6010416666666667" layoutX="153.0" layoutY="70.0" prefHeight="300.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+      <SplitPane dividerPositions="0.6104166666666667" layoutX="153.0" layoutY="70.0" prefHeight="300.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>

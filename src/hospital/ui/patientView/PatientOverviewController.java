@@ -105,20 +105,35 @@ public class PatientOverviewController {
 		if (deleteIndex != -1) {
 			patientTable.getItems().remove(deleteIndex);
 		} else {
-	        // Nothing selected.
-	        Alert alert = new Alert(AlertType.WARNING);
-	        alert.initOwner(Main.stage);
-	        alert.setTitle("No Selection");
-	        alert.setHeaderText("No Patient Selected");
-	        alert.setContentText("Please select a patient in the table.");
+			// Nothing selected.
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(Main.stage);
+			alert.setTitle("No Selection");
+			alert.setHeaderText("No Patient Selected");
+			alert.setContentText("Please select a patient in the table.");
 
-	        alert.showAndWait();
-	    }
+			alert.showAndWait();
+		}
 	}
 
 	@FXML
 	void handleEditPatient(ActionEvent event) {
+		Patient p = patientTable.getSelectionModel().getSelectedItem();
+		if (p != null) {
+			boolean okClicked = showPatientDialog(p, "Edit Patient");
+			if (okClicked) {
+				showPatientDetails(p);
+			}
+		} else {
+			// Nothing selected.
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(Main.stage);
+			alert.setTitle("No Selection");
+			alert.setHeaderText("No Patient Selected");
+			alert.setContentText("Please select a patient in the table.");
 
+			alert.showAndWait();
+		}
 	}
 
 	public boolean showPatientDialog(Patient patient, String header) {
