@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" prefHeight="900.0" prefWidth="600.0" spacing="25.0" style="-fx-background-color: #041e32;" styleClass="rootpane" stylesheets="@../css/Stage.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.ui.doctorView.DoctorDialogController">
+   <children>
+      <Label fx:id="headLbl" text="Doctor" textFill="#eeeeee">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" spacing="25.0">
+         <children>
+            <Label prefWidth="138.0" text="Doctor Name:" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <JFXTextField fx:id="name" focusColor="WHITE" prefHeight="26.0" prefWidth="144.0" promptText="John Doe" style="-fx-text-fill: #ffffff;" unFocusColor="#d4d4d4">
+               <font>
+                  <Font size="18.0" />
+               </font></JFXTextField>
+         </children>
+         <padding>
+            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+         </padding>
+      </HBox>
+      <HBox alignment="CENTER" spacing="25.0">
+         <children>
+            <Label prefWidth="138.0" text="Doctor Age:" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <JFXTextField fx:id="age" focusColor="WHITE" prefHeight="26.0" prefWidth="144.0" promptText="20" style="-fx-text-fill: #ffffff;" unFocusColor="#d4d4d4">
+               <font>
+                  <Font size="18.0" />
+               </font></JFXTextField>
+         </children>
+         <padding>
+            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+         </padding>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="60.0" layoutY="396.0" spacing="25.0">
+         <children>
+            <Label prefHeight="27.0" prefWidth="144.0" text="Gender" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <JFXComboBox fx:id="gender" focusColor="WHITE" prefHeight="26.0" prefWidth="149.0" promptText="M/F/O" style="-fx-text-fill: #ffffff;" unFocusColor="#d4d4d4" />
+         </children>
+         <padding>
+            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+         </padding>
+      </HBox>
+      <HBox alignment="CENTER" spacing="25.0">
+         <children>
+            <!-- <Label layoutX="89.0" layoutY="283.0" prefWidth="138.0" text="Diagnosis Date:" textFill="WHITE">
+               <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <JFXDatePicker defaultColor="WHITE" layoutX="249.0" layoutY="279.0" promptText="30/12/2020" /> -->
+            <Label prefWidth="138.0" text="Address:" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <JFXTextField fx:id="address" focusColor="WHITE" prefHeight="26.0" prefWidth="144.0" promptText="#123,Wall Street, London" style="-fx-text-fill: #ffffff;" unFocusColor="#d4d4d4">
+               <font>
+                  <Font size="18.0" />
+               </font></JFXTextField>
+         </children>
+         <padding>
+            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+         </padding>
+      </HBox>
+      <HBox alignment="CENTER" spacing="25.0">
+         <children>
+            <Label prefWidth="138.0" text="Contact: " textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <JFXTextField fx:id="contact" focusColor="WHITE" prefHeight="26.0" prefWidth="144.0" promptText="9876543210" style="-fx-text-fill: #ffffff;" unFocusColor="#d4d4d4">
+               <font>
+                  <Font size="18.0" />
+               </font></JFXTextField>
+         </children>
+         <padding>
+            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+         </padding>
+      </HBox>
+      <HBox alignment="CENTER" spacing="25.0">
+         <children>
+            <Label prefWidth="138.0" text="Speciality: " textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <JFXTextField fx:id="speciality" focusColor="WHITE" prefHeight="26.0" prefWidth="144.0" promptText="Cardiologist" style="-fx-text-fill: #ffffff;" unFocusColor="#d4d4d4">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </JFXTextField>
+         </children>
+         <padding>
+            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+         </padding>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="43.0" prefWidth="499.0" spacing="50.0">
+         <children>
+            <JFXButton buttonType="RAISED" onAction="#handleOK" prefHeight="26.0" prefWidth="110.0" ripplerFill="#2b76cd" style="-fx-background-color: #eee;" text="OK" textFill="#17449e">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton buttonType="RAISED" onAction="#closeWindow" prefHeight="26.0" prefWidth="110.0" ripplerFill="#2b76cd" style="-fx-background-color: #eee;" text="Cancel" textFill="#17449e">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+         </children>
+         <padding>
+            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+         </padding>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+   </padding>
+</VBox>

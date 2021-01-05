@@ -119,6 +119,7 @@ public class HomePageController implements Initializable {
 						case "doctor":
 							node.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 								triggerHamburger();
+								showDoctorView();
 							});
 							break;
 						case "appointment":
@@ -169,6 +170,21 @@ public class HomePageController implements Initializable {
 			e.printStackTrace();
 		}
 
+	}
+	
+	public void showDoctorView() {
+		AnchorPane root;
+		try {
+			root = FXMLLoader.load(getClass().getResource("../doctorView/DoctorOverview.fxml"));
+			modelView.getChildren().add(root);
+			AnchorPane.setTopAnchor(root, 0.0);
+			AnchorPane.setRightAnchor(root, 0.0);
+			AnchorPane.setBottomAnchor(root, 0.0);
+			AnchorPane.setLeftAnchor(root, 0.0);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	public void setHamburger() {
