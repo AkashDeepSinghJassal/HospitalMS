@@ -61,11 +61,13 @@ public class PatientDialogController implements Initializable {
 
 	public void setPatient(Patient patient) {
 		this.patient = patient;
-		name.setText("Demo data");
-		age.setText("20");
-		contact.setText("1234567890");
-		gender.setValue(GENDER.M);
-		address.setText("Demo add");
+		if(patient != null) {
+			name.setText(patient.getName());
+			age.setText(String.valueOf(patient.getAge()));
+			contact.setText(patient.getContact());
+			gender.setValue(patient.getGender());
+			address.setText(patient.getAddress());
+		}
 	}
 
 
@@ -102,7 +104,9 @@ public class PatientDialogController implements Initializable {
         } else {
             // try to parse the postal code into an int.
             try {
-                Integer.parseInt(age.getText());
+                int temp = Integer.parseInt(age.getText());
+                if(temp <= 0 || temp >= 130)
+                	errorMessage += "No vaid age!\n";
             } catch (NumberFormatException e) {
                 errorMessage += "No valid age (must be an integer)!\n"; 
             }
