@@ -20,14 +20,14 @@ public class Main extends Application {
 			root = FXMLLoader.load(getClass().getResource("../login/Login.fxml"));
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add("hospital/ui/css/Main.css");
-			 primaryStage.setFullScreen(true);
-			 primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+			primaryStage.setFullScreen(true);
+			primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
 			primaryStage.setHeight(1080);
 			primaryStage.setWidth(1920);
 			primaryStage.initStyle(StageStyle.TRANSPARENT);
 			primaryStage.setScene(scene);
 			primaryStage.show();
-		} catch (Exception e) {	
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

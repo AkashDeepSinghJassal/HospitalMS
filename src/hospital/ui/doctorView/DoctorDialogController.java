@@ -70,7 +70,6 @@ public class DoctorDialogController implements Initializable {
 	}
 
 	public boolean isOkClicked() {
-		// TODO Auto-generated method stub
 		return okClicked;
 	}
 
