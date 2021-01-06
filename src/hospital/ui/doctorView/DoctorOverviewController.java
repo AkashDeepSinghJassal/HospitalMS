@@ -33,7 +33,6 @@ import javafx.stage.StageStyle;
 
 public class DoctorOverviewController {
 
-	private Doctor doctor = null;
 	private ObservableList<Doctor> doctorList = FXCollections.observableArrayList();
 
 	public DoctorOverviewController() {

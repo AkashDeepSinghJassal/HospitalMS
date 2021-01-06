@@ -10,12 +10,10 @@ import hospital.model.Patient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 
 public class PatientDialogController implements Initializable {
@@ -72,7 +70,6 @@ public class PatientDialogController implements Initializable {
 
 
 	public boolean isOkClicked() {
-		// TODO Auto-generated method stub
 		return okClicked;
 	}
     @FXML
