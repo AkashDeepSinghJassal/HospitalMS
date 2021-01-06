@@ -7,7 +7,9 @@ import hospital.model.GENDER;
 import hospital.ui.main.Main;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,6 +24,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -43,25 +46,25 @@ public class DoctorOverviewController {
 	private TableView<Doctor> doctorTable;
 
 	@FXML
-	private TableColumn<Doctor, String> doctorIDTableColumn;
+	private TableColumn<Doctor, SimpleStringProperty> doctorIDTableColumn;
 
 	@FXML
-	private TableColumn<Doctor, String> nameTableColumn;
+	private TableColumn<Doctor, SimpleStringProperty> nameTableColumn;
 
 	@FXML
-	private TableColumn<Doctor, String> ageTableColumn;
+	private TableColumn<Doctor, SimpleIntegerProperty> ageTableColumn;
 
 	@FXML
 	private TableColumn<Doctor, String> genderTableColumn;
 
 	@FXML
-	private TableColumn<Doctor, String> contactTableColumn;
+	private TableColumn<Doctor, SimpleStringProperty> contactTableColumn;
 
 	@FXML
-	private TableColumn<Doctor, String> addressTableColumn;
+	private TableColumn<Doctor, SimpleStringProperty> addressTableColumn;
 
 	@FXML
-	private TableColumn<Doctor, String> specialityTableColumn;
+	private TableColumn<Doctor, SimpleStringProperty> specialityTableColumn;
 
 	@FXML
 	private Label IDLabel;
@@ -87,16 +90,14 @@ public class DoctorOverviewController {
 	@FXML
 	private void initialize() {
 		doctorTable.setItems(doctorList);
-		doctorIDTableColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getId()));
-		nameTableColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getName()));
-		ageTableColumn.setCellValueFactory(
-				cellData -> new ReadOnlyStringWrapper(Integer.toString(cellData.getValue().getAge())));
+		doctorIDTableColumn.setCellValueFactory(new PropertyValueFactory<Doctor, SimpleStringProperty>("id"));
+		nameTableColumn.setCellValueFactory(new PropertyValueFactory<Doctor, SimpleStringProperty>("name"));
+		ageTableColumn.setCellValueFactory(new PropertyValueFactory<Doctor, SimpleIntegerProperty>("age"));
 		genderTableColumn
 				.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getGender().toString()));
-		contactTableColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getContact()));
-		addressTableColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAddress()));
-		specialityTableColumn
-				.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getSpeciality()));
+		contactTableColumn.setCellValueFactory(new PropertyValueFactory<Doctor, SimpleStringProperty>("contact"));
+		addressTableColumn.setCellValueFactory(new PropertyValueFactory<Doctor, SimpleStringProperty>("address"));
+		specialityTableColumn.setCellValueFactory(new PropertyValueFactory<Doctor, SimpleStringProperty>("speciality"));
 
 		// lastNameColumn.setCellValueFactory(cellData ->
 		// cellData.getValue().lastNameProperty());

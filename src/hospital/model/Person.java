@@ -1,66 +1,85 @@
 package hospital.model;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 public class Person {
-	private String name, address, contact;
 	private GENDER gender;
-	private int age;
+	private SimpleStringProperty name = new SimpleStringProperty(), address = new SimpleStringProperty(),
+			contact = new SimpleStringProperty();
+	private SimpleIntegerProperty age = new SimpleIntegerProperty();
 
 	public Person() {
 	}
 
-	public Person(String name, int age,GENDER gender, String address, String contact) {
-		this.name = name;
-		this.age = age;
-		this.address = address;
-		this.contact = contact;
+	public Person(String name, int age, GENDER gender, String address, String contact) {
+		this.name.set(name);
+		this.age.set(age);
 		this.gender = gender;
+		this.address.set(address);
+		this.contact.set(contact);
 	}
 
 	public String getName() {
-		return this.name;
+		return this.name.get();
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.name.set(name);
+	}
+
+	public SimpleStringProperty nameProperty() {
+		return this.name;
 	}
 
 	public int getAge() {
-		return this.age;
+		return this.age.get();
 	}
 
 	public void setAge(int age) {
-		this.age = age;
+		this.age.set(age);
 	}
 
-	public String getAddress() {
-		return this.address;
+	public SimpleIntegerProperty ageProperty() {
+		return this.age;
 	}
-	
+
 	public GENDER getGender() {
 		return this.gender;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getContact() {
-		return this.contact;
-	}
-
-	public void setContact(String contact) {
-		this.contact = contact;
-	}
-	
 	public void setGender(GENDER gender) {
 		this.gender = gender;
 	}
 
-	@Override
-	public String toString() {
-		return "Person [name=" + name + ", address=" + address + ", age=" + age + ", contact=" + contact+ ", gender=" + gender + "]";
+	public String getAddress() {
+		return this.address.get();
 	}
 
+	public void setAddress(String address) {
+		this.address.set(address);
+	}
 
+	public SimpleStringProperty addressProperty() {
+		return this.address;
+	}
+
+	public String getContact() {
+		return this.contact.get();
+	}
+
+	public void setContact(String contact) {
+		this.contact.set(contact);
+	}
+
+	public SimpleStringProperty contactProperty() {
+		return this.contact;
+	}
+
+	@Override
+	public String toString() {
+		return "Person [name=" + getName() + ", address=" + getAddress() + ", age=" + getAge() + ", contact="
+				+ getContact() + ", gender=" + gender + "]";
+	}
 
 }

@@ -1,23 +1,29 @@
 package hospital.model;
 
+import javafx.beans.property.SimpleStringProperty;
+
 public class Patient extends Person {
-	private String id;
-	
-	public Patient(){
-		
+	private SimpleStringProperty id = new SimpleStringProperty();
+
+	public Patient() {
+
 	}
-	
-	public Patient(String id, String name, int age,GENDER gender, String address, String contact) {
-		super(name, age,gender, address, contact);
-		this.id = id;
+
+	public Patient(String id, String name, int age, GENDER gender, String address, String contact) {
+		super(name, age, gender, address, contact);
+		this.id.set(id);
 	}
-	
+
 	public String getId() {
-		return id;
+		return id.get();
 	}
-	
+
 	public void setId(String id) {
-		this.id = id;
+		this.id.set(id);
+	}
+
+	public SimpleStringProperty idProperty() {
+		return id;
 	}
 
 	@Override
@@ -25,5 +31,5 @@ public class Patient extends Person {
 		return "Patient [getId()=" + getId() + ", getName()=" + getName() + ", getAge()=" + getAge() + ", getAddress()="
 				+ getAddress() + ", getContact()=" + getContact() + "]";
 	}
-	
+
 }
