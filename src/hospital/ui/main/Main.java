@@ -1,5 +1,7 @@
 package hospital.ui.main;
 
+import hospital.ui.doctorView.DoctorOverviewController;
+import hospital.ui.patientView.PatientOverviewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,11 +13,15 @@ import javafx.stage.StageStyle;
 public class Main extends Application {
 	public static Stage stage = null;
 	public static Boolean isWelcomeLoaded = true;
+	public static PatientOverviewController patientOverviewController;
+	public static DoctorOverviewController doctorOverviewController;
 
 	@Override
 	public void start(Stage primaryStage) {
 		stage = primaryStage;
 		Parent root;
+		patientOverviewController = new PatientOverviewController();
+		doctorOverviewController = new DoctorOverviewController();
 		try {
 			root = FXMLLoader.load(getClass().getResource("../login/Login.fxml"));
 			Scene scene = new Scene(root);
