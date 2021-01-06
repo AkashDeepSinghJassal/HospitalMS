@@ -5,18 +5,24 @@ import java.io.IOException;
 import hospital.model.GENDER;
 import hospital.model.Patient;
 import hospital.ui.main.Main;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Bounds;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
-import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -83,11 +89,43 @@ public class PatientOverviewController {
 		contactTableColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getContact()));
 		addressTableColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAddress()));
 
-//		lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
+		// lastNameColumn.setCellValueFactory(cellData ->
+		// cellData.getValue().lastNameProperty());
 		// show empty in personal details
 		showPatientDetails(null);
 		patientTable.getSelectionModel().selectedItemProperty()
 				.addListener((observable, oldValue, newValue) -> showPatientDetails(newValue));
+
+		// Clear Selection On Opening
+		patientTable.getSelectionModel().clearSelection();
+
+		// Clear Selection when clicking on empty rows
+		ObjectProperty<TableRow<Patient>> lastSelectedRow = new SimpleObjectProperty<>();
+
+		patientTable.setRowFactory(tableView -> {
+			TableRow<Patient> row = new TableRow<Patient>();
+
+			row.selectedProperty().addListener((observable, wasSelected, isNowSelected) -> {
+				if (isNowSelected) {
+					lastSelectedRow.set(row);
+				}
+			});
+			return row;
+		});
+
+		patientTable.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent event) {
+				if (lastSelectedRow.get() != null) {
+					Bounds boundsOfSelectedRow = lastSelectedRow.get()
+							.localToScene(lastSelectedRow.get().getLayoutBounds());
+					if (boundsOfSelectedRow.contains(event.getSceneX(), event.getSceneY()) == false) {
+						patientTable.getSelectionModel().clearSelection();
+					}
+				}
+			}
+		});
 	}
 
 	@FXML

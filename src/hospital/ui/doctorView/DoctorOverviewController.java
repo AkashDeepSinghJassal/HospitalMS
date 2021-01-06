@@ -5,18 +5,24 @@ import java.io.IOException;
 import hospital.model.Doctor;
 import hospital.model.GENDER;
 import hospital.ui.main.Main;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Bounds;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
-import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -53,7 +59,7 @@ public class DoctorOverviewController {
 
 	@FXML
 	private TableColumn<Doctor, String> addressTableColumn;
-	
+
 	@FXML
 	private TableColumn<Doctor, String> specialityTableColumn;
 
@@ -68,13 +74,13 @@ public class DoctorOverviewController {
 
 	@FXML
 	private Label genderLabel;
-	
+
 	@FXML
 	private Label contactLabel;
 
 	@FXML
 	private Label addressLabel;
-	
+
 	@FXML
 	private Label specialityLabel;
 
@@ -89,13 +95,45 @@ public class DoctorOverviewController {
 				.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getGender().toString()));
 		contactTableColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getContact()));
 		addressTableColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAddress()));
-		specialityTableColumn.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getSpeciality()));
+		specialityTableColumn
+				.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getSpeciality()));
 
-//		lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
+		// lastNameColumn.setCellValueFactory(cellData ->
+		// cellData.getValue().lastNameProperty());
 		// show empty in personal details
 		showDoctorDetails(null);
 		doctorTable.getSelectionModel().selectedItemProperty()
 				.addListener((observable, oldValue, newValue) -> showDoctorDetails(newValue));
+
+		// Clear Selection On Opening
+		doctorTable.getSelectionModel().clearSelection();
+
+		ObjectProperty<TableRow<Doctor>> lastSelectedRow = new SimpleObjectProperty<>();
+
+		doctorTable.setRowFactory(tableView -> {
+			TableRow<Doctor> row = new TableRow<Doctor>();
+
+			row.selectedProperty().addListener((observable, wasSelected, isNowSelected) -> {
+				if (isNowSelected) {
+					lastSelectedRow.set(row);
+				}
+			});
+			return row;
+		});
+
+		doctorTable.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent event) {
+				if (lastSelectedRow.get() != null) {
+					Bounds boundsOfSelectedRow = lastSelectedRow.get()
+							.localToScene(lastSelectedRow.get().getLayoutBounds());
+					if (boundsOfSelectedRow.contains(event.getSceneX(), event.getSceneY()) == false) {
+						doctorTable.getSelectionModel().clearSelection();
+					}
+				}
+			}
+		});
 	}
 
 	@FXML
