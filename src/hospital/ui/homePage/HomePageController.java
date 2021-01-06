@@ -140,7 +140,7 @@ public class HomePageController implements Initializable {
 							break;
 						case "exit":
 							node.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-								((Stage)node.getScene().getWindow()).close();
+								((Stage) node.getScene().getWindow()).close();
 							});
 							break;
 						default:
@@ -171,7 +171,7 @@ public class HomePageController implements Initializable {
 		}
 
 	}
-	
+
 	public void showDoctorView() {
 		AnchorPane root;
 		try {
@@ -184,7 +184,7 @@ public class HomePageController implements Initializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	public void setHamburger() {
@@ -204,6 +204,7 @@ public class HomePageController implements Initializable {
 				transition.play();
 				fadeOut.play();
 				drawer.close();
+				drawer.setDisable(true);
 			} else if (drawer.isClosed()) {
 				transition.setRate(1);
 
@@ -219,6 +220,7 @@ public class HomePageController implements Initializable {
 				transition.play();
 				fadeIn.play();
 				drawer.open();
+				drawer.setDisable(false);
 			}
 		});
 	}
