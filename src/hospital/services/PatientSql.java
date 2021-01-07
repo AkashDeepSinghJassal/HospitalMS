@@ -1,6 +1,5 @@
 package hospital.services;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -36,8 +35,7 @@ public class PatientSql {
 
 	public static int addPatient(Patient patient) {
 		try {
-			Connection conn = Main.conn;
-			PreparedStatement statement = conn.prepareStatement("INSERT INTO patient VALUES (?,?,?,?,?,?)");
+			PreparedStatement statement = Main.conn.prepareStatement("INSERT INTO patient VALUES (?,?,?,?,?,?)");
 			statement.setString(1, "");
 			statement.setString(2, patient.getName());
 			statement.setInt(3, patient.getAge());
@@ -51,11 +49,22 @@ public class PatientSql {
 		return 0;
 	}
 
+	public static int removePatient(String id) {
+		try {
+			PreparedStatement statement = Main.conn.prepareStatement("DELETE FROM patient WHERE id = ?");
+			statement.setString(1, id);
+			return statement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
 	public static String getIdOfLastPatient() {
-		Connection conn = Main.conn;
 		String id = "";
 		try {
-			PreparedStatement statement = conn.prepareStatement("SELECT id FROM patient ORDER BY id DESC LIMIT 1;");
+			PreparedStatement statement = Main.conn
+					.prepareStatement("SELECT id FROM patient ORDER BY id DESC LIMIT 1;");
 			ResultSet resultSet = statement.executeQuery();
 			if (resultSet.next())
 				id = resultSet.getString(1);

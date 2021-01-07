@@ -149,15 +149,18 @@ public class PatientOverviewController {
 				patient.setId(PatientSql.getIdOfLastPatient());
 				patientList.add(patient);
 				showPatientDetails(patient);
-			};
+			}
 		}
 	}
 
 	@FXML
 	void handleDeletePatient(ActionEvent event) {
-		int deleteIndex = patientTable.getSelectionModel().getSelectedIndex();
-		if (deleteIndex != -1) {
-			patientTable.getItems().remove(deleteIndex);
+		Patient deletedPatient = patientTable.getSelectionModel().getSelectedItem();
+		if (deletedPatient != null) {
+			if (PatientSql.removePatient(deletedPatient.getId()) == 1) {
+				patientTable.getItems().remove(deletedPatient);
+			}
+
 		} else {
 			// Nothing selected.
 			Alert alert = new Alert(AlertType.WARNING);
