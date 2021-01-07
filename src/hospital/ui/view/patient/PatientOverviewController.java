@@ -7,8 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import hospital.model.GENDER;
-import hospital.model.GenerateGender;
 import hospital.model.Patient;
+import hospital.services.PatientSql;
 import hospital.ui.main.Main;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -44,15 +44,12 @@ public class PatientOverviewController {
 
 	public PatientOverviewController() {
 		try {
-			statement = conn.prepareStatement("select id, name, age, gender, contact, address from patients");
+			statement = conn.prepareStatement("select id, name, age, gender, contact, address from patient");
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				Patient patient = new Patient(resultSet.getString(1), resultSet.getString(2), resultSet.getInt(3),
-						GenerateGender.generateGender(resultSet.getString(4)), resultSet.getString(6),
-						resultSet.getString(5));
+				Patient patient = PatientSql.generatePatient(resultSet);
 				patientList.add(patient);
 			}
-			System.out.println(resultSet);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -148,8 +145,10 @@ public class PatientOverviewController {
 	void handleAddPatient(ActionEvent event) {
 		Patient patient = new Patient();
 		if (showPatientDialog(patient, "Add Patient")) {
-			showPatientDetails(patient);
+			PatientSql.addPatient(patient);
+			patient.setId(PatientSql.getIdOfLastPatient());
 			patientList.add(patient);
+			showPatientDetails(patient);
 		}
 	}
 
