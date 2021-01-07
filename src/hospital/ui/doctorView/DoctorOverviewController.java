@@ -54,7 +54,7 @@ public class DoctorOverviewController {
 	private TableColumn<Doctor, SimpleIntegerProperty> ageTableColumn;
 
 	@FXML
-	private TableColumn<Doctor, String> genderTableColumn;
+	private TableColumn<Doctor, SimpleObjectProperty<GENDER>> genderTableColumn;
 
 	@FXML
 	private TableColumn<Doctor, SimpleStringProperty> contactTableColumn;
@@ -92,8 +92,7 @@ public class DoctorOverviewController {
 		doctorIDTableColumn.setCellValueFactory(new PropertyValueFactory<Doctor, SimpleStringProperty>("id"));
 		nameTableColumn.setCellValueFactory(new PropertyValueFactory<Doctor, SimpleStringProperty>("name"));
 		ageTableColumn.setCellValueFactory(new PropertyValueFactory<Doctor, SimpleIntegerProperty>("age"));
-		genderTableColumn
-				.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getGender().toString()));
+		genderTableColumn.setCellValueFactory(new PropertyValueFactory<Doctor, SimpleObjectProperty<GENDER>>("gender"));
 		contactTableColumn.setCellValueFactory(new PropertyValueFactory<Doctor, SimpleStringProperty>("contact"));
 		addressTableColumn.setCellValueFactory(new PropertyValueFactory<Doctor, SimpleStringProperty>("address"));
 		specialityTableColumn.setCellValueFactory(new PropertyValueFactory<Doctor, SimpleStringProperty>("speciality"));

@@ -1,10 +1,11 @@
 package hospital.model;
 
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Person {
-	private GENDER gender;
+	private SimpleObjectProperty<GENDER> gender = new SimpleObjectProperty<GENDER>();
 	private SimpleStringProperty name = new SimpleStringProperty(), address = new SimpleStringProperty(),
 			contact = new SimpleStringProperty();
 	private SimpleIntegerProperty age = new SimpleIntegerProperty();
@@ -15,7 +16,8 @@ public class Person {
 	public Person(String name, int age, GENDER gender, String address, String contact) {
 		this.name.set(name);
 		this.age.set(age);
-		this.gender = gender;
+		this.gender.set(gender);
+		;
 		this.address.set(address);
 		this.contact.set(contact);
 	}
@@ -45,11 +47,16 @@ public class Person {
 	}
 
 	public GENDER getGender() {
-		return this.gender;
+		return this.gender.get();
 	}
 
 	public void setGender(GENDER gender) {
-		this.gender = gender;
+		this.gender.set(gender);
+		;
+	}
+
+	public SimpleObjectProperty<GENDER> genderProperty() {
+		return this.gender;
 	}
 
 	public String getAddress() {
