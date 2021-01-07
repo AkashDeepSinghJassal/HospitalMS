@@ -1,7 +1,7 @@
 package hospital.ui.main;
 
-import hospital.ui.doctorView.DoctorOverviewController;
-import hospital.ui.patientView.PatientOverviewController;
+import hospital.ui.view.doctor.DoctorOverviewController;
+import hospital.ui.view.patient.PatientOverviewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

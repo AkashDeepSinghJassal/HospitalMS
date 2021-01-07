@@ -1,4 +1,4 @@
-package hospital.ui.doctorView;
+package hospital.ui.view.doctor;
 
 import java.io.IOException;
 
@@ -6,7 +6,6 @@ import hospital.model.Doctor;
 import hospital.model.GENDER;
 import hospital.ui.main.Main;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
