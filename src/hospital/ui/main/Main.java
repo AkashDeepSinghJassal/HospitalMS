@@ -1,7 +1,10 @@
 package hospital.ui.main;
 
+import java.sql.Connection;
+
 import hospital.ui.view.doctor.DoctorOverviewController;
 import hospital.ui.view.patient.PatientOverviewController;
+import hospital.util.DBUtil;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,11 +18,13 @@ public class Main extends Application {
 	public static Boolean isWelcomeLoaded = true;
 	public static PatientOverviewController patientOverviewController;
 	public static DoctorOverviewController doctorOverviewController;
+	public static Connection conn = null;
 
 	@Override
 	public void start(Stage primaryStage) {
 		stage = primaryStage;
 		Parent root;
+		conn = DBUtil.getDBConnection();
 		patientOverviewController = new PatientOverviewController();
 		doctorOverviewController = new DoctorOverviewController();
 		try {
