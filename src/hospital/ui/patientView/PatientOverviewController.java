@@ -1,11 +1,8 @@
 package hospital.ui.patientView;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
-import hospital.model.GenerateGender;
+import hospital.model.GENDER;
 import hospital.model.Patient;
 import hospital.ui.main.Main;
 import javafx.beans.property.ObjectProperty;
@@ -35,27 +32,13 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class PatientOverviewController {
-	Connection conn = Main.conn;
-	PreparedStatement statement = null;
-	ResultSet resultSet = null;
 
 	private ObservableList<Patient> patientList = FXCollections.observableArrayList();
 
 	public PatientOverviewController() {
-		try {
-			statement = conn.prepareStatement(
-					"select concat(\"PA\", LPAD(id,5,\"0\")), name, age, gender, contact, address from patients");
-			resultSet = statement.executeQuery();
-			while (resultSet.next()) {
-				Patient patient = new Patient(resultSet.getString(1), resultSet.getString(2), resultSet.getInt(3),
-						GenerateGender.generateGender(resultSet.getString(4)), "" + resultSet.getInt(5),
-						resultSet.getString(6));
-				patientList.add(patient);
-			}
-			System.out.println(resultSet);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		patientList.add(new Patient("PA001", "Akash", 21, GENDER.M, "Mohali", "7009000480"));
+		patientList.add(new Patient("PA002", "Nishesh", 20, GENDER.O, "Jalandhar", "1234567890"));
+		patientList.add(new Patient("PA003", "Ram", 20, GENDER.F, "Panchkula", "9999999999"));
 	}
 
 	@FXML
@@ -107,7 +90,8 @@ public class PatientOverviewController {
 		contactTableColumn.setCellValueFactory(new PropertyValueFactory<Patient, SimpleStringProperty>("contact"));
 		addressTableColumn.setCellValueFactory(new PropertyValueFactory<Patient, SimpleStringProperty>("address"));
 
-
+		// lastNameColumn.setCellValueFactory(cellData ->
+		// cellData.getValue().lastNameProperty());
 		// show empty in personal details
 		showPatientDetails(null);
 		patientTable.getSelectionModel().selectedItemProperty()

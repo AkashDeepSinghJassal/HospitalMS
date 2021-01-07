@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class DBUtil {
 
-	static boolean offline = false;
+	static boolean offline = true;
 	static Connection conn = null;
 	
 	static {	

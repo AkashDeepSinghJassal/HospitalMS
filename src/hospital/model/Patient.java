@@ -9,7 +9,7 @@ public class Patient extends Person {
 
 	}
 
-	public Patient(String id, String name, int age, GENDER gender, String contact, String address) {
+	public Patient(String id, String name, int age, GENDER gender, String address, String contact) {
 		super(name, age, gender, address, contact);
 		this.id.set(id);
 	}
