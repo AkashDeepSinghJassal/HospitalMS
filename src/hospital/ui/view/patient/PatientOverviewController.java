@@ -145,10 +145,11 @@ public class PatientOverviewController {
 	void handleAddPatient(ActionEvent event) {
 		Patient patient = new Patient();
 		if (showPatientDialog(patient, "Add Patient")) {
-			PatientSql.addPatient(patient);
-			patient.setId(PatientSql.getIdOfLastPatient());
-			patientList.add(patient);
-			showPatientDetails(patient);
+			if (PatientSql.addPatient(patient) == 1) {
+				patient.setId(PatientSql.getIdOfLastPatient());
+				patientList.add(patient);
+				showPatientDetails(patient);
+			};
 		}
 	}
 
