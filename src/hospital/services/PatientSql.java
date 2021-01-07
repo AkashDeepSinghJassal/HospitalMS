@@ -33,6 +33,12 @@ public class PatientSql {
 		return patient;
 	}
 
+	/**
+	 * Adds the given patient to the database.
+	 * 
+	 * @param patient the patient to add to the database
+	 * @return the number of rows affected. Should be equal to 1
+	 */
 	public static int addPatient(Patient patient) {
 		try {
 			PreparedStatement statement = Main.conn.prepareStatement("INSERT INTO patient VALUES (?,?,?,?,?,?)");
@@ -49,6 +55,12 @@ public class PatientSql {
 		return 0;
 	}
 
+	/**
+	 * Deletes the patient with the given id from the database.
+	 * 
+	 * @param id The id of the patient to be deleted
+	 * @return Returns the number of rows affected. Should be equal to 1
+	 */
 	public static int removePatient(String id) {
 		try {
 			PreparedStatement statement = Main.conn.prepareStatement("DELETE FROM patient WHERE id = ?");
@@ -60,6 +72,34 @@ public class PatientSql {
 		return 0;
 	}
 
+	/**
+	 * Updates the given patient according to the id.
+	 * 
+	 * @param patient Edited patient
+	 * @return Returns the number of rows affected. Should be equal to 1
+	 */
+	public static int updatePatient(Patient patient) {
+		try {
+			PreparedStatement statement = Main.conn.prepareStatement(
+					"UPDATE patient SET name = ?, age = ?, gender = ?, contact = ?, address = ? WHERE id = ?");
+			statement.setString(1, patient.getName());
+			statement.setInt(2, patient.getAge());
+			statement.setString(3, patient.getGender().toString());
+			statement.setString(4, patient.getContact());
+			statement.setString(5, patient.getAddress());
+			statement.setString(6, patient.getId());
+			return statement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	/**
+	 * Returns the ID of the last inserted patient
+	 * 
+	 * @return String containing the id of the last inserted patient
+	 */
 	public static String getIdOfLastPatient() {
 		String id = "";
 		try {

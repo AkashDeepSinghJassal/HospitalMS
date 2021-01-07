@@ -179,7 +179,10 @@ public class PatientOverviewController {
 		if (p != null) {
 			boolean okClicked = showPatientDialog(p, "Edit Patient");
 			if (okClicked) {
-				showPatientDetails(p);
+				if (PatientSql.updatePatient(p) == 1) {
+					showPatientDetails(p);
+				}
+
 			}
 		} else {
 			// Nothing selected.
