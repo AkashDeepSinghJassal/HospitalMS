@@ -1,4 +1,4 @@
-package hospital.ui.doctorView;
+package hospital.ui.view.doctor;
 
 import java.net.URL;
 import java.util.ResourceBundle;

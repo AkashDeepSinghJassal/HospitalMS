@@ -160,7 +160,7 @@ public class HomePageController implements Initializable {
 	public void showPatientView() {
 		AnchorPane root;
 		try {
-			FXMLLoader patientOverview = new FXMLLoader(getClass().getResource("../patientView/PatientOverview.fxml"));
+			FXMLLoader patientOverview = new FXMLLoader(getClass().getResource("../view/patient/PatientOverview.fxml"));
 			patientOverview.setController(Main.patientOverviewController);
 			root = patientOverview.load();
 			modelView.getChildren().add(root);
@@ -177,7 +177,7 @@ public class HomePageController implements Initializable {
 	public void showDoctorView() {
 		AnchorPane root;
 		try {
-			FXMLLoader doctorOverview = new FXMLLoader(getClass().getResource("../doctorView/DoctorOverview.fxml"));
+			FXMLLoader doctorOverview = new FXMLLoader(getClass().getResource("../view/doctor/DoctorOverview.fxml"));
 			doctorOverview.setController(Main.doctorOverviewController);
 			root = doctorOverview.load();
 			modelView.getChildren().add(root);

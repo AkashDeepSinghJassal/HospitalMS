@@ -1,4 +1,4 @@
-package hospital.ui.patientView;
+package hospital.ui.view.patient;
 
 import java.io.IOException;
 
@@ -6,7 +6,6 @@ import hospital.model.GENDER;
 import hospital.model.Patient;
 import hospital.ui.main.Main;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -54,7 +53,7 @@ public class PatientOverviewController {
 	private TableColumn<Patient, SimpleIntegerProperty> ageTableColumn;
 
 	@FXML
-	private TableColumn<Patient, String> genderTableColumn;
+	private TableColumn<Patient, SimpleObjectProperty<GENDER>> genderTableColumn;
 
 	@FXML
 	private TableColumn<Patient, SimpleStringProperty> contactTableColumn;
@@ -86,7 +85,7 @@ public class PatientOverviewController {
 		nameTableColumn.setCellValueFactory(new PropertyValueFactory<Patient, SimpleStringProperty>("name"));
 		ageTableColumn.setCellValueFactory(new PropertyValueFactory<Patient, SimpleIntegerProperty>("age"));
 		genderTableColumn
-				.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getGender().toString()));
+				.setCellValueFactory(new PropertyValueFactory<Patient, SimpleObjectProperty<GENDER>>("gender"));
 		contactTableColumn.setCellValueFactory(new PropertyValueFactory<Patient, SimpleStringProperty>("contact"));
 		addressTableColumn.setCellValueFactory(new PropertyValueFactory<Patient, SimpleStringProperty>("address"));
 
