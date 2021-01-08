@@ -120,7 +120,7 @@ public class DoctorDialogController implements Initializable {
 		if (gender.getValue() == null || gender.getValue().toString().length() == 0) {
 			errorMessage += "Select gender!\n";
 		}
-		if(speciality.getText() == null || speciality.getText().length() != 0) {
+		if(speciality.getText() == null || speciality.getText().length() == 0) {
 			errorMessage += "No valid speciality";
 		}
 
