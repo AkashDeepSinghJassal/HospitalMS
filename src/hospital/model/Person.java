@@ -13,13 +13,12 @@ public class Person {
 	public Person() {
 	}
 
-	public Person(String name, int age, GENDER gender, String address, String contact) {
+	public Person(String name, int age, GENDER gender, String contact, String address) {
 		this.name.set(name);
 		this.age.set(age);
 		this.gender.set(gender);
-		;
-		this.address.set(address);
 		this.contact.set(contact);
+		this.address.set(address);
 	}
 
 	public String getName() {
@@ -59,18 +58,6 @@ public class Person {
 		return this.gender;
 	}
 
-	public String getAddress() {
-		return this.address.get();
-	}
-
-	public void setAddress(String address) {
-		this.address.set(address);
-	}
-
-	public SimpleStringProperty addressProperty() {
-		return this.address;
-	}
-
 	public String getContact() {
 		return this.contact.get();
 	}
@@ -81,6 +68,18 @@ public class Person {
 
 	public SimpleStringProperty contactProperty() {
 		return this.contact;
+	}
+
+	public String getAddress() {
+		return this.address.get();
+	}
+
+	public void setAddress(String address) {
+		this.address.set(address);
+	}
+
+	public SimpleStringProperty addressProperty() {
+		return this.address;
 	}
 
 	@Override

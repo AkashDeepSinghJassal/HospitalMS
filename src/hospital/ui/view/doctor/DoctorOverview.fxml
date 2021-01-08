@@ -28,9 +28,9 @@
                       <TableColumn fx:id="nameTableColumn" prefWidth="266.6665954589844" text="Name" />
                         <TableColumn fx:id="ageTableColumn" prefWidth="164.80001831054688" text="Age" />
                         <TableColumn fx:id="genderTableColumn" prefWidth="216.0" text="Gender" />
+                        <TableColumn fx:id="specialityTableColumn" prefWidth="75.0" text="Speciality" />
                         <TableColumn fx:id="contactTableColumn" prefWidth="75.0" text="Contact" />
                         <TableColumn fx:id="addressTableColumn" prefWidth="75.0" text="Address" />
-                        <TableColumn fx:id="specialityTableColumn" prefWidth="75.0" text="Speciality" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -60,16 +60,16 @@
                         <Label text="Name" GridPane.rowIndex="1" />
                         <Label layoutX="10.0" layoutY="73.0" text="Gender" GridPane.rowIndex="2" />
                         <Label text="Age" GridPane.rowIndex="3" />
-                        <Label text="Contact" GridPane.rowIndex="4" />
-                        <Label text="Address" GridPane.rowIndex="5" />
-                        <Label text="Speciality" GridPane.rowIndex="6" />
+                        <Label text="Speciality" GridPane.rowIndex="4" />
+                        <Label text="Contact" GridPane.rowIndex="5" />
+                        <Label text="Address" GridPane.rowIndex="6" />
                         <Label fx:id="IDLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="1" />
                         <Label fx:id="nameLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label fx:id="genderLabel" layoutX="341.0" layoutY="73.0" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <Label fx:id="ageLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label fx:id="contactLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <Label fx:id="addressLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <Label fx:id="specialityLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <Label fx:id="specialityLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label fx:id="contactLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label fx:id="addressLabel" styleClass="label-bright" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                      </children>
                   </GridPane>
                   <ButtonBar layoutX="54.0" layoutY="250.0" prefHeight="75.0" prefWidth="470.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">

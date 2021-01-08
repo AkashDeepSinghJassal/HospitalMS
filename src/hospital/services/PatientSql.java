@@ -24,8 +24,8 @@ public class PatientSql {
 			String name = resultSet.getString(2);
 			int age = resultSet.getInt(3);
 			GENDER gender = GenerateGender.generateGender(resultSet.getString(4));
-			String address = resultSet.getString(5);
-			String contact = resultSet.getString(6);
+			String contact = resultSet.getString(5);
+			String address = resultSet.getString(6);
 			patient = new Patient(id, name, age, gender, contact, address);
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -9,8 +9,8 @@ public class Doctor extends Person {
 
 	}
 
-	public Doctor(String id, String name, int age, GENDER gender, String address, String contact, String speciality) {
-		super(name, age, gender, address, contact);
+	public Doctor(String id, String name, int age, GENDER gender, String speciality, String contact, String address) {
+		super(name, age, gender, contact, address);
 		this.id.set(id);
 		this.speciality.set(speciality);
 	}

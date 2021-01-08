@@ -35,9 +35,9 @@ public class DoctorOverviewController {
 	private ObservableList<Doctor> doctorList = FXCollections.observableArrayList();
 
 	public DoctorOverviewController() {
-		doctorList.add(new Doctor("DOC001", "Akash", 21, GENDER.M, "Mohali", "7009000480", "Gynac"));
-		doctorList.add(new Doctor("DOC002", "Nishesh", 20, GENDER.O, "Jalandhar", "1234567890", "Cardio"));
-		doctorList.add(new Doctor("DOC003", "Ram", 20, GENDER.F, "Panchkula", "9999999999", "Ortho"));
+		doctorList.add(new Doctor("DOC001", "Akash", 21, GENDER.M, "Gynac", "7009000480", "Mohali"));
+		doctorList.add(new Doctor("DOC002", "Nishesh", 20, GENDER.O, "Cardio", "1234567890", "Jalandhar"));
+		doctorList.add(new Doctor("DOC003", "Ram", 20, GENDER.F, "Ortho", "9999999999", "Panchkula"));
 	}
 
 	@FXML
