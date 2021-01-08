@@ -70,8 +70,8 @@ public class Main extends Application {
 	private void initDoctorView(){
 		DoctorOverviewController doctorOverviewController;
 		FXMLLoader doctorOverviewFxmlLoader;
-		doctorOverviewFxmlLoader = new FXMLLoader(getClass().getResource("../view/doctor/DoctorOverview.fxml"));
 		doctorOverviewController = new DoctorOverviewController();
+		doctorOverviewFxmlLoader = new FXMLLoader(getClass().getResource("../view/doctor/DoctorOverview.fxml"));
 		doctorOverviewFxmlLoader.setController(doctorOverviewController);
 		try {
 			doctorViewAnchorPane = doctorOverviewFxmlLoader.load();

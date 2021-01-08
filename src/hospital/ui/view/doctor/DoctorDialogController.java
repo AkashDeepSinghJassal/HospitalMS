@@ -20,9 +20,9 @@ public class DoctorDialogController implements Initializable {
 
 	private Doctor doctor;
 	private Stage parentStage;
-	private String header;
 	private boolean okClicked;
-	private @FXML Label headLbl;
+	@FXML
+	Label headLbl;
 	@FXML
 	private TextField name;
 	@FXML
@@ -46,7 +46,6 @@ public class DoctorDialogController implements Initializable {
 		gender.getItems().add(GENDER.M);
 		gender.getItems().add(GENDER.F);
 		gender.getItems().add(GENDER.O);
-		headLbl.setText(header);
 	}
 
 	public void setDialogStage(Stage stage) {
@@ -54,7 +53,7 @@ public class DoctorDialogController implements Initializable {
 	}
 
 	public void setHeader(String header) {
-		this.header = header;
+		headLbl.setText(header);
 	}
 
 	public void setDoctor(Doctor doctor) {

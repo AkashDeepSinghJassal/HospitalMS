@@ -20,7 +20,6 @@ public class PatientDialogController implements Initializable {
 
 	private Patient patient;
 	private Stage parentStage;
-	private String header;
 	private boolean okClicked;
 	private 
 	@FXML
@@ -46,7 +45,6 @@ public class PatientDialogController implements Initializable {
 		gender.getItems().add(GENDER.M);
 		gender.getItems().add(GENDER.F);
 		gender.getItems().add(GENDER.O);
-		headLbl.setText(header);
 	}
 
 
@@ -54,7 +52,7 @@ public class PatientDialogController implements Initializable {
 		this.parentStage = stage;
 	}
 	public void setHeader(String header) {
-		this.header = header;
+		headLbl.setText(header);
 	}
 
 	public void setPatient(Patient patient) {
