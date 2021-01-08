@@ -114,11 +114,14 @@ public class DoctorDialogController implements Initializable {
 		if (address.getText() == null || address.getText().length() == 0) {
 			errorMessage += "No valid address!\n";
 		}
-		if (contact.getText() == null || contact.getText().length() != 10) {
+		if (contact.getText() == null || contact.getText().length() < 10) {
 			errorMessage += "No valid contact!\n";
 		}
 		if (gender.getValue() == null || gender.getValue().toString().length() == 0) {
 			errorMessage += "Select gender!\n";
+		}
+		if(speciality.getText() == null || speciality.getText().length() != 0) {
+			errorMessage += "No valid speciality";
 		}
 
 		if (errorMessage.length() == 0) {
