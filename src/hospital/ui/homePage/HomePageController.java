@@ -175,10 +175,8 @@ public class HomePageController implements Initializable {
 	public void showDoctorView() {
 		AnchorPane root;
 		try {
-			FXMLLoader doctorOverview = new FXMLLoader(getClass().getResource("../view/doctor/DoctorOverview.fxml"));
-			doctorOverview.setController(Main.doctorOverviewController);
-			root = doctorOverview.load();
-			modelView.getChildren().add(root);
+			root = Main.doctorViewAnchorPane;
+			modelView.getChildren().setAll(root);
 			AnchorPane.setTopAnchor(root, 0.0);
 			AnchorPane.setRightAnchor(root, 0.0);
 			AnchorPane.setBottomAnchor(root, 0.0);

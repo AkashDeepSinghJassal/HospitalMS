@@ -20,7 +20,7 @@ public class Main extends Application {
 	public static Stage stage = null;
 	public static Boolean isWelcomeLoaded = true;
 	public static AnchorPane patientViewAnchorPane;
-	public static DoctorOverviewController doctorOverviewController;
+	public static AnchorPane doctorViewAnchorPane;
 	public static HomePageController homePageController;
 	
 	public static Connection conn = null;
@@ -31,7 +31,7 @@ public class Main extends Application {
 		Parent root;
 		conn = DBUtil.getDBConnection();
 		initPatientView();
-		doctorOverviewController = new DoctorOverviewController();
+		initDoctorView();
 		homePageController = new HomePageController();
 		try {
 			root = FXMLLoader.load(getClass().getResource("../login/Login.fxml"));
@@ -59,6 +59,22 @@ public class Main extends Application {
 		patientOverviewFxmlLoader.setController(patientOverviewController);
 		try {
 			patientViewAnchorPane = patientOverviewFxmlLoader.load();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	}
+	/*
+	 * Loads fxml and controller for doctor view 
+	 */
+	private void initDoctorView(){
+		DoctorOverviewController doctorOverviewController;
+		FXMLLoader doctorOverviewFxmlLoader;
+		doctorOverviewFxmlLoader = new FXMLLoader(getClass().getResource("../view/doctor/DoctorOverview.fxml"));
+		doctorOverviewController = new DoctorOverviewController();
+		doctorOverviewFxmlLoader.setController(doctorOverviewController);
+		try {
+			doctorViewAnchorPane = doctorOverviewFxmlLoader.load();
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
