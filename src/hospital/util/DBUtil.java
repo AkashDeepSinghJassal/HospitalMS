@@ -6,16 +6,16 @@ import java.sql.SQLException;
 
 public class DBUtil {
 
-	static boolean offline = false;
+	static boolean offline = true;
 	static Connection conn = null;
 	
 	static {	
 		try {
 			if(offline) {
-//				Class.forName("com.mysql.cj.jdbc.Driver");
-//				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/student", "root", null);
-				Class.forName("oracle.jdbc.driver.OracleDriver");
-				conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "system", "oracle");
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/emp", "root", null);
+//				Class.forName("oracle.jdbc.driver.OracleDriver");
+//				conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "system", "oracle");
 			}
 			else {
 				conn = DriverManager.getConnection("jdbc:mysql://hospital-db.cowul8deiwyt.ap-south-1.rds.amazonaws.com/hospital", "admin", "hospital123");

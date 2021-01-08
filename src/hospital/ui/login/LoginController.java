@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import hospital.ui.homePage.HomePageController;
+import hospital.ui.main.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,7 +23,10 @@ public class LoginController implements Initializable {
 	@FXML
 	void login(ActionEvent event) {
 		try {
-			AnchorPane root = FXMLLoader.load(getClass().getResource("../homePage/HomePage.fxml"));
+			AnchorPane root;
+			FXMLLoader homeLoader = new FXMLLoader(getClass().getResource("../homePage/HomePage.fxml"));
+			homeLoader.setController(Main.homePageController);
+			root = homeLoader.load();
 			anchorPane.getScene().setRoot(root);
 		} catch (IOException e) {
 			e.printStackTrace();
