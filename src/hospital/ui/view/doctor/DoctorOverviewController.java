@@ -1,9 +1,14 @@
 package hospital.ui.view.doctor;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import hospital.model.Doctor;
 import hospital.model.GENDER;
+import hospital.services.DoctorSql;
 import hospital.ui.main.Main;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -33,11 +38,21 @@ import javafx.stage.StageStyle;
 public class DoctorOverviewController {
 
 	private ObservableList<Doctor> doctorList = FXCollections.observableArrayList();
+	Connection conn = Main.conn;
+	PreparedStatement statement = null;
+	ResultSet resultSet = null;
 
 	public DoctorOverviewController() {
-		doctorList.add(new Doctor("DOC001", "Akash", 21, GENDER.M, "Gynac", "7009000480", "Mohali"));
-		doctorList.add(new Doctor("DOC002", "Nishesh", 20, GENDER.O, "Cardio", "1234567890", "Jalandhar"));
-		doctorList.add(new Doctor("DOC003", "Ram", 20, GENDER.F, "Ortho", "9999999999", "Panchkula"));
+		try {
+			statement = conn.prepareStatement("select id, name, age, gender, speciality, contact, address from doctor");
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				Doctor doctor = DoctorSql.generateDoctor(resultSet);
+				doctorList.add(doctor);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@FXML
@@ -138,16 +153,21 @@ public class DoctorOverviewController {
 	void handleAddDoctor(ActionEvent event) {
 		Doctor doctor = new Doctor();
 		if (showDoctorDialog(doctor, "Add Doctor")) {
-			showDoctorDetails(doctor);
-			doctorList.add(doctor);
+			if (DoctorSql.addDoctor(doctor) == 1) {
+				doctor.setId(DoctorSql.getIdOfLastDoctor());
+				doctorList.add(doctor);
+				showDoctorDetails(doctor);
+			}
 		}
 	}
 
 	@FXML
 	void handleDeleteDoctor(ActionEvent event) {
-		int deleteIndex = doctorTable.getSelectionModel().getSelectedIndex();
-		if (deleteIndex != -1) {
-			doctorTable.getItems().remove(deleteIndex);
+		Doctor deletedDoctor = doctorTable.getSelectionModel().getSelectedItem();
+		if (deletedDoctor != null) {
+			if (DoctorSql.removeDoctor(deletedDoctor.getId()) == 1) {
+				doctorTable.getItems().remove(deletedDoctor);
+			}
 		} else {
 			// Nothing selected.
 			Alert alert = new Alert(AlertType.WARNING);
@@ -166,7 +186,9 @@ public class DoctorOverviewController {
 		if (d != null) {
 			boolean okClicked = showDoctorDialog(d, "Edit Doctor");
 			if (okClicked) {
-				showDoctorDetails(d);
+				if (DoctorSql.updateDoctor(d) == 1) {
+					showDoctorDetails(d);
+				}
 			}
 		} else {
 			// Nothing selected.
