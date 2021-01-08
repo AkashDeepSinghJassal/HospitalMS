@@ -64,6 +64,22 @@
       </HBox>
       <HBox alignment="CENTER" spacing="25.0">
          <children>
+            <Label prefWidth="138.0" text="Contact: " textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <JFXTextField fx:id="contact" focusColor="WHITE" prefHeight="26.0" prefWidth="144.0" promptText="9876543210" style="-fx-text-fill: #ffffff;" unFocusColor="#d4d4d4">
+               <font>
+                  <Font size="18.0" />
+               </font></JFXTextField>
+         </children>
+         <padding>
+            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+         </padding>
+      </HBox>
+      <HBox alignment="CENTER" spacing="25.0">
+         <children>
             <!-- <Label layoutX="89.0" layoutY="283.0" prefWidth="138.0" text="Diagnosis Date:" textFill="WHITE">
                <font>
                                                       <Font size="14.0" />
@@ -76,22 +92,6 @@
                </font>
             </Label>
             <JFXTextField fx:id="address" focusColor="WHITE" prefHeight="26.0" prefWidth="144.0" promptText="#123,Wall Street, London" style="-fx-text-fill: #ffffff;" unFocusColor="#d4d4d4">
-               <font>
-                  <Font size="18.0" />
-               </font></JFXTextField>
-         </children>
-         <padding>
-            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
-         </padding>
-      </HBox>
-      <HBox alignment="CENTER" spacing="25.0">
-         <children>
-            <Label prefWidth="138.0" text="Contact: " textFill="WHITE">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <JFXTextField fx:id="contact" focusColor="WHITE" prefHeight="26.0" prefWidth="144.0" promptText="9876543210" style="-fx-text-fill: #ffffff;" unFocusColor="#d4d4d4">
                <font>
                   <Font size="18.0" />
                </font></JFXTextField>

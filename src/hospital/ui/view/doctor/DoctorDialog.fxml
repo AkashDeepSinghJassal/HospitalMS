@@ -64,21 +64,16 @@
       </HBox>
       <HBox alignment="CENTER" spacing="25.0">
          <children>
-            <!-- <Label layoutX="89.0" layoutY="283.0" prefWidth="138.0" text="Diagnosis Date:" textFill="WHITE">
-               <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                </Label>
-                                                <JFXDatePicker defaultColor="WHITE" layoutX="249.0" layoutY="279.0" promptText="30/12/2020" /> -->
-            <Label prefWidth="138.0" text="Address:" textFill="WHITE">
+            <Label prefWidth="138.0" text="Speciality: " textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <JFXTextField fx:id="address" focusColor="WHITE" prefHeight="26.0" prefWidth="144.0" promptText="#123,Wall Street, London" style="-fx-text-fill: #ffffff;" unFocusColor="#d4d4d4">
+            <JFXTextField fx:id="speciality" focusColor="WHITE" prefHeight="26.0" prefWidth="144.0" promptText="Cardiologist" style="-fx-text-fill: #ffffff;" unFocusColor="#d4d4d4">
                <font>
                   <Font size="18.0" />
-               </font></JFXTextField>
+               </font>
+            </JFXTextField>
          </children>
          <padding>
             <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
@@ -102,12 +97,18 @@
       </HBox>
       <HBox alignment="CENTER" spacing="25.0">
          <children>
-            <Label prefWidth="138.0" text="Speciality: " textFill="WHITE">
+            <!-- <Label layoutX="89.0" layoutY="283.0" prefWidth="138.0" text="Diagnosis Date:" textFill="WHITE">
+               <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <JFXDatePicker defaultColor="WHITE" layoutX="249.0" layoutY="279.0" promptText="30/12/2020" /> -->
+            <Label prefWidth="138.0" text="Address:" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <JFXTextField fx:id="speciality" focusColor="WHITE" prefHeight="26.0" prefWidth="144.0" promptText="Cardiologist" style="-fx-text-fill: #ffffff;" unFocusColor="#d4d4d4">
+            <JFXTextField fx:id="address" focusColor="WHITE" prefHeight="26.0" prefWidth="144.0" promptText="#123,Wall Street, London" style="-fx-text-fill: #ffffff;" unFocusColor="#d4d4d4">
                <font>
                   <Font size="18.0" />
                </font>
