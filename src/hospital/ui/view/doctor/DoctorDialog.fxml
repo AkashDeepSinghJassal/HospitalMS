@@ -56,7 +56,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <JFXComboBox fx:id="gender" focusColor="WHITE" prefHeight="26.0" prefWidth="149.0" promptText="M/F/O" style="-fx-text-fill: #ffffff;" unFocusColor="#d4d4d4" />
+            <JFXComboBox fx:id="gender" focusColor="WHITE" prefHeight="26.0" prefWidth="149.0" promptText="M/F/O" style="-fx-text-fill: #ffffff;" stylesheets="@../../css/DarkTheme.css" unFocusColor="#d4d4d4" />
          </children>
          <padding>
             <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
