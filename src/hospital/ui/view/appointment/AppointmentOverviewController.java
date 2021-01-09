@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 import hospital.model.Appointment;
+import hospital.services.AppointmentSql;
 import hospital.ui.main.Main;
 import hospital.util.DateUtil;
 import javafx.beans.property.ObjectProperty;
@@ -54,15 +55,22 @@ public class AppointmentOverviewController {
 	@FXML
 	private Label doctorIDLbl;
 
+	public AppointmentOverviewController() {
+		appointmentList.addAll(AppointmentSql.getAppointments());
+	}
+	
 	@FXML
 	private void initialize() {
 		appointmentTable.setItems(appointmentList);
-		patientIDTableColumn.setCellValueFactory(new PropertyValueFactory<Appointment, SimpleStringProperty>("patientID"));
-		appointIDTableColumn.setCellValueFactory(new PropertyValueFactory<Appointment, SimpleStringProperty>("appointID"));
-		doctorIDTableColumn.setCellValueFactory(new PropertyValueFactory<Appointment, SimpleStringProperty>("doctorID"));
-		dateTableColumn.setCellValueFactory(new PropertyValueFactory<Appointment, SimpleObjectProperty<LocalDate>>("date"));
-		
-		
+		patientIDTableColumn
+				.setCellValueFactory(new PropertyValueFactory<Appointment, SimpleStringProperty>("patientID"));
+		appointIDTableColumn
+				.setCellValueFactory(new PropertyValueFactory<Appointment, SimpleStringProperty>("appointID"));
+		doctorIDTableColumn
+				.setCellValueFactory(new PropertyValueFactory<Appointment, SimpleStringProperty>("doctorID"));
+		dateTableColumn
+				.setCellValueFactory(new PropertyValueFactory<Appointment, SimpleObjectProperty<LocalDate>>("date"));
+
 		// show empty in personal details
 		showAppointmentDetails(null);
 		appointmentTable.getSelectionModel().selectedItemProperty()
@@ -99,6 +107,7 @@ public class AppointmentOverviewController {
 			}
 		});
 	}
+
 	/**
 	 * Fills all text fields to show details about the appointment. If the specified
 	 * appointment is null, all text fields are cleared.
@@ -112,7 +121,7 @@ public class AppointmentOverviewController {
 			appointIDLbl.setText(appointment.getAppointID());
 			doctorIDLbl.setText(appointment.getDoctorID());
 			dateLbl.setText(DateUtil.format(appointment.getDate()));
-			
+
 		} else {
 			// appointment is null, remove all the text.
 			patientIDLbl.setText("");
@@ -121,6 +130,7 @@ public class AppointmentOverviewController {
 			dateLbl.setText("");
 		}
 	}
+
 	public boolean showAppointmentDialog(Appointment appointment, String header) {
 		try {
 			// Load the fxml file and create a new stage for the popup dialog.
@@ -150,16 +160,17 @@ public class AppointmentOverviewController {
 			return false;
 		}
 	}
+
 	// Event Listener on Button.onAction
 	@FXML
 	public void handleEdit(ActionEvent event) {
-		Appointment p = appointmentTable.getSelectionModel().getSelectedItem();
-		if (p != null) {
-			boolean okClicked = showAppointmentDialog(p, "Edit Appointment");
+		Appointment appointment = appointmentTable.getSelectionModel().getSelectedItem();
+		if (appointment != null) {
+			boolean okClicked = showAppointmentDialog(appointment, "Edit Appointment");
 			if (okClicked) {
-//				if (appointmentSql.updateAppointment(p) == 1) {
-					showAppointmentDetails(p);
-//				}
+				if(AppointmentSql.updateAppointment(appointment) > 0) {
+					showAppointmentDetails(appointment);					
+				}
 
 			}
 		} else {
@@ -179,9 +190,9 @@ public class AppointmentOverviewController {
 	public void handleDelete(ActionEvent event) {
 		Appointment deletedAppointment = appointmentTable.getSelectionModel().getSelectedItem();
 		if (deletedAppointment != null) {
-//			if (AppointmentSql.removeAppointment(deletedAppointment.getId()) == 1) {
-				appointmentTable.getItems().remove(deletedAppointment);
-//			}
+			if(AppointmentSql.removeAppointment(deletedAppointment) > 0) {
+				appointmentTable.getItems().remove(deletedAppointment);				
+			}
 
 		} else {
 			// Nothing selected.
@@ -200,11 +211,14 @@ public class AppointmentOverviewController {
 	public void handleAdd(ActionEvent event) {
 		Appointment appointment = new Appointment();
 		if (showAppointmentDialog(appointment, "Add Appointment")) {
-//			if (PatientSql.addPatient(patient) == 1) {
-//				patient.setId(PatientSql.getIdOfLastPatient());
-				appointmentList.add(appointment);
-				showAppointmentDetails(appointment);
-//			}
+			String appointID = AppointmentSql.generateAppointID();
+			if (appointID != null) {
+				appointment.setAppointID(appointID);
+				if (AppointmentSql.addAppointment(appointment) > 0) {
+					appointmentList.add(appointment);
+					showAppointmentDetails(appointment);
+				}
+			}
 		}
 	}
 }
