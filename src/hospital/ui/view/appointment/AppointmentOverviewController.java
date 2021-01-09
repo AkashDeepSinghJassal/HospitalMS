@@ -8,10 +8,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 import hospital.model.Appointment;
-import hospital.model.Patient;
-import hospital.services.PatientSql;
 import hospital.ui.main.Main;
-import hospital.ui.view.patient.PatientDialogController;
 import hospital.util.DateUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -113,7 +110,7 @@ public class AppointmentOverviewController {
 			// Fill the labels with info from the patient object.
 			patientIDLbl.setText(appointment.getPatientID());
 			appointIDLbl.setText(appointment.getAppointID());
-			patientIDLbl.setText(appointment.getDoctorID());
+			doctorIDLbl.setText(appointment.getDoctorID());
 			dateLbl.setText(DateUtil.format(appointment.getDate()));
 			
 		} else {
@@ -141,9 +138,9 @@ public class AppointmentOverviewController {
 
 			// Set the appointment into the controller.
 			AppointmentDialogController controller = loader.getController();
-//			controller.setDialogStage(dialogStage);
-//			controller.setAppointment(appointment);
-//			controller.setHeader(header);
+			controller.setDialogStage(dialogStage);
+			controller.setAppointment(appointment);
+			controller.setHeader(header);
 			// Show the dialog and wait until the user closes it
 			dialogStage.showAndWait();
 

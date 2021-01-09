@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="700.0" prefWidth="600.0" spacing="25.0" style="-fx-background-color: #041e32;" styleClass="rootpane" stylesheets="@../../css/Stage.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" prefHeight="700.0" prefWidth="600.0" spacing="25.0" style="-fx-background-color: #041e32;" styleClass="rootpane" stylesheets="@../../css/Stage.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.ui.view.appointment.AppointmentDialogController">
    <children>
       <Label fx:id="headLbl" text="Appointment" textFill="#eeeeee">
          <font>
@@ -23,7 +23,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <JFXTextField fx:id="patientID" focusColor="WHITE" prefHeight="26.0" prefWidth="144.0" promptText="John Doe" style="-fx-text-fill: #ffffff;" unFocusColor="#d4d4d4">
+            <JFXTextField fx:id="patientID" focusColor="WHITE" prefHeight="26.0" prefWidth="144.0" promptText="PA00000" style="-fx-text-fill: #ffffff;" unFocusColor="#d4d4d4">
                <font>
                   <Font size="18.0" />
                </font></JFXTextField>
@@ -39,7 +39,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <JFXTextField fx:id="doctorID" focusColor="WHITE" prefHeight="26.0" prefWidth="144.0" promptText="20" style="-fx-text-fill: #ffffff;" unFocusColor="#d4d4d4">
+            <JFXTextField fx:id="doctorID" focusColor="WHITE" prefHeight="26.0" prefWidth="144.0" promptText="DO00000" style="-fx-text-fill: #ffffff;" unFocusColor="#d4d4d4">
                <font>
                   <Font size="18.0" />
                </font></JFXTextField>
@@ -55,7 +55,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <JFXTextField fx:id="date" focusColor="WHITE" prefHeight="26.0" prefWidth="144.0" promptText="9876543210" style="-fx-text-fill: #ffffff;" unFocusColor="#d4d4d4">
+            <JFXTextField fx:id="date" focusColor="WHITE" prefHeight="26.0" prefWidth="144.0" promptText="01.01.2000" style="-fx-text-fill: #ffffff;" unFocusColor="#d4d4d4">
                <font>
                   <Font size="18.0" />
                </font></JFXTextField>

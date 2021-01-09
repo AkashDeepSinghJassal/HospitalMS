@@ -125,6 +125,7 @@ public class HomePageController implements Initializable {
 						case "appointment":
 							node.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 								triggerHamburger();
+								showAppointmentView();
 							});
 							break;
 						case "logout":
@@ -161,6 +162,21 @@ public class HomePageController implements Initializable {
 		AnchorPane root;
 		try {
 			root = Main.patientViewAnchorPane;
+			modelView.getChildren().setAll(root);
+			AnchorPane.setTopAnchor(root, 0.0);
+			AnchorPane.setRightAnchor(root, 0.0);
+			AnchorPane.setBottomAnchor(root, 0.0);
+			AnchorPane.setLeftAnchor(root, 0.0);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+	public void showAppointmentView() {
+		AnchorPane root;
+		try {
+			root = Main.appointmentViewAnchorPane;
+			System.out.println(root);
 			modelView.getChildren().setAll(root);
 			AnchorPane.setTopAnchor(root, 0.0);
 			AnchorPane.setRightAnchor(root, 0.0);

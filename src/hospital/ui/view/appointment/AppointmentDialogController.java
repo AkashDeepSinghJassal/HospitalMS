@@ -37,7 +37,7 @@ public class AppointmentDialogController {
 		this.appointment = appointment;
 		if(appointment != null) {
 			patientID.setText(appointment.getPatientID());
-			doctorID.setText(appointment.getPatientID());
+			doctorID.setText(appointment.getDoctorID());
 			date.setText(DateUtil.format(appointment.getDate()));
 		}
 	}
@@ -63,6 +63,12 @@ public class AppointmentDialogController {
         if (doctorID.getText() == null || doctorID.getText().length() == 0) {
             errorMessage += "No valid doctor ID!\n"; 
         }        
+        if(date.getText() == null || date.getText().length() == 0) {
+        	errorMessage += "No valid date!\n";
+        	if(!DateUtil.validDate(date.getText())) {
+        		errorMessage += "Wrong format for date selected";
+        	}
+        }
 
         if (errorMessage.length() == 0) {
             return true;	

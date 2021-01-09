@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 
 import hospital.ui.homePage.HomePageController;
+import hospital.ui.view.appointment.AppointmentOverviewController;
 import hospital.ui.view.doctor.DoctorOverviewController;
 import hospital.ui.view.patient.PatientOverviewController;
 import hospital.util.DBUtil;
@@ -21,6 +22,7 @@ public class Main extends Application {
 	public static Boolean isWelcomeLoaded = true;
 	public static AnchorPane patientViewAnchorPane;
 	public static AnchorPane doctorViewAnchorPane;
+	public static AnchorPane appointmentViewAnchorPane;
 	public static HomePageController homePageController;
 	
 	public static Connection conn = null;
@@ -32,6 +34,7 @@ public class Main extends Application {
 		conn = DBUtil.getDBConnection();
 		initPatientView();
 		initDoctorView();
+		initAppointmentView();
 		homePageController = new HomePageController();
 		try {
 			root = FXMLLoader.load(getClass().getResource("../login/Login.fxml"));
@@ -46,6 +49,26 @@ public class Main extends Application {
 			primaryStage.show();
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+	/*
+	 * Loads fxml and controller for appointment view 
+	 */
+	private void initAppointmentView() {
+		AppointmentOverviewController appointmentOverviewController;
+		FXMLLoader appointmentOverviewFxmlLoader;
+		try {
+			appointmentOverviewFxmlLoader = new FXMLLoader(getClass().getResource("../view/appointment/AppointmentOverview.fxml"));
+			appointmentOverviewController = new AppointmentOverviewController();
+			appointmentOverviewFxmlLoader.setController(appointmentOverviewController);
+			try {
+				appointmentViewAnchorPane = appointmentOverviewFxmlLoader.load();
+			} catch (Exception e) {
+//				System.out.println(e);
+				e.printStackTrace();
+			}
+			
+		} catch (Exception e) {
 		}
 	}
 	/*

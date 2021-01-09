@@ -6,10 +6,10 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Appointment {
-	private SimpleStringProperty appointID;
-	private SimpleStringProperty patientID;
-	private SimpleStringProperty doctorID;
-	private SimpleObjectProperty<LocalDate> date;
+	private SimpleStringProperty appointID = new SimpleStringProperty();
+	private SimpleStringProperty patientID = new SimpleStringProperty();
+	private SimpleStringProperty doctorID = new SimpleStringProperty();
+	private SimpleObjectProperty<LocalDate> date = new SimpleObjectProperty<LocalDate>();
 
 	public String getAppointID() {
 		return appointID.get();
@@ -29,11 +29,11 @@ public class Appointment {
 	}
 
 	public String getPatientID() {
-		return appointID.get();
+		return patientID.get();
 	}
 
 	public void setPatientID(String id) {
-		appointID.set(id);
+		patientID.set(id);
 	}
 
 	/**
@@ -46,11 +46,11 @@ public class Appointment {
 	}
 
 	public String getDoctorID() {
-		return appointID.get();
+		return doctorID.get();
 	}
 
 	public void setDoctorID(String id) {
-		appointID.set(id);
+		doctorID.set(id);
 	}
 
 	/**
