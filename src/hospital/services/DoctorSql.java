@@ -12,6 +12,23 @@ import hospital.ui.main.Main;
 public class DoctorSql {
 
 	/**
+	 * Get all paients from the database.
+	 * 
+	 * @return a {@link ResultSet} containing all paients from the database
+	 */
+	public static ResultSet getDoctors() {
+		ResultSet resultSet = null;
+		try {
+			PreparedStatement statement = Main.conn
+					.prepareStatement("select id, name, age, gender, speciality, contact, address from doctor");
+			resultSet = statement.executeQuery();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return resultSet;
+	}
+
+	/**
 	 * Generate a new Doctor from the given ResultSet
 	 * 
 	 * @param resultSet a single ResultSet

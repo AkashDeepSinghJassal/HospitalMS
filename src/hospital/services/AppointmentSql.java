@@ -28,7 +28,6 @@ public class AppointmentSql {
 			}
 			return appointments;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -50,7 +49,6 @@ public class AppointmentSql {
 			ps.setString(4, "2010-04-30 07:27:39");
 			return ps.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return -1;
@@ -77,7 +75,6 @@ public class AppointmentSql {
 				}
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -94,7 +91,6 @@ public class AppointmentSql {
 			ps.setString(1, appointment.getAppointID());
 			return ps.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -116,7 +112,6 @@ public class AppointmentSql {
 			ps.setString(4, appointment.getAppointID());
 			return ps.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return 0;

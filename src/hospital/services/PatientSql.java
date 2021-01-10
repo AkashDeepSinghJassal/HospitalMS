@@ -12,9 +12,26 @@ import hospital.ui.main.Main;
 public class PatientSql {
 
 	/**
+	 * Get all paients from the database.
+	 * 
+	 * @return a {@link ResultSet} containing all paients from the database
+	 */
+	public static ResultSet getPatients() {
+		ResultSet resultSet = null;
+		try {
+			PreparedStatement statement = Main.conn
+					.prepareStatement("select id, name, age, gender, contact, address from patient");
+			resultSet = statement.executeQuery();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return resultSet;
+	}
+
+	/**
 	 * Generate a new Patient from the given ResultSet
 	 * 
-	 * @param resultSet a single ResultSet
+	 * @param resultSet a single {@link ResultSet}
 	 * @return the new Patient
 	 */
 	public static Patient generatePatient(ResultSet resultSet) {
@@ -73,9 +90,9 @@ public class PatientSql {
 	}
 
 	/**
-	 * Updates the given patient according to the id.
+	 * Updates the given {@link Patient} according to the id.
 	 * 
-	 * @param patient Edited patient
+	 * @param patient Edited {@link Patient}
 	 * @return Returns the number of rows affected. Should be equal to 1
 	 */
 	public static int updatePatient(Patient patient) {
