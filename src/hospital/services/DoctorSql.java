@@ -20,7 +20,7 @@ public class DoctorSql {
 		ResultSet resultSet = null;
 		try {
 			PreparedStatement statement = Main.conn
-					.prepareStatement("select id, name, age, gender, speciality, contact, address from doctor");
+					.prepareStatement("select id, name, age, gender, contact, address from doctor");
 			resultSet = statement.executeQuery();
 		} catch (SQLException e) {
 			e.printStackTrace();
