@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import hospital.ui.homePage.HomePageController;
 import hospital.ui.main.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

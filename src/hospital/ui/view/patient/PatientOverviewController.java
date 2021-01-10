@@ -44,8 +44,7 @@ public class PatientOverviewController {
 
 	public PatientOverviewController() {
 		try {
-			statement = conn.prepareStatement("select id, name, age, gender, contact, address from patient");
-			resultSet = statement.executeQuery();
+			resultSet = PatientSql.getPatients();
 			while (resultSet.next()) {
 				Patient patient = PatientSql.generatePatient(resultSet);
 				patientList.add(patient);

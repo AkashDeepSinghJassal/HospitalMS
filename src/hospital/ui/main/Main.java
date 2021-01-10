@@ -83,7 +83,6 @@ public class Main extends Application {
 		try {
 			patientViewAnchorPane = patientOverviewFxmlLoader.load();
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}
@@ -99,7 +98,6 @@ public class Main extends Application {
 		try {
 			doctorViewAnchorPane = doctorOverviewFxmlLoader.load();
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}
