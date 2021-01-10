@@ -3,6 +3,7 @@ package hospital.services;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import hospital.model.GENDER;
 import hospital.model.GenerateGender;
@@ -14,18 +15,24 @@ public class PatientSql {
 	/**
 	 * Get all paients from the database.
 	 * 
-	 * @return a {@link ResultSet} containing all paients from the database
+	 * @return a {@link ArrayList} of type {@link Patient} containing all patients
+	 *         from the database
 	 */
-	public static ResultSet getPatients() {
-		ResultSet resultSet = null;
+	public static ArrayList<Patient> getPatients() {
+		ArrayList<Patient> patients = new ArrayList<Patient>();
 		try {
 			PreparedStatement statement = Main.conn
 					.prepareStatement("select id, name, age, gender, contact, address from patient");
-			resultSet = statement.executeQuery();
+			ResultSet resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				patients.add(generatePatient(resultSet));
+			}
+			return patients;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return resultSet;
+
+		return null;
 	}
 
 	/**

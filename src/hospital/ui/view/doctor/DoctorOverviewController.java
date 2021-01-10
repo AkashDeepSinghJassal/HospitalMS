@@ -43,15 +43,7 @@ public class DoctorOverviewController {
 	ResultSet resultSet = null;
 
 	public DoctorOverviewController() {
-		try {
-			resultSet = DoctorSql.getDoctors();
-			while (resultSet.next()) {
-				Doctor doctor = DoctorSql.generateDoctor(resultSet);
-				doctorList.add(doctor);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		doctorList.addAll(DoctorSql.getDoctors());
 	}
 
 	@FXML

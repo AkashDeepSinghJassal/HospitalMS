@@ -2,7 +2,6 @@ package hospital.ui.view.patient;
 
 import java.io.IOException;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import hospital.model.GENDER;
 import hospital.model.Patient;
@@ -39,15 +38,7 @@ public class PatientOverviewController {
 	ResultSet resultSet = null;
 
 	public PatientOverviewController() {
-		try {
-			resultSet = PatientSql.getPatients();
-			while (resultSet.next()) {
-				Patient patient = PatientSql.generatePatient(resultSet);
-				patientList.add(patient);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		patientList.addAll(PatientSql.getPatients());
 	}
 
 	@FXML

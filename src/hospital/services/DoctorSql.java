@@ -3,6 +3,7 @@ package hospital.services;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import hospital.model.Doctor;
 import hospital.model.GENDER;
@@ -14,18 +15,24 @@ public class DoctorSql {
 	/**
 	 * Get all paients from the database.
 	 * 
-	 * @return a {@link ResultSet} containing all paients from the database
+	 * @return a {@link ArrayList} of type {@link Doctor} containing all doctors
+	 *         from the database
 	 */
-	public static ResultSet getDoctors() {
-		ResultSet resultSet = null;
+	public static ArrayList<Doctor> getDoctors() {
+		ArrayList<Doctor> doctors = new ArrayList<Doctor>();
 		try {
 			PreparedStatement statement = Main.conn
 					.prepareStatement("select id, name, age, gender, speciality, contact, address from doctor");
-			resultSet = statement.executeQuery();
+			ResultSet resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				doctors.add(generateDoctor(resultSet));
+			}
+			return doctors;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return resultSet;
+
+		return null;
 	}
 
 	/**
@@ -123,8 +130,7 @@ public class DoctorSql {
 	public static String getIdOfLastDoctor() {
 		String id = "";
 		try {
-			PreparedStatement statement = Main.conn
-					.prepareStatement("SELECT id FROM doctor ORDER BY id DESC LIMIT 1;");
+			PreparedStatement statement = Main.conn.prepareStatement("SELECT id FROM doctor ORDER BY id DESC LIMIT 1;");
 			ResultSet resultSet = statement.executeQuery();
 			if (resultSet.next())
 				id = resultSet.getString(1);
