@@ -1,8 +1,6 @@
 package hospital.ui.view.patient;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -38,8 +36,6 @@ import javafx.stage.StageStyle;
 public class PatientOverviewController {
 
 	private ObservableList<Patient> patientList = FXCollections.observableArrayList();
-	Connection conn = Main.conn;
-	PreparedStatement statement = null;
 	ResultSet resultSet = null;
 
 	public PatientOverviewController() {

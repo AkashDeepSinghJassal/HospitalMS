@@ -24,7 +24,7 @@ public class Appointment {
 	 * 
 	 * @return SimpleStringProperty of {@code appointID}
 	 */
-	public SimpleStringProperty getAppointIDProperty() {
+	public SimpleStringProperty appointIDProperty() {
 		return appointID;
 	}
 
@@ -41,7 +41,7 @@ public class Appointment {
 	 * 
 	 * @return SimpleStringProperty of {@code patientID}
 	 */
-	public SimpleStringProperty getPatientIDProperty() {
+	public SimpleStringProperty patientIDProperty() {
 		return patientID;
 	}
 
@@ -58,7 +58,7 @@ public class Appointment {
 	 * 
 	 * @return SimpleStringProperty of {@code doctorID}
 	 */
-	public SimpleStringProperty getDoctorIDProperty() {
+	public SimpleStringProperty doctorIDProperty() {
 		return doctorID;
 	}
 
@@ -75,7 +75,7 @@ public class Appointment {
 	 * 
 	 * @return SimpleObjectProperty of {@code localDate}
 	 */
-	public SimpleObjectProperty<LocalDate> getDateProperty() {
+	public SimpleObjectProperty<LocalDate> dateProperty() {
 		return date;
 	}
 }
