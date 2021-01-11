@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import hospital.model.GENDER;
 import hospital.model.GenerateGender;
 import hospital.model.Patient;
-import hospital.ui.main.Main;
+import hospital.util.DBUtil;
 
 public class PatientSql {
 
@@ -21,7 +21,7 @@ public class PatientSql {
 	public static ArrayList<Patient> getPatients() {
 		ArrayList<Patient> patients = new ArrayList<Patient>();
 		try {
-			PreparedStatement statement = Main.conn
+			PreparedStatement statement = DBUtil.getDBConnection()
 					.prepareStatement("select id, name, age, gender, contact, address from patient");
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
@@ -65,7 +65,8 @@ public class PatientSql {
 	 */
 	public static int addPatient(Patient patient) {
 		try {
-			PreparedStatement statement = Main.conn.prepareStatement("INSERT INTO patient VALUES (?,?,?,?,?,?)");
+			PreparedStatement statement = DBUtil.getDBConnection()
+					.prepareStatement("INSERT INTO patient VALUES (?,?,?,?,?,?)");
 			statement.setString(1, "");
 			statement.setString(2, patient.getName());
 			statement.setInt(3, patient.getAge());
@@ -87,7 +88,7 @@ public class PatientSql {
 	 */
 	public static int removePatient(String id) {
 		try {
-			PreparedStatement statement = Main.conn.prepareStatement("DELETE FROM patient WHERE id = ?");
+			PreparedStatement statement = DBUtil.getDBConnection().prepareStatement("DELETE FROM patient WHERE id = ?");
 			statement.setString(1, id);
 			return statement.executeUpdate();
 		} catch (SQLException e) {
@@ -104,7 +105,7 @@ public class PatientSql {
 	 */
 	public static int updatePatient(Patient patient) {
 		try {
-			PreparedStatement statement = Main.conn.prepareStatement(
+			PreparedStatement statement = DBUtil.getDBConnection().prepareStatement(
 					"UPDATE patient SET name = ?, age = ?, gender = ?, contact = ?, address = ? WHERE id = ?");
 			statement.setString(1, patient.getName());
 			statement.setInt(2, patient.getAge());
@@ -127,7 +128,7 @@ public class PatientSql {
 	public static String getIdOfLastPatient() {
 		String id = "";
 		try {
-			PreparedStatement statement = Main.conn
+			PreparedStatement statement = DBUtil.getDBConnection()
 					.prepareStatement("SELECT id FROM patient ORDER BY id DESC LIMIT 1;");
 			ResultSet resultSet = statement.executeQuery();
 			if (resultSet.next())

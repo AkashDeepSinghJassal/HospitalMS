@@ -9,6 +9,7 @@ import hospital.model.Doctor;
 import hospital.model.GENDER;
 import hospital.services.DoctorSql;
 import hospital.ui.main.Main;
+import hospital.util.DBUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -37,7 +38,7 @@ import javafx.stage.StageStyle;
 public class DoctorOverviewController {
 
 	private ObservableList<Doctor> doctorList = FXCollections.observableArrayList();
-	Connection conn = Main.conn;
+	Connection conn = DBUtil.getDBConnection();
 	PreparedStatement statement = null;
 	ResultSet resultSet = null;
 

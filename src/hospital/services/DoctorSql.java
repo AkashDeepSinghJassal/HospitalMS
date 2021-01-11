@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import hospital.model.Doctor;
 import hospital.model.GENDER;
 import hospital.model.GenerateGender;
-import hospital.ui.main.Main;
+import hospital.util.DBUtil;
 
 public class DoctorSql {
 
@@ -21,7 +21,7 @@ public class DoctorSql {
 	public static ArrayList<Doctor> getDoctors() {
 		ArrayList<Doctor> doctors = new ArrayList<Doctor>();
 		try {
-			PreparedStatement statement = Main.conn
+			PreparedStatement statement = DBUtil.getDBConnection()
 					.prepareStatement("select id, name, age, gender, speciality, contact, address from doctor");
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
@@ -66,7 +66,8 @@ public class DoctorSql {
 	 */
 	public static int addDoctor(Doctor doctor) {
 		try {
-			PreparedStatement statement = Main.conn.prepareStatement("INSERT INTO doctor VALUES (?,?,?,?,?,?,?)");
+			PreparedStatement statement = DBUtil.getDBConnection()
+					.prepareStatement("INSERT INTO doctor VALUES (?,?,?,?,?,?,?)");
 			statement.setString(1, "");
 			statement.setString(2, doctor.getName());
 			statement.setInt(3, doctor.getAge());
@@ -89,7 +90,7 @@ public class DoctorSql {
 	 */
 	public static int removeDoctor(String id) {
 		try {
-			PreparedStatement statement = Main.conn.prepareStatement("DELETE FROM doctor WHERE id = ?");
+			PreparedStatement statement = DBUtil.getDBConnection().prepareStatement("DELETE FROM doctor WHERE id = ?");
 			statement.setString(1, id);
 			return statement.executeUpdate();
 		} catch (SQLException e) {
@@ -106,7 +107,7 @@ public class DoctorSql {
 	 */
 	public static int updateDoctor(Doctor doctor) {
 		try {
-			PreparedStatement statement = Main.conn.prepareStatement(
+			PreparedStatement statement = DBUtil.getDBConnection().prepareStatement(
 					"UPDATE doctor SET name = ?, age = ?, gender = ?, speciality = ?, contact = ?, address = ? WHERE id = ?");
 			statement.setString(1, doctor.getName());
 			statement.setInt(2, doctor.getAge());
@@ -130,7 +131,8 @@ public class DoctorSql {
 	public static String getIdOfLastDoctor() {
 		String id = "";
 		try {
-			PreparedStatement statement = Main.conn.prepareStatement("SELECT id FROM doctor ORDER BY id DESC LIMIT 1;");
+			PreparedStatement statement = DBUtil.getDBConnection()
+					.prepareStatement("SELECT id FROM doctor ORDER BY id DESC LIMIT 1;");
 			ResultSet resultSet = statement.executeQuery();
 			if (resultSet.next())
 				id = resultSet.getString(1);
