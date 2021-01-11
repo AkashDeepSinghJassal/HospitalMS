@@ -24,7 +24,7 @@ public class Main extends Application {
 	public static AnchorPane doctorViewAnchorPane;
 	public static AnchorPane appointmentViewAnchorPane;
 	public static HomePageController homePageController;
-	
+
 	public static Connection conn = null;
 
 	@Override
@@ -51,30 +51,33 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
+
 	/*
-	 * Loads fxml and controller for appointment view 
+	 * Loads fxml and controller for appointment view
 	 */
 	private void initAppointmentView() {
 		AppointmentOverviewController appointmentOverviewController;
 		FXMLLoader appointmentOverviewFxmlLoader;
 		try {
-			appointmentOverviewFxmlLoader = new FXMLLoader(getClass().getResource("../view/appointment/AppointmentOverview.fxml"));
+			appointmentOverviewFxmlLoader = new FXMLLoader(
+					getClass().getResource("../view/appointment/AppointmentOverview.fxml"));
 			appointmentOverviewController = new AppointmentOverviewController();
 			appointmentOverviewFxmlLoader.setController(appointmentOverviewController);
 			try {
 				appointmentViewAnchorPane = appointmentOverviewFxmlLoader.load();
 			} catch (Exception e) {
-//				System.out.println(e);
+				// System.out.println(e);
 				e.printStackTrace();
 			}
-			
+
 		} catch (Exception e) {
 		}
 	}
+
 	/*
-	 * Loads fxml and controller for patient view 
+	 * Loads fxml and controller for patient view
 	 */
-	private void initPatientView(){
+	private void initPatientView() {
 		PatientOverviewController patientOverviewController;
 		FXMLLoader patientOverviewFxmlLoader;
 		patientOverviewFxmlLoader = new FXMLLoader(getClass().getResource("../view/patient/PatientOverview.fxml"));
@@ -86,10 +89,11 @@ public class Main extends Application {
 			e1.printStackTrace();
 		}
 	}
+
 	/*
-	 * Loads fxml and controller for doctor view 
+	 * Loads fxml and controller for doctor view
 	 */
-	private void initDoctorView(){
+	private void initDoctorView() {
 		DoctorOverviewController doctorOverviewController;
 		FXMLLoader doctorOverviewFxmlLoader;
 		doctorOverviewController = new DoctorOverviewController();
@@ -101,6 +105,13 @@ public class Main extends Application {
 			e1.printStackTrace();
 		}
 	}
+
+	@Override
+	public void stop() {
+		DBUtil.closeConnection();
+		System.out.println("Connection closed");
+	}
+
 	public static void main(String[] args) {
 		launch(args);
 	}
