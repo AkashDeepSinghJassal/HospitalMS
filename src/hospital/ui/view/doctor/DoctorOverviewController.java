@@ -1,15 +1,11 @@
 package hospital.ui.view.doctor;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 import hospital.model.Doctor;
 import hospital.model.GENDER;
 import hospital.services.DoctorSql;
 import hospital.ui.main.Main;
-import hospital.util.DBUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -38,9 +34,6 @@ import javafx.stage.StageStyle;
 public class DoctorOverviewController {
 
 	private ObservableList<Doctor> doctorList = FXCollections.observableArrayList();
-	Connection conn = DBUtil.getDBConnection();
-	PreparedStatement statement = null;
-	ResultSet resultSet = null;
 
 	public DoctorOverviewController() {
 		doctorList.addAll(DoctorSql.getDoctors());

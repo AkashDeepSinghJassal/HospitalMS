@@ -2,6 +2,8 @@ package hospital.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DBUtil {
@@ -39,10 +41,35 @@ public class DBUtil {
 		return conn;
 	}
 
-	public static void closeConnection() {
+	public static void closeQuietly() {
 		try {
 			conn.close();
 		} catch (SQLException e) {
+			/* ignore */;
+		}
+	}
+
+	public static void closeQuietly(Connection conn) {
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			/* ignore */;
+		}
+	}
+
+	public static void closeQuietly(PreparedStatement statement) {
+		try {
+			statement.close();
+		} catch (SQLException e) {
+			/* ignore */;
+		}
+	}
+
+	public static void closeQuietly(ResultSet resultSet) {
+		try {
+			resultSet.close();
+		} catch (SQLException e) {
+			/* ignore */;
 		}
 	}
 }

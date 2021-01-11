@@ -20,16 +20,21 @@ public class DoctorSql {
 	 */
 	public static ArrayList<Doctor> getDoctors() {
 		ArrayList<Doctor> doctors = new ArrayList<Doctor>();
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
 		try {
-			PreparedStatement statement = DBUtil.getDBConnection()
+			statement = DBUtil.getDBConnection()
 					.prepareStatement("select id, name, age, gender, speciality, contact, address from doctor");
-			ResultSet resultSet = statement.executeQuery();
+			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				doctors.add(generateDoctor(resultSet));
 			}
 			return doctors;
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			DBUtil.closeQuietly(resultSet);
+			DBUtil.closeQuietly(statement);
 		}
 
 		return null;
@@ -65,9 +70,9 @@ public class DoctorSql {
 	 * @return the number of rows affected. Should be equal to 1
 	 */
 	public static int addDoctor(Doctor doctor) {
+		PreparedStatement statement = null;
 		try {
-			PreparedStatement statement = DBUtil.getDBConnection()
-					.prepareStatement("INSERT INTO doctor VALUES (?,?,?,?,?,?,?)");
+			statement = DBUtil.getDBConnection().prepareStatement("INSERT INTO doctor VALUES (?,?,?,?,?,?,?)");
 			statement.setString(1, "");
 			statement.setString(2, doctor.getName());
 			statement.setInt(3, doctor.getAge());
@@ -78,6 +83,8 @@ public class DoctorSql {
 			return statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			DBUtil.closeQuietly(statement);
 		}
 		return 0;
 	}
@@ -89,12 +96,15 @@ public class DoctorSql {
 	 * @return Returns the number of rows affected. Should be equal to 1
 	 */
 	public static int removeDoctor(String id) {
+		PreparedStatement statement = null;
 		try {
-			PreparedStatement statement = DBUtil.getDBConnection().prepareStatement("DELETE FROM doctor WHERE id = ?");
+			statement = DBUtil.getDBConnection().prepareStatement("DELETE FROM doctor WHERE id = ?");
 			statement.setString(1, id);
 			return statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			DBUtil.closeQuietly(statement);
 		}
 		return 0;
 	}
@@ -106,8 +116,9 @@ public class DoctorSql {
 	 * @return Returns the number of rows affected. Should be equal to 1
 	 */
 	public static int updateDoctor(Doctor doctor) {
+		PreparedStatement statement = null;
 		try {
-			PreparedStatement statement = DBUtil.getDBConnection().prepareStatement(
+			statement = DBUtil.getDBConnection().prepareStatement(
 					"UPDATE doctor SET name = ?, age = ?, gender = ?, speciality = ?, contact = ?, address = ? WHERE id = ?");
 			statement.setString(1, doctor.getName());
 			statement.setInt(2, doctor.getAge());
@@ -119,6 +130,8 @@ public class DoctorSql {
 			return statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			DBUtil.closeQuietly(statement);
 		}
 		return 0;
 	}
@@ -130,14 +143,18 @@ public class DoctorSql {
 	 */
 	public static String getIdOfLastDoctor() {
 		String id = "";
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
 		try {
-			PreparedStatement statement = DBUtil.getDBConnection()
-					.prepareStatement("SELECT id FROM doctor ORDER BY id DESC LIMIT 1;");
-			ResultSet resultSet = statement.executeQuery();
+			statement = DBUtil.getDBConnection().prepareStatement("SELECT id FROM doctor ORDER BY id DESC LIMIT 1;");
+			resultSet = statement.executeQuery();
 			if (resultSet.next())
 				id = resultSet.getString(1);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			DBUtil.closeQuietly(resultSet);
+			DBUtil.closeQuietly(statement);
 		}
 		return id;
 	}

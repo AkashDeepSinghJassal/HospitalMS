@@ -20,16 +20,22 @@ public class PatientSql {
 	 */
 	public static ArrayList<Patient> getPatients() {
 		ArrayList<Patient> patients = new ArrayList<Patient>();
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+
 		try {
-			PreparedStatement statement = DBUtil.getDBConnection()
+			statement = DBUtil.getDBConnection()
 					.prepareStatement("select id, name, age, gender, contact, address from patient");
-			ResultSet resultSet = statement.executeQuery();
+			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				patients.add(generatePatient(resultSet));
 			}
 			return patients;
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			DBUtil.closeQuietly(resultSet);
+			DBUtil.closeQuietly(statement);
 		}
 
 		return null;
@@ -64,9 +70,9 @@ public class PatientSql {
 	 * @return the number of rows affected. Should be equal to 1
 	 */
 	public static int addPatient(Patient patient) {
+		PreparedStatement statement = null;
 		try {
-			PreparedStatement statement = DBUtil.getDBConnection()
-					.prepareStatement("INSERT INTO patient VALUES (?,?,?,?,?,?)");
+			statement = DBUtil.getDBConnection().prepareStatement("INSERT INTO patient VALUES (?,?,?,?,?,?)");
 			statement.setString(1, "");
 			statement.setString(2, patient.getName());
 			statement.setInt(3, patient.getAge());
@@ -76,6 +82,8 @@ public class PatientSql {
 			return statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			DBUtil.closeQuietly(statement);
 		}
 		return 0;
 	}
@@ -87,12 +95,15 @@ public class PatientSql {
 	 * @return Returns the number of rows affected. Should be equal to 1
 	 */
 	public static int removePatient(String id) {
+		PreparedStatement statement = null;
 		try {
-			PreparedStatement statement = DBUtil.getDBConnection().prepareStatement("DELETE FROM patient WHERE id = ?");
+			statement = DBUtil.getDBConnection().prepareStatement("DELETE FROM patient WHERE id = ?");
 			statement.setString(1, id);
 			return statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			DBUtil.closeQuietly(statement);
 		}
 		return 0;
 	}
@@ -104,8 +115,9 @@ public class PatientSql {
 	 * @return Returns the number of rows affected. Should be equal to 1
 	 */
 	public static int updatePatient(Patient patient) {
+		PreparedStatement statement = null;
 		try {
-			PreparedStatement statement = DBUtil.getDBConnection().prepareStatement(
+			statement = DBUtil.getDBConnection().prepareStatement(
 					"UPDATE patient SET name = ?, age = ?, gender = ?, contact = ?, address = ? WHERE id = ?");
 			statement.setString(1, patient.getName());
 			statement.setInt(2, patient.getAge());
@@ -116,6 +128,8 @@ public class PatientSql {
 			return statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			DBUtil.closeQuietly(statement);
 		}
 		return 0;
 	}
@@ -127,14 +141,18 @@ public class PatientSql {
 	 */
 	public static String getIdOfLastPatient() {
 		String id = "";
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
 		try {
-			PreparedStatement statement = DBUtil.getDBConnection()
-					.prepareStatement("SELECT id FROM patient ORDER BY id DESC LIMIT 1;");
-			ResultSet resultSet = statement.executeQuery();
+			statement = DBUtil.getDBConnection().prepareStatement("SELECT id FROM patient ORDER BY id DESC LIMIT 1;");
+			resultSet = statement.executeQuery();
 			if (resultSet.next())
 				id = resultSet.getString(1);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			DBUtil.closeQuietly(resultSet);
+			DBUtil.closeQuietly(statement);
 		}
 		return id;
 	}

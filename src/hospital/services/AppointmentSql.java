@@ -13,11 +13,13 @@ import hospital.util.DateUtil;
 public class AppointmentSql {
 	static Connection conn = DBUtil.getDBConnection();
 
-	public static ArrayList<Appointment> getAppointments(){
+	public static ArrayList<Appointment> getAppointments() {
 		ArrayList<Appointment> appointments = new ArrayList<Appointment>();
+		PreparedStatement statement = null;
 		try {
-			PreparedStatement ps = conn.prepareStatement("select appoint_id, patient_id, doctor_id, date_scheduled from appointment");
-			ResultSet rs = ps.executeQuery();
+			statement = conn
+					.prepareStatement("select appoint_id, patient_id, doctor_id, date_scheduled from appointment");
+			ResultSet rs = statement.executeQuery();
 			while (rs.next()) {
 				Appointment appointment = new Appointment();
 				appointment.setAppointID(rs.getString(1));
@@ -29,10 +31,13 @@ public class AppointmentSql {
 			return appointments;
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			DBUtil.closeQuietly(statement);
 		}
-		
+
 		return null;
 	}
+
 	/**
 	 * Adds the given appointment to the database.
 	 * 
@@ -40,34 +45,39 @@ public class AppointmentSql {
 	 * @return the number of rows affected. Should be equal to 1
 	 */
 	public static int addAppointment(Appointment appointment) {
+		PreparedStatement statement = null;
 		try {
-			PreparedStatement ps = conn.prepareStatement("insert into appointment values(?,?,?,?)");
-			ps.setString(1, appointment.getAppointID());
-			ps.setString(2, appointment.getPatientID());
-			ps.setString(3, appointment.getDoctorID());
+			statement = conn.prepareStatement("insert into appointment values(?,?,?,?)");
+			statement.setString(1, appointment.getAppointID());
+			statement.setString(2, appointment.getPatientID());
+			statement.setString(3, appointment.getDoctorID());
 
-			ps.setString(4, "2010-04-30 07:27:39");
-			return ps.executeUpdate();
+			statement.setString(4, "2010-04-30 07:27:39");
+			return statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			DBUtil.closeQuietly(statement);
 		}
 		return -1;
 	}
 
 	/**
-	 * Returns the generated ID of appointment 
+	 * Returns the generated ID of appointment
 	 * 
-	 * @return String  id of the appointment
+	 * @return String id of the appointment
 	 */
 	public static String generateAppointID() {
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
 		try {
-			PreparedStatement ps = conn.prepareStatement("insert into appointment_seq values(null)");
-			int ex = ps.executeUpdate();
+			statement = conn.prepareStatement("insert into appointment_seq values(null)");
+			int ex = statement.executeUpdate();
 			if (ex > 0) {
 				PreparedStatement p = conn.prepareStatement("select last_insert_id()");
-				ResultSet rSet = p.executeQuery();
-				if (rSet.next()) {
-					int lastInsert = rSet.getInt(1);
+				resultSet = p.executeQuery();
+				if (resultSet.next()) {
+					int lastInsert = resultSet.getInt(1);
 					String prefix = "AP";
 					int repeatCount = 5 - (int) (Math.log10((double) lastInsert) + 1);
 					prefix = prefix + "0".repeat(repeatCount) + lastInsert;
@@ -76,9 +86,13 @@ public class AppointmentSql {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			DBUtil.closeQuietly(resultSet);
+			DBUtil.closeQuietly(statement);
 		}
 		return null;
 	}
+
 	/**
 	 * Deletes the appointment with the given id from the database.
 	 * 
@@ -86,14 +100,17 @@ public class AppointmentSql {
 	 * @return Returns the number of rows affected. Should be equal to 1
 	 */
 	public static int removeAppointment(Appointment appointment) {
+		PreparedStatement statement = null;
 		try {
-			PreparedStatement ps = conn.prepareStatement("delete from appointment where appoint_id = ?");
-			ps.setString(1, appointment.getAppointID());
-			return ps.executeUpdate();
+			statement = conn.prepareStatement("delete from appointment where appoint_id = ?");
+			statement.setString(1, appointment.getAppointID());
+			return statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			DBUtil.closeQuietly(statement);
 		}
-		
+
 		return 0;
 	}
 
@@ -104,15 +121,19 @@ public class AppointmentSql {
 	 * @return Returns the number of rows affected. Should be equal to 1
 	 */
 	public static int updateAppointment(Appointment appointment) {
+		PreparedStatement statement = null;
 		try {
-			PreparedStatement ps = conn.prepareStatement("update appointment set patient_id = ?, doctor_id = ?, date_scheduled = ? where appoint_id = ?");
-			ps.setString(1, appointment.getPatientID());
-			ps.setString(2,  appointment.getDoctorID());
-			ps.setString(3, "2020-01-01 16:00:00");
-			ps.setString(4, appointment.getAppointID());
-			return ps.executeUpdate();
+			statement = conn.prepareStatement(
+					"update appointment set patient_id = ?, doctor_id = ?, date_scheduled = ? where appoint_id = ?");
+			statement.setString(1, appointment.getPatientID());
+			statement.setString(2, appointment.getDoctorID());
+			statement.setString(3, "2020-01-01 16:00:00");
+			statement.setString(4, appointment.getAppointID());
+			return statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			DBUtil.closeQuietly(statement);
 		}
 		return 0;
 	}

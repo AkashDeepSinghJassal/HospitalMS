@@ -108,7 +108,7 @@ public class Main extends Application {
 
 	@Override
 	public void stop() {
-		DBUtil.closeConnection();
+		DBUtil.closeQuietly();
 		System.out.println("Connection closed");
 	}
 

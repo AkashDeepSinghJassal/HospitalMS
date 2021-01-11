@@ -1,7 +1,6 @@
 package hospital.ui.view.patient;
 
 import java.io.IOException;
-import java.sql.ResultSet;
 
 import hospital.model.GENDER;
 import hospital.model.Patient;
@@ -35,7 +34,6 @@ import javafx.stage.StageStyle;
 public class PatientOverviewController {
 
 	private ObservableList<Patient> patientList = FXCollections.observableArrayList();
-	ResultSet resultSet = null;
 
 	public PatientOverviewController() {
 		patientList.addAll(PatientSql.getPatients());
