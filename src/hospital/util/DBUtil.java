@@ -20,9 +20,11 @@ public class DBUtil {
 				// conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe",
 				// "system", "oracle");
 			} else {
+				DriverManager.setLoginTimeout(10);
 				conn = DriverManager.getConnection(
 						"jdbc:mysql://hospital-db.cowul8deiwyt.ap-south-1.rds.amazonaws.com/hospital", "admin",
 						"hospital123");
+
 			}
 
 			if (!conn.isClosed()) {
