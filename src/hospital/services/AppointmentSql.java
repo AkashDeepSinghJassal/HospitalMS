@@ -17,8 +17,7 @@ public class AppointmentSql {
 		ArrayList<Appointment> appointments = new ArrayList<Appointment>();
 		PreparedStatement statement = null;
 		try {
-			statement = conn
-					.prepareStatement("select id, patient_id, doctor_id, date_scheduled from appointment");
+			statement = conn.prepareStatement("select id, patient_id, doctor_id, date_scheduled from appointment");
 			ResultSet rs = statement.executeQuery();
 			while (rs.next()) {
 				Appointment appointment = new Appointment();
@@ -67,30 +66,23 @@ public class AppointmentSql {
 	 * 
 	 * @return String id of the appointment
 	 */
-	public static String generateAppointID() {
+	public static String getIdOfLastAppointment() {
+		String id = "";
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		try {
-			statement = conn.prepareStatement("insert into appointment_seq values(null)");
-			int ex = statement.executeUpdate();
-			if (ex > 0) {
-				PreparedStatement p = conn.prepareStatement("select last_insert_id()");
-				resultSet = p.executeQuery();
-				if (resultSet.next()) {
-					int lastInsert = resultSet.getInt(1);
-					String prefix = "AP";
-					int repeatCount = 5 - (int) (Math.log10((double) lastInsert) + 1);
-					prefix = prefix + "0".repeat(repeatCount) + lastInsert;
-					return prefix;
-				}
-			}
+			statement = DBUtil.getDBConnection()
+					.prepareStatement("SELECT id FROM appointment ORDER BY id DESC LIMIT 1;");
+			resultSet = statement.executeQuery();
+			if (resultSet.next())
+				id = resultSet.getString(1);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			DBUtil.closeQuietly(resultSet);
 			DBUtil.closeQuietly(statement);
 		}
-		return null;
+		return id;
 	}
 
 	/**

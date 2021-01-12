@@ -233,13 +233,13 @@ public class AppointmentOverviewController {
 	public void handleAdd(ActionEvent event) {
 		Appointment appointment = new Appointment();
 		if (showAppointmentDialog(appointment, "Add Appointment")) {
-			String appointID = AppointmentSql.generateAppointID();
-			if (appointID != null) {
-				appointment.setAppointID(appointID);
-				if (AppointmentSql.addAppointment(appointment) > 0) {
-					appointmentList.add(appointment);
-					showAppointmentDetails(appointment);
+			if (AppointmentSql.addAppointment(appointment) > 0) {
+				String appointID = AppointmentSql.getIdOfLastAppointment();
+				if (appointID != null && !appointID.equals("")) {
+					appointment.setAppointID(appointID);
 				}
+				appointmentList.add(appointment);
+				showAppointmentDetails(appointment);
 			}
 		}
 	}
