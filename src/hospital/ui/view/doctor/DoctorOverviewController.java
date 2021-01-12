@@ -12,6 +12,8 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -24,6 +26,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
@@ -85,8 +88,10 @@ public class DoctorOverviewController {
 	private Label specialityLabel;
 
 	@FXML
+	private TextField filterTF;
+
+	@FXML
 	private void initialize() {
-		doctorTable.setItems(doctorList);
 		doctorIDTableColumn.setCellValueFactory(new PropertyValueFactory<Doctor, SimpleStringProperty>("id"));
 		nameTableColumn.setCellValueFactory(new PropertyValueFactory<Doctor, SimpleStringProperty>("name"));
 		ageTableColumn.setCellValueFactory(new PropertyValueFactory<Doctor, SimpleIntegerProperty>("age"));
@@ -95,8 +100,24 @@ public class DoctorOverviewController {
 		addressTableColumn.setCellValueFactory(new PropertyValueFactory<Doctor, SimpleStringProperty>("address"));
 		specialityTableColumn.setCellValueFactory(new PropertyValueFactory<Doctor, SimpleStringProperty>("speciality"));
 
-		// lastNameColumn.setCellValueFactory(cellData ->
-		// cellData.getValue().lastNameProperty());
+		/* Filter table */
+		FilteredList<Doctor> filteredDoctors = new FilteredList<Doctor>(doctorList, p -> true);
+		filterTF.textProperty().addListener((observable, oldValue, newValue) -> {
+			filteredDoctors.setPredicate(doctor -> {
+				if (newValue == null || newValue.isEmpty())
+					return true;
+				String filter = newValue.toLowerCase();
+				if (doctor.getName().toLowerCase().contains(filter))
+					return true;
+				if (doctor.getId().toLowerCase().contains(filter))
+					return true;
+				return false;
+			});
+		});
+		SortedList<Doctor> sortedDoctors = new SortedList<Doctor>(filteredDoctors);
+		sortedDoctors.comparatorProperty().bind(doctorTable.comparatorProperty());
+		doctorTable.setItems(sortedDoctors);
+		
 		// show empty in personal details
 		showDoctorDetails(null);
 		doctorTable.getSelectionModel().selectedItemProperty()

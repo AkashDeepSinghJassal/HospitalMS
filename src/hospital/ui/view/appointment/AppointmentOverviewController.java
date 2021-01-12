@@ -1,9 +1,5 @@
 package hospital.ui.view.appointment;
 
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Bounds;
-
 import java.io.IOException;
 import java.time.LocalDate;
 
@@ -16,22 +12,27 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Bounds;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-
-import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
 
 public class AppointmentOverviewController {
 
@@ -54,6 +55,8 @@ public class AppointmentOverviewController {
 	private Label dateLbl;
 	@FXML
 	private Label doctorIDLbl;
+	@FXML
+	private TextField filterTF;
 
 	public AppointmentOverviewController() {
 		appointmentList.addAll(AppointmentSql.getAppointments());
@@ -61,7 +64,6 @@ public class AppointmentOverviewController {
 	
 	@FXML
 	private void initialize() {
-		appointmentTable.setItems(appointmentList);
 		patientIDTableColumn
 				.setCellValueFactory(new PropertyValueFactory<Appointment, SimpleStringProperty>("patientID"));
 		appointIDTableColumn
@@ -71,6 +73,26 @@ public class AppointmentOverviewController {
 		dateTableColumn
 				.setCellValueFactory(new PropertyValueFactory<Appointment, SimpleObjectProperty<LocalDate>>("date"));
 
+		/* Filter table */
+		FilteredList<Appointment> filteredAppointments = new FilteredList<Appointment>(appointmentList, p -> true);
+		filterTF.textProperty().addListener((observable, oldValue, newValue) -> {
+			filteredAppointments.setPredicate(appointment -> {
+				if (newValue == null || newValue.isEmpty())
+					return true;
+				String filter = newValue.toLowerCase();
+				if (appointment.getID().toLowerCase().contains(filter))
+					return true;
+				if (appointment.getDoctorID().toLowerCase().contains(filter))
+					return true;
+				if (appointment.getPatientID().toLowerCase().contains(filter))
+					return true;
+				return false;
+			});
+		});
+		SortedList<Appointment> sortedAppointments = new SortedList<Appointment>(filteredAppointments);
+		sortedAppointments.comparatorProperty().bind(appointmentTable.comparatorProperty());
+		appointmentTable.setItems(sortedAppointments);
+		
 		// show empty in personal details
 		showAppointmentDetails(null);
 		appointmentTable.getSelectionModel().selectedItemProperty()
@@ -118,7 +140,7 @@ public class AppointmentOverviewController {
 		if (appointment != null) {
 			// Fill the labels with info from the patient object.
 			patientIDLbl.setText(appointment.getPatientID());
-			appointIDLbl.setText(appointment.getAppointID());
+			appointIDLbl.setText(appointment.getID());
 			doctorIDLbl.setText(appointment.getDoctorID());
 			dateLbl.setText(DateUtil.format(appointment.getDate()));
 

@@ -19,12 +19,12 @@
       <AnchorPane prefHeight="100.0" prefWidth="1920.0" styleClass="background" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label layoutX="842.0" layoutY="22.0" styleClass="label-header" text="Patient Overview" />
-            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="1652.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="1652.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="235.0" AnchorPane.topAnchor="55.0">
                <image>
                   <Image url="@../../img/search-white.png" />
                </image>
             </ImageView>
-            <JFXTextField fx:id="filterTF" layoutX="1691.4000244140625" layoutY="31.0" promptText="Seach" style="-fx-text-fill: #FFF;" />
+            <JFXTextField fx:id="filterTF" layoutX="1691.4000244140625" layoutY="31.0" prefWidth="200.0" promptText="Seach" style="-fx-text-fill: #FFF;" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="45.0" />
          </children>
       </AnchorPane>
       <SplitPane dividerPositions="0.6104166666666667" layoutX="153.0" layoutY="70.0" prefHeight="300.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">

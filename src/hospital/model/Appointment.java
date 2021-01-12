@@ -11,7 +11,7 @@ public class Appointment {
 	private SimpleStringProperty doctorID = new SimpleStringProperty();
 	private SimpleObjectProperty<LocalDate> date = new SimpleObjectProperty<LocalDate>();
 
-	public String getAppointID() {
+	public String getID() {
 		return appointID.get();
 	}
 
