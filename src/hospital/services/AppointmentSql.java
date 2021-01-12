@@ -116,7 +116,7 @@ public class AppointmentSql {
 		PreparedStatement statement = null;
 		try {
 			statement = conn.prepareStatement(
-					"update appointment set patient_id = ?, doctor_id = ?, date_scheduled = ? where appoint_id = ?");
+					"update appointment set patient_id = ?, doctor_id = ?, date_scheduled = ? where id = ?");
 			statement.setString(1, appointment.getPatientID());
 			statement.setString(2, appointment.getDoctorID());
 			statement.setString(3, "2020-01-01 16:00:00");

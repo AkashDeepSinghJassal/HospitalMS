@@ -37,9 +37,11 @@ import javafx.stage.StageStyle;
 
 public class AppointmentOverviewController {
 
-	private ObservableList<Appointment> appointmentList = FXCollections.observableArrayList();
+	private ObservableList<Appointment> observableList = FXCollections.observableArrayList();
+	private FilteredList<Appointment> filteredList = null;
+	private SortedList<Appointment> sortedList = null;
 	@FXML
-	private TableView<Appointment> appointmentTable;
+	private TableView<Appointment> tableView;
 	@FXML
 	private TableColumn<Appointment, SimpleStringProperty> appointIDTableColumn;
 	@FXML
@@ -62,9 +64,9 @@ public class AppointmentOverviewController {
 	private Button edit;
 
 	public AppointmentOverviewController() {
-		appointmentList.addAll(AppointmentSql.getAppointments());
+		observableList.addAll(AppointmentSql.getAppointments());
 	}
-	
+
 	@FXML
 	private void initialize() {
 		patientIDTableColumn
@@ -77,9 +79,9 @@ public class AppointmentOverviewController {
 				.setCellValueFactory(new PropertyValueFactory<Appointment, SimpleObjectProperty<LocalDate>>("date"));
 
 		/* Filter table */
-		FilteredList<Appointment> filteredAppointments = new FilteredList<Appointment>(appointmentList, p -> true);
+		filteredList = new FilteredList<Appointment>(observableList, p -> true);
 		filterTF.textProperty().addListener((observable, oldValue, newValue) -> {
-			filteredAppointments.setPredicate(appointment -> {
+			filteredList.setPredicate(appointment -> {
 				if (newValue == null || newValue.isEmpty())
 					return true;
 				String filter = newValue.toLowerCase();
@@ -92,21 +94,21 @@ public class AppointmentOverviewController {
 				return false;
 			});
 		});
-		SortedList<Appointment> sortedAppointments = new SortedList<Appointment>(filteredAppointments);
-		sortedAppointments.comparatorProperty().bind(appointmentTable.comparatorProperty());
-		appointmentTable.setItems(sortedAppointments);
-		
+		sortedList = new SortedList<Appointment>(filteredList);
+		sortedList.comparatorProperty().bind(tableView.comparatorProperty());
+		tableView.setItems(sortedList);
+
 		// show empty in personal details
 		showAppointmentDetails(null);
-		appointmentTable.getSelectionModel().selectedItemProperty()
+		tableView.getSelectionModel().selectedItemProperty()
 				.addListener((observable, oldValue, newValue) -> showAppointmentDetails(newValue));
 
 		// Clear Selection On Opening
-		appointmentTable.getSelectionModel().clearSelection();
+		tableView.getSelectionModel().clearSelection();
 
 		// Clear Selection when clicking on empty rows
 		ObjectProperty<TableRow<Appointment>> lastSelectedRow = new SimpleObjectProperty<>();
-		appointmentTable.setRowFactory(tableView -> {
+		tableView.setRowFactory(tableView -> {
 			TableRow<Appointment> row = new TableRow<Appointment>();
 			row.selectedProperty().addListener((observable, wasSelected, isNowSelected) -> {
 				if (isNowSelected) {
@@ -115,21 +117,21 @@ public class AppointmentOverviewController {
 			});
 			return row;
 		});
-		appointmentTable.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+		tableView.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
 				if (lastSelectedRow.get() != null) {
 					Bounds boundsOfSelectedRow = lastSelectedRow.get()
 							.localToScene(lastSelectedRow.get().getLayoutBounds());
 					if (boundsOfSelectedRow.contains(event.getSceneX(), event.getSceneY()) == false) {
-						appointmentTable.getSelectionModel().clearSelection();
+						tableView.getSelectionModel().clearSelection();
 					}
 				}
 			}
 		});
 
 		// Edit on double click
-		appointmentTable.setRowFactory(e -> {
+		tableView.setRowFactory(e -> {
 			TableRow<Appointment> row = new TableRow<Appointment>();
 			row.setOnMouseClicked(event -> {
 				if (event.getClickCount() == 2 && !row.isEmpty()) {
@@ -196,12 +198,12 @@ public class AppointmentOverviewController {
 	// Event Listener on Button.onAction
 	@FXML
 	public void handleEdit(ActionEvent event) {
-		Appointment appointment = appointmentTable.getSelectionModel().getSelectedItem();
+		Appointment appointment = tableView.getSelectionModel().getSelectedItem();
 		if (appointment != null) {
 			boolean okClicked = showAppointmentDialog(appointment, "Edit Appointment");
 			if (okClicked) {
-				if(AppointmentSql.updateAppointment(appointment) > 0) {
-					showAppointmentDetails(appointment);					
+				if (AppointmentSql.updateAppointment(appointment) > 0) {
+					showAppointmentDetails(appointment);
 				}
 
 			}
@@ -220,10 +222,12 @@ public class AppointmentOverviewController {
 	// Event Listener on Button.onAction
 	@FXML
 	public void handleDelete(ActionEvent event) {
-		Appointment deletedAppointment = appointmentTable.getSelectionModel().getSelectedItem();
+		Appointment deletedAppointment = tableView.getSelectionModel().getSelectedItem();
 		if (deletedAppointment != null) {
-			if(AppointmentSql.removeAppointment(deletedAppointment) > 0) {
-				appointmentTable.getItems().remove(deletedAppointment);				
+			if (AppointmentSql.removeAppointment(deletedAppointment) > 0) {
+				int visibleIndex = tableView.getSelectionModel().getSelectedIndex();
+				int sourceIndex = sortedList.getSourceIndexFor(observableList, visibleIndex);
+				observableList.remove(sourceIndex);
 			}
 
 		} else {
@@ -248,7 +252,7 @@ public class AppointmentOverviewController {
 				if (appointID != null && !appointID.equals("")) {
 					appointment.setAppointID(appointID);
 				}
-				appointmentList.add(appointment);
+				observableList.add(appointment);
 				showAppointmentDetails(appointment);
 			}
 		}

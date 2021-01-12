@@ -37,14 +37,16 @@ import javafx.stage.StageStyle;
 
 public class PatientOverviewController {
 
-	private ObservableList<Patient> patientList = FXCollections.observableArrayList();
+	private ObservableList<Patient> observableList = FXCollections.observableArrayList();
+	private FilteredList<Patient> filteredList = null;
+	private SortedList<Patient> sortedList = null;
 
 	public PatientOverviewController() {
-		patientList.addAll(PatientSql.getPatients());
+		observableList.addAll(PatientSql.getPatients());
 	}
 
 	@FXML
-	private TableView<Patient> patientTable;
+	private TableView<Patient> tableView;
 	@FXML
 	private TableColumn<Patient, SimpleStringProperty> patientIDTableColumn;
 	@FXML
@@ -85,9 +87,9 @@ public class PatientOverviewController {
 		addressTableColumn.setCellValueFactory(new PropertyValueFactory<Patient, SimpleStringProperty>("address"));
 
 		/* Filter table */
-		FilteredList<Patient> filteredPatients = new FilteredList<Patient>(patientList, p -> true);
+		filteredList = new FilteredList<Patient>(observableList, p -> true);
 		filterTF.textProperty().addListener((observable, oldValue, newValue) -> {
-			filteredPatients.setPredicate(patient -> {
+			filteredList.setPredicate(patient -> {
 				if (newValue == null || newValue.isEmpty())
 					return true;
 				String filter = newValue.toLowerCase();
@@ -98,21 +100,21 @@ public class PatientOverviewController {
 				return false;
 			});
 		});
-		SortedList<Patient> sortedPatients = new SortedList<Patient>(filteredPatients);
-		sortedPatients.comparatorProperty().bind(patientTable.comparatorProperty());
-		patientTable.setItems(sortedPatients);
+		sortedList = new SortedList<Patient>(filteredList);
+		sortedList.comparatorProperty().bind(tableView.comparatorProperty());
+		tableView.setItems(sortedList);
 
 		// show empty in personal details
 		showPatientDetails(null);
-		patientTable.getSelectionModel().selectedItemProperty()
+		tableView.getSelectionModel().selectedItemProperty()
 				.addListener((observable, oldValue, newValue) -> showPatientDetails(newValue));
 
 		// Clear Selection On Opening
-		patientTable.getSelectionModel().clearSelection();
+		tableView.getSelectionModel().clearSelection();
 
 		// Clear Selection when clicking on empty rows
 		ObjectProperty<TableRow<Patient>> lastSelectedRow = new SimpleObjectProperty<>();
-		patientTable.setRowFactory(tableView -> {
+		tableView.setRowFactory(tableView -> {
 			TableRow<Patient> row = new TableRow<Patient>();
 			row.selectedProperty().addListener((observable, wasSelected, isNowSelected) -> {
 				if (isNowSelected) {
@@ -121,21 +123,21 @@ public class PatientOverviewController {
 			});
 			return row;
 		});
-		patientTable.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+		tableView.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
 				if (lastSelectedRow.get() != null) {
 					Bounds boundsOfSelectedRow = lastSelectedRow.get()
 							.localToScene(lastSelectedRow.get().getLayoutBounds());
 					if (boundsOfSelectedRow.contains(event.getSceneX(), event.getSceneY()) == false) {
-						patientTable.getSelectionModel().clearSelection();
+						tableView.getSelectionModel().clearSelection();
 					}
 				}
 			}
 		});
 
 		// Edit on double click
-		patientTable.setRowFactory(e -> {
+		tableView.setRowFactory(e -> {
 			TableRow<Patient> row = new TableRow<Patient>();
 			row.setOnMouseClicked(event -> {
 				if (event.getClickCount() == 2 && !row.isEmpty()) {
@@ -152,7 +154,7 @@ public class PatientOverviewController {
 		if (showPatientDialog(patient, "Add Patient")) {
 			if (PatientSql.addPatient(patient) == 1) {
 				patient.setId(PatientSql.getIdOfLastPatient());
-				patientList.add(patient);
+				observableList.add(patient);
 				showPatientDetails(patient);
 			}
 		}
@@ -160,10 +162,12 @@ public class PatientOverviewController {
 
 	@FXML
 	void handleDeletePatient(ActionEvent event) {
-		Patient deletedPatient = patientTable.getSelectionModel().getSelectedItem();
+		Patient deletedPatient = tableView.getSelectionModel().getSelectedItem();
 		if (deletedPatient != null) {
 			if (PatientSql.removePatient(deletedPatient.getId()) == 1) {
-				patientTable.getItems().remove(deletedPatient);
+				int visibleIndex = tableView.getSelectionModel().getSelectedIndex();
+				int sourceIndex = sortedList.getSourceIndexFor(observableList, visibleIndex);
+				observableList.remove(sourceIndex);
 			}
 
 		} else {
@@ -180,7 +184,7 @@ public class PatientOverviewController {
 
 	@FXML
 	void handleEditPatient(ActionEvent event) {
-		Patient p = patientTable.getSelectionModel().getSelectedItem();
+		Patient p = tableView.getSelectionModel().getSelectedItem();
 		if (p != null) {
 			boolean okClicked = showPatientDialog(p, "Edit Patient");
 			if (okClicked) {
