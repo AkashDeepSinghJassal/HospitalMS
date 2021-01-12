@@ -12,6 +12,8 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -24,6 +26,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
@@ -78,8 +81,10 @@ public class PatientOverviewController {
 	private Label addressLabel;
 
 	@FXML
+	private TextField filterTF;
+
+	@FXML
 	private void initialize() {
-		patientTable.setItems(patientList);
 		patientIDTableColumn.setCellValueFactory(new PropertyValueFactory<Patient, SimpleStringProperty>("id"));
 		nameTableColumn.setCellValueFactory(new PropertyValueFactory<Patient, SimpleStringProperty>("name"));
 		ageTableColumn.setCellValueFactory(new PropertyValueFactory<Patient, SimpleIntegerProperty>("age"));
@@ -87,6 +92,24 @@ public class PatientOverviewController {
 				.setCellValueFactory(new PropertyValueFactory<Patient, SimpleObjectProperty<GENDER>>("gender"));
 		contactTableColumn.setCellValueFactory(new PropertyValueFactory<Patient, SimpleStringProperty>("contact"));
 		addressTableColumn.setCellValueFactory(new PropertyValueFactory<Patient, SimpleStringProperty>("address"));
+
+		/* Filter table */
+		FilteredList<Patient> filteredPatients = new FilteredList<Patient>(patientList, p -> true);
+		filterTF.textProperty().addListener((observable, oldValue, newValue) -> {
+			filteredPatients.setPredicate(patient -> {
+				if (newValue == null || newValue.isEmpty())
+					return true;
+				String filter = newValue.toLowerCase();
+				if (patient.getName().toLowerCase().contains(filter))
+					return true;
+				if (patient.getId().toLowerCase().contains(filter))
+					return true;
+				return false;
+			});
+		});
+		SortedList<Patient> sortedPatients = new SortedList<Patient>(filteredPatients);
+		sortedPatients.comparatorProperty().bind(patientTable.comparatorProperty());
+		patientTable.setItems(sortedPatients);
 
 		// show empty in personal details
 		showPatientDetails(null);
