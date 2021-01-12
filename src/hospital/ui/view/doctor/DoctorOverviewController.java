@@ -31,6 +31,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -220,6 +221,7 @@ public class DoctorOverviewController {
 			dialogStage.initStyle(StageStyle.TRANSPARENT);
 			dialogStage.initOwner(Main.stage);
 			Scene scene = new Scene(aPane);
+			scene.setFill(Color.TRANSPARENT);
 			dialogStage.setScene(scene);
 
 			// Set the doctor into the controller.
