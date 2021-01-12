@@ -120,7 +120,7 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="43.0" prefWidth="499.0" spacing="50.0">
          <children>
-            <JFXButton buttonType="RAISED" onAction="#handleOK" prefHeight="26.0" prefWidth="110.0" ripplerFill="#2b76cd" style="-fx-background-color: #eee;" text="OK" textFill="#17449e">
+            <JFXButton buttonType="RAISED" defaultButton="true" onAction="#handleOK" prefHeight="26.0" prefWidth="110.0" ripplerFill="#2b76cd" style="-fx-background-color: #eee;" text="OK" textFill="#17449e">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -128,7 +128,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton buttonType="RAISED" onAction="#closeWindow" prefHeight="26.0" prefWidth="110.0" ripplerFill="#2b76cd" style="-fx-background-color: #eee;" text="Cancel" textFill="#17449e">
+            <JFXButton buttonType="RAISED" cancelButton="true" onAction="#closeWindow" prefHeight="26.0" prefWidth="110.0" ripplerFill="#2b76cd" style="-fx-background-color: #eee;" text="Cancel" textFill="#17449e">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
