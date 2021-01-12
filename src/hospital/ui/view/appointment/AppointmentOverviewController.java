@@ -22,6 +22,7 @@ import javafx.geometry.Bounds;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
@@ -57,6 +58,8 @@ public class AppointmentOverviewController {
 	private Label doctorIDLbl;
 	@FXML
 	private TextField filterTF;
+	@FXML
+	private Button edit;
 
 	public AppointmentOverviewController() {
 		appointmentList.addAll(AppointmentSql.getAppointments());
@@ -103,10 +106,8 @@ public class AppointmentOverviewController {
 
 		// Clear Selection when clicking on empty rows
 		ObjectProperty<TableRow<Appointment>> lastSelectedRow = new SimpleObjectProperty<>();
-
 		appointmentTable.setRowFactory(tableView -> {
 			TableRow<Appointment> row = new TableRow<Appointment>();
-
 			row.selectedProperty().addListener((observable, wasSelected, isNowSelected) -> {
 				if (isNowSelected) {
 					lastSelectedRow.set(row);
@@ -114,9 +115,7 @@ public class AppointmentOverviewController {
 			});
 			return row;
 		});
-
 		appointmentTable.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-
 			@Override
 			public void handle(MouseEvent event) {
 				if (lastSelectedRow.get() != null) {
@@ -128,6 +127,17 @@ public class AppointmentOverviewController {
 				}
 			}
 		});
+
+		// Edit on double click
+		appointmentTable.setRowFactory(e -> {
+			TableRow<Appointment> row = new TableRow<Appointment>();
+			row.setOnMouseClicked(event -> {
+				if (event.getClickCount() == 2 && !row.isEmpty()) {
+					edit.fire();
+				}
+			});
+			return row;
+		});
 	}
 
 	/**
@@ -138,7 +148,7 @@ public class AppointmentOverviewController {
 	 */
 	private void showAppointmentDetails(Appointment appointment) {
 		if (appointment != null) {
-			// Fill the labels with info from the patient object.
+			// Fill the labels with info from the appointment object.
 			patientIDLbl.setText(appointment.getPatientID());
 			appointIDLbl.setText(appointment.getID());
 			doctorIDLbl.setText(appointment.getDoctorID());

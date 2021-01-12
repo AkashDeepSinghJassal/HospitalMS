@@ -22,6 +22,7 @@ import javafx.geometry.Bounds;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
@@ -44,44 +45,34 @@ public class PatientOverviewController {
 
 	@FXML
 	private TableView<Patient> patientTable;
-
 	@FXML
 	private TableColumn<Patient, SimpleStringProperty> patientIDTableColumn;
-
 	@FXML
 	private TableColumn<Patient, SimpleStringProperty> nameTableColumn;
-
 	@FXML
 	private TableColumn<Patient, SimpleIntegerProperty> ageTableColumn;
-
 	@FXML
 	private TableColumn<Patient, SimpleObjectProperty<GENDER>> genderTableColumn;
-
 	@FXML
 	private TableColumn<Patient, SimpleStringProperty> contactTableColumn;
-
 	@FXML
 	private TableColumn<Patient, SimpleStringProperty> addressTableColumn;
-
 	@FXML
 	private Label IDLabel;
-
 	@FXML
 	private Label nameLabel;
-
 	@FXML
 	private Label ageLabel;
-
 	@FXML
 	private Label genderLabel;
 	@FXML
 	private Label contactLabel;
-
 	@FXML
 	private Label addressLabel;
-
 	@FXML
 	private TextField filterTF;
+	@FXML
+	private Button edit;
 
 	@FXML
 	private void initialize() {
@@ -121,10 +112,8 @@ public class PatientOverviewController {
 
 		// Clear Selection when clicking on empty rows
 		ObjectProperty<TableRow<Patient>> lastSelectedRow = new SimpleObjectProperty<>();
-
 		patientTable.setRowFactory(tableView -> {
 			TableRow<Patient> row = new TableRow<Patient>();
-
 			row.selectedProperty().addListener((observable, wasSelected, isNowSelected) -> {
 				if (isNowSelected) {
 					lastSelectedRow.set(row);
@@ -132,9 +121,7 @@ public class PatientOverviewController {
 			});
 			return row;
 		});
-
 		patientTable.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-
 			@Override
 			public void handle(MouseEvent event) {
 				if (lastSelectedRow.get() != null) {
@@ -145,6 +132,17 @@ public class PatientOverviewController {
 					}
 				}
 			}
+		});
+
+		// Edit on double click
+		patientTable.setRowFactory(e -> {
+			TableRow<Patient> row = new TableRow<Patient>();
+			row.setOnMouseClicked(event -> {
+				if (event.getClickCount() == 2 && !row.isEmpty()) {
+					edit.fire();
+				}
+			});
+			return row;
 		});
 	}
 

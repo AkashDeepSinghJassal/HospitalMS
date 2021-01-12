@@ -22,6 +22,7 @@ import javafx.geometry.Bounds;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
@@ -44,51 +45,38 @@ public class DoctorOverviewController {
 
 	@FXML
 	private TableView<Doctor> doctorTable;
-
 	@FXML
 	private TableColumn<Doctor, SimpleStringProperty> doctorIDTableColumn;
-
 	@FXML
 	private TableColumn<Doctor, SimpleStringProperty> nameTableColumn;
-
 	@FXML
 	private TableColumn<Doctor, SimpleIntegerProperty> ageTableColumn;
-
 	@FXML
 	private TableColumn<Doctor, SimpleObjectProperty<GENDER>> genderTableColumn;
-
 	@FXML
 	private TableColumn<Doctor, SimpleStringProperty> contactTableColumn;
-
 	@FXML
 	private TableColumn<Doctor, SimpleStringProperty> addressTableColumn;
-
 	@FXML
 	private TableColumn<Doctor, SimpleStringProperty> specialityTableColumn;
-
 	@FXML
 	private Label IDLabel;
-
 	@FXML
 	private Label nameLabel;
-
 	@FXML
 	private Label ageLabel;
-
 	@FXML
 	private Label genderLabel;
-
 	@FXML
 	private Label contactLabel;
-
 	@FXML
 	private Label addressLabel;
-
 	@FXML
 	private Label specialityLabel;
-
 	@FXML
 	private TextField filterTF;
+	@FXML
+	private Button edit;
 
 	@FXML
 	private void initialize() {
@@ -117,7 +105,7 @@ public class DoctorOverviewController {
 		SortedList<Doctor> sortedDoctors = new SortedList<Doctor>(filteredDoctors);
 		sortedDoctors.comparatorProperty().bind(doctorTable.comparatorProperty());
 		doctorTable.setItems(sortedDoctors);
-		
+
 		// show empty in personal details
 		showDoctorDetails(null);
 		doctorTable.getSelectionModel().selectedItemProperty()
@@ -126,11 +114,10 @@ public class DoctorOverviewController {
 		// Clear Selection On Opening
 		doctorTable.getSelectionModel().clearSelection();
 
+		// Clear Selection when clicking on empty rows
 		ObjectProperty<TableRow<Doctor>> lastSelectedRow = new SimpleObjectProperty<>();
-
 		doctorTable.setRowFactory(tableView -> {
 			TableRow<Doctor> row = new TableRow<Doctor>();
-
 			row.selectedProperty().addListener((observable, wasSelected, isNowSelected) -> {
 				if (isNowSelected) {
 					lastSelectedRow.set(row);
@@ -138,9 +125,7 @@ public class DoctorOverviewController {
 			});
 			return row;
 		});
-
 		doctorTable.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-
 			@Override
 			public void handle(MouseEvent event) {
 				if (lastSelectedRow.get() != null) {
@@ -151,6 +136,17 @@ public class DoctorOverviewController {
 					}
 				}
 			}
+		});
+
+		// Edit on double click
+		doctorTable.setRowFactory(e -> {
+			TableRow<Doctor> row = new TableRow<Doctor>();
+			row.setOnMouseClicked(event -> {
+				if (event.getClickCount() == 2 && !row.isEmpty()) {
+					edit.fire();
+				}
+			});
+			return row;
 		});
 	}
 

@@ -79,7 +79,7 @@
                   </GridPane>
                   <ButtonBar layoutX="54.0" layoutY="250.0" prefHeight="75.0" prefWidth="470.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
                     <buttons>
-                        <Button mnemonicParsing="false" onAction="#handleEditPatient" prefHeight="40.0" prefWidth="300.0" text="Edit" />
+                        <Button fx:id="edit" mnemonicParsing="false" onAction="#handleEditPatient" prefHeight="40.0" prefWidth="300.0" text="Edit" />
                         <Button mnemonicParsing="false" onAction="#handleDeletePatient" prefHeight="40.0" prefWidth="300.0" text="Delete" />
                       <Button mnemonicParsing="false" onAction="#handleAddPatient" prefHeight="40.0" prefWidth="300.0" text="New" />
                     </buttons>
