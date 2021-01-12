@@ -176,7 +176,6 @@ public class HomePageController implements Initializable {
 		AnchorPane root;
 		try {
 			root = Main.appointmentViewAnchorPane;
-			System.out.println(root);
 			modelView.getChildren().setAll(root);
 			AnchorPane.setTopAnchor(root, 0.0);
 			AnchorPane.setRightAnchor(root, 0.0);

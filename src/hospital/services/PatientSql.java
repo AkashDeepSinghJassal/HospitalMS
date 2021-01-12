@@ -13,6 +13,35 @@ import hospital.util.DBUtil;
 public class PatientSql {
 
 	/**
+	 * Get the {@link Patient} from the given {@link Patient#id}
+	 * 
+	 * @param id The id of the patient you want to get
+	 * @return The {@link Patient} associated with the given id from the database.
+	 */
+	public static Patient getPatient(String id) {
+		Patient patient = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		if (id != null && !id.equals("")) {
+			try {
+				statement = DBUtil.getDBConnection()
+						.prepareStatement("select id, name, age, gender, contact, address from patient where id = ?");
+				statement.setString(1, id);
+				resultSet = statement.executeQuery();
+				if (resultSet.next()) {
+					patient = generatePatient(resultSet);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				DBUtil.closeQuietly(resultSet);
+				DBUtil.closeQuietly(statement);
+			}
+		}
+		return patient;
+	}
+
+	/**
 	 * Get all paients from the database.
 	 * 
 	 * @return a {@link ArrayList} of type {@link Patient} containing all patients

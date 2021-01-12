@@ -13,6 +13,35 @@ import hospital.util.DBUtil;
 public class DoctorSql {
 
 	/**
+	 * Get the {@link Doctor} from the given {@link Doctor#id}
+	 * 
+	 * @param id The id of the doctor you want to get
+	 * @return The {@link Doctor} associated with the given id from the database.
+	 */
+	public static Doctor getDoctor(String id) {
+		Doctor doctor = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		if (id != null && !id.equals("")) {
+			try {
+				statement = DBUtil.getDBConnection().prepareStatement(
+						"select id, name, age, gender, speciality, contact, address from doctor where id = ?");
+				statement.setString(1, id);
+				resultSet = statement.executeQuery();
+				if (resultSet.next()) {
+					doctor = generateDoctor(resultSet);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				DBUtil.closeQuietly(resultSet);
+				DBUtil.closeQuietly(statement);
+			}
+		}
+		return doctor;
+	}
+
+	/**
 	 * Get all paients from the database.
 	 * 
 	 * @return a {@link ArrayList} of type {@link Doctor} containing all doctors
