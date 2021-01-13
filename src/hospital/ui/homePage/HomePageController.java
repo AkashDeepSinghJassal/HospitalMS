@@ -86,8 +86,9 @@ public class HomePageController implements Initializable {
 			});
 			fadeOut.setOnFinished((e) -> {
 				try {
-					AnchorPane oldRoot = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
-					anchorPane.getChildren().setAll(oldRoot.getChildren());
+					FXMLLoader homeLoader = new FXMLLoader(getClass().getResource("../homePage/HomePage.fxml"));
+					homeLoader.setController(Main.homePageController);
+					newRoot.getScene().setRoot((AnchorPane) homeLoader.load());
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
@@ -156,6 +157,7 @@ public class HomePageController implements Initializable {
 
 	public void showHome() {
 		modelView.getChildren().clear();
+
 	}
 
 	public void showPatientView() {
@@ -172,6 +174,7 @@ public class HomePageController implements Initializable {
 		}
 
 	}
+
 	public void showAppointmentView() {
 		AnchorPane root;
 		try {
