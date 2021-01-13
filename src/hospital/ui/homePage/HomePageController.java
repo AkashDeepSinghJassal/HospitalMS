@@ -20,7 +20,6 @@ import javafx.scene.Parent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
@@ -38,7 +37,7 @@ public class HomePageController implements Initializable {
 	@FXML
 	private JFXDrawer drawer;
 	@FXML
-	private HBox loader;
+	private AnchorPane loader;
 	@FXML
 	private Circle c1;
 	@FXML
