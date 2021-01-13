@@ -17,6 +17,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -44,6 +46,13 @@ public class HomePageController implements Initializable {
 	private Circle c2;
 	@FXML
 	private Circle c3;
+
+	@FXML
+	void keyPressed(KeyEvent event) {
+		if (event.getCode() == KeyCode.ESCAPE) {
+			triggerHamburger();
+		}
+	}
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
