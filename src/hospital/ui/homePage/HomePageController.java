@@ -55,12 +55,7 @@ public class HomePageController implements Initializable {
 	@FXML
 	private Circle c3;
 
-	@FXML
-	void keyPressed(KeyEvent event) {
-		if (event.getCode() == KeyCode.ESCAPE) {
-			triggerHamburger();
-		}
-	}
+	HamburgerBasicCloseTransition transition = null;
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
@@ -68,13 +63,52 @@ public class HomePageController implements Initializable {
 			loadWelcomePage();
 		}
 		loadSidePane();
-		setHamburger();
-
+		transition = new HamburgerBasicCloseTransition(hamburger);
 		drawerOverlay.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			triggerHamburger();
 		});
+	}
 
-		triggerHamburger();
+	@FXML
+	void hamburgerToggle(MouseEvent event) {
+		if (drawer.isOpened()) {
+			transition.setRate(-1);
+
+			FadeTransition fadeOut = new FadeTransition(Duration.seconds(0.25), drawerOverlay);
+			fadeOut.setFromValue(1);
+			fadeOut.setToValue(0);
+			fadeOut.setOnFinished((e2) -> {
+				AnchorPane.clearConstraints(drawerOverlay);
+			});
+
+			transition.play();
+			fadeOut.play();
+			drawer.close();
+			drawer.setDisable(true);
+		} else if (drawer.isClosed()) {
+			transition.setRate(1);
+
+			FadeTransition fadeIn = new FadeTransition(Duration.seconds(0.25), drawerOverlay);
+			AnchorPane.setTopAnchor(drawerOverlay, 0.0);
+			AnchorPane.setRightAnchor(drawerOverlay, 0.0);
+			AnchorPane.setBottomAnchor(drawerOverlay, 0.0);
+			AnchorPane.setLeftAnchor(drawerOverlay, 0.0);
+
+			fadeIn.setFromValue(0);
+			fadeIn.setToValue(1);
+
+			transition.play();
+			fadeIn.play();
+			drawer.open();
+			drawer.setDisable(false);
+		}
+	}
+
+	@FXML
+	void keyPressed(KeyEvent event) {
+		if (event.getCode() == KeyCode.ESCAPE) {
+			triggerHamburger();
+		}
 	}
 
 	void loadWelcomePage() {
@@ -232,44 +266,6 @@ public class HomePageController implements Initializable {
 
 	public void showAppointmentView() {
 		appointmentView.toFront();
-	}
-
-	public void setHamburger() {
-		HamburgerBasicCloseTransition transition = new HamburgerBasicCloseTransition(hamburger);
-		hamburger.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-
-			if (drawer.isOpened()) {
-				transition.setRate(-1);
-
-				FadeTransition fadeOut = new FadeTransition(Duration.seconds(0.25), drawerOverlay);
-				fadeOut.setFromValue(1);
-				fadeOut.setToValue(0);
-				fadeOut.setOnFinished((e2) -> {
-					AnchorPane.clearConstraints(drawerOverlay);
-				});
-
-				transition.play();
-				fadeOut.play();
-				drawer.close();
-				drawer.setDisable(true);
-			} else if (drawer.isClosed()) {
-				transition.setRate(1);
-
-				FadeTransition fadeIn = new FadeTransition(Duration.seconds(0.25), drawerOverlay);
-				AnchorPane.setTopAnchor(drawerOverlay, 0.0);
-				AnchorPane.setRightAnchor(drawerOverlay, 0.0);
-				AnchorPane.setBottomAnchor(drawerOverlay, 0.0);
-				AnchorPane.setLeftAnchor(drawerOverlay, 0.0);
-
-				fadeIn.setFromValue(0);
-				fadeIn.setToValue(1);
-
-				transition.play();
-				fadeIn.play();
-				drawer.open();
-				drawer.setDisable(false);
-			}
-		});
 	}
 
 	void triggerHamburger() {
