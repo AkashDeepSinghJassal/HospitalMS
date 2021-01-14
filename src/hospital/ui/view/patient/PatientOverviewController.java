@@ -19,6 +19,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -41,6 +42,39 @@ public class PatientOverviewController {
 	private ObservableList<Patient> observableList = FXCollections.observableArrayList();
 	private FilteredList<Patient> filteredList = null;
 	private SortedList<Patient> sortedList = null;
+	private Boolean isModal = false;
+
+	public ObservableList<Patient> getObservableList() {
+		return this.observableList;
+	}
+
+	public void setObservableList(ObservableList<Patient> observableList) {
+		this.observableList = observableList;
+	}
+
+	public FilteredList<Patient> getFilteredList() {
+		return this.filteredList;
+	}
+
+	public void setFilteredList(FilteredList<Patient> filteredList) {
+		this.filteredList = filteredList;
+	}
+
+	public SortedList<Patient> getSortedList() {
+		return this.sortedList;
+	}
+
+	public void setSortedList(SortedList<Patient> sortedList) {
+		this.sortedList = sortedList;
+	}
+
+	public void setIsModal(Boolean isModal) {
+		this.isModal = isModal;
+	}
+
+	public Boolean getIsModal() {
+		return this.isModal;
+	}
 
 	public PatientOverviewController() {
 		observableList.addAll(PatientSql.getPatients());
@@ -76,6 +110,8 @@ public class PatientOverviewController {
 	private TextField filterTF;
 	@FXML
 	private Button edit;
+	@FXML
+	private Button select;
 
 	@FXML
 	private void initialize() {
@@ -142,7 +178,10 @@ public class PatientOverviewController {
 			TableRow<Patient> row = new TableRow<Patient>();
 			row.setOnMouseClicked(event -> {
 				if (event.getClickCount() == 2 && !row.isEmpty()) {
-					edit.fire();
+					if (!isModal)
+						edit.fire();
+					else
+						select.fire();
 				}
 			});
 			return row;
@@ -235,6 +274,16 @@ public class PatientOverviewController {
 			e.printStackTrace();
 			return false;
 		}
+	}
+
+	@FXML
+	void cancelModal(ActionEvent event) {
+		((Stage) ((Node) event.getTarget()).getScene().getWindow()).close();
+	}
+
+	@FXML
+	void selectPatient(ActionEvent event) {
+
 	}
 
 	/**

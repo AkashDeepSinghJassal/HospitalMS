@@ -1,5 +1,7 @@
 package hospital.ui.view.appointment;
 
+import java.io.IOException;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 
@@ -8,13 +10,20 @@ import hospital.model.Doctor;
 import hospital.model.Patient;
 import hospital.services.DoctorSql;
 import hospital.services.PatientSql;
+import hospital.ui.main.Main;
 import hospital.util.DateUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class AppointmentDialogController {
 	private Appointment appointment;
@@ -35,6 +44,35 @@ public class AppointmentDialogController {
 	private JFXButton patientButton;
 	@FXML
 	private JFXButton doctorButton;
+
+	@FXML
+	void selectDoctor(ActionEvent event) {
+	}
+
+	@FXML
+	void selectPatient(ActionEvent event) {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../patient/PatientSelector.fxml"));
+
+		loader.setController(Main.patientOverviewController);
+		AnchorPane aPane = null;
+		try {	
+			aPane = loader.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		// Create the dialog Stage.
+		Stage dialogStage = new Stage();
+		dialogStage.initModality(Modality.WINDOW_MODAL);
+		dialogStage.initStyle(StageStyle.TRANSPARENT);
+		dialogStage.initOwner(parentStage);
+		Scene scene = new Scene(aPane);
+		scene.setFill(Color.TRANSPARENT);
+		dialogStage.setScene(scene);
+		Main.patientOverviewController.setIsModal(true);
+		dialogStage.showAndWait();
+		Main.patientOverviewController.setIsModal(false);
+	}
 
 	public JFXTextField getPatientID() {
 		return this.patientID;

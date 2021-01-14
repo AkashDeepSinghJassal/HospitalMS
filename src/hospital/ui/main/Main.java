@@ -20,8 +20,11 @@ import javafx.stage.StageStyle;
 public class Main extends Application {
 	public static Stage stage = null;
 	public static Boolean isWelcomeLoaded = false;
+	public static PatientOverviewController patientOverviewController;
 	public static AnchorPane patientViewAnchorPane;
+	public static DoctorOverviewController doctorOverviewController;
 	public static AnchorPane doctorViewAnchorPane;
+	public static AppointmentOverviewController appointmentOverviewController;
 	public static AnchorPane appointmentViewAnchorPane;
 	public static HomePageController homePageController;
 
@@ -56,7 +59,6 @@ public class Main extends Application {
 	 * Loads fxml and controller for appointment view
 	 */
 	private void initAppointmentView() {
-		AppointmentOverviewController appointmentOverviewController;
 		FXMLLoader appointmentOverviewFxmlLoader;
 		try {
 			appointmentOverviewFxmlLoader = new FXMLLoader(
@@ -78,7 +80,6 @@ public class Main extends Application {
 	 * Loads fxml and controller for patient view
 	 */
 	private void initPatientView() {
-		PatientOverviewController patientOverviewController;
 		FXMLLoader patientOverviewFxmlLoader;
 		patientOverviewFxmlLoader = new FXMLLoader(getClass().getResource("../view/patient/PatientOverview.fxml"));
 		patientOverviewController = new PatientOverviewController();
@@ -94,7 +95,6 @@ public class Main extends Application {
 	 * Loads fxml and controller for doctor view
 	 */
 	private void initDoctorView() {
-		DoctorOverviewController doctorOverviewController;
 		FXMLLoader doctorOverviewFxmlLoader;
 		doctorOverviewController = new DoctorOverviewController();
 		doctorOverviewFxmlLoader = new FXMLLoader(getClass().getResource("../view/doctor/DoctorOverview.fxml"));

@@ -39,7 +39,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <JFXButton fx:id="patientButton" buttonType="RAISED" prefHeight="40.0" prefWidth="144.0" style="-fx-text-fill: #FFF;" text="Select Patient" />
+            <JFXButton fx:id="patientButton" buttonType="RAISED" onAction="#selectPatient" prefHeight="40.0" prefWidth="144.0" style="-fx-text-fill: #FFF;" text="Select Patient" />
          </children>
          <padding>
             <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
@@ -68,7 +68,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <JFXButton fx:id="doctorButton" buttonType="RAISED" prefHeight="40.0" prefWidth="144.0" style="-fx-text-fill: #FFF;" text="Select Patient" />
+            <JFXButton fx:id="doctorButton" buttonType="RAISED" onAction="#selectDoctor" prefHeight="40.0" prefWidth="144.0" style="-fx-text-fill: #FFF;" text="Select Patient" />
          </children>
          <padding>
             <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
