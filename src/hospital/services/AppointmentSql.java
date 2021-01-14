@@ -7,6 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import hospital.model.Appointment;
+import hospital.model.Doctor;
+import hospital.model.Patient;
+import hospital.ui.main.Main;
 import hospital.util.DBUtil;
 import hospital.util.DateUtil;
 
@@ -21,9 +24,27 @@ public class AppointmentSql {
 			ResultSet rs = statement.executeQuery();
 			while (rs.next()) {
 				Appointment appointment = new Appointment();
-				appointment.setAppointID(rs.getString(1));
-				appointment.setPatientID(rs.getString(2));
-				appointment.setDoctorID(rs.getString(3));
+				appointment.setID(rs.getString(1));
+				String patientID = rs.getString(2);
+				Patient patient = Main.patientOverviewController.getSortedList().filtered(p -> {
+					if (p.getId().equals(patientID)) {
+						return true;
+					}
+					return false;
+				}).get(0);
+				appointment.setPatient(patient);
+				appointment.setPatientID(patientID);
+
+				String doctorID = rs.getString(3);
+				Doctor doctor = Main.doctorOverviewController.getSortedList().filtered(d -> {
+					if (d.getId().equals(doctorID)) {
+						return true;
+					}
+					return false;
+				}).get(0);
+				appointment.setDoctor(doctor);
+				appointment.setDoctorID(doctorID);
+
 				appointment.setDate(DateUtil.parse("01.01.2020"));
 				appointments.add(appointment);
 			}

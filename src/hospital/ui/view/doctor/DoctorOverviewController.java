@@ -42,6 +42,30 @@ public class DoctorOverviewController {
 	private FilteredList<Doctor> filteredList = null;
 	private SortedList<Doctor> sortedList = null;
 
+	public ObservableList<Doctor> getObservableList() {
+		return this.observableList;
+	}
+
+	public void setObservableList(ObservableList<Doctor> observableList) {
+		this.observableList = observableList;
+	}
+
+	public FilteredList<Doctor> getFilteredList() {
+		return this.filteredList;
+	}
+
+	public void setFilteredList(FilteredList<Doctor> filteredList) {
+		this.filteredList = filteredList;
+	}
+
+	public SortedList<Doctor> getSortedList() {
+		return this.sortedList;
+	}
+
+	public void setSortedList(SortedList<Doctor> sortedList) {
+		this.sortedList = sortedList;
+	}
+
 	public DoctorOverviewController() {
 		observableList.addAll(DoctorSql.getDoctors());
 	}

@@ -12,6 +12,7 @@ import hospital.util.DateUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -27,6 +28,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -37,6 +39,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Callback;
 
 public class AppointmentOverviewController {
 
@@ -67,9 +70,9 @@ public class AppointmentOverviewController {
 	@FXML
 	private TableColumn<Appointment, SimpleStringProperty> appointIDTableColumn;
 	@FXML
-	private TableColumn<Appointment, SimpleStringProperty> patientIDTableColumn;
+	private TableColumn<Appointment, String> patientIDTableColumn;
 	@FXML
-	private TableColumn<Appointment, SimpleStringProperty> doctorIDTableColumn;
+	private TableColumn<Appointment, String> doctorIDTableColumn;
 	@FXML
 	private TableColumn<Appointment, SimpleObjectProperty<LocalDate>> dateTableColumn;
 	@FXML
@@ -91,12 +94,22 @@ public class AppointmentOverviewController {
 
 	@FXML
 	private void initialize() {
-		patientIDTableColumn
-				.setCellValueFactory(new PropertyValueFactory<Appointment, SimpleStringProperty>("patientID"));
-		appointIDTableColumn
-				.setCellValueFactory(new PropertyValueFactory<Appointment, SimpleStringProperty>("appointID"));
-		doctorIDTableColumn
-				.setCellValueFactory(new PropertyValueFactory<Appointment, SimpleStringProperty>("doctorID"));
+		/* Set Table Column value factory */
+		patientIDTableColumn.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<Appointment, String>, ObservableValue<String>>() {
+					@Override
+					public ObservableValue<String> call(CellDataFeatures<Appointment, String> data) {
+						return data.getValue().getPatient().idProperty();
+					}
+				});
+		doctorIDTableColumn.setCellValueFactory(
+				new Callback<TableColumn.CellDataFeatures<Appointment, String>, ObservableValue<String>>() {
+					@Override
+					public ObservableValue<String> call(CellDataFeatures<Appointment, String> data) {
+						return data.getValue().getDoctor().idProperty();
+					}
+				});
+		appointIDTableColumn.setCellValueFactory(new PropertyValueFactory<Appointment, SimpleStringProperty>("id"));
 		dateTableColumn
 				.setCellValueFactory(new PropertyValueFactory<Appointment, SimpleObjectProperty<LocalDate>>("date"));
 
@@ -273,7 +286,7 @@ public class AppointmentOverviewController {
 			if (AppointmentSql.addAppointment(appointment) > 0) {
 				String appointID = AppointmentSql.getIdOfLastAppointment();
 				if (appointID != null && !appointID.equals("")) {
-					appointment.setAppointID(appointID);
+					appointment.setID(appointID);
 				}
 				observableList.add(appointment);
 				showAppointmentDetails(appointment);
