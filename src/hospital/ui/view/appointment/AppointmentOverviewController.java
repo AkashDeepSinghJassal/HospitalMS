@@ -30,6 +30,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
@@ -41,6 +42,7 @@ public class AppointmentOverviewController {
 	private ObservableList<Appointment> observableList = FXCollections.observableArrayList();
 	private FilteredList<Appointment> filteredList = null;
 	private SortedList<Appointment> sortedList = null;
+	public AnchorPane overlay = null;
 
 	@FXML
 	private TableView<Appointment> tableView;
@@ -188,8 +190,16 @@ public class AppointmentOverviewController {
 			controller.setDialogStage(dialogStage);
 			controller.setAppointment(appointment);
 			controller.setHeader(header);
+
+			/* Set the position of the stage */
+			dialogStage.setX(100);
+			dialogStage.setY(190);
+
+			overlay.toFront();
 			// Show the dialog and wait until the user closes it
 			dialogStage.showAndWait();
+
+			overlay.toBack();
 
 			return controller.isOkClicked();
 		} catch (IOException e) {
@@ -206,7 +216,7 @@ public class AppointmentOverviewController {
 			boolean okClicked = showAppointmentDialog(appointment, "Edit Appointment");
 			if (okClicked) {
 				// if (AppointmentSql.updateAppointment(appointment) > 0) {
-					showAppointmentDetails(appointment);
+				showAppointmentDetails(appointment);
 				// }
 
 			}
@@ -251,12 +261,12 @@ public class AppointmentOverviewController {
 		Appointment appointment = new Appointment();
 		if (showAppointmentDialog(appointment, "Add Appointment")) {
 			// if (AppointmentSql.addAppointment(appointment) > 0) {
-				String appointID = AppointmentSql.getIdOfLastAppointment();
-				if (appointID != null && !appointID.equals("")) {
-					appointment.setAppointID(appointID);
-				}
-				observableList.add(appointment);
-				showAppointmentDetails(appointment);
+			String appointID = AppointmentSql.getIdOfLastAppointment();
+			if (appointID != null && !appointID.equals("")) {
+				appointment.setAppointID(appointID);
+			}
+			observableList.add(appointment);
+			showAppointmentDetails(appointment);
 			// }
 		}
 	}

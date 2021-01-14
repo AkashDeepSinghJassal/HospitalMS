@@ -32,6 +32,8 @@ public class HomePageController implements Initializable {
 	@FXML
 	private AnchorPane anchorPane;
 	@FXML
+	private AnchorPane overlay;
+	@FXML
 	private AnchorPane drawerOverlay;
 	@FXML
 	private AnchorPane modelView;
@@ -60,6 +62,9 @@ public class HomePageController implements Initializable {
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		Main.patientOverviewController.overlay = overlay;
+		Main.doctorOverviewController.overlay = overlay;
+		Main.appointmentOverviewController.overlay = overlay;
 		if (!Main.isWelcomeLoaded) {
 			loadWelcomePage();
 		}

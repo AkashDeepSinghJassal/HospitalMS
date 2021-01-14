@@ -30,6 +30,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
@@ -41,6 +42,7 @@ public class PatientOverviewController {
 	private ObservableList<Patient> observableList = FXCollections.observableArrayList();
 	private FilteredList<Patient> filteredList = null;
 	private SortedList<Patient> sortedList = null;
+	public AnchorPane overlay = null;
 
 	public ObservableList<Patient> getObservableList() {
 		return this.observableList;
@@ -253,8 +255,12 @@ public class PatientOverviewController {
 			controller.setDialogStage(dialogStage);
 			controller.setPatient(patient);
 			controller.setHeader(header);
+
+			overlay.toFront();
 			// Show the dialog and wait until the user closes it
 			dialogStage.showAndWait();
+
+			overlay.toBack();
 
 			return controller.isOkClicked();
 		} catch (IOException e) {

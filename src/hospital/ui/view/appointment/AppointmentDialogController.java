@@ -61,6 +61,8 @@ public class AppointmentDialogController {
 		Scene scene = new Scene(aPane);
 		scene.setFill(Color.TRANSPARENT);
 		dialogStage.setScene(scene);
+		dialogStage.setX(800);
+		dialogStage.setY(190);
 		dialogStage.showAndWait();
 		doctor = controller.getDoctor();
 		if (doctor != null)
@@ -87,6 +89,8 @@ public class AppointmentDialogController {
 		Scene scene = new Scene(aPane);
 		scene.setFill(Color.TRANSPARENT);
 		dialogStage.setScene(scene);
+		dialogStage.setX(800);
+		dialogStage.setY(190);
 		dialogStage.showAndWait();
 		patient = controller.getPatient();
 		if (patient != null)
