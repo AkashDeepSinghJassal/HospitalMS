@@ -11,6 +11,7 @@ import hospital.model.Patient;
 import hospital.services.DoctorSql;
 import hospital.services.PatientSql;
 import hospital.ui.main.Main;
+import hospital.ui.view.patient.PatientSelectorController;
 import hospital.util.DateUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -52,7 +53,8 @@ public class AppointmentDialogController {
 	@FXML
 	void selectPatient(ActionEvent event) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("../patient/PatientSelector.fxml"));
-		loader.setController(Main.patientOverviewController);
+		PatientSelectorController controller = new PatientSelectorController();
+		loader.setController(controller);
 		AnchorPane aPane = null;
 		try {
 			aPane = loader.load();
@@ -68,10 +70,8 @@ public class AppointmentDialogController {
 		Scene scene = new Scene(aPane);
 		scene.setFill(Color.TRANSPARENT);
 		dialogStage.setScene(scene);
-		Main.patientOverviewController.setIsModal(true);
 		dialogStage.showAndWait();
 		System.out.println(Main.appointmentOverviewController.getPatient());
-		Main.patientOverviewController.setIsModal(false);
 	}
 
 	public JFXTextField getPatientID() {

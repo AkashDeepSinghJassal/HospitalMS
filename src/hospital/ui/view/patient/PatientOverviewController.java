@@ -42,7 +42,6 @@ public class PatientOverviewController {
 	private ObservableList<Patient> observableList = FXCollections.observableArrayList();
 	private FilteredList<Patient> filteredList = null;
 	private SortedList<Patient> sortedList = null;
-	private Boolean isModal = false;
 
 	public ObservableList<Patient> getObservableList() {
 		return this.observableList;
@@ -66,14 +65,6 @@ public class PatientOverviewController {
 
 	public void setSortedList(SortedList<Patient> sortedList) {
 		this.sortedList = sortedList;
-	}
-
-	public void setIsModal(Boolean isModal) {
-		this.isModal = isModal;
-	}
-
-	public Boolean getIsModal() {
-		return this.isModal;
 	}
 
 	public PatientOverviewController() {
@@ -178,10 +169,7 @@ public class PatientOverviewController {
 			TableRow<Patient> row = new TableRow<Patient>();
 			row.setOnMouseClicked(event -> {
 				if (event.getClickCount() == 2 && !row.isEmpty()) {
-					if (!isModal)
-						edit.fire();
-					else
-						select.fire();
+					edit.fire();
 				}
 			});
 			return row;
