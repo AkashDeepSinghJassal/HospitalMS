@@ -136,14 +136,16 @@ public class AppointmentDialogController {
 	private boolean isInputValid() {
 		String errorMessage = "";
 
-		// if (patientID.getText() == null || patientID.getText().length() == 0) {
-		// // Further constraint may be required
-		// errorMessage += "No valid patient ID!\n";
-		// }
+		if (patient == null || patient.getId() == null) {
+			// Further constraint may be required
+			errorMessage += "No valid patient ID!\n";
+		}
+		
+		if (doctor == null || doctor.getId() == null) {
+			// Further constraint may be required
+			errorMessage += "No valid doctor ID!\n";
+		}
 
-		// if (doctorID.getText() == null || doctorID.getText().length() == 0) {
-		// errorMessage += "No valid doctor ID!\n";
-		// }
 		if (date.getText() == null || date.getText().length() == 0) {
 			errorMessage += "No valid date!\n";
 			if (!DateUtil.validDate(date.getText())) {
