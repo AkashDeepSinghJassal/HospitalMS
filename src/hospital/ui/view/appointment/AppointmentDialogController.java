@@ -63,7 +63,8 @@ public class AppointmentDialogController {
 		dialogStage.setScene(scene);
 		dialogStage.showAndWait();
 		doctor = controller.getDoctor();
-		doctorButton.setText(doctor.getId());
+		if (doctor != null)
+			doctorButton.setText(doctor.getId());
 	}
 
 	@FXML
@@ -88,7 +89,8 @@ public class AppointmentDialogController {
 		dialogStage.setScene(scene);
 		dialogStage.showAndWait();
 		patient = controller.getPatient();
-		patientButton.setText(patient.getId());
+		if (patient != null)
+			patientButton.setText(patient.getId());
 	}
 
 	public void setDialogStage(Stage stage) {
@@ -140,7 +142,7 @@ public class AppointmentDialogController {
 			// Further constraint may be required
 			errorMessage += "No valid patient ID!\n";
 		}
-		
+
 		if (doctor == null || doctor.getId() == null) {
 			// Further constraint may be required
 			errorMessage += "No valid doctor ID!\n";
