@@ -15,6 +15,7 @@ import javafx.animation.RotateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.CacheHint;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.input.KeyCode;
@@ -160,6 +161,10 @@ public class HomePageController implements Initializable {
 	public void loadSidePane() {
 		try {
 			VBox sidePane = FXMLLoader.load(getClass().getResource("HomePageSidePane.fxml"));
+			drawer.setCache(true);
+			drawer.setCacheHint(CacheHint.SPEED);
+			sidePane.setCache(true);
+			sidePane.setCacheHint(CacheHint.SPEED);
 			drawer.setSidePane(sidePane);
 			for (Node node : sidePane.getChildren()) {
 				if (node.getAccessibleText() != null) {
