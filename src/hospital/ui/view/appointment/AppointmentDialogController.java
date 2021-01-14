@@ -36,10 +36,6 @@ public class AppointmentDialogController {
 	@FXML
 	private Label headLbl;
 	@FXML
-	private JFXTextField patientID;
-	@FXML
-	private JFXTextField doctorID;
-	@FXML
 	private JFXTextField date;
 	@FXML
 	private JFXButton patientButton;
@@ -74,22 +70,6 @@ public class AppointmentDialogController {
 		System.out.println(Main.appointmentOverviewController.getPatient());
 	}
 
-	public JFXTextField getPatientID() {
-		return this.patientID;
-	}
-
-	public void setPatientID(JFXTextField patientID) {
-		this.patientID = patientID;
-	}
-
-	public JFXTextField getDoctorID() {
-		return this.doctorID;
-	}
-
-	public void setDoctorID(JFXTextField doctorID) {
-		this.doctorID = doctorID;
-	}
-
 	public void setDialogStage(Stage stage) {
 		this.parentStage = stage;
 	}
@@ -101,7 +81,6 @@ public class AppointmentDialogController {
 	public void setAppointment(Appointment appointment) {
 		this.appointment = appointment;
 		if (appointment != null) {
-			patientID.setText(appointment.getPatientID());
 			patient = PatientSql.getPatient(appointment.getPatientID());
 			if (patient != null) {
 				patientButton.setText(patient.getId());
@@ -109,7 +88,6 @@ public class AppointmentDialogController {
 				patientButton.setText("Select Patient");
 			}
 
-			doctorID.setText(appointment.getDoctorID());
 			doctor = DoctorSql.getDoctor(appointment.getDoctorID());
 			if (doctor != null) {
 				doctorButton.setText(doctor.getId());
@@ -132,14 +110,14 @@ public class AppointmentDialogController {
 	private boolean isInputValid() {
 		String errorMessage = "";
 
-		if (patientID.getText() == null || patientID.getText().length() == 0) {
-			// Further constraint may be required
-			errorMessage += "No valid patient ID!\n";
-		}
+		// if (patientID.getText() == null || patientID.getText().length() == 0) {
+		// 	// Further constraint may be required
+		// 	errorMessage += "No valid patient ID!\n";
+		// }
 
-		if (doctorID.getText() == null || doctorID.getText().length() == 0) {
-			errorMessage += "No valid doctor ID!\n";
-		}
+		// if (doctorID.getText() == null || doctorID.getText().length() == 0) {
+		// 	errorMessage += "No valid doctor ID!\n";
+		// }
 		if (date.getText() == null || date.getText().length() == 0) {
 			errorMessage += "No valid date!\n";
 			if (!DateUtil.validDate(date.getText())) {
@@ -171,8 +149,8 @@ public class AppointmentDialogController {
 	@FXML
 	void handleOK(ActionEvent event) {
 		if (isInputValid()) {
-			appointment.setPatientID(patientID.getText());
-			appointment.setDoctorID(doctorID.getText());
+			// appointment.setPatientID(patientID.getText());
+			// appointment.setDoctorID(doctorID.getText());
 			appointment.setDate(DateUtil.parse(date.getText()));
 			okClicked = true;
 			parentStage.close();
