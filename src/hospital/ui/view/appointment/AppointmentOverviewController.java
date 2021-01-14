@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 import hospital.model.Appointment;
+import hospital.model.Doctor;
+import hospital.model.Patient;
 import hospital.services.AppointmentSql;
 import hospital.ui.main.Main;
 import hospital.util.DateUtil;
@@ -41,6 +43,25 @@ public class AppointmentOverviewController {
 	private ObservableList<Appointment> observableList = FXCollections.observableArrayList();
 	private FilteredList<Appointment> filteredList = null;
 	private SortedList<Appointment> sortedList = null;
+	private Patient patient = null;
+	private Doctor doctor = null;
+
+	public Patient getPatient() {
+		return this.patient;
+	}
+
+	public void setPatient(Patient patient) {
+		this.patient = patient;
+	}
+
+	public Doctor getDoctor() {
+		return this.doctor;
+	}
+
+	public void setDoctor(Doctor doctor) {
+		this.doctor = doctor;
+	}
+
 	@FXML
 	private TableView<Appointment> tableView;
 	@FXML

@@ -283,7 +283,18 @@ public class PatientOverviewController {
 
 	@FXML
 	void selectPatient(ActionEvent event) {
-
+		if (tableView.getSelectionModel().getSelectedItem() == null) {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner((Stage) ((Node) event.getTarget()).getScene().getWindow());
+			alert.setTitle("No Selection");
+			alert.setHeaderText("No Appointment Selected");
+			alert.setContentText("Please select a Appointment in the table.");
+			alert.showAndWait();
+		} else {
+			Patient patient = tableView.getSelectionModel().getSelectedItem();
+			Main.appointmentOverviewController.setPatient(patient);
+			cancelModal(event);
+		}
 	}
 
 	/**

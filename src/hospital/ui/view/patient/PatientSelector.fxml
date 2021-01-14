@@ -31,7 +31,7 @@
          </image>
       </ImageView>
       <JFXTextField fx:id="filterTF" layoutX="650.0" layoutY="62.0" prefWidth="200.0" promptText="Seach" style="-fx-text-fill: #FFF;" />
-      <ButtonBar layoutX="379.0" layoutY="600.0" prefHeight="75.0" prefWidth="470.0">
+      <ButtonBar layoutX="375.0" layoutY="600.0" prefHeight="75.0" prefWidth="470.0">
          <buttons>
             <Button fx:id="select" defaultButton="true" mnemonicParsing="false" onAction="#selectPatient" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #1d1d1d;" text="Select" />
             <Button fx:id="cancel" cancelButton="true" mnemonicParsing="false" onAction="#cancelModal" prefHeight="40.0" prefWidth="300.0" text="Cancel" />

@@ -30,8 +30,8 @@ public class AppointmentDialogController {
 	private Stage parentStage;
 	private Patient patient = null;
 	private Doctor doctor = null;
-
 	private boolean okClicked;
+
 	@FXML
 	private Label headLbl;
 	@FXML
@@ -52,10 +52,9 @@ public class AppointmentDialogController {
 	@FXML
 	void selectPatient(ActionEvent event) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("../patient/PatientSelector.fxml"));
-
 		loader.setController(Main.patientOverviewController);
 		AnchorPane aPane = null;
-		try {	
+		try {
 			aPane = loader.load();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -71,6 +70,7 @@ public class AppointmentDialogController {
 		dialogStage.setScene(scene);
 		Main.patientOverviewController.setIsModal(true);
 		dialogStage.showAndWait();
+		System.out.println(Main.appointmentOverviewController.getPatient());
 		Main.patientOverviewController.setIsModal(false);
 	}
 
