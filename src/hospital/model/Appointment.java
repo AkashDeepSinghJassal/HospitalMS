@@ -6,19 +6,17 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Appointment {
-	private SimpleStringProperty id = new SimpleStringProperty();
-	private Patient patient = new Patient();
-	private Doctor doctor = new Doctor();
+	private SimpleStringProperty appointID = new SimpleStringProperty();
 	private SimpleStringProperty patientID = new SimpleStringProperty();
 	private SimpleStringProperty doctorID = new SimpleStringProperty();
 	private SimpleObjectProperty<LocalDate> date = new SimpleObjectProperty<LocalDate>();
 
 	public String getID() {
-		return id.get();
+		return appointID.get();
 	}
 
-	public void setID(String id) {
-		this.id.set(id);
+	public void setAppointID(String id) {
+		appointID.set(id);
 	}
 
 	/**
@@ -26,24 +24,8 @@ public class Appointment {
 	 * 
 	 * @return SimpleStringProperty of {@code appointID}
 	 */
-	public SimpleStringProperty idProperty() {
-		return id;
-	}
-
-	public Patient getPatient() {
-		return this.patient;
-	}
-
-	public void setPatient(Patient patient) {
-		this.patient = patient;
-	}
-
-	public Doctor getDoctor() {
-		return this.doctor;
-	}
-
-	public void setDoctor(Doctor doctor) {
-		this.doctor = doctor;
+	public SimpleStringProperty appointIDProperty() {
+		return appointID;
 	}
 
 	public String getPatientID() {
