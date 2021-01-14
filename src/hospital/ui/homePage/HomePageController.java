@@ -35,6 +35,14 @@ public class HomePageController implements Initializable {
 	@FXML
 	private AnchorPane modelView;
 	@FXML
+	private AnchorPane homeView;
+	@FXML
+	private AnchorPane patientView;
+	@FXML
+	private AnchorPane doctorView;
+	@FXML
+	private AnchorPane appointmentView;
+	@FXML
 	private JFXHamburger hamburger;
 	@FXML
 	private JFXDrawer drawer;
@@ -74,7 +82,14 @@ public class HomePageController implements Initializable {
 
 		try {
 			Parent newRoot = FXMLLoader.load(getClass().getResource("../welcome/Welcome.fxml"));
-			anchorPane.getChildren().setAll(newRoot);
+			AnchorPane welcomeBackground = new AnchorPane();
+			AnchorPane.setTopAnchor(welcomeBackground, 0.0);
+			AnchorPane.setRightAnchor(welcomeBackground, 0.0);
+			AnchorPane.setBottomAnchor(welcomeBackground, 0.0);
+			AnchorPane.setLeftAnchor(welcomeBackground, 0.0);
+			welcomeBackground.setStyle("-fx-background-color: #FFF");
+			anchorPane.getChildren().add(welcomeBackground);
+			anchorPane.getChildren().add(newRoot);
 
 			FadeTransition fadeIn = new FadeTransition(Duration.seconds(1), newRoot);
 			fadeIn.setFromValue(0);
@@ -82,24 +97,26 @@ public class HomePageController implements Initializable {
 			fadeIn.setCycleCount(1);
 			fadeIn.interpolatorProperty().set(Interpolator.EASE_OUT);
 			FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), newRoot);
+			FadeTransition fadeOutWelcome = new FadeTransition(Duration.seconds(1), welcomeBackground);
 			fadeOut.setFromValue(1);
+			fadeOutWelcome.setFromValue(1);
 			fadeOut.setToValue(0);
+			fadeOutWelcome.setToValue(0);
 			fadeOut.setCycleCount(1);
+			fadeOutWelcome.setCycleCount(1);
 			fadeOut.setDelay(Duration.seconds(1));
-			fadeIn.interpolatorProperty().set(Interpolator.EASE_IN);
+			fadeOutWelcome.setDelay(Duration.seconds(1.5));
+			fadeIn.interpolatorProperty().set(Interpolator.EASE_OUT);
 			fadeIn.play();
 
 			fadeIn.setOnFinished((e) -> {
+				initializeViews();
 				fadeOut.play();
+				fadeOutWelcome.play();
 			});
 			fadeOut.setOnFinished((e) -> {
-				try {
-					FXMLLoader homeLoader = new FXMLLoader(getClass().getResource("../homePage/HomePage.fxml"));
-					homeLoader.setController(Main.homePageController);
-					newRoot.getScene().setRoot((AnchorPane) homeLoader.load());
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
+				anchorPane.getChildren().remove(welcomeBackground);
+				anchorPane.getChildren().remove(newRoot);
 			});
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -163,54 +180,58 @@ public class HomePageController implements Initializable {
 		}
 	}
 
-	public void showHome() {
-		modelView.getChildren().clear();
+	private void initializeViews() {
+		AnchorPane patientRoot;
+		try {
+			patientRoot = Main.patientViewAnchorPane;
+			patientView.getChildren().setAll(patientRoot);
+			AnchorPane.setTopAnchor(patientRoot, 0.0);
+			AnchorPane.setRightAnchor(patientRoot, 0.0);
+			AnchorPane.setBottomAnchor(patientRoot, 0.0);
+			AnchorPane.setLeftAnchor(patientRoot, 0.0);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
+		AnchorPane doctorRoot;
+		try {
+			doctorRoot = Main.doctorViewAnchorPane;
+			doctorView.getChildren().setAll(doctorRoot);
+			AnchorPane.setTopAnchor(doctorRoot, 0.0);
+			AnchorPane.setRightAnchor(doctorRoot, 0.0);
+			AnchorPane.setBottomAnchor(doctorRoot, 0.0);
+			AnchorPane.setLeftAnchor(doctorRoot, 0.0);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		AnchorPane appointmentRoot;
+		try {
+			appointmentRoot = Main.appointmentViewAnchorPane;
+			appointmentView.getChildren().setAll(appointmentRoot);
+			AnchorPane.setTopAnchor(appointmentRoot, 0.0);
+			AnchorPane.setRightAnchor(appointmentRoot, 0.0);
+			AnchorPane.setBottomAnchor(appointmentRoot, 0.0);
+			AnchorPane.setLeftAnchor(appointmentRoot, 0.0);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void showHome() {
+		homeView.toFront();
 	}
 
 	public void showPatientView() {
-		AnchorPane root;
-		try {
-			root = Main.patientViewAnchorPane;
-			modelView.getChildren().setAll(root);
-			AnchorPane.setTopAnchor(root, 0.0);
-			AnchorPane.setRightAnchor(root, 0.0);
-			AnchorPane.setBottomAnchor(root, 0.0);
-			AnchorPane.setLeftAnchor(root, 0.0);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	public void showAppointmentView() {
-		AnchorPane root;
-		try {
-			root = Main.appointmentViewAnchorPane;
-			modelView.getChildren().setAll(root);
-			AnchorPane.setTopAnchor(root, 0.0);
-			AnchorPane.setRightAnchor(root, 0.0);
-			AnchorPane.setBottomAnchor(root, 0.0);
-			AnchorPane.setLeftAnchor(root, 0.0);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
+		patientView.toFront();
 	}
 
 	public void showDoctorView() {
-		AnchorPane root;
-		try {
-			root = Main.doctorViewAnchorPane;
-			modelView.getChildren().setAll(root);
-			AnchorPane.setTopAnchor(root, 0.0);
-			AnchorPane.setRightAnchor(root, 0.0);
-			AnchorPane.setBottomAnchor(root, 0.0);
-			AnchorPane.setLeftAnchor(root, 0.0);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		doctorView.toFront();
+	}
 
+	public void showAppointmentView() {
+		appointmentView.toFront();
 	}
 
 	public void setHamburger() {
