@@ -42,6 +42,30 @@ public class DoctorOverviewController {
 	private FilteredList<Doctor> filteredList = null;
 	private SortedList<Doctor> sortedList = null;
 
+	public ObservableList<Doctor> getObservableList() {
+		return this.observableList;
+	}
+
+	public void setObservableList(ObservableList<Doctor> observableList) {
+		this.observableList = observableList;
+	}
+
+	public FilteredList<Doctor> getFilteredList() {
+		return this.filteredList;
+	}
+
+	public void setFilteredList(FilteredList<Doctor> filteredList) {
+		this.filteredList = filteredList;
+	}
+
+	public SortedList<Doctor> getSortedList() {
+		return this.sortedList;
+	}
+
+	public void setSortedList(SortedList<Doctor> sortedList) {
+		this.sortedList = sortedList;
+	}
+
 	public DoctorOverviewController() {
 		observableList.addAll(DoctorSql.getDoctors());
 	}
@@ -87,9 +111,9 @@ public class DoctorOverviewController {
 		nameTableColumn.setCellValueFactory(new PropertyValueFactory<Doctor, SimpleStringProperty>("name"));
 		ageTableColumn.setCellValueFactory(new PropertyValueFactory<Doctor, SimpleIntegerProperty>("age"));
 		genderTableColumn.setCellValueFactory(new PropertyValueFactory<Doctor, SimpleObjectProperty<GENDER>>("gender"));
+		specialityTableColumn.setCellValueFactory(new PropertyValueFactory<Doctor, SimpleStringProperty>("speciality"));
 		contactTableColumn.setCellValueFactory(new PropertyValueFactory<Doctor, SimpleStringProperty>("contact"));
 		addressTableColumn.setCellValueFactory(new PropertyValueFactory<Doctor, SimpleStringProperty>("address"));
-		specialityTableColumn.setCellValueFactory(new PropertyValueFactory<Doctor, SimpleStringProperty>("speciality"));
 
 		/* Filter table */
 		filteredList = new FilteredList<Doctor>(observableList, p -> true);

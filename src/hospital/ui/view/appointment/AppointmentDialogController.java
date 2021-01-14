@@ -8,8 +8,8 @@ import com.jfoenix.controls.JFXTextField;
 import hospital.model.Appointment;
 import hospital.model.Doctor;
 import hospital.model.Patient;
-import hospital.services.DoctorSql;
 import hospital.ui.main.Main;
+import hospital.ui.view.doctor.DoctorSelectorController;
 import hospital.ui.view.patient.PatientSelectorController;
 import hospital.util.DateUtil;
 import javafx.event.ActionEvent;
@@ -43,6 +43,27 @@ public class AppointmentDialogController {
 
 	@FXML
 	void selectDoctor(ActionEvent event) {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../doctor/DoctorSelector.fxml"));
+		DoctorSelectorController controller = new DoctorSelectorController();
+		loader.setController(controller);
+		AnchorPane aPane = null;
+		try {
+			aPane = loader.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		// Create the dialog Stage.
+		Stage dialogStage = new Stage();
+		dialogStage.initModality(Modality.WINDOW_MODAL);
+		dialogStage.initStyle(StageStyle.TRANSPARENT);
+		dialogStage.initOwner(parentStage);
+		Scene scene = new Scene(aPane);
+		scene.setFill(Color.TRANSPARENT);
+		dialogStage.setScene(scene);
+		dialogStage.showAndWait();
+		doctor = controller.getDoctor();
+		doctorButton.setText(doctor.getId());
 	}
 
 	@FXML
@@ -90,12 +111,15 @@ public class AppointmentDialogController {
 			}).get(0);
 			patientButton.setText(patient.getId());
 
-			doctor = DoctorSql.getDoctor(appointment.getDoctorID());
-			if (doctor != null) {
-				doctorButton.setText(doctor.getId());
-			} else {
-				doctorButton.setText("Select Doctor");
-			}
+			String doctorID = appointment.getDoctorID();
+			Doctor doctor = Main.doctorOverviewController.getSortedList().filtered(p -> {
+				if (p.getId().equals(doctorID)) {
+					return true;
+				}
+				return false;
+			}).get(0);
+			doctorButton.setText(doctor.getId());
+
 			date.setText(DateUtil.format(appointment.getDate()));
 		}
 	}
