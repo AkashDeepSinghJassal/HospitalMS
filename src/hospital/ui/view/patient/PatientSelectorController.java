@@ -30,6 +30,15 @@ public class PatientSelectorController {
 	private ObservableList<Patient> observableList = null;
 	private FilteredList<Patient> filteredList = null;
 	private SortedList<Patient> sortedList = null;
+	private Patient patient = null;
+
+	public Patient getPatient() {
+		return patient;
+	}
+
+	public void setPatient(Patient patient) {
+		this.patient = patient;
+	}
 
 	@FXML
 	private TableView<Patient> tableView;
@@ -128,17 +137,16 @@ public class PatientSelectorController {
 
 	@FXML
 	void selectPatient(ActionEvent event) {
-		if (tableView.getSelectionModel().getSelectedItem() == null) {
+		if (tableView.getSelectionModel().getSelectedItem() != null) {
+			setPatient(tableView.getSelectionModel().getSelectedItem());
+			cancelModal(event);
+		} else {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.initOwner((Stage) ((Node) event.getTarget()).getScene().getWindow());
 			alert.setTitle("No Selection");
 			alert.setHeaderText("No Appointment Selected");
 			alert.setContentText("Please select a Appointment in the table.");
 			alert.showAndWait();
-		} else {
-			Patient patient = tableView.getSelectionModel().getSelectedItem();
-			Main.appointmentOverviewController.setPatient(patient);
-			cancelModal(event);
 		}
 	}
 

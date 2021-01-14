@@ -9,7 +9,6 @@ import hospital.model.Appointment;
 import hospital.model.Doctor;
 import hospital.model.Patient;
 import hospital.services.DoctorSql;
-import hospital.services.PatientSql;
 import hospital.ui.main.Main;
 import hospital.ui.view.patient.PatientSelectorController;
 import hospital.util.DateUtil;
@@ -67,7 +66,8 @@ public class AppointmentDialogController {
 		scene.setFill(Color.TRANSPARENT);
 		dialogStage.setScene(scene);
 		dialogStage.showAndWait();
-		System.out.println(Main.appointmentOverviewController.getPatient());
+		patient = controller.getPatient();
+		patientButton.setText(patient.getId());
 	}
 
 	public void setDialogStage(Stage stage) {
@@ -80,13 +80,15 @@ public class AppointmentDialogController {
 
 	public void setAppointment(Appointment appointment) {
 		this.appointment = appointment;
-		if (appointment != null) {
-			patient = PatientSql.getPatient(appointment.getPatientID());
-			if (patient != null) {
-				patientButton.setText(patient.getId());
-			} else {
-				patientButton.setText("Select Patient");
-			}
+		if (appointment != null && appointment.getID() != null) {
+			String patientID = appointment.getPatientID();
+			Patient patient = Main.patientOverviewController.getSortedList().filtered(p -> {
+				if (p.getId().equals(patientID)) {
+					return true;
+				}
+				return false;
+			}).get(0);
+			patientButton.setText(patient.getId());
 
 			doctor = DoctorSql.getDoctor(appointment.getDoctorID());
 			if (doctor != null) {
@@ -111,12 +113,12 @@ public class AppointmentDialogController {
 		String errorMessage = "";
 
 		// if (patientID.getText() == null || patientID.getText().length() == 0) {
-		// 	// Further constraint may be required
-		// 	errorMessage += "No valid patient ID!\n";
+		// // Further constraint may be required
+		// errorMessage += "No valid patient ID!\n";
 		// }
 
 		// if (doctorID.getText() == null || doctorID.getText().length() == 0) {
-		// 	errorMessage += "No valid doctor ID!\n";
+		// errorMessage += "No valid doctor ID!\n";
 		// }
 		if (date.getText() == null || date.getText().length() == 0) {
 			errorMessage += "No valid date!\n";
@@ -149,8 +151,8 @@ public class AppointmentDialogController {
 	@FXML
 	void handleOK(ActionEvent event) {
 		if (isInputValid()) {
-			// appointment.setPatientID(patientID.getText());
-			// appointment.setDoctorID(doctorID.getText());
+			appointment.setPatientID(patientButton.getText());
+			appointment.setDoctorID(doctorButton.getText());
 			appointment.setDate(DateUtil.parse(date.getText()));
 			okClicked = true;
 			parentStage.close();

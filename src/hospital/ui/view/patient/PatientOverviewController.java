@@ -19,7 +19,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -261,27 +260,6 @@ public class PatientOverviewController {
 		} catch (IOException e) {
 			e.printStackTrace();
 			return false;
-		}
-	}
-
-	@FXML
-	void cancelModal(ActionEvent event) {
-		((Stage) ((Node) event.getTarget()).getScene().getWindow()).close();
-	}
-
-	@FXML
-	void selectPatient(ActionEvent event) {
-		if (tableView.getSelectionModel().getSelectedItem() == null) {
-			Alert alert = new Alert(AlertType.WARNING);
-			alert.initOwner((Stage) ((Node) event.getTarget()).getScene().getWindow());
-			alert.setTitle("No Selection");
-			alert.setHeaderText("No Appointment Selected");
-			alert.setContentText("Please select a Appointment in the table.");
-			alert.showAndWait();
-		} else {
-			Patient patient = tableView.getSelectionModel().getSelectedItem();
-			Main.appointmentOverviewController.setPatient(patient);
-			cancelModal(event);
 		}
 	}
 
