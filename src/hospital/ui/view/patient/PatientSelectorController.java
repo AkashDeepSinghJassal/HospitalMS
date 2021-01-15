@@ -3,6 +3,7 @@ package hospital.ui.view.patient;
 import hospital.model.GENDER;
 import hospital.model.Patient;
 import hospital.ui.main.Main;
+import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -146,6 +147,15 @@ public class PatientSelectorController {
 			});
 			return row;
 		});
+
+		/* Set focus on TextField on opening */
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				setFocus();
+			}
+		});
+
 	}
 
 	@FXML
@@ -170,4 +180,10 @@ public class PatientSelectorController {
 		}
 	}
 
+	/**
+	 * Set focus {@link #filterTF} on opening.
+	 */
+	public void setFocus() {
+		filterTF.requestFocus();
+	}
 }

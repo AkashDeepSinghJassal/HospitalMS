@@ -270,4 +270,11 @@ public class AppointmentOverviewController {
 			}
 		}
 	}
+
+	/**
+	 * Set focus {@link #filterTF} on opening.
+	 */
+	public void setFocus() {
+		filterTF.requestFocus();
+	}
 }

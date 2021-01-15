@@ -296,4 +296,11 @@ public class DoctorOverviewController {
 			specialityLabel.setText("");
 		}
 	}
+
+	/**
+	 * Set focus {@link #filterTF} on opening.
+	 */
+	public void setFocus() {
+		filterTF.requestFocus();
+	}
 }

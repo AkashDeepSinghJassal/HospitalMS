@@ -268,14 +268,17 @@ public class HomePageController implements Initializable {
 
 	public void showPatientView() {
 		patientView.toFront();
+		Main.patientOverviewController.setFocus();
 	}
 
 	public void showDoctorView() {
 		doctorView.toFront();
+		Main.doctorOverviewController.setFocus();
 	}
 
 	public void showAppointmentView() {
 		appointmentView.toFront();
+		Main.appointmentOverviewController.setFocus();
 	}
 
 	void triggerHamburger() {

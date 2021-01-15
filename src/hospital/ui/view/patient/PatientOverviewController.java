@@ -294,4 +294,11 @@ public class PatientOverviewController {
 			IDLabel.setText("");
 		}
 	}
+
+	/**
+	 * Set focus {@link #filterTF} on opening.
+	 */
+	public void setFocus() {
+		filterTF.requestFocus();
+	}
 }
