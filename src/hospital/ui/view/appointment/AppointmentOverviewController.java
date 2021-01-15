@@ -215,9 +215,9 @@ public class AppointmentOverviewController {
 		if (appointment != null) {
 			boolean okClicked = showAppointmentDialog(appointment, "Edit Appointment");
 			if (okClicked) {
-				// if (AppointmentSql.updateAppointment(appointment) > 0) {
-				showAppointmentDetails(appointment);
-				// }
+				if (AppointmentSql.updateAppointment(appointment) > 0) {
+					showAppointmentDetails(appointment);
+				}
 
 			}
 		} else {
@@ -260,14 +260,14 @@ public class AppointmentOverviewController {
 	public void handleAdd(ActionEvent event) {
 		Appointment appointment = new Appointment();
 		if (showAppointmentDialog(appointment, "Add Appointment")) {
-			// if (AppointmentSql.addAppointment(appointment) > 0) {
-			String appointID = AppointmentSql.getIdOfLastAppointment();
-			if (appointID != null && !appointID.equals("")) {
-				appointment.setAppointID(appointID);
+			if (AppointmentSql.addAppointment(appointment) > 0) {
+				String appointID = AppointmentSql.getIdOfLastAppointment();
+				if (appointID != null && !appointID.equals("")) {
+					appointment.setAppointID(appointID);
+				}
+				observableList.add(appointment);
+				showAppointmentDetails(appointment);
 			}
-			observableList.add(appointment);
-			showAppointmentDetails(appointment);
-			// }
 		}
 	}
 }

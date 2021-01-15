@@ -64,6 +64,7 @@ public class AppointmentDialogController {
 		dialogStage.setX(800);
 		dialogStage.setY(190);
 		dialogStage.showAndWait();
+		
 		doctor = controller.getDoctor();
 		if (doctor != null)
 			doctorButton.setText(doctor.getId());
@@ -115,16 +116,18 @@ public class AppointmentDialogController {
 				}
 				return false;
 			}).get(0);
-			patientButton.setText(patient.getId());
+			this.patient = patient;
+			patientButton.setText(this.patient.getId());
 
 			String doctorID = appointment.getDoctorID();
-			Doctor doctor = Main.doctorOverviewController.getSortedList().filtered(p -> {
-				if (p.getId().equals(doctorID)) {
+			Doctor doctor = Main.doctorOverviewController.getSortedList().filtered(d -> {
+				if (d.getId().equals(doctorID)) {
 					return true;
 				}
 				return false;
 			}).get(0);
-			doctorButton.setText(doctor.getId());
+			this.doctor = doctor;
+			doctorButton.setText(this.doctor.getId());
 
 			date.setText(DateUtil.format(appointment.getDate()));
 		}
