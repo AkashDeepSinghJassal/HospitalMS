@@ -60,14 +60,17 @@ public class AppointmentDialogController {
 		dialogStage.initOwner(parentStage);
 		Scene scene = new Scene(aPane);
 		scene.setFill(Color.TRANSPARENT);
+		controller.setStage(dialogStage);
 		dialogStage.setScene(scene);
 		dialogStage.setX(800);
 		dialogStage.setY(190);
 		dialogStage.showAndWait();
-		
-		doctor = controller.getDoctor();
-		if (doctor != null)
-			doctorButton.setText(doctor.getId());
+
+		if (controller.getIsOkClicked()) {
+			doctor = controller.getDoctor();
+			if (doctor != null)
+				doctorButton.setText(doctor.getId());
+		}
 	}
 
 	@FXML
@@ -89,13 +92,17 @@ public class AppointmentDialogController {
 		dialogStage.initOwner(parentStage);
 		Scene scene = new Scene(aPane);
 		scene.setFill(Color.TRANSPARENT);
+		controller.setStage(dialogStage);
 		dialogStage.setScene(scene);
 		dialogStage.setX(800);
 		dialogStage.setY(190);
 		dialogStage.showAndWait();
-		patient = controller.getPatient();
-		if (patient != null)
-			patientButton.setText(patient.getId());
+
+		if (controller.getIsOkClicked()) {
+			patient = controller.getPatient();
+			if (patient != null)
+				patientButton.setText(patient.getId());
+		}
 	}
 
 	public void setDialogStage(Stage stage) {

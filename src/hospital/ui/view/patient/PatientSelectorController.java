@@ -30,7 +30,17 @@ public class PatientSelectorController {
 	private ObservableList<Patient> observableList = null;
 	private FilteredList<Patient> filteredList = null;
 	private SortedList<Patient> sortedList = null;
+	private Stage stage = null;
 	private Patient patient = null;
+	private Boolean isOkClicked = false;
+
+	public Stage getStage() {
+		return stage;
+	}
+
+	public void setStage(Stage stage) {
+		this.stage = stage;
+	}
 
 	public Patient getPatient() {
 		return patient;
@@ -38,6 +48,14 @@ public class PatientSelectorController {
 
 	public void setPatient(Patient patient) {
 		this.patient = patient;
+	}
+
+	public Boolean getIsOkClicked() {
+		return isOkClicked;
+	}
+
+	public void setIsOkClicked(Boolean isOkClicked) {
+		this.isOkClicked = isOkClicked;
 	}
 
 	@FXML
@@ -132,14 +150,16 @@ public class PatientSelectorController {
 
 	@FXML
 	void cancelModal(ActionEvent event) {
-		((Stage) ((Node) event.getTarget()).getScene().getWindow()).close();
+		setIsOkClicked(false);
+		getStage().close();
 	}
 
 	@FXML
 	void selectPatient(ActionEvent event) {
 		if (tableView.getSelectionModel().getSelectedItem() != null) {
 			setPatient(tableView.getSelectionModel().getSelectedItem());
-			cancelModal(event);
+			setIsOkClicked(true);
+			getStage().close();
 		} else {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.initOwner((Stage) ((Node) event.getTarget()).getScene().getWindow());
