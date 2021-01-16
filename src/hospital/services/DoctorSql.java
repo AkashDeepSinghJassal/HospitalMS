@@ -101,7 +101,8 @@ public class DoctorSql {
 	public static int addDoctor(Doctor doctor) {
 		PreparedStatement statement = null;
 		try {
-			statement = DBUtil.getDBConnection().prepareStatement("INSERT INTO doctor VALUES (?,?,?,?,?,?,?)");
+			statement = DBUtil.getDBConnection().prepareStatement(
+					"INSERT INTO doctor (id, name, age, gender, speciality, contact, address) VALUES (?,?,?,?,?,?,?)");
 			statement.setString(1, "");
 			statement.setString(2, doctor.getName());
 			statement.setInt(3, doctor.getAge());

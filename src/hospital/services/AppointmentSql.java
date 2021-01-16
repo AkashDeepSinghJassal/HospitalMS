@@ -46,7 +46,8 @@ public class AppointmentSql {
 	public static int addAppointment(Appointment appointment) {
 		PreparedStatement statement = null;
 		try {
-			statement = conn.prepareStatement("insert into appointment values(?,?,?,?)");
+			statement = conn.prepareStatement(
+					"insert into appointment (id, patient_id, doctor_id, date_scheduled) values(?,?,?,?)");
 			statement.setString(1, appointment.getID());
 			statement.setString(2, appointment.getPatientID());
 			statement.setString(3, appointment.getDoctorID());
