@@ -21,7 +21,7 @@ public class AppointmentSql {
 			ResultSet rs = statement.executeQuery();
 			while (rs.next()) {
 				Appointment appointment = new Appointment();
-				appointment.setAppointID(rs.getString(1));
+				appointment.setId(rs.getString(1));
 				appointment.setPatientID(rs.getString(2));
 				appointment.setDoctorID(rs.getString(3));
 				appointment.setDate(DateUtil.parse("01.01.2020"));
@@ -48,7 +48,7 @@ public class AppointmentSql {
 		try {
 			statement = conn.prepareStatement(
 					"insert into appointment (id, patient_id, doctor_id, date_scheduled) values(?,?,?,?)");
-			statement.setString(1, appointment.getID());
+			statement.setString(1, appointment.getId());
 			statement.setString(2, appointment.getPatientID());
 			statement.setString(3, appointment.getDoctorID());
 
@@ -96,7 +96,7 @@ public class AppointmentSql {
 		PreparedStatement statement = null;
 		try {
 			statement = conn.prepareStatement("delete from appointment where id = ?");
-			statement.setString(1, appointment.getID());
+			statement.setString(1, appointment.getId());
 			return statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -121,7 +121,7 @@ public class AppointmentSql {
 			statement.setString(1, appointment.getPatientID());
 			statement.setString(2, appointment.getDoctorID());
 			statement.setString(3, "2020-01-01 16:00:00");
-			statement.setString(4, appointment.getID());
+			statement.setString(4, appointment.getId());
 			return statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

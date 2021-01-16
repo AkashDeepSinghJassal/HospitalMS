@@ -115,7 +115,7 @@ public class AppointmentDialogController {
 
 	public void setAppointment(Appointment appointment) {
 		this.appointment = appointment;
-		if (appointment != null && appointment.getID() != null) {
+		if (appointment != null && appointment.getId() != null) {
 			String patientID = appointment.getPatientID();
 			Patient patient = Main.patientOverviewController.getSortedList().filtered(p -> {
 				if (p.getId().equals(patientID)) {

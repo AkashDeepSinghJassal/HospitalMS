@@ -6,26 +6,26 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Appointment {
-	private SimpleStringProperty appointID = new SimpleStringProperty();
+	private SimpleStringProperty id = new SimpleStringProperty();
 	private SimpleStringProperty patientID = new SimpleStringProperty();
 	private SimpleStringProperty doctorID = new SimpleStringProperty();
 	private SimpleObjectProperty<LocalDate> date = new SimpleObjectProperty<LocalDate>();
 
-	public String getID() {
-		return appointID.get();
+	public String getId() {
+		return id.get();
 	}
 
-	public void setAppointID(String id) {
-		appointID.set(id);
+	public void setId(String id) {
+		this.id.set(id);
 	}
 
 	/**
-	 * Function returns Simple String Property of {@code appointID}
+	 * Function returns Simple String Property of {@code id}
 	 * 
-	 * @return SimpleStringProperty of {@code appointID}
+	 * @return SimpleStringProperty of {@code id}
 	 */
-	public SimpleStringProperty appointIDProperty() {
-		return appointID;
+	public SimpleStringProperty idProperty() {
+		return id;
 	}
 
 	public String getPatientID() {

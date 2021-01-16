@@ -47,7 +47,7 @@ public class AppointmentOverviewController {
 	@FXML
 	private TableView<Appointment> tableView;
 	@FXML
-	private TableColumn<Appointment, SimpleStringProperty> appointIDTableColumn;
+	private TableColumn<Appointment, SimpleStringProperty> idTableColumn;
 	@FXML
 	private TableColumn<Appointment, SimpleStringProperty> patientIDTableColumn;
 	@FXML
@@ -75,8 +75,8 @@ public class AppointmentOverviewController {
 	private void initialize() {
 		patientIDTableColumn
 				.setCellValueFactory(new PropertyValueFactory<Appointment, SimpleStringProperty>("patientID"));
-		appointIDTableColumn
-				.setCellValueFactory(new PropertyValueFactory<Appointment, SimpleStringProperty>("appointID"));
+		idTableColumn
+				.setCellValueFactory(new PropertyValueFactory<Appointment, SimpleStringProperty>("id"));
 		doctorIDTableColumn
 				.setCellValueFactory(new PropertyValueFactory<Appointment, SimpleStringProperty>("doctorID"));
 		dateTableColumn
@@ -89,7 +89,7 @@ public class AppointmentOverviewController {
 				if (newValue == null || newValue.isEmpty())
 					return true;
 				String filter = newValue.toLowerCase();
-				if (appointment.getID().toLowerCase().contains(filter))
+				if (appointment.getId().toLowerCase().contains(filter))
 					return true;
 				if (appointment.getDoctorID().toLowerCase().contains(filter))
 					return true;
@@ -156,7 +156,7 @@ public class AppointmentOverviewController {
 		if (appointment != null) {
 			// Fill the labels with info from the appointment object.
 			patientIDLbl.setText(appointment.getPatientID());
-			appointIDLbl.setText(appointment.getID());
+			appointIDLbl.setText(appointment.getId());
 			doctorIDLbl.setText(appointment.getDoctorID());
 			dateLbl.setText(DateUtil.format(appointment.getDate()));
 
@@ -263,7 +263,7 @@ public class AppointmentOverviewController {
 			if (AppointmentSql.addAppointment(appointment) > 0) {
 				String appointID = AppointmentSql.getIdOfLastAppointment();
 				if (appointID != null && !appointID.equals("")) {
-					appointment.setAppointID(appointID);
+					appointment.setId(appointID);
 				}
 				observableList.add(appointment);
 				showAppointmentDetails(appointment);

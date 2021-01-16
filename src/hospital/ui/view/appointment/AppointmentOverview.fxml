@@ -27,7 +27,7 @@
                <children>
                   <TableView fx:id="tableView" layoutX="-12.0" layoutY="49.0" prefHeight="298.0" prefWidth="175.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn fx:id="appointIDTableColumn" prefWidth="179.46667051315308" text="Appoint ID" />
+                      <TableColumn fx:id="idTableColumn" prefWidth="179.46667051315308" text="Appoint ID" />
                       <TableColumn fx:id="patientIDTableColumn" prefWidth="266.6665954589844" text="Patient ID" />
                         <TableColumn fx:id="doctorIDTableColumn" prefWidth="164.80001831054688" text="Doctor ID" />
                         <TableColumn fx:id="dateTableColumn" prefWidth="216.0" text="Date Scheduled" />
