@@ -4,8 +4,12 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 
 import hospital.model.Appointment;
+import hospital.model.Doctor;
+import hospital.model.Patient;
 import hospital.services.AppointmentSql;
 import hospital.ui.main.Main;
+import hospital.ui.view.doctor.DoctorDetailsController;
+import hospital.ui.view.patient.PatientDetailsController;
 import hospital.util.DateTimeUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -287,7 +291,39 @@ public class AppointmentOverviewController {
 		cell.setOnMouseClicked(e -> {
 			if (!cell.isEmpty() && e.getClickCount() == 2) {
 				String userId = cell.getItem();
-				Main.homePageController.showPatientView(userId);
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("../patient/PatientDetails.fxml"));
+				Patient patient = Main.patientOverviewController.getPatient(userId);
+				PatientDetailsController controller = new PatientDetailsController(patient);
+				loader.setController(controller);
+
+				AnchorPane pane = null;
+				try {
+					pane = loader.load();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+
+				Stage dialogStage = new Stage();
+				dialogStage.initStyle(StageStyle.TRANSPARENT);
+				dialogStage.initOwner(Main.stage);
+				dialogStage.focusedProperty().addListener((obv, wasFocused, isNowFocused) -> {
+					if (!isNowFocused)
+						dialogStage.close();
+				});
+
+				Scene scene = new Scene(pane);
+				scene.setFill(Color.TRANSPARENT);
+				scene.setOnKeyPressed(event -> {
+					dialogStage.close();
+				});
+				scene.setOnMouseClicked(event -> {
+					dialogStage.close();
+				});
+				dialogStage.setScene(scene);
+
+				overlay.toFront();
+				dialogStage.showAndWait();
+				overlay.toBack();
 			}
 		});
 		return cell;
@@ -309,7 +345,39 @@ public class AppointmentOverviewController {
 		cell.setOnMouseClicked(e -> {
 			if (!cell.isEmpty() && e.getClickCount() == 2) {
 				String userId = cell.getItem();
-				Main.homePageController.showDoctorView(userId);
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("../doctor/DoctorDetails.fxml"));
+				Doctor doctor = Main.doctorOverviewController.getDoctor(userId);
+				DoctorDetailsController controller = new DoctorDetailsController(doctor);
+				loader.setController(controller);
+
+				AnchorPane pane = null;
+				try {
+					pane = loader.load();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+
+				Stage dialogStage = new Stage();
+				dialogStage.initStyle(StageStyle.TRANSPARENT);
+				dialogStage.initOwner(Main.stage);
+				dialogStage.focusedProperty().addListener((obv, wasFocused, isNowFocused) -> {
+					if (!isNowFocused)
+						dialogStage.close();
+				});
+
+				Scene scene = new Scene(pane);
+				scene.setFill(Color.TRANSPARENT);
+				scene.setOnKeyPressed(event -> {
+					dialogStage.close();
+				});
+				scene.setOnMouseClicked(event -> {
+					dialogStage.close();
+				});
+				dialogStage.setScene(scene);
+
+				overlay.toFront();
+				dialogStage.showAndWait();
+				overlay.toBack();
 			}
 		});
 		return cell;
