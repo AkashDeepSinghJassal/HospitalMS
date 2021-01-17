@@ -1,7 +1,7 @@
 package hospital.ui.view.appointment;
 
 import java.io.IOException;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import hospital.model.Appointment;
 import hospital.services.AppointmentSql;
@@ -9,7 +9,6 @@ import hospital.ui.main.Main;
 import hospital.util.DateTimeUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -24,6 +23,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -47,13 +47,13 @@ public class AppointmentOverviewController {
 	@FXML
 	private TableView<Appointment> tableView;
 	@FXML
-	private TableColumn<Appointment, SimpleStringProperty> idTableColumn;
+	private TableColumn<Appointment, String> idTableColumn;
 	@FXML
-	private TableColumn<Appointment, SimpleStringProperty> patientIDTableColumn;
+	private TableColumn<Appointment, String> patientIDTableColumn;
 	@FXML
-	private TableColumn<Appointment, SimpleStringProperty> doctorIDTableColumn;
+	private TableColumn<Appointment, String> doctorIDTableColumn;
 	@FXML
-	private TableColumn<Appointment, SimpleObjectProperty<LocalDate>> dateTableColumn;
+	private TableColumn<Appointment, LocalDateTime> dateTableColumn;
 	@FXML
 	private Label appointIDLbl;
 	@FXML
@@ -73,14 +73,24 @@ public class AppointmentOverviewController {
 
 	@FXML
 	private void initialize() {
-		patientIDTableColumn
-				.setCellValueFactory(new PropertyValueFactory<Appointment, SimpleStringProperty>("patientID"));
-		idTableColumn
-				.setCellValueFactory(new PropertyValueFactory<Appointment, SimpleStringProperty>("id"));
-		doctorIDTableColumn
-				.setCellValueFactory(new PropertyValueFactory<Appointment, SimpleStringProperty>("doctorID"));
-		dateTableColumn
-				.setCellValueFactory(new PropertyValueFactory<Appointment, SimpleObjectProperty<LocalDate>>("date"));
+		patientIDTableColumn.setCellValueFactory(new PropertyValueFactory<Appointment, String>("patientID"));
+		idTableColumn.setCellValueFactory(new PropertyValueFactory<Appointment, String>("id"));
+		doctorIDTableColumn.setCellValueFactory(new PropertyValueFactory<Appointment, String>("doctorID"));
+		dateTableColumn.setCellValueFactory(new PropertyValueFactory<Appointment, LocalDateTime>("date"));
+
+		/* Event listeners for cells */
+		patientIDTableColumn.setCellFactory(tc -> {
+			return patientCellFactory();
+		});
+		doctorIDTableColumn.setCellFactory(tc -> {
+			return doctorCellFactory();
+		});
+		idTableColumn.setCellFactory(tc -> {
+			return idCellFactory();
+		});
+		dateTableColumn.setCellFactory(tc -> {
+			return dateTimeCellFactory();
+		});
 
 		/* Filter table */
 		filteredList = new FilteredList<Appointment>(observableList, p -> true);
@@ -134,16 +144,6 @@ public class AppointmentOverviewController {
 			}
 		});
 
-		// Edit on double click
-		tableView.setRowFactory(e -> {
-			TableRow<Appointment> row = new TableRow<Appointment>();
-			row.setOnMouseClicked(event -> {
-				if (event.getClickCount() == 2 && !row.isEmpty()) {
-					edit.fire();
-				}
-			});
-			return row;
-		});
 	}
 
 	/**
@@ -272,9 +272,117 @@ public class AppointmentOverviewController {
 	}
 
 	/**
+	 * Create {@link TableCell} for the PatientID column
+	 * 
+	 * @return the created {@link TableCell}
+	 */
+	public TableCell<Appointment, String> patientCellFactory() {
+		TableCell<Appointment, String> cell = new TableCell<Appointment, String>() {
+			@Override
+			public void updateItem(String item, boolean empty) {
+				super.updateItem(item, empty);
+				this.setText(empty ? "" : item);
+			}
+		};
+		cell.setOnMouseClicked(e -> {
+			if (!cell.isEmpty() && e.getClickCount() == 2) {
+				String userId = cell.getItem();
+				Main.homePageController.showPatientView(userId);
+			}
+		});
+		return cell;
+	}
+
+	/**
+	 * Create {@link TableCell} for the DoctorID column
+	 * 
+	 * @return the created {@link TableCell}
+	 */
+	public TableCell<Appointment, String> doctorCellFactory() {
+		TableCell<Appointment, String> cell = new TableCell<Appointment, String>() {
+			@Override
+			public void updateItem(String item, boolean empty) {
+				super.updateItem(item, empty);
+				this.setText(empty ? "" : item);
+			}
+		};
+		cell.setOnMouseClicked(e -> {
+			if (!cell.isEmpty() && e.getClickCount() == 2) {
+				String userId = cell.getItem();
+				Main.homePageController.showDoctorView(userId);
+			}
+		});
+		return cell;
+	}
+
+	/**
+	 * Create {@link TableCell} for the ID column.
+	 * 
+	 * @return the created {@link TableCell}
+	 */
+	public TableCell<Appointment, String> idCellFactory() {
+		TableCell<Appointment, String> cell = new TableCell<Appointment, String>() {
+			@Override
+			public void updateItem(String item, boolean empty) {
+				super.updateItem(item, empty);
+				this.setText(empty ? "" : item);
+			}
+		};
+		cell.setOnMouseClicked(e -> {
+			if (!cell.isEmpty() && e.getClickCount() == 2) {
+				edit.fire();
+			}
+		});
+		return cell;
+	}
+
+	/**
+	 * Create {@link TableCell} for the ID column.
+	 * 
+	 * @return the created {@link TableCell}
+	 */
+	public TableCell<Appointment, LocalDateTime> dateTimeCellFactory() {
+		TableCell<Appointment, LocalDateTime> cell = new TableCell<Appointment, LocalDateTime>() {
+			@Override
+			public void updateItem(LocalDateTime item, boolean empty) {
+				super.updateItem(item, empty);
+				this.setText(empty ? "" : item.toString());
+			}
+		};
+		cell.setOnMouseClicked(e -> {
+			if (!cell.isEmpty() && e.getClickCount() == 2) {
+				edit.fire();
+			}
+		});
+		return cell;
+	}
+
+	/**
+	 * Chear selected item in the table.
+	 */
+	public void clearSelection() {
+		tableView.getSelectionModel().clearSelection();
+	}
+
+	/**
 	 * Set focus {@link #filterTF} on opening.
 	 */
 	public void setFocus() {
 		filterTF.requestFocus();
+	}
+
+	/**
+	 * Set text of {@link #filterTF}.
+	 */
+	public void selectAppointment(String filterText) {
+		filterTF.setText(filterText);
+		tableView.getSelectionModel().select(0);
+	}
+
+	/**
+	 * Clear text of {@link #filterTF}.
+	 */
+	public void clearAppointment() {
+		filterTF.clear();
 	}
 }

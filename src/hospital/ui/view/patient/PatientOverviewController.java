@@ -296,9 +296,32 @@ public class PatientOverviewController {
 	}
 
 	/**
+	 * Chear selected item in the table.
+	 */
+	public void clearSelection() {
+		tableView.getSelectionModel().clearSelection();
+	}
+
+	/**
 	 * Set focus {@link #filterTF} on opening.
 	 */
 	public void setFocus() {
 		filterTF.requestFocus();
 	}
+
+	/**
+	 * Set text of {@link #filterTF}.
+	 */
+	public void selectPatient(String filterText) {
+		filterTF.setText(filterText);
+		tableView.getSelectionModel().select(0);
+	}
+
+	/**
+	 * Clear text of {@link #filterTF}.
+	 */
+	public void clearPatient() {
+		filterTF.clear();
+	}
+
 }

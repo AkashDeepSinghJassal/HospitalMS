@@ -108,9 +108,6 @@ public class DoctorSelectorController {
 		sortedList = new SortedList<Doctor>(filteredList);
 		sortedList.comparatorProperty().bind(tableView.comparatorProperty());
 		tableView.setItems(sortedList);
-		// System.out.println(observableList);
-		// System.out.println(filteredList);
-		// System.out.println(sortedList);
 
 		// Clear Selection On Opening
 		tableView.getSelectionModel().clearSelection();

@@ -268,17 +268,38 @@ public class HomePageController implements Initializable {
 
 	public void showPatientView() {
 		patientView.toFront();
+		Main.patientOverviewController.clearSelection();
+		Main.patientOverviewController.clearPatient();
 		Main.patientOverviewController.setFocus();
+	}
+
+	public void showPatientView(String filterText) {
+		showPatientView();
+		Main.patientOverviewController.selectPatient(filterText);
 	}
 
 	public void showDoctorView() {
 		doctorView.toFront();
+		Main.doctorOverviewController.clearSelection();
+		Main.doctorOverviewController.clearDoctor();
 		Main.doctorOverviewController.setFocus();
+	}
+
+	public void showDoctorView(String filterText) {
+		showDoctorView();
+		Main.doctorOverviewController.selectDoctor(filterText);
 	}
 
 	public void showAppointmentView() {
 		appointmentView.toFront();
+		Main.appointmentOverviewController.clearSelection();
+		Main.appointmentOverviewController.clearAppointment();
 		Main.appointmentOverviewController.setFocus();
+	}
+
+	public void showAppointmentView(String filterText) {
+		showAppointmentView();
+		Main.appointmentOverviewController.selectAppointment(filterText);
 	}
 
 	void triggerHamburger() {
