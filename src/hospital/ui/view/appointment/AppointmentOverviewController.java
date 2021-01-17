@@ -158,7 +158,7 @@ public class AppointmentOverviewController {
 			patientIDLbl.setText(appointment.getPatientID());
 			appointIDLbl.setText(appointment.getId());
 			doctorIDLbl.setText(appointment.getDoctorID());
-			dateLbl.setText(DateTimeUtil.format(appointment.getDate()));
+			dateLbl.setText(DateTimeUtil.formatExpand(appointment.getDate()));
 
 		} else {
 			// appointment is null, remove all the text.
