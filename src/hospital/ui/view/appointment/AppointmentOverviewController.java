@@ -346,7 +346,7 @@ public class AppointmentOverviewController {
 			@Override
 			public void updateItem(LocalDateTime item, boolean empty) {
 				super.updateItem(item, empty);
-				this.setText(empty ? "" : item.toString());
+				this.setText(empty ? "" : DateTimeUtil.format(item));
 			}
 		};
 		cell.setOnMouseClicked(e -> {
