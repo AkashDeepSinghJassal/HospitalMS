@@ -270,8 +270,10 @@ public class HomePageController implements Initializable {
 	public void showPatientView() {
 		patientView.toFront();
 		Main.patientOverviewController.clearSelection();
-		Main.patientOverviewController.clearPatient();
+		Main.patientOverviewController.clearFilter();
 		Main.patientOverviewController.setFocus();
+		Main.doctorOverviewController.clearFilter();
+		Main.appointmentOverviewController.clearFilter();
 	}
 
 	public void showPatientView(String filterText) {
@@ -282,8 +284,10 @@ public class HomePageController implements Initializable {
 	public void showDoctorView() {
 		doctorView.toFront();
 		Main.doctorOverviewController.clearSelection();
-		Main.doctorOverviewController.clearDoctor();
+		Main.doctorOverviewController.clearFilter();
 		Main.doctorOverviewController.setFocus();
+		Main.patientOverviewController.clearFilter();
+		Main.appointmentOverviewController.clearFilter();
 	}
 
 	public void showDoctorView(String filterText) {
@@ -294,8 +298,10 @@ public class HomePageController implements Initializable {
 	public void showAppointmentView() {
 		appointmentView.toFront();
 		Main.appointmentOverviewController.clearSelection();
-		Main.appointmentOverviewController.clearAppointment();
+		Main.appointmentOverviewController.clearFilter();
 		Main.appointmentOverviewController.setFocus();
+		Main.patientOverviewController.clearFilter();
+		Main.doctorOverviewController.clearFilter();
 	}
 
 	public void showAppointmentView(String filterText) {

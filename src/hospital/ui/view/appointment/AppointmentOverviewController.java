@@ -382,7 +382,7 @@ public class AppointmentOverviewController {
 	/**
 	 * Clear text of {@link #filterTF}.
 	 */
-	public void clearAppointment() {
+	public void clearFilter() {
 		filterTF.clear();
 	}
 }
