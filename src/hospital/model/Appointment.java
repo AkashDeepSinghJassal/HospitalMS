@@ -1,6 +1,6 @@
 package hospital.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -9,7 +9,7 @@ public class Appointment {
 	private SimpleStringProperty id = new SimpleStringProperty();
 	private SimpleStringProperty patientID = new SimpleStringProperty();
 	private SimpleStringProperty doctorID = new SimpleStringProperty();
-	private SimpleObjectProperty<LocalDate> date = new SimpleObjectProperty<LocalDate>();
+	private SimpleObjectProperty<LocalDateTime> date = new SimpleObjectProperty<LocalDateTime>();
 
 	public String getId() {
 		return id.get();
@@ -62,20 +62,20 @@ public class Appointment {
 		return doctorID;
 	}
 
-	public LocalDate getDate() {
+	public LocalDateTime getDate() {
 		return date.get();
 	}
 
-	public void setDate(LocalDate localDate) {
-		date.set(localDate);
+	public void setDate(LocalDateTime localDateTime) {
+		date.set(localDateTime);
 	}
 
 	/**
-	 * Function returns Simple Object Property of {@code localDate}
+	 * Function returns Simple Object Property of {@code LocalDateTime}
 	 * 
-	 * @return SimpleObjectProperty of {@code localDate}
+	 * @return SimpleObjectProperty of {@code LocalDateTime}
 	 */
-	public SimpleObjectProperty<LocalDate> dateProperty() {
+	public SimpleObjectProperty<LocalDateTime> dateProperty() {
 		return date;
 	}
 }

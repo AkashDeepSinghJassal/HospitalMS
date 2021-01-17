@@ -11,7 +11,7 @@ import hospital.model.Patient;
 import hospital.ui.main.Main;
 import hospital.ui.view.doctor.DoctorSelectorController;
 import hospital.ui.view.patient.PatientSelectorController;
-import hospital.util.DateUtil;
+import hospital.util.DateTimeUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -136,7 +136,7 @@ public class AppointmentDialogController {
 			this.doctor = doctor;
 			doctorButton.setText(this.doctor.getId());
 
-			date.setText(DateUtil.format(appointment.getDate()));
+			date.setText(DateTimeUtil.format(appointment.getDate()));
 		}
 	}
 
@@ -164,7 +164,7 @@ public class AppointmentDialogController {
 
 		if (date.getText() == null || date.getText().length() == 0) {
 			errorMessage += "No valid date!\n";
-			if (!DateUtil.validDate(date.getText())) {
+			if (!DateTimeUtil.validDate(date.getText())) {
 				errorMessage += "Wrong format for date selected";
 			}
 		}
@@ -195,7 +195,7 @@ public class AppointmentDialogController {
 		if (isInputValid()) {
 			appointment.setPatientID(patientButton.getText());
 			appointment.setDoctorID(doctorButton.getText());
-			appointment.setDate(DateUtil.parse(date.getText()));
+			appointment.setDate(DateTimeUtil.parse(date.getText()));
 			okClicked = true;
 			parentStage.close();
 		}

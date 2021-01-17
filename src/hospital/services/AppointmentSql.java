@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import hospital.model.Appointment;
 import hospital.util.DBUtil;
-import hospital.util.DateUtil;
+import hospital.util.DateTimeUtil;
 
 public class AppointmentSql {
 	static Connection conn = DBUtil.getDBConnection();
@@ -24,7 +24,7 @@ public class AppointmentSql {
 				appointment.setId(rs.getString(1));
 				appointment.setPatientID(rs.getString(2));
 				appointment.setDoctorID(rs.getString(3));
-				appointment.setDate(DateUtil.parse("01.01.2020"));
+				appointment.setDate(DateTimeUtil.parse(rs.getString(4)));
 				appointments.add(appointment);
 			}
 			return appointments;
@@ -51,8 +51,7 @@ public class AppointmentSql {
 			statement.setString(1, appointment.getId());
 			statement.setString(2, appointment.getPatientID());
 			statement.setString(3, appointment.getDoctorID());
-
-			statement.setString(4, "2010-04-30 07:27:39");
+			statement.setString(4, DateTimeUtil.format(appointment.getDate()));
 			return statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -120,7 +119,7 @@ public class AppointmentSql {
 					"update appointment set patient_id = ?, doctor_id = ?, date_scheduled = ? where id = ?");
 			statement.setString(1, appointment.getPatientID());
 			statement.setString(2, appointment.getDoctorID());
-			statement.setString(3, "2020-01-01 16:00:00");
+			statement.setString(3, DateTimeUtil.format(appointment.getDate()));
 			statement.setString(4, appointment.getId());
 			return statement.executeUpdate();
 		} catch (SQLException e) {

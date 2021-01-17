@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import hospital.model.Appointment;
 import hospital.services.AppointmentSql;
 import hospital.ui.main.Main;
-import hospital.util.DateUtil;
+import hospital.util.DateTimeUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -158,7 +158,7 @@ public class AppointmentOverviewController {
 			patientIDLbl.setText(appointment.getPatientID());
 			appointIDLbl.setText(appointment.getId());
 			doctorIDLbl.setText(appointment.getDoctorID());
-			dateLbl.setText(DateUtil.format(appointment.getDate()));
+			dateLbl.setText(DateTimeUtil.format(appointment.getDate()));
 
 		} else {
 			// appointment is null, remove all the text.
