@@ -68,6 +68,7 @@ public class HomePageController implements Initializable {
 		if (!Main.isWelcomeLoaded) {
 			loadWelcomePage();
 		}
+		initializeViews();
 		loadSidePane();
 		transition = new HamburgerBasicCloseTransition(hamburger);
 		drawerOverlay.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
@@ -150,7 +151,7 @@ public class HomePageController implements Initializable {
 			fadeIn.play();
 
 			fadeIn.setOnFinished((e) -> {
-				initializeViews();
+				// initializeViews();
 				fadeOut.play();
 				fadeOutWelcome.play();
 			});
