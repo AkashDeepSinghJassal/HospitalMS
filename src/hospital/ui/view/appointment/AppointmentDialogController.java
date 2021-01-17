@@ -125,23 +125,11 @@ public class AppointmentDialogController {
 		this.appointment = appointment;
 		if (appointment != null && appointment.getId() != null) {
 			String patientID = appointment.getPatientID();
-			Patient patient = Main.patientOverviewController.getSortedList().filtered(p -> {
-				if (p.getId().equals(patientID)) {
-					return true;
-				}
-				return false;
-			}).get(0);
-			this.patient = patient;
+			this.patient = Main.patientOverviewController.getPatient(patientID);
 			patientButton.setText(this.patient.getId());
 
 			String doctorID = appointment.getDoctorID();
-			Doctor doctor = Main.doctorOverviewController.getSortedList().filtered(d -> {
-				if (d.getId().equals(doctorID)) {
-					return true;
-				}
-				return false;
-			}).get(0);
-			this.doctor = doctor;
+			this.doctor = Main.doctorOverviewController.getDoctor(doctorID);
 			doctorButton.setText(this.doctor.getId());
 			datePicker.setValue(appointment.getDate().toLocalDate());
 			hour.setValue(appointment.getDate().toLocalTime().getHour());

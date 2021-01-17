@@ -320,8 +320,28 @@ public class PatientOverviewController {
 	/**
 	 * Clear text of {@link #filterTF}.
 	 */
-	public void clearPatient() {
+	public void clearFilter() {
 		filterTF.clear();
 	}
 
+	/**
+	 * Get {@link Patient} from the given {@link Patient#id} from the
+	 * {@link #observableList}.
+	 * 
+	 * @param patientID the {@link Patient#id} of the Patient
+	 * @return The patient object from the {@link #observableList}
+	 */
+	public Patient getPatient(String patientID) {
+		Patient patient = null;
+		try {
+			patient = Main.patientOverviewController.getSortedList().filtered(p -> {
+				if (p.getId().equals(patientID)) {
+					return true;
+				}
+				return false;
+			}).get(0);
+		} catch (IndexOutOfBoundsException e) {
+		}
+		return patient;
+	}
 }
