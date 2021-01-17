@@ -3,7 +3,7 @@ package hospital.ui.view.appointment;
 import java.io.IOException;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXComboBox;
 
 import hospital.model.Appointment;
 import hospital.model.Doctor;
@@ -11,13 +11,13 @@ import hospital.model.Patient;
 import hospital.ui.main.Main;
 import hospital.ui.view.doctor.DoctorSelectorController;
 import hospital.ui.view.patient.PatientSelectorController;
-import hospital.util.DateTimeUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -34,13 +34,18 @@ public class AppointmentDialogController {
 
 	@FXML
 	private Label headLbl;
-	@FXML
-	private JFXTextField date;
+//	@FXML
+//	private JFXTextField date;
 	@FXML
 	private JFXButton patientButton;
 	@FXML
 	private JFXButton doctorButton;
-
+	@FXML
+	private DatePicker datePicker;
+    @FXML
+    private JFXComboBox<Integer> hour;
+    @FXML
+    private JFXComboBox<Integer> minute;
 	@FXML
 	void selectDoctor(ActionEvent event) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("../doctor/DoctorSelector.fxml"));
@@ -107,6 +112,9 @@ public class AppointmentDialogController {
 
 	public void setDialogStage(Stage stage) {
 		this.parentStage = stage;
+//		ObservableList<String> hourList = (ObservableList<String>)Arrays.asList("10", "11", "12", "16", "17", "18");
+		hour.getItems().addAll(10, 11, 12, 16, 17, 18);
+		minute.getItems().addAll(00, 15, 30, 45);
 	}
 
 	public void setHeader(String header) {
@@ -123,8 +131,9 @@ public class AppointmentDialogController {
 			String doctorID = appointment.getDoctorID();
 			this.doctor = Main.doctorOverviewController.getDoctor(doctorID);
 			doctorButton.setText(this.doctor.getId());
-
-			date.setText(DateTimeUtil.format(appointment.getDate()));
+			datePicker.setValue(appointment.getDate().toLocalDate());
+			hour.setValue(appointment.getDate().toLocalTime().getHour());
+			minute.setValue(appointment.getDate().toLocalTime().getMinute());
 		}
 	}
 
@@ -150,11 +159,11 @@ public class AppointmentDialogController {
 			errorMessage += "No valid doctor ID!\n";
 		}
 
-		if (date.getText() == null || date.getText().length() == 0) {
+		if (datePicker.getValue() == null) {
 			errorMessage += "No valid date!\n";
-			if (!DateTimeUtil.validDate(date.getText())) {
-				errorMessage += "Wrong format for date selected";
-			}
+//			if (!DateTimeUtil.validDate(datePicker.getValue()) {
+//				errorMessage += "Wrong format for date selected";
+//			}
 		}
 
 		if (errorMessage.length() == 0) {
@@ -183,9 +192,10 @@ public class AppointmentDialogController {
 		if (isInputValid()) {
 			appointment.setPatientID(patientButton.getText());
 			appointment.setDoctorID(doctorButton.getText());
-			appointment.setDate(DateTimeUtil.parse(date.getText()));
+			appointment.setDate(datePicker.getValue().atTime(hour.getValue(), minute.getValue()));
 			okClicked = true;
 			parentStage.close();
 		}
 	}
+
 }
