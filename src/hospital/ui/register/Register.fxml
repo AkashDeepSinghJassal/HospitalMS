@@ -8,70 +8,105 @@
 <?import javafx.scene.layout.AnchorPane ?>
 <?import javafx.scene.text.Font ?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.ui.login.LoginController">
-   <children>
-      <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <AnchorPane prefHeight="1080.0" prefWidth="960.0" style="-fx-background-color: #17449d;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <ImageView fitHeight="1080.0" fitWidth="960.0" opacity="0.7" pickOnBounds="true" AnchorPane.leftAnchor="0.0">
-                     <image>
-                        <Image url="@../img/healthcare.jpg" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="152.0" layoutY="445.0" pickOnBounds="true" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="400.0">
-                     <image>
-                        <Image url="@../img/MainLogo.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </AnchorPane>
-         </children>
-      </AnchorPane>
-      <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="960.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <AnchorPane layoutY="-87.0" prefHeight="1080.0" prefWidth="960.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <JFXTextField layoutX="224.0" layoutY="314.0" prefHeight="75.0" prefWidth="465.0" promptText="Username" unFocusColor="#17449e" AnchorPane.rightAnchor="270.4" AnchorPane.topAnchor="314.0">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                  </JFXTextField>
-                  <JFXTextField layoutX="224.0" layoutY="408.0" prefHeight="75.0" prefWidth="465.0" promptText="Password" unFocusColor="#17449e" AnchorPane.rightAnchor="270.4" AnchorPane.topAnchor="408.0">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                  </JFXTextField>
-                  <JFXTextField layoutX="224.0" layoutY="596.0" prefHeight="75.0" prefWidth="465.0" promptText="Confirm Password" unFocusColor="#17449e" AnchorPane.rightAnchor="270.4" AnchorPane.topAnchor="501.0">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                  </JFXTextField>
-                  <JFXTextField layoutX="224.0" layoutY="602.0" prefHeight="75.0" prefWidth="465.0" promptText="Admin Code" unFocusColor="#17449e" AnchorPane.rightAnchor="270.4" AnchorPane.topAnchor="602.0">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                  </JFXTextField>
-                  <JFXButton buttonType="RAISED" layoutX="371.0" layoutY="725.0" prefHeight="78.0" prefWidth="216.0" style="-fx-background-color: #17449e;" text="Register" textFill="WHITE" AnchorPane.rightAnchor="373.0" AnchorPane.topAnchor="725.0">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </JFXButton>
-                  <JFXButton layoutX="371.0" layoutY="815.0" onAction="#login" styleClass="cursor" text="Already have an account? Login" AnchorPane.rightAnchor="373.0" AnchorPane.topAnchor="815.0">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <font>
-                        <Font size="14.0" />
-                     </font>
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity"
+	maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+	xmlns="http://javafx.com/javafx/11.0.1"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="hospital.ui.login.LoginController">
+	<children>
+		<AnchorPane AnchorPane.bottomAnchor="0.0"
+			AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+			<children>
+				<AnchorPane prefHeight="1080.0" prefWidth="960.0"
+					style="-fx-background-color: #17449d;"
+					AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+					AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+					<children>
+						<ImageView fitHeight="1080.0" fitWidth="960.0"
+							opacity="0.7" pickOnBounds="true" AnchorPane.leftAnchor="0.0">
+							<image>
+								<Image url="@../img/healthcare.jpg" />
+							</image>
+						</ImageView>
+						<ImageView fitHeight="150.0" fitWidth="150.0"
+							layoutX="152.0" layoutY="445.0" pickOnBounds="true"
+							AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="400.0">
+							<image>
+								<Image url="@../img/MainLogo.png" />
+							</image>
+						</ImageView>
+					</children>
+				</AnchorPane>
+			</children>
+		</AnchorPane>
+		<AnchorPane AnchorPane.bottomAnchor="0.0"
+			AnchorPane.leftAnchor="960.0" AnchorPane.rightAnchor="0.0"
+			AnchorPane.topAnchor="0.0">
+			<children>
+				<AnchorPane layoutY="-87.0" prefHeight="1080.0"
+					prefWidth="960.0" AnchorPane.bottomAnchor="0.0"
+					AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+					AnchorPane.topAnchor="0.0">
+					<children>
+						<JFXTextField layoutX="224.0" layoutY="314.0"
+							prefHeight="75.0" prefWidth="465.0" promptText="Username"
+							unFocusColor="#17449e" AnchorPane.rightAnchor="270.4"
+							AnchorPane.topAnchor="314.0">
+							<font>
+								<Font size="36.0" />
+							</font>
+						</JFXTextField>
+						<JFXTextField layoutX="224.0" layoutY="408.0"
+							prefHeight="75.0" prefWidth="465.0" promptText="Password"
+							unFocusColor="#17449e" AnchorPane.rightAnchor="270.4"
+							AnchorPane.topAnchor="408.0">
+							<font>
+								<Font size="36.0" />
+							</font>
+						</JFXTextField>
+						<JFXTextField layoutX="224.0" layoutY="596.0"
+							prefHeight="75.0" prefWidth="465.0" promptText="Confirm Password"
+							unFocusColor="#17449e" AnchorPane.rightAnchor="270.4"
+							AnchorPane.topAnchor="501.0">
+							<font>
+								<Font size="36.0" />
+							</font>
+						</JFXTextField>
+						<JFXTextField layoutX="224.0" layoutY="602.0"
+							prefHeight="75.0" prefWidth="465.0" promptText="Admin Code"
+							unFocusColor="#17449e" AnchorPane.rightAnchor="270.4"
+							AnchorPane.topAnchor="602.0">
+							<font>
+								<Font size="36.0" />
+							</font>
+						</JFXTextField>
+						<JFXButton buttonType="RAISED" layoutX="371.0"
+							layoutY="725.0" prefHeight="78.0" prefWidth="216.0"
+							style="-fx-background-color: #17449e;" text="Register"
+							textFill="WHITE" AnchorPane.rightAnchor="373.0"
+							AnchorPane.topAnchor="725.0">
+							<font>
+								<Font size="36.0" />
+							</font>
+							<cursor>
+								<Cursor fx:constant="HAND" />
+							</cursor>
+						</JFXButton>
+						<JFXButton layoutX="371.0" layoutY="815.0"
+							onAction="#login" styleClass="cursor"
+							text="Already have an account? Login"
+							AnchorPane.rightAnchor="373.0" AnchorPane.topAnchor="815.0">
+							<cursor>
+								<Cursor fx:constant="HAND" />
+							</cursor>
+							<font>
+								<Font size="14.0" />
+							</font>
 
-                  </JFXButton>
-               </children>
-            </AnchorPane>
-         </children>
-      </AnchorPane>
-   </children>
+						</JFXButton>
+					</children>
+				</AnchorPane>
+			</children>
+		</AnchorPane>
+	</children>
 </AnchorPane>

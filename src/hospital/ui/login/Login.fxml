@@ -9,75 +9,115 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.ui.login.LoginController">
-   <children>
-      <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <AnchorPane style="-fx-background-color: #17449d;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <ImageView fitHeight="1080.0" fitWidth="800.0" layoutX="20.0" layoutY="-3.0" opacity="0.75" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <image>
-                        <Image url="@../img/healthcare.jpg" />
-                     </image>
-                  </ImageView>
-               </children>
-            </AnchorPane>
-         </children>
-      </AnchorPane>
-      <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="800.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <AnchorPane layoutY="-84.0" prefHeight="1080.0" prefWidth="960.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="240.0" layoutY="442.0" pickOnBounds="true" AnchorPane.rightAnchor="670.0" AnchorPane.topAnchor="442.0">
-                     <image>
-                        <Image url="@../img/iconfinder_user_925901.png" />
-                     </image>
-                  </ImageView>
-                  <JFXTextField layoutX="302.0" layoutY="428.0" prefHeight="75.0" prefWidth="465.0" promptText="Username" unFocusColor="#17449e" AnchorPane.rightAnchor="192.39999999999998" AnchorPane.topAnchor="428.0">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                  </JFXTextField>
-                  <JFXTextField layoutX="302.0" layoutY="540.0" prefHeight="78.0" prefWidth="457.0" promptText="Password" unFocusColor="#17449e" AnchorPane.rightAnchor="200.39999999999998" AnchorPane.topAnchor="540.0">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                  </JFXTextField>
-                  <JFXButton buttonType="RAISED" layoutX="428.0" layoutY="679.0" onAction="#login" prefHeight="75.0" prefWidth="170.0" style="-fx-background-color: #17449e;" text="Login" textFill="WHITE" AnchorPane.rightAnchor="361.6" AnchorPane.topAnchor="679.0">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity"
+	maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+	xmlns="http://javafx.com/javafx/11.0.1"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="hospital.ui.login.LoginController">
+	<children>
+		<AnchorPane AnchorPane.bottomAnchor="0.0"
+			AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+			<children>
+				<AnchorPane style="-fx-background-color: #17449d;"
+					AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+					AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+					<children>
+						<ImageView fitHeight="1080.0" fitWidth="800.0"
+							layoutX="20.0" layoutY="-3.0" opacity="0.75" pickOnBounds="true"
+							AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+							AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+							<image>
+								<Image url="@../img/healthcare.jpg" />
+							</image>
+						</ImageView>
+					</children>
+				</AnchorPane>
+			</children>
+		</AnchorPane>
+		<AnchorPane AnchorPane.bottomAnchor="0.0"
+			AnchorPane.leftAnchor="800.0" AnchorPane.rightAnchor="0.0"
+			AnchorPane.topAnchor="0.0">
+			<children>
+				<AnchorPane layoutY="-84.0" prefHeight="1080.0"
+					prefWidth="960.0" AnchorPane.bottomAnchor="0.0"
+					AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+					AnchorPane.topAnchor="0.0">
+					<children>
+						<ImageView fitHeight="50.0" fitWidth="50.0"
+							layoutX="240.0" layoutY="442.0" pickOnBounds="true"
+							AnchorPane.rightAnchor="670.0" AnchorPane.topAnchor="442.0">
+							<image>
+								<Image url="@../img/iconfinder_user_925901.png" />
+							</image>
+						</ImageView>
+						<JFXTextField layoutX="302.0" layoutY="428.0"
+							prefHeight="75.0" prefWidth="465.0" promptText="Username"
+							unFocusColor="#17449e"
+							AnchorPane.rightAnchor="192.39999999999998"
+							AnchorPane.topAnchor="428.0">
+							<font>
+								<Font size="36.0" />
+							</font>
+						</JFXTextField>
+						<JFXTextField layoutX="302.0" layoutY="540.0"
+							prefHeight="78.0" prefWidth="457.0" promptText="Password"
+							unFocusColor="#17449e"
+							AnchorPane.rightAnchor="200.39999999999998"
+							AnchorPane.topAnchor="540.0">
+							<font>
+								<Font size="36.0" />
+							</font>
+						</JFXTextField>
+						<JFXButton buttonType="RAISED" layoutX="428.0"
+							layoutY="679.0" onAction="#login" prefHeight="75.0"
+							prefWidth="170.0" style="-fx-background-color: #17449e;"
+							text="Login" textFill="WHITE" AnchorPane.rightAnchor="361.6"
+							AnchorPane.topAnchor="679.0">
 
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </JFXButton>
-                  <JFXButton layoutX="402.0" layoutY="778.0" onAction="#addAccount" styleClass="cursor" text="Didn't have an account? Register" AnchorPane.rightAnchor="335.6" AnchorPane.topAnchor="778.0">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </JFXButton>
-                  <ImageView fitHeight="75.0" fitWidth="75.0" layoutX="227.0" layoutY="542.0" pickOnBounds="true" AnchorPane.rightAnchor="658.0" AnchorPane.topAnchor="542.0">
-                     <image>
-                        <Image url="@../img/iconfinder_Lock_1214985.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="265.0" layoutY="154.0" pickOnBounds="true" AnchorPane.rightAnchor="575.0" AnchorPane.topAnchor="160.0">
-                     <image>
-                        <Image url="@../img/MainLogo.png" />
-                     </image>
-                  </ImageView>
-                  <Label layoutX="281.0" layoutY="215.0" prefHeight="159.0" prefWidth="494.0" text="Hospital Management System" textAlignment="CENTER" textFill="#17449e" wrapText="true" AnchorPane.rightAnchor="184.60000000000002" AnchorPane.topAnchor="175.0">
-                     <font>
-                        <Font name="System Bold" size="48.0" />
-                     </font>
-                  </Label>
-               </children>
-            </AnchorPane>
-         </children>
-      </AnchorPane>
-   </children>
+							<font>
+								<Font size="36.0" />
+							</font>
+							<cursor>
+								<Cursor fx:constant="HAND" />
+							</cursor>
+						</JFXButton>
+						<JFXButton layoutX="402.0" layoutY="778.0"
+							onAction="#addAccount" styleClass="cursor"
+							text="Didn't have an account? Register"
+							AnchorPane.rightAnchor="335.6" AnchorPane.topAnchor="778.0">
+							<cursor>
+								<Cursor fx:constant="HAND" />
+							</cursor>
+							<font>
+								<Font size="14.0" />
+							</font>
+						</JFXButton>
+						<ImageView fitHeight="75.0" fitWidth="75.0"
+							layoutX="227.0" layoutY="542.0" pickOnBounds="true"
+							AnchorPane.rightAnchor="658.0" AnchorPane.topAnchor="542.0">
+							<image>
+								<Image url="@../img/iconfinder_Lock_1214985.png" />
+							</image>
+						</ImageView>
+						<ImageView fitHeight="100.0" fitWidth="100.0"
+							layoutX="265.0" layoutY="154.0" pickOnBounds="true"
+							AnchorPane.rightAnchor="575.0" AnchorPane.topAnchor="160.0">
+							<image>
+								<Image url="@../img/MainLogo.png" />
+							</image>
+						</ImageView>
+						<Label layoutX="281.0" layoutY="215.0" prefHeight="159.0"
+							prefWidth="494.0" text="Hospital Management System"
+							textAlignment="CENTER" textFill="#17449e" wrapText="true"
+							AnchorPane.rightAnchor="184.60000000000002"
+							AnchorPane.topAnchor="175.0">
+							<font>
+								<Font name="System Bold" size="48.0" />
+							</font>
+						</Label>
+					</children>
+				</AnchorPane>
+			</children>
+		</AnchorPane>
+	</children>
 </AnchorPane>
