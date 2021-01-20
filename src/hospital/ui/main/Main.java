@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 
 import hospital.ui.homePage.HomePageController;
+import hospital.ui.view.appointment.AppointmentCalendarController;
 import hospital.ui.view.appointment.AppointmentOverviewController;
 import hospital.ui.view.doctor.DoctorOverviewController;
 import hospital.ui.view.patient.PatientOverviewController;
@@ -26,6 +27,8 @@ public class Main extends Application {
 	public static AnchorPane doctorViewAnchorPane;
 	public static AppointmentOverviewController appointmentOverviewController;
 	public static AnchorPane appointmentViewAnchorPane;
+	public static AppointmentCalendarController appointmentCalendarController;
+	public static AnchorPane appointmentCalendarAnchorPane;
 	public static HomePageController homePageController;
 
 	public static Connection conn = null;
@@ -38,6 +41,7 @@ public class Main extends Application {
 		initPatientView();
 		initDoctorView();
 		initAppointmentView();
+		initAppointmentCalendar();
 		homePageController = new HomePageController();
 		try {
 			root = FXMLLoader.load(getClass().getResource("../login/Login.fxml"));
@@ -67,6 +71,27 @@ public class Main extends Application {
 			appointmentOverviewFxmlLoader.setController(appointmentOverviewController);
 			try {
 				appointmentViewAnchorPane = appointmentOverviewFxmlLoader.load();
+			} catch (Exception e) {
+				// System.out.println(e);
+				e.printStackTrace();
+			}
+
+		} catch (Exception e) {
+		}
+	}
+
+	/*
+	 * Loads fxml and controller for appointment view
+	 */
+	private void initAppointmentCalendar() {
+		FXMLLoader appointmentCalendarFxmlLoader;
+		try {
+			appointmentCalendarFxmlLoader = new FXMLLoader(
+					getClass().getResource("../view/appointment/AppointmentCalendar.fxml"));
+			appointmentCalendarController = new AppointmentCalendarController();
+			appointmentCalendarFxmlLoader.setController(appointmentCalendarController);
+			try {
+				appointmentCalendarAnchorPane = appointmentCalendarFxmlLoader.load();
 			} catch (Exception e) {
 				// System.out.println(e);
 				e.printStackTrace();
