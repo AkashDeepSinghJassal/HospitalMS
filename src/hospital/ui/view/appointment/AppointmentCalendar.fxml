@@ -19,16 +19,10 @@
          <children>
             <TableView fx:id="doctorTable" prefHeight="200.0" prefWidth="200.0" stylesheets="@../../css/DarkTheme.css" AnchorPane.bottomAnchor="26.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <columns>
-                  <TableColumn fx:id="t1c1" maxWidth="200.0" prefWidth="190.0" text="DoctorID" />
+                  <TableColumn fx:id="doctorColumn" maxWidth="200.0" prefWidth="190.0" text="DoctorID" />
                </columns>
             </TableView>
-            <TableView fx:id="appointmentTable" prefHeight="200.0" prefWidth="200.0" stylesheets="@../../css/DarkTheme.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <columns>
-                  <TableColumn fx:id="t2c1" prefWidth="1000.0" text="C1" />
-                  <TableColumn fx:id="t2c2" minWidth="0.0" prefWidth="1000.0" text="C2" />
-                  <TableColumn fx:id="t2c3" minWidth="0.0" prefWidth="1000.0" text="C3" />
-               </columns>
-            </TableView>
+            <TableView fx:id="appointmentTable" prefHeight="200.0" prefWidth="200.0" stylesheets="@../../css/DarkTheme.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
 				</AnchorPane>
 		<ImageView fitHeight="30.0" fitWidth="30.0" layoutX="1657.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="235.0" AnchorPane.topAnchor="55.0">
