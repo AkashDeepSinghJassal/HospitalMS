@@ -1,5 +1,7 @@
 package hospital.ui.view.appointment;
 
+import java.util.ArrayList;
+
 import hospital.model.AppointmentCalendar;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
@@ -21,11 +23,14 @@ public class AppointmentCalendarController {
 	@FXML
 	private void initialize() {
 		ObservableList<AppointmentCalendar> data = FXCollections.observableArrayList();
-		AppointmentCalendar calendar = new AppointmentCalendar();
-		data.add(new AppointmentCalendar());
-		data.add(new AppointmentCalendar());
-		data.add(new AppointmentCalendar());
-		data.add(new AppointmentCalendar());
+		ArrayList<String> appointment = new ArrayList<String>();
+		appointment.add("000");
+		appointment.add("001");
+		appointment.add("002");
+		data.add(new AppointmentCalendar(appointment));
+		data.add(new AppointmentCalendar(appointment));
+		data.add(new AppointmentCalendar(appointment));
+		data.add(new AppointmentCalendar(appointment));
 
 		TableColumn days[] = new TableColumn[30];
 		for (int i = 1; i <= 30; i++) {
@@ -42,7 +47,6 @@ public class AppointmentCalendarController {
 				TableColumn minutes[] = new TableColumn[4];
 				for (int k = 1; k <= 4; k++) {
 					minutes[k - 1] = new TableColumn<AppointmentCalendar, String>("" + (k - 1) * 15);
-
 					minutes[k - 1].getStyleClass().add("calendarHeader");
 
 					final int colNoI = i - 1;
@@ -53,8 +57,12 @@ public class AppointmentCalendarController {
 							new Callback<CellDataFeatures<AppointmentCalendar, String>, ObservableValue<String>>() {
 								@Override
 								public ObservableValue<String> call(CellDataFeatures<AppointmentCalendar, String> p) {
-									return new SimpleStringProperty(
-											p.getValue().getAppointments()[colNoI][colNoJ][colNoK]);
+									if (p.getValue().getAppointments().contains("" + colNoI + colNoJ + colNoK)) {
+										return new SimpleStringProperty("abc");
+
+									} else {
+										return new SimpleStringProperty("");
+									}
 								}
 							});
 				}
