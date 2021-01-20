@@ -4,11 +4,11 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.ui.view.appointment.table">
+<AnchorPane prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: rgb(27, 27, 27);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospital.ui.view.appointment.table">
    <children>
-      <TableView fx:id="doctorTable" prefHeight="200.0" prefWidth="200.0" stylesheets="@../../css/DarkTheme.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <TableView fx:id="doctorTable" prefHeight="200.0" prefWidth="200.0" stylesheets="@../../css/DarkTheme.css" AnchorPane.bottomAnchor="26.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columns>
-          <TableColumn fx:id="t1c1" maxWidth="200.0" prefWidth="200.0" text="DoctorID" />
+          <TableColumn fx:id="t1c1" maxWidth="200.0" prefWidth="190.0" text="DoctorID" />
         </columns>
       </TableView>
       <TableView fx:id="appointmentTable" layoutX="200.0" prefHeight="200.0" prefWidth="200.0" stylesheets="@../../css/DarkTheme.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
