@@ -12,6 +12,7 @@ import hospital.ui.main.Main;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -220,6 +221,7 @@ public class HomePageController implements Initializable {
 					}
 				}
 			}
+			drawer.setDisable(true);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -235,6 +237,12 @@ public class HomePageController implements Initializable {
 			AnchorPane.setRightAnchor(homeRoot, 0.0);
 			AnchorPane.setBottomAnchor(homeRoot, 0.0);
 			AnchorPane.setLeftAnchor(homeRoot, 0.0);
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					Main.appointmentCalendarController.setScroll();
+				}
+			});
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
