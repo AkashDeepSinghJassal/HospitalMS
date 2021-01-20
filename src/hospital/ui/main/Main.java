@@ -44,7 +44,7 @@ public class Main extends Application {
 		initAppointmentCalendar();
 		homePageController = new HomePageController();
 		try {
-			root = FXMLLoader.load(getClass().getResource("../view/appointment/table.fxml"));
+			root = FXMLLoader.load(getClass().getResource("../login/Login.fxml"));
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add("hospital/ui/css/Main.css");
 			primaryStage.setFullScreen(true);

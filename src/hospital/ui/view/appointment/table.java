@@ -18,40 +18,39 @@ public class table {
 	@FXML
 	private ScrollPane sp2;
 	@FXML
-	private TableView<A> doctorTable;
+	private TableView<String> doctorTable;
 	@FXML
-	private TableColumn<A, String> t1c1;
+	private TableColumn<String, String> t1c1;
 	@FXML
-	private TableView<B> appointmentTable;
+	private TableView<String> appointmentTable;
 	@FXML
-	private TableColumn<B, String> t2c1;
+	private TableColumn<String, String> t2c1;
 	@FXML
-	private TableColumn<B, String> t2c2;
+	private TableColumn<String, String> t2c2;
 	@FXML
-	private TableColumn<B, String> t2c3;
+	private TableColumn<String, String> t2c3;
 
 	@FXML
 	private void initialize() {
-
-		t1c1.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().doctorID));
-		t2c1.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().a));
-		t2c2.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().b));
-		t2c3.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().c));
-		ObservableList<A> doctorList = FXCollections.observableArrayList();
-		ObservableList<B> appointmentList = FXCollections.observableArrayList();
+		t1c1.setCellValueFactory(c -> new SimpleStringProperty(new String("123")));
+		t2c1.setCellValueFactory(c -> new SimpleStringProperty(new String("123")));
+		t2c2.setCellValueFactory(c -> new SimpleStringProperty(new String("123")));
+		t2c3.setCellValueFactory(c -> new SimpleStringProperty(new String("123")));
+		ObservableList<String> doctorList = FXCollections.observableArrayList();
+		ObservableList<String> appointmentList = FXCollections.observableArrayList();
 		for (int i = 0; i < 100; i++) {
-			doctorList.add(new A("" + i));
-			appointmentList.add(new B("" + i, "" + i, "" + i));
+			doctorList.add("");
+			appointmentList.add("");
 		}
 		doctorTable.setItems(doctorList);
 		appointmentTable.setItems(appointmentList);
 
-		doctorTable.getSelectionModel().selectedIndexProperty().addListener((obs, oldVal, newVal) -> {
-			appointmentTable.getSelectionModel().select(newVal.intValue());
+		doctorTable.getSelectionModel().selectedIndexProperty().addListener((obs, oldIndex, newIndex) -> {
+			appointmentTable.getSelectionModel().select(newIndex.intValue());
 		});
 
-		appointmentTable.getSelectionModel().selectedIndexProperty().addListener((obs, oldVal, newVal) -> {
-			doctorTable.getSelectionModel().select(newVal.intValue());
+		appointmentTable.getSelectionModel().selectedIndexProperty().addListener((obs, oldIndex, newIndex) -> {
+			doctorTable.getSelectionModel().select(newIndex.intValue());
 		});
 
 		Platform.runLater(new Runnable() {
@@ -81,33 +80,6 @@ public class table {
 
 		if (firstScrollBar != null && secondScrollBar != null) {
 			firstScrollBar.valueProperty().bindBidirectional(secondScrollBar.valueProperty());
-		}
-
-		firstScrollBar.setMaxHeight(0);
-		firstScrollBar.setPrefHeight(0);
-		firstScrollBar.setMaxWidth(0);
-		firstScrollBar.setPrefWidth(0);
-		firstScrollBar.setVisible(false);
-		firstScrollBar.setOpacity(0);
-
-		System.out.println(secondScrollBar.getWidth());
-	}
-
-	public static class A {
-		String doctorID;
-
-		public A(String doctorID) {
-			this.doctorID = doctorID;
-		}
-	}
-
-	public static class B {
-		String a, b, c;
-
-		public B(String a, String b, String c) {
-			this.a = a;
-			this.b = b;
-			this.c = c;
 		}
 	}
 }
