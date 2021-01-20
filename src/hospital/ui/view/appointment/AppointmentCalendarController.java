@@ -1,23 +1,35 @@
 package hospital.ui.view.appointment;
 
-import hospital.model.Appointment;
+import hospital.model.AppointmentCalendar;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 
 public class AppointmentCalendarController {
 	@FXML
-	private TableView<Appointment> tableView;
+	private TableView<AppointmentCalendar> tableView;
 	@FXML
-	private TableColumn<Appointment, String> doctorIDTableColumn;
+	private TableColumn<AppointmentCalendar, String> doctorIDTableColumn;
 
 	@FXML
 	private void initialize() {
-		// tableView.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
+		ObservableList<AppointmentCalendar> data = FXCollections.observableArrayList();
+		AppointmentCalendar calendar = new AppointmentCalendar();
+		data.add(new AppointmentCalendar());
+		data.add(new AppointmentCalendar());
+		data.add(new AppointmentCalendar());
+		data.add(new AppointmentCalendar());
+
 		TableColumn days[] = new TableColumn[30];
 		for (int i = 1; i <= 30; i++) {
 			days[i - 1] = new TableColumn("" + i);
-			// days[i - 1].getStyleClass().add("calendarHeader");
 
 			TableColumn hours[] = new TableColumn[8];
 			for (int j = 1; j <= 8; j++) {
@@ -27,22 +39,24 @@ public class AppointmentCalendarController {
 				else
 					hours[j - 1] = new TableColumn((8 + j) + " AM");
 
-				// hours[j - 1].getStyleClass().add("calendarHeader");
-
 				TableColumn minutes[] = new TableColumn[4];
 				for (int k = 1; k <= 4; k++) {
-					minutes[k - 1] = new TableColumn("" + (k - 1) * 15);
-					// minutes[k - 1].getStyleClass().add("calendarHeader");
-					// minutes[k - 1].setCellFactory(tc -> {
-					// TableCell cell = new TableCell() {
-					// @Override
-					// public void updateItem(String item, boolean empty) {
-					// super.updateItem(item, empty);
-					// this.setText(empty ? "" : item);
-					// }
-					// };
-					// return cell;
-					// });
+					minutes[k - 1] = new TableColumn<AppointmentCalendar, String>("" + (k - 1) * 15);
+
+					minutes[k - 1].getStyleClass().add("calendarHeader");
+
+					final int colNoI = i - 1;
+					final int colNoJ = j - 1;
+					final int colNoK = k - 1;
+
+					minutes[k - 1].setCellValueFactory(
+							new Callback<CellDataFeatures<AppointmentCalendar, String>, ObservableValue<String>>() {
+								@Override
+								public ObservableValue<String> call(CellDataFeatures<AppointmentCalendar, String> p) {
+									return new SimpleStringProperty(
+											p.getValue().getAppointments()[colNoI][colNoJ][colNoK]);
+								}
+							});
 				}
 
 				hours[j - 1].getColumns().addAll(minutes);
@@ -51,6 +65,9 @@ public class AppointmentCalendarController {
 			days[i - 1].getColumns().addAll(hours);
 		}
 		tableView.getColumns().addAll(days);
-		tableView.scrollToColumnIndex(30);
+
+		doctorIDTableColumn.setCellValueFactory(new PropertyValueFactory<AppointmentCalendar, String>("doctorID"));
+
+		tableView.setItems(data);
 	}
 }
