@@ -1,13 +1,12 @@
 package hospital.model;
 
-import java.util.ArrayList;
-
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.ObservableList;
 
 public class AppointmentCalendar {
 	SimpleStringProperty doctorID;
-	// String[][][] appointments = new String[30][12][4];
-	ArrayList appointments = null;
+	ObservableList<String> appointments = null;
+
 	public String getDoctorID() {
 		return this.doctorID.getValue();
 	}
@@ -20,17 +19,16 @@ public class AppointmentCalendar {
 		return this.doctorID;
 	}
 
-
-	public AppointmentCalendar(ArrayList appointment) {
+	public AppointmentCalendar(ObservableList<String> appointment) {
 		doctorID = new SimpleStringProperty("doctorID");
 		appointments = appointment;
 	}
 
-	public ArrayList<String> getAppointments() {
+	public ObservableList<String> getAppointments() {
 		return appointments;
 	}
 
-	public void setAppointments(ArrayList<String> appointments) {
+	public void setAppointments(ObservableList<String> appointments) {
 		this.appointments = appointments;
 	}
 }

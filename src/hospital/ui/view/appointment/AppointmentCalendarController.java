@@ -1,7 +1,5 @@
 package hospital.ui.view.appointment;
 
-import java.util.ArrayList;
-
 import hospital.model.AppointmentCalendar;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
@@ -48,7 +46,7 @@ public class AppointmentCalendarController {
 		doctorColumn.setCellValueFactory(new PropertyValueFactory<AppointmentCalendar, String>("doctorID"));
 
 		ObservableList<AppointmentCalendar> data = FXCollections.observableArrayList();
-		ArrayList<String> appointment = new ArrayList<String>();
+		ObservableList<String> appointment = FXCollections.observableArrayList();
 		appointment.add("000");
 		appointment.add("001");
 		appointment.add("002");
@@ -59,15 +57,17 @@ public class AppointmentCalendarController {
 
 		int day = 1;
 
-		TableColumn hours[] = new TableColumn[8];
+		@SuppressWarnings("unchecked")
+		TableColumn<AppointmentCalendar, String> hours[] = new TableColumn[8];
 		for (int j = 1; j <= 8; j++) {
 			if (8 + j > 12)
-				hours[j - 1] = new TableColumn((j - 4) + " PM");
+				hours[j - 1] = new TableColumn<AppointmentCalendar, String>((j - 4) + " PM");
 
 			else
-				hours[j - 1] = new TableColumn((8 + j) + " AM");
+				hours[j - 1] = new TableColumn<AppointmentCalendar, String>((8 + j) + " AM");
 
-			TableColumn minutes[] = new TableColumn[4];
+			@SuppressWarnings("unchecked")
+			TableColumn<AppointmentCalendar, String> minutes[] = new TableColumn[4];
 			for (int k = 1; k <= 4; k++) {
 				minutes[k - 1] = new TableColumn<AppointmentCalendar, String>("" + (k - 1) * 15);
 				minutes[k - 1].getStyleClass().add("calendarHeader");
