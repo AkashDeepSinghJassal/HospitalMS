@@ -19,8 +19,8 @@ public class AppointmentCalendar {
 		return this.doctorID;
 	}
 
-	public AppointmentCalendar(ObservableList<String> appointment) {
-		doctorID = new SimpleStringProperty("doctorID");
+	public AppointmentCalendar(String doctorID, ObservableList<String> appointment) {
+		this.doctorID = new SimpleStringProperty(doctorID);
 		appointments = appointment;
 	}
 

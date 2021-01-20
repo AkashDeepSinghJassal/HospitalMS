@@ -30,8 +30,8 @@
     -fx-table-cell-border-color: transparent;
     -fx-table-header-border-color: transparent;
     -fx-padding: 5;
-    -fx-font-size : 16pt;
-    -fx-text-fill : #cccccc;
+    -fx-font-size: 16pt;
+    -fx-text-fill: #cccccc;
 }
 
 .table-view .column-header-background {
@@ -42,11 +42,7 @@
     -fx-size: 50;
     -fx-border-width: 0 0 1 0;
     -fx-background-color: transparent;
-    -fx-border-color: 
-        transparent
-        transparent
-        derive(-fx-base, 80%) 
-        transparent;
+    -fx-border-color: transparent transparent derive(-fx-base, 80%) transparent;
     -fx-border-insets: 0 10 1 0;
 }
 
@@ -62,9 +58,18 @@
     -fx-background-color: -fx-focus-color;
 }
 
-.split-pane:horizontal > .split-pane-divider {
+.doctor-column .label {
+    -fx-pref-height: 100px;
+    -fx-alignment: center !important;
+}
+
+.appointment-column .label, .doctor-column.cell.indexed-cell.table-cell.table-column, .appointment-column.cell.indexed-cell.table-cell.table-column {
+    -fx-alignment: center !important;
+}
+
+.split-pane:horizontal>.split-pane-divider {
     -fx-border-color: transparent #1d1d1d transparent #1d1d1d;
-    -fx-background-color: transparent, derive(#1d1d1d,20%);
+    -fx-background-color: transparent, derive(#1d1d1d, 20%);
 }
 
 .split-pane {
@@ -72,11 +77,11 @@
 }
 
 .menu-bar {
-    -fx-background-color: derive(#1d1d1d,20%);
+    -fx-background-color: derive(#1d1d1d, 20%);
 }
 
 .context-menu {
-    -fx-background-color: derive(#1d1d1d,50%);
+    -fx-background-color: derive(#1d1d1d, 50%);
 }
 
 .menu-bar .label {
@@ -100,8 +105,9 @@
  * Author: Pedro Duque Vieira
  * http://pixelduke.wordpress.com/2012/10/23/jmetro-windows-8-controls-on-java/
  */
+
 .button {
-    -fx-padding: 5 22 5 22;   
+    -fx-padding: 5 22 5 22;
     -fx-border-color: #e2e2e2;
     -fx-border-width: 2;
     -fx-background-radius: 0;
@@ -117,8 +123,8 @@
 }
 
 .button:pressed, .button:default:hover:pressed {
-  -fx-background-color: white;
-  -fx-text-fill: #1d1d1d;
+    -fx-background-color: white;
+    -fx-text-fill: #1d1d1d;
 }
 
 .button:focused {
@@ -141,13 +147,15 @@
 }
 
 .button:default:hover {
-    -fx-background-color: derive(-fx-focus-color,30%);
+    -fx-background-color: derive(-fx-focus-color, 30%);
 }
 
 /* Drop Down text color */
-.combo-box .list-cell { 
-    -fx-text-fill: white; 
+
+.combo-box .list-cell {
+    -fx-text-fill: white;
 }
-.combo-box-popup .list-view .list-cell{ 
-    -fx-text-fill: black; 
+
+.combo-box-popup .list-view .list-cell {
+    -fx-text-fill: black;
 }

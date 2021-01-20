@@ -44,16 +44,60 @@ public class AppointmentCalendarController {
 	@FXML
 	private void initialize() {
 		doctorColumn.setCellValueFactory(new PropertyValueFactory<AppointmentCalendar, String>("doctorID"));
+		doctorColumn.getStyleClass().add("doctor-column");
 
 		ObservableList<AppointmentCalendar> data = FXCollections.observableArrayList();
 		ObservableList<String> appointment = FXCollections.observableArrayList();
 		appointment.add("000");
 		appointment.add("001");
 		appointment.add("002");
-		data.add(new AppointmentCalendar(appointment));
-		data.add(new AppointmentCalendar(appointment));
-		data.add(new AppointmentCalendar(appointment));
-		data.add(new AppointmentCalendar(appointment));
+		appointment.add("003");
+		appointment.add("010");
+		appointment.add("011");
+		appointment.add("012");
+		appointment.add("013");
+		appointment.add("020");
+		appointment.add("021");
+		appointment.add("022");
+		appointment.add("023");
+		appointment.add("030");
+		appointment.add("031");
+		appointment.add("032");
+		appointment.add("033");
+		appointment.add("040");
+		appointment.add("041");
+		appointment.add("042");
+		appointment.add("043");
+		data.add(new AppointmentCalendar("001", appointment));
+		data.add(new AppointmentCalendar("002", appointment));
+		data.add(new AppointmentCalendar("003", appointment));
+		data.add(new AppointmentCalendar("004", appointment));
+		data.add(new AppointmentCalendar("005", appointment));
+		data.add(new AppointmentCalendar("006", appointment));
+		data.add(new AppointmentCalendar("007", appointment));
+		data.add(new AppointmentCalendar("008", appointment));
+		data.add(new AppointmentCalendar("009", appointment));
+		data.add(new AppointmentCalendar("010", appointment));
+		data.add(new AppointmentCalendar("011", appointment));
+		data.add(new AppointmentCalendar("012", appointment));
+		data.add(new AppointmentCalendar("013", appointment));
+		data.add(new AppointmentCalendar("014", appointment));
+		data.add(new AppointmentCalendar("015", appointment));
+		data.add(new AppointmentCalendar("016", appointment));
+		data.add(new AppointmentCalendar("017", appointment));
+		data.add(new AppointmentCalendar("018", appointment));
+		data.add(new AppointmentCalendar("019", appointment));
+		data.add(new AppointmentCalendar("020", appointment));
+		data.add(new AppointmentCalendar("021", appointment));
+		data.add(new AppointmentCalendar("022", appointment));
+		data.add(new AppointmentCalendar("023", appointment));
+		data.add(new AppointmentCalendar("024", appointment));
+		data.add(new AppointmentCalendar("025", appointment));
+		data.add(new AppointmentCalendar("026", appointment));
+		data.add(new AppointmentCalendar("027", appointment));
+		data.add(new AppointmentCalendar("028", appointment));
+		data.add(new AppointmentCalendar("029", appointment));
+		data.add(new AppointmentCalendar("030", appointment));
 
 		int day = 1;
 
@@ -66,11 +110,13 @@ public class AppointmentCalendarController {
 			else
 				hours[j - 1] = new TableColumn<AppointmentCalendar, String>((8 + j) + " AM");
 
+			hours[j - 1].getStyleClass().add("appointment-column");
+
 			@SuppressWarnings("unchecked")
 			TableColumn<AppointmentCalendar, String> minutes[] = new TableColumn[4];
 			for (int k = 1; k <= 4; k++) {
 				minutes[k - 1] = new TableColumn<AppointmentCalendar, String>("" + (k - 1) * 15);
-				minutes[k - 1].getStyleClass().add("calendarHeader");
+				minutes[k - 1].getStyleClass().add("appointment-column");
 				minutes[k - 1].setMinWidth(100);
 				final int colNoI = day - 1;
 				final int colNoJ = j - 1;
