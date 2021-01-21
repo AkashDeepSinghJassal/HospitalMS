@@ -95,31 +95,30 @@ public class AppointmentCalendarController {
 
 		@SuppressWarnings("unchecked")
 		TableColumn<AppointmentCalendar, String> hours[] = new TableColumn[8];
-		for (int j = 1; j <= 8; j++) {
-			if (8 + j > 12)
-				hours[j - 1] = new TableColumn<AppointmentCalendar, String>((j - 4) + " PM");
-
+		for (int j = 0; j < 8; j++) {
+			final int HOUR = j + 9;
+			if (HOUR > 12)
+				hours[j] = new TableColumn<AppointmentCalendar, String>(HOUR - 12 + " PM");
+			else if (HOUR == 12)
+				hours[j] = new TableColumn<AppointmentCalendar, String>(HOUR + " PM");
 			else
-				hours[j - 1] = new TableColumn<AppointmentCalendar, String>((8 + j) + " AM");
+				hours[j] = new TableColumn<AppointmentCalendar, String>(HOUR + " AM");
 
-			hours[j - 1].getStyleClass().add("appointment-column");
+			hours[j].getStyleClass().add("appointment-column");
 
 			@SuppressWarnings("unchecked")
 			TableColumn<AppointmentCalendar, String> minutes[] = new TableColumn[4];
-			for (int k = 1; k <= 4; k++) {
-				minutes[k - 1] = new TableColumn<AppointmentCalendar, String>("" + (k - 1) * 15);
-				minutes[k - 1].getStyleClass().add("appointment-column");
-				minutes[k - 1].setMinWidth(100);
-				final int colNoI = day - 1;
-				final int colNoJ = j - 1;
-				final int colNoK = k - 1;
+			for (int k = 0; k < 4; k++) {
+				minutes[k] = new TableColumn<AppointmentCalendar, String>("" + (k) * 15);
+				minutes[k].getStyleClass().add("appointment-column");
+				minutes[k].setMinWidth(100);
+				final int MINUTES = k * 15;
 
-				minutes[k - 1].setCellValueFactory(
+				minutes[k].setCellValueFactory(
 						new Callback<CellDataFeatures<AppointmentCalendar, String>, ObservableValue<String>>() {
 							@Override
 							public ObservableValue<String> call(CellDataFeatures<AppointmentCalendar, String> p) {
-								LocalDateTime temp = LocalDateTime.of(selectedDate,
-										LocalTime.of(colNoJ + 9, colNoK * 15));
+								LocalDateTime temp = LocalDateTime.of(selectedDate, LocalTime.of(HOUR, MINUTES));
 								if (p.getValue().getAppointments().contains(temp)) {
 									return new SimpleStringProperty("abc");
 
@@ -130,7 +129,7 @@ public class AppointmentCalendarController {
 						});
 			}
 
-			hours[j - 1].getColumns().addAll(minutes);
+			hours[j].getColumns().addAll(minutes);
 		}
 
 		appointmentTable.getColumns().addAll(hours);
