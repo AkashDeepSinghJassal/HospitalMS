@@ -1,11 +1,13 @@
 package hospital.model;
 
+import java.time.LocalDateTime;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 
 public class AppointmentCalendar {
 	SimpleStringProperty doctorID;
-	ObservableList<String> appointments = null;
+	ObservableList<LocalDateTime> appointments = null;
 
 	public String getDoctorID() {
 		return this.doctorID.getValue();
@@ -19,16 +21,16 @@ public class AppointmentCalendar {
 		return this.doctorID;
 	}
 
-	public AppointmentCalendar(String doctorID, ObservableList<String> appointment) {
+	public AppointmentCalendar(String doctorID, ObservableList<LocalDateTime> appointment) {
 		this.doctorID = new SimpleStringProperty(doctorID);
 		appointments = appointment;
 	}
 
-	public ObservableList<String> getAppointments() {
+	public ObservableList<LocalDateTime> getAppointments() {
 		return appointments;
 	}
 
-	public void setAppointments(ObservableList<String> appointments) {
+	public void setAppointments(ObservableList<LocalDateTime> appointments) {
 		this.appointments = appointments;
 	}
 }

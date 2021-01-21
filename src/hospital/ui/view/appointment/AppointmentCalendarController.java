@@ -1,6 +1,17 @@
 package hospital.ui.view.appointment;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+
 import hospital.model.AppointmentCalendar;
+import hospital.util.DBUtil;
+import hospital.util.DateTimeUtil;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -8,6 +19,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Orientation;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
@@ -31,6 +43,8 @@ public class AppointmentCalendarController {
 	}
 
 	@FXML
+	private Label date;
+	@FXML
 	private ScrollPane sp1;
 	@FXML
 	private ScrollPane sp2;
@@ -45,61 +59,39 @@ public class AppointmentCalendarController {
 	private void initialize() {
 		doctorColumn.setCellValueFactory(new PropertyValueFactory<AppointmentCalendar, String>("doctorID"));
 		doctorColumn.getStyleClass().add("doctor-column");
-
+		// DateTimeComparator.getDateOnlyInstance().compare(first, second);
+		List<LocalDateTime> item = new ArrayList<LocalDateTime>();
+		try {
+			PreparedStatement statement = DBUtil.getDBConnection().prepareStatement(
+					"select doctor_id, group_concat(date_scheduled) all_appointments from appointment group by doctor_id");
+			ResultSet resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				System.out.println(resultSet.getString(1));
+				String[] values = resultSet.getString(2).split(",");
+				for (String value : values) {
+					item.add(DateTimeUtil.parse(value));
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println(item.contains(LocalDateTime.of(LocalDateTime.now().toLocalDate(), LocalTime.of(12, 15))));
+		System.out.println(LocalDateTime.of(LocalDateTime.now().toLocalDate(), LocalTime.of(12, 15)));
+		System.out.println(item);
 		ObservableList<AppointmentCalendar> data = FXCollections.observableArrayList();
-		ObservableList<String> appointment = FXCollections.observableArrayList();
-		appointment.add("000");
-		appointment.add("001");
-		appointment.add("002");
-		appointment.add("003");
-		appointment.add("010");
-		appointment.add("011");
-		appointment.add("012");
-		appointment.add("013");
-		appointment.add("020");
-		appointment.add("021");
-		appointment.add("022");
-		appointment.add("023");
-		appointment.add("030");
-		appointment.add("031");
-		appointment.add("032");
-		appointment.add("033");
-		appointment.add("040");
-		appointment.add("041");
-		appointment.add("042");
-		appointment.add("043");
+		ObservableList<LocalDateTime> appointment = FXCollections.observableArrayList();
+		appointment.addAll(item);
 		data.add(new AppointmentCalendar("001", appointment));
 		data.add(new AppointmentCalendar("002", appointment));
 		data.add(new AppointmentCalendar("003", appointment));
 		data.add(new AppointmentCalendar("004", appointment));
 		data.add(new AppointmentCalendar("005", appointment));
-		data.add(new AppointmentCalendar("006", appointment));
-		data.add(new AppointmentCalendar("007", appointment));
-		data.add(new AppointmentCalendar("008", appointment));
-		data.add(new AppointmentCalendar("009", appointment));
-		data.add(new AppointmentCalendar("010", appointment));
-		data.add(new AppointmentCalendar("011", appointment));
-		data.add(new AppointmentCalendar("012", appointment));
-		data.add(new AppointmentCalendar("013", appointment));
-		data.add(new AppointmentCalendar("014", appointment));
-		data.add(new AppointmentCalendar("015", appointment));
-		data.add(new AppointmentCalendar("016", appointment));
-		data.add(new AppointmentCalendar("017", appointment));
-		data.add(new AppointmentCalendar("018", appointment));
-		data.add(new AppointmentCalendar("019", appointment));
-		data.add(new AppointmentCalendar("020", appointment));
-		data.add(new AppointmentCalendar("021", appointment));
-		data.add(new AppointmentCalendar("022", appointment));
-		data.add(new AppointmentCalendar("023", appointment));
-		data.add(new AppointmentCalendar("024", appointment));
-		data.add(new AppointmentCalendar("025", appointment));
-		data.add(new AppointmentCalendar("026", appointment));
-		data.add(new AppointmentCalendar("027", appointment));
-		data.add(new AppointmentCalendar("028", appointment));
-		data.add(new AppointmentCalendar("029", appointment));
-		data.add(new AppointmentCalendar("030", appointment));
 
 		int day = 1;
+		LocalDateTime selectedDateTime = LocalDateTime.now();
+		LocalDate selectedDate = selectedDateTime.toLocalDate();
+		date.setText(selectedDateTime.getYear() + "-" + selectedDateTime.getMonth() + "-"
+				+ selectedDateTime.getDayOfMonth());
 
 		@SuppressWarnings("unchecked")
 		TableColumn<AppointmentCalendar, String> hours[] = new TableColumn[8];
@@ -126,7 +118,9 @@ public class AppointmentCalendarController {
 						new Callback<CellDataFeatures<AppointmentCalendar, String>, ObservableValue<String>>() {
 							@Override
 							public ObservableValue<String> call(CellDataFeatures<AppointmentCalendar, String> p) {
-								if (p.getValue().getAppointments().contains("" + colNoI + colNoJ + colNoK)) {
+								LocalDateTime temp = LocalDateTime.of(selectedDate,
+										LocalTime.of(colNoJ + 9, colNoK * 15));
+								if (p.getValue().getAppointments().contains(temp)) {
 									return new SimpleStringProperty("abc");
 
 								} else {
