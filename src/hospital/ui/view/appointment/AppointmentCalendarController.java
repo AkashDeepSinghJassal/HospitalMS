@@ -1,19 +1,13 @@
 package hospital.ui.view.appointment;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.LinkedHashMap;
 
 import hospital.model.AppointmentCalendar;
-import hospital.util.DBUtil;
-import hospital.util.DateTimeUtil;
+import hospital.services.AppointmentCalendarSql;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Orientation;
@@ -60,28 +54,7 @@ public class AppointmentCalendarController {
 		doctorColumn.getStyleClass().add("doctor-column");
 
 		// DateTimeComparator.getDateOnlyInstance().compare(first, second);
-		ObservableList<AppointmentCalendar> data = FXCollections.observableArrayList();
-		try {
-			PreparedStatement statement = DBUtil.getDBConnection().prepareStatement(
-					"select doctor_id, group_concat(patient_id) patients, group_concat(date_scheduled) appointments from appointment group by doctor_id");
-			ResultSet resultSet = statement.executeQuery();
-
-			while (resultSet.next()) {
-				AppointmentCalendar calendar = null;
-				LinkedHashMap<LocalDateTime, String> hashMap = new LinkedHashMap<LocalDateTime, String>();
-				String doctorID = resultSet.getString(1);
-				String[] patients = resultSet.getString(2).split(",");
-				String[] appointments = resultSet.getString(3).split(",");
-
-				for (int i = 0; i < patients.length; i++) {
-					hashMap.put(DateTimeUtil.parse(appointments[i]), patients[i]);
-				}
-				calendar = new AppointmentCalendar(doctorID, hashMap);
-				data.add(calendar);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		ObservableList<AppointmentCalendar> data = AppointmentCalendarSql.getAppointmentCalendars();
 
 		doctorTable.setItems(data);
 		appointmentTable.setItems(data);

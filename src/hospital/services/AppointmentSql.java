@@ -16,21 +16,23 @@ public class AppointmentSql {
 	public static ArrayList<Appointment> getAppointments() {
 		ArrayList<Appointment> appointments = new ArrayList<Appointment>();
 		PreparedStatement statement = null;
+		ResultSet resultSet = null;
 		try {
 			statement = conn.prepareStatement("select id, patient_id, doctor_id, date_scheduled from appointment");
-			ResultSet rs = statement.executeQuery();
-			while (rs.next()) {
+			resultSet = statement.executeQuery();
+			while (resultSet.next()) {
 				Appointment appointment = new Appointment();
-				appointment.setId(rs.getString(1));
-				appointment.setPatientID(rs.getString(2));
-				appointment.setDoctorID(rs.getString(3));
-				appointment.setDate(DateTimeUtil.parse(rs.getString(4)));
+				appointment.setId(resultSet.getString(1));
+				appointment.setPatientID(resultSet.getString(2));
+				appointment.setDoctorID(resultSet.getString(3));
+				appointment.setDate(DateTimeUtil.parse(resultSet.getString(4)));
 				appointments.add(appointment);
 			}
 			return appointments;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			DBUtil.closeQuietly(resultSet);
 			DBUtil.closeQuietly(statement);
 		}
 
