@@ -1,13 +1,13 @@
 package hospital.model;
 
 import java.time.LocalDateTime;
+import java.util.LinkedHashMap;
 
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.ObservableList;
 
 public class AppointmentCalendar {
 	SimpleStringProperty doctorID;
-	ObservableList<LocalDateTime> appointments = null;
+	LinkedHashMap<LocalDateTime, String> appointments = null;
 
 	public String getDoctorID() {
 		return this.doctorID.getValue();
@@ -21,16 +21,22 @@ public class AppointmentCalendar {
 		return this.doctorID;
 	}
 
-	public AppointmentCalendar(String doctorID, ObservableList<LocalDateTime> appointment) {
+	public AppointmentCalendar(String doctorID, LinkedHashMap<LocalDateTime, String> appointment) {
 		this.doctorID = new SimpleStringProperty(doctorID);
-		appointments = appointment;
+		this.appointments = appointment;
 	}
 
-	public ObservableList<LocalDateTime> getAppointments() {
+	public LinkedHashMap<LocalDateTime, String> getAppointments() {
 		return appointments;
 	}
 
-	public void setAppointments(ObservableList<LocalDateTime> appointments) {
+	public void setAppointments(LinkedHashMap<LocalDateTime, String> appointments) {
 		this.appointments = appointments;
 	}
+
+	@Override
+	public String toString() {
+		return "{" + " doctorID='" + getDoctorID() + "'" + ", appointments='" + getAppointments() + "'" + "}";
+	}
+
 }

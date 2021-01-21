@@ -6,8 +6,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashMap;
 
 import hospital.model.AppointmentCalendar;
 import hospital.util.DBUtil;
@@ -59,39 +58,41 @@ public class AppointmentCalendarController {
 	private void initialize() {
 		doctorColumn.setCellValueFactory(new PropertyValueFactory<AppointmentCalendar, String>("doctorID"));
 		doctorColumn.getStyleClass().add("doctor-column");
+
 		// DateTimeComparator.getDateOnlyInstance().compare(first, second);
-		List<LocalDateTime> item = new ArrayList<LocalDateTime>();
+		ObservableList<AppointmentCalendar> data = FXCollections.observableArrayList();
 		try {
 			PreparedStatement statement = DBUtil.getDBConnection().prepareStatement(
-					"select doctor_id, group_concat(date_scheduled) all_appointments from appointment group by doctor_id");
+					"select doctor_id, group_concat(patient_id) patients, group_concat(date_scheduled) appointments from appointment group by doctor_id");
 			ResultSet resultSet = statement.executeQuery();
+
 			while (resultSet.next()) {
-				System.out.println(resultSet.getString(1));
-				String[] values = resultSet.getString(2).split(",");
-				for (String value : values) {
-					item.add(DateTimeUtil.parse(value));
+				AppointmentCalendar calendar = null;
+				LinkedHashMap<LocalDateTime, String> hashMap = new LinkedHashMap<LocalDateTime, String>();
+				String doctorID = resultSet.getString(1);
+				String[] patients = resultSet.getString(2).split(",");
+				String[] appointments = resultSet.getString(3).split(",");
+
+				for (int i = 0; i < patients.length; i++) {
+					hashMap.put(DateTimeUtil.parse(appointments[i]), patients[i]);
 				}
+				calendar = new AppointmentCalendar(doctorID, hashMap);
+				data.add(calendar);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println(item.contains(LocalDateTime.of(LocalDateTime.now().toLocalDate(), LocalTime.of(12, 15))));
-		System.out.println(LocalDateTime.of(LocalDateTime.now().toLocalDate(), LocalTime.of(12, 15)));
-		System.out.println(item);
-		ObservableList<AppointmentCalendar> data = FXCollections.observableArrayList();
-		ObservableList<LocalDateTime> appointment = FXCollections.observableArrayList();
-		appointment.addAll(item);
-		data.add(new AppointmentCalendar("001", appointment));
-		data.add(new AppointmentCalendar("002", appointment));
-		data.add(new AppointmentCalendar("003", appointment));
-		data.add(new AppointmentCalendar("004", appointment));
-		data.add(new AppointmentCalendar("005", appointment));
+
+		doctorTable.setItems(data);
+		appointmentTable.setItems(data);
 
 		int day = 1;
 		LocalDateTime selectedDateTime = LocalDateTime.now();
 		LocalDate selectedDate = selectedDateTime.toLocalDate();
 		date.setText(selectedDateTime.getYear() + "-" + selectedDateTime.getMonth() + "-"
 				+ selectedDateTime.getDayOfMonth());
+
+		doctorColumn.setCellValueFactory(new PropertyValueFactory<AppointmentCalendar, String>("doctorID"));
 
 		@SuppressWarnings("unchecked")
 		TableColumn<AppointmentCalendar, String> hours[] = new TableColumn[8];
@@ -119,25 +120,17 @@ public class AppointmentCalendarController {
 							@Override
 							public ObservableValue<String> call(CellDataFeatures<AppointmentCalendar, String> p) {
 								LocalDateTime temp = LocalDateTime.of(selectedDate, LocalTime.of(HOUR, MINUTES));
-								if (p.getValue().getAppointments().contains(temp)) {
-									return new SimpleStringProperty("abc");
-
+								if (p.getValue().getAppointments().containsKey(temp)) {
+									return new SimpleStringProperty(p.getValue().getAppointments().get(temp));
 								} else {
 									return new SimpleStringProperty("");
 								}
 							}
 						});
 			}
-
 			hours[j].getColumns().addAll(minutes);
 		}
-
 		appointmentTable.getColumns().addAll(hours);
-
-		doctorColumn.setCellValueFactory(new PropertyValueFactory<AppointmentCalendar, String>("doctorID"));
-
-		doctorTable.setItems(data);
-		appointmentTable.setItems(data);
 
 		/* Selection Binding */
 		doctorTable.getSelectionModel().selectedIndexProperty().addListener((obs, oldVal, newVal) -> {
