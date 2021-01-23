@@ -18,8 +18,8 @@ public class AppointmentCalendarSql {
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		try {
-			statement = DBUtil.getDBConnection().prepareStatement(
-					"SELECT doctor.id as doctor_id, group_concat(patient_id) patients, group_concat(date_scheduled) appointments from doctor left join appointment on doctor.id = appointment.doctor_id group by doctor.id");
+			statement = DBUtil.getDBConnection()
+					.prepareStatement("select doctor_id, patients, appointments from appointment_calendar");
 			resultSet = statement.executeQuery();
 
 			while (resultSet.next()) {
