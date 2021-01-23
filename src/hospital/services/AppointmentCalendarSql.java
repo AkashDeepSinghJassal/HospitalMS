@@ -18,24 +18,28 @@ public class AppointmentCalendarSql {
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		try {
-			statement = DBUtil.getDBConnection()
-					.prepareStatement("select doctor_id, patients, appointments from appointment_calendar");
+			statement = DBUtil.getDBConnection().prepareStatement(
+					"select doctor_id, patients, appointments, appointment_ids from appointment_calendar");
 			resultSet = statement.executeQuery();
 
 			while (resultSet.next()) {
 				AppointmentCalendar calendar = null;
-				LinkedHashMap<LocalDateTime, String> hashMap = new LinkedHashMap<LocalDateTime, String>();
+				LinkedHashMap<LocalDateTime, String> appointmentHashMap = new LinkedHashMap<LocalDateTime, String>();
+				LinkedHashMap<LocalDateTime, String> idHashMap = new LinkedHashMap<LocalDateTime, String>();
+
 				String doctorID = resultSet.getString(1);
 				String patientString = resultSet.getString(2);
 				if (patientString != null) {
 					String[] patients = patientString.split(",");
 					String[] appointments = resultSet.getString(3).split(",");
+					String[] ids = resultSet.getString(4).split(",");
 
 					for (int i = 0; i < patients.length; i++) {
-						hashMap.put(DateTimeUtil.parse(appointments[i]), patients[i]);
+						appointmentHashMap.put(DateTimeUtil.parse(appointments[i]), patients[i]);
+						idHashMap.put(DateTimeUtil.parse(appointments[i]), ids[i]);
 					}
 				}
-				calendar = new AppointmentCalendar(doctorID, hashMap);
+				calendar = new AppointmentCalendar(doctorID, appointmentHashMap, idHashMap);
 				data.add(calendar);
 			}
 		} catch (SQLException e) {
