@@ -8,6 +8,7 @@ import com.jfoenix.controls.JFXComboBox;
 
 import hospital.model.AppointmentCalendar;
 import hospital.services.AppointmentCalendarSql;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -112,8 +113,23 @@ public class AppointmentCalendarController {
 
 		/* Selection Binding */
 		doctorTable.getSelectionModel().selectedIndexProperty().addListener((obs, oldVal, newVal) -> {
+			if (appointmentTable.getSelectionModel().getSelectedIndex() == -1 && newVal.intValue() != -1) {
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						doctorTable.getSelectionModel().clearSelection();
+					}
+				});
+				return;
+			}
 			if (appointmentTable.getSelectionModel().getSelectedIndex() != newVal.intValue()) {
-				doctorTable.getSelectionModel().select(appointmentTable.getSelectionModel().getSelectedIndex());
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						doctorTable.getSelectionModel().select(appointmentTable.getSelectionModel().getSelectedIndex());
+						doctorTable.getFocusModel().focus(appointmentTable.getSelectionModel().getSelectedIndex());
+					}
+				});
 			}
 		});
 
