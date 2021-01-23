@@ -4,15 +4,17 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+import com.jfoenix.controls.JFXComboBox;
+
 import hospital.model.AppointmentCalendar;
 import hospital.services.AppointmentCalendarSql;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Orientation;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
@@ -25,6 +27,7 @@ public class AppointmentCalendarController {
 
 	private ScrollBar firstScrollBar = null;
 	private ScrollBar secondScrollBar = null;
+	private LocalDate selectedDate = null;
 	private int Day = 1;
 
 	public int getDay() {
@@ -36,7 +39,7 @@ public class AppointmentCalendarController {
 	}
 
 	@FXML
-	private Label date;
+	private JFXComboBox<LocalDate> date;
 	@FXML
 	private ScrollPane sp1;
 	@FXML
@@ -59,11 +62,12 @@ public class AppointmentCalendarController {
 		doctorTable.setItems(data);
 		appointmentTable.setItems(data);
 
-		int day = 1;
 		LocalDateTime selectedDateTime = LocalDateTime.now();
-		LocalDate selectedDate = selectedDateTime.toLocalDate();
-		date.setText(selectedDateTime.getYear() + "-" + selectedDateTime.getMonth() + "-"
-				+ selectedDateTime.getDayOfMonth());
+		selectedDate = selectedDateTime.toLocalDate();
+		for (int i = 0; i < 30; i++) {
+			date.getItems().add(selectedDate.plusDays(i));
+		}
+		date.setValue(selectedDate);
 
 		doctorColumn.setCellValueFactory(new PropertyValueFactory<AppointmentCalendar, String>("doctorID"));
 
@@ -114,6 +118,12 @@ public class AppointmentCalendarController {
 			doctorTable.getSelectionModel().select(newVal.intValue());
 		});
 
+	}
+
+	@FXML
+	void selectedDateChange(ActionEvent event) {
+		selectedDate = date.getValue();
+		appointmentTable.refresh();
 	}
 
 	public void setScroll() {
