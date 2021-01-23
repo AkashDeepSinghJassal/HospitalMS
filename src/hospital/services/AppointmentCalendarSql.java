@@ -19,18 +19,21 @@ public class AppointmentCalendarSql {
 		ResultSet resultSet = null;
 		try {
 			statement = DBUtil.getDBConnection().prepareStatement(
-					"select doctor_id, group_concat(patient_id) patients, group_concat(date_scheduled) appointments from appointment group by doctor_id");
+					"SELECT doctor.id as doctor_id, group_concat(patient_id) patients, group_concat(date_scheduled) appointments from doctor left join appointment on doctor.id = appointment.doctor_id group by doctor.id");
 			resultSet = statement.executeQuery();
 
 			while (resultSet.next()) {
 				AppointmentCalendar calendar = null;
 				LinkedHashMap<LocalDateTime, String> hashMap = new LinkedHashMap<LocalDateTime, String>();
 				String doctorID = resultSet.getString(1);
-				String[] patients = resultSet.getString(2).split(",");
-				String[] appointments = resultSet.getString(3).split(",");
+				String patientString = resultSet.getString(2);
+				if (patientString != null) {
+					String[] patients = patientString.split(",");
+					String[] appointments = resultSet.getString(3).split(",");
 
-				for (int i = 0; i < patients.length; i++) {
-					hashMap.put(DateTimeUtil.parse(appointments[i]), patients[i]);
+					for (int i = 0; i < patients.length; i++) {
+						hashMap.put(DateTimeUtil.parse(appointments[i]), patients[i]);
+					}
 				}
 				calendar = new AppointmentCalendar(doctorID, hashMap);
 				data.add(calendar);
