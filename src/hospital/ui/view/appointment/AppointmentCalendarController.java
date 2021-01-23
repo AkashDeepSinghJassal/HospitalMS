@@ -108,10 +108,13 @@ public class AppointmentCalendarController {
 			hours[j].getColumns().addAll(minutes);
 		}
 		appointmentTable.getColumns().addAll(hours);
+		appointmentTable.getSelectionModel().setCellSelectionEnabled(true);
 
 		/* Selection Binding */
 		doctorTable.getSelectionModel().selectedIndexProperty().addListener((obs, oldVal, newVal) -> {
-			appointmentTable.getSelectionModel().select(newVal.intValue());
+			if (appointmentTable.getSelectionModel().getSelectedIndex() != newVal.intValue()) {
+				doctorTable.getSelectionModel().select(appointmentTable.getSelectionModel().getSelectedIndex());
+			}
 		});
 
 		appointmentTable.getSelectionModel().selectedIndexProperty().addListener((obs, oldVal, newVal) -> {
