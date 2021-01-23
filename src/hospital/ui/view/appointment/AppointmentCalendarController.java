@@ -13,15 +13,21 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Orientation;
 import javafx.scene.Node;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 
 public class AppointmentCalendarController {
@@ -72,6 +78,25 @@ public class AppointmentCalendarController {
 
 		doctorColumn.setCellValueFactory(new PropertyValueFactory<AppointmentCalendar, String>("doctorID"));
 
+		ContextMenu existingContextMenu = new ContextMenu();
+		MenuItem mi1 = new MenuItem("Edit");
+		existingContextMenu.getItems().add(mi1);
+		MenuItem mi2 = new MenuItem("Delete");
+		existingContextMenu.getItems().add(mi2);
+		ContextMenu newContextMenu = new ContextMenu();
+		MenuItem mi3 = new MenuItem("New");
+		newContextMenu.getItems().add(mi3);
+		// appointmentTable.addEventHandler(MouseEvent.MOUSE_CLICKED, new
+		// EventHandler<MouseEvent>() {
+
+		// @Override
+		// public void handle(MouseEvent t) {
+		// if (t.getButton() == MouseButton.SECONDARY) {
+		// cm.show(appointmentTable, t.getScreenX(), t.getScreenY());
+		// }
+		// }
+		// });
+
 		@SuppressWarnings("unchecked")
 		TableColumn<AppointmentCalendar, String> hours[] = new TableColumn[8];
 		for (int j = 0; j < 8; j++) {
@@ -103,6 +128,30 @@ public class AppointmentCalendarController {
 								} else {
 									return new SimpleStringProperty("");
 								}
+							}
+						});
+				minutes[k].setCellFactory(
+						new Callback<TableColumn<AppointmentCalendar, String>, TableCell<AppointmentCalendar, String>>() {
+							@Override
+							public TableCell<AppointmentCalendar, String> call(
+									TableColumn<AppointmentCalendar, String> column) {
+								final TableCell<AppointmentCalendar, String> cell = new TableCell<>();
+								cell.textProperty().bind(cell.itemProperty());
+								cell.setOnMouseClicked(new EventHandler<MouseEvent>() {
+									@Override
+									public void handle(MouseEvent event) {
+										if (event.getButton() == MouseButton.SECONDARY) {
+											// ContextMenu contextMenu = new ContextMenu();
+											// MenuItem menuItem = new MenuItem(cell.getText());
+											// contextMenu.getItems().add(menuItem);
+											if (cell.getText() == null || cell.getText().equals(""))
+												cell.setContextMenu(newContextMenu);
+											else
+												cell.setContextMenu(existingContextMenu);
+										}
+									}
+								});
+								return cell;
 							}
 						});
 			}

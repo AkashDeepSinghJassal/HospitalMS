@@ -16,7 +16,17 @@
 	-fx-background-color: #3D3D3D;
 }
 
-.cursor
-{
+.cursor {
 	-fx-cursor: pointer !important;
+}
+
+.context-menu {
+	-fx-background-color: derive(#1d1d1d, 50%);
+}
+
+.context-menu .label {
+	-fx-font-size: 16pt;
+	-fx-font-family: "Segoe UI Semibold";
+	-fx-text-fill: white;
+	-fx-opacity: 0.6;
 }
