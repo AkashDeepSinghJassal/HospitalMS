@@ -37,9 +37,6 @@ public class AppointmentCalendarSql {
 				}
 				calendar = new AppointmentCalendar(doctorID, hashMap);
 				data.add(calendar);
-				if (data.size() > 15) {
-					break;
-				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
