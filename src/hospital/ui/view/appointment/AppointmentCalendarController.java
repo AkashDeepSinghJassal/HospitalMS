@@ -78,25 +78,6 @@ public class AppointmentCalendarController {
 
 		doctorColumn.setCellValueFactory(new PropertyValueFactory<AppointmentCalendar, String>("doctorID"));
 
-		ContextMenu existingContextMenu = new ContextMenu();
-		MenuItem mi1 = new MenuItem("Edit");
-		existingContextMenu.getItems().add(mi1);
-		MenuItem mi2 = new MenuItem("Delete");
-		existingContextMenu.getItems().add(mi2);
-		ContextMenu newContextMenu = new ContextMenu();
-		MenuItem mi3 = new MenuItem("New");
-		newContextMenu.getItems().add(mi3);
-		// appointmentTable.addEventHandler(MouseEvent.MOUSE_CLICKED, new
-		// EventHandler<MouseEvent>() {
-
-		// @Override
-		// public void handle(MouseEvent t) {
-		// if (t.getButton() == MouseButton.SECONDARY) {
-		// cm.show(appointmentTable, t.getScreenX(), t.getScreenY());
-		// }
-		// }
-		// });
-
 		@SuppressWarnings("unchecked")
 		TableColumn<AppointmentCalendar, String> hours[] = new TableColumn[8];
 		for (int j = 0; j < 8; j++) {
@@ -141,13 +122,45 @@ public class AppointmentCalendarController {
 									@Override
 									public void handle(MouseEvent event) {
 										if (event.getButton() == MouseButton.SECONDARY) {
-											// ContextMenu contextMenu = new ContextMenu();
-											// MenuItem menuItem = new MenuItem(cell.getText());
-											// contextMenu.getItems().add(menuItem);
-											if (cell.getText() == null || cell.getText().equals(""))
+											if (cell.getText() == null || cell.getText().equals("")) {
+												ContextMenu newContextMenu = new ContextMenu();
+												MenuItem newMI = new MenuItem("New");
+												newContextMenu.getItems().add(newMI);
+
+												newMI.setOnAction(new EventHandler<ActionEvent>() {
+													@Override
+													public void handle(ActionEvent event) {
+														System.out.println(LocalDateTime.of(selectedDate,
+																LocalTime.of(HOUR, MINUTES)));
+													}
+												});
+
 												cell.setContextMenu(newContextMenu);
-											else
+											} else {
+												ContextMenu existingContextMenu = new ContextMenu();
+												MenuItem editMI = new MenuItem("Edit");
+												existingContextMenu.getItems().add(editMI);
+												MenuItem deleteMI = new MenuItem("Delete");
+												existingContextMenu.getItems().add(deleteMI);
+
+												editMI.setOnAction(new EventHandler<ActionEvent>() {
+													@Override
+													public void handle(ActionEvent event) {
+														System.out.println(LocalDateTime.of(selectedDate,
+																LocalTime.of(HOUR, MINUTES)));
+													}
+												});
+
+												deleteMI.setOnAction(new EventHandler<ActionEvent>() {
+													@Override
+													public void handle(ActionEvent event) {
+														System.out.println(LocalDateTime.of(selectedDate,
+																LocalTime.of(HOUR, MINUTES)));
+													}
+												});
+
 												cell.setContextMenu(existingContextMenu);
+											}
 										}
 									}
 								});
