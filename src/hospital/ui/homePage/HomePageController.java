@@ -66,6 +66,7 @@ public class HomePageController implements Initializable {
 		Main.patientOverviewController.overlay = overlay;
 		Main.doctorOverviewController.overlay = overlay;
 		Main.appointmentOverviewController.overlay = overlay;
+		Main.appointmentCalendarController.overlay = overlay;
 		if (!Main.isWelcomeLoaded) {
 			loadWelcomePage();
 		}

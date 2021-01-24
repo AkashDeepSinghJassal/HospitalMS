@@ -34,18 +34,19 @@ public class AppointmentDialogController {
 
 	@FXML
 	private Label headLbl;
-//	@FXML
-//	private JFXTextField date;
+	// @FXML
+	// private JFXTextField date;
 	@FXML
 	private JFXButton patientButton;
 	@FXML
 	private JFXButton doctorButton;
 	@FXML
 	private DatePicker datePicker;
-    @FXML
-    private JFXComboBox<Integer> hour;
-    @FXML
-    private JFXComboBox<Integer> minute;
+	@FXML
+	private JFXComboBox<Integer> hour;
+	@FXML
+	private JFXComboBox<Integer> minute;
+
 	@FXML
 	void selectDoctor(ActionEvent event) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("../doctor/DoctorSelector.fxml"));
@@ -112,8 +113,9 @@ public class AppointmentDialogController {
 
 	public void setDialogStage(Stage stage) {
 		this.parentStage = stage;
-//		ObservableList<String> hourList = (ObservableList<String>)Arrays.asList("10", "11", "12", "16", "17", "18");
-		hour.getItems().addAll(10, 11, 12, 16, 17, 18);
+		// ObservableList<String> hourList = (ObservableList<String>)Arrays.asList("10",
+		// "11", "12", "16", "17", "18");
+		hour.getItems().addAll(9, 10, 11, 12, 13, 14, 15, 16);
 		minute.getItems().addAll(00, 15, 30, 45);
 	}
 
@@ -121,12 +123,14 @@ public class AppointmentDialogController {
 		headLbl.setText(header);
 	}
 
-	public void setAppointment(Appointment appointment) {
+	public void setAppointment(Appointment appointment, boolean partialAppointment) {
 		this.appointment = appointment;
-		if (appointment != null && appointment.getId() != null) {
-			String patientID = appointment.getPatientID();
-			this.patient = Main.patientOverviewController.getPatient(patientID);
-			patientButton.setText(this.patient.getId());
+		if (appointment != null && (appointment.getId() != null || partialAppointment)) {
+			if (!partialAppointment) {
+				String patientID = appointment.getPatientID();
+				this.patient = Main.patientOverviewController.getPatient(patientID);
+				patientButton.setText(this.patient.getId());
+			}
 
 			String doctorID = appointment.getDoctorID();
 			this.doctor = Main.doctorOverviewController.getDoctor(doctorID);
@@ -135,6 +139,10 @@ public class AppointmentDialogController {
 			hour.setValue(appointment.getDate().toLocalTime().getHour());
 			minute.setValue(appointment.getDate().toLocalTime().getMinute());
 		}
+	}
+
+	public void setAppointment(Appointment appointment) {
+		setAppointment(appointment, false);
 	}
 
 	public boolean isOkClicked() {
@@ -161,9 +169,9 @@ public class AppointmentDialogController {
 
 		if (datePicker.getValue() == null) {
 			errorMessage += "No valid date!\n";
-//			if (!DateTimeUtil.validDate(datePicker.getValue()) {
-//				errorMessage += "Wrong format for date selected";
-//			}
+			// if (!DateTimeUtil.validDate(datePicker.getValue()) {
+			// errorMessage += "Wrong format for date selected";
+			// }
 		}
 
 		if (errorMessage.length() == 0) {
@@ -196,6 +204,13 @@ public class AppointmentDialogController {
 			okClicked = true;
 			parentStage.close();
 		}
+	}
+
+	public void onlyPatient() {
+		doctorButton.setDisable(true);
+		datePicker.setDisable(true);
+		hour.setDisable(true);
+		minute.setDisable(true);
 	}
 
 }

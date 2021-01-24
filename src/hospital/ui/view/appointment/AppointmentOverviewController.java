@@ -477,4 +477,25 @@ public class AppointmentOverviewController {
 	public void clearFilter() {
 		filterTF.clear();
 	}
+
+	/**
+	 * Get {@link Appointment} from the given {@link Appointment#id} from the
+	 * {@link #observableList}.
+	 * 
+	 * @param appointmentID the {@link Appointment#id} of the Appointment
+	 * @return The appointment object from the {@link #observableList}
+	 */
+	public Appointment getAppointment(String appointmentID) {
+		Appointment appointment = null;
+		try {
+			appointment = Main.appointmentOverviewController.getSortedList().filtered(p -> {
+				if (p.getId().equals(appointmentID)) {
+					return true;
+				}
+				return false;
+			}).get(0);
+		} catch (IndexOutOfBoundsException e) {
+		}
+		return appointment;
+	}
 }

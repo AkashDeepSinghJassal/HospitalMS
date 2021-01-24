@@ -1,5 +1,6 @@
 package hospital.ui.view.appointment;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -18,8 +19,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Orientation;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollBar;
@@ -31,10 +34,17 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Callback;
 
 public class AppointmentCalendarController {
 
+	public AnchorPane overlay = null;
 	private ScrollBar firstScrollBar = null;
 	private ScrollBar secondScrollBar = null;
 	private LocalDate selectedDate = null;
@@ -135,6 +145,7 @@ public class AppointmentCalendarController {
 													public void handle(ActionEvent event) {
 														System.out.println("new: " + LocalDateTime.of(selectedDate,
 																LocalTime.of(HOUR, MINUTES)));
+														handleAdd(HOUR, MINUTES, "Add Appointment");
 													}
 												});
 
@@ -243,18 +254,79 @@ public class AppointmentCalendarController {
 
 	}
 
-	public void handleDelete(final int HOUR, final int MINUTES) {
+	public boolean showAppointmentDialog(Appointment appointment, String header, int HOUR, int MINUTES,
+			boolean onlyPatient) {
+		try {
+			// Load the fxml file and create a new stage for the popup dialog.
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("AppointmentDialog.fxml"));
+			VBox aPane = loader.load();
+
+			// Create the dialog Stage.
+			Stage dialogStage = new Stage();
+			dialogStage.setTitle(header);
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+			dialogStage.initStyle(StageStyle.TRANSPARENT);
+			dialogStage.initOwner(Main.stage);
+			Scene scene = new Scene(aPane);
+			scene.setFill(Color.TRANSPARENT);
+			dialogStage.setScene(scene);
+
+			// Set the appointment into the controller.
+			AppointmentDialogController controller = loader.getController();
+			controller.setDialogStage(dialogStage);
+			controller.setAppointment(appointment, true);
+			controller.setHeader(header);
+			if (onlyPatient)
+				controller.onlyPatient();
+
+			/* Set the position of the stage */
+			dialogStage.setX(100);
+			dialogStage.setY(190);
+
+			overlay.toFront();
+			// Show the dialog and wait until the user closes it
+			dialogStage.showAndWait();
+
+			overlay.toBack();
+
+			return controller.isOkClicked();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public void handleAdd(final int HOUR, final int MINUTES, String header) {
 		LocalDateTime dateTime = LocalDateTime.of(selectedDate, LocalTime.of(HOUR, MINUTES));
 		AppointmentCalendar calendar = doctorTable.getSelectionModel().getSelectedItem();
 		Appointment appointment = new Appointment();
-		appointment.setId(calendar.getIds().get(dateTime));
+		appointment.setDoctorID(calendar.getDoctorID());
+		appointment.setDate(dateTime);
 
+		if (showAppointmentDialog(appointment, "Add Appointment", HOUR, MINUTES, true)) {
+			if (AppointmentSql.addAppointment(appointment) > 0) {
+				String appointID = AppointmentSql.getIdOfLastAppointment();
+				if (appointID != null && !appointID.equals("")) {
+					appointment.setId(appointID);
+					calendar.getAppointments().put(dateTime, appointment.getPatientID());
+					calendar.getIds().put(dateTime, appointID);
+				}
+				Main.appointmentOverviewController.getObservableList().add(appointment);
+				appointmentTable.refresh();
+			}
+		}
+	}
+
+	public void handleDelete(final int HOUR, final int MINUTES) {
+		LocalDateTime dateTime = LocalDateTime.of(selectedDate, LocalTime.of(HOUR, MINUTES));
+		AppointmentCalendar calendar = doctorTable.getSelectionModel().getSelectedItem();
+		Appointment appointment = null;
+		appointment = Main.appointmentOverviewController.getAppointment(calendar.getIds().get(dateTime));
 		if (AppointmentSql.removeAppointment(appointment) > 0) {
 			Main.appointmentOverviewController.getObservableList().remove(appointment);
 			calendar.getAppointments().remove(dateTime);
 			calendar.getIds().remove(dateTime);
 			appointmentTable.refresh();
 		}
-
 	}
 }
