@@ -171,6 +171,13 @@ public class AppointmentCalendarController {
 
 												cell.setContextMenu(existingContextMenu);
 											}
+										} else if (event.getClickCount() == 2
+												&& event.getButton() == MouseButton.PRIMARY) {
+											if (cell.getText() == null || cell.getText().equals("")) {
+												handleAdd(HOUR, MINUTES, "Add Appointment");
+											} else {
+												handleEdit(HOUR, MINUTES, "Edit Appointment");
+											}
 										}
 									}
 								});
