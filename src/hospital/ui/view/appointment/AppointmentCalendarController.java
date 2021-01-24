@@ -143,8 +143,6 @@ public class AppointmentCalendarController {
 												newMI.setOnAction(new EventHandler<ActionEvent>() {
 													@Override
 													public void handle(ActionEvent event) {
-														System.out.println("new: " + LocalDateTime.of(selectedDate,
-																LocalTime.of(HOUR, MINUTES)));
 														handleAdd(HOUR, MINUTES, "Add Appointment");
 													}
 												});
@@ -160,16 +158,13 @@ public class AppointmentCalendarController {
 												editMI.setOnAction(new EventHandler<ActionEvent>() {
 													@Override
 													public void handle(ActionEvent event) {
-														System.out.println("edit:" + LocalDateTime.of(selectedDate,
-																LocalTime.of(HOUR, MINUTES)));
+														handleEdit(HOUR, MINUTES, "Edit Appointment");
 													}
 												});
 
 												deleteMI.setOnAction(new EventHandler<ActionEvent>() {
 													@Override
 													public void handle(ActionEvent event) {
-														System.out.println("delete: " + LocalDateTime.of(selectedDate,
-																LocalTime.of(HOUR, MINUTES)));
 														handleDelete(HOUR, MINUTES);
 													}
 												});
@@ -255,7 +250,7 @@ public class AppointmentCalendarController {
 	}
 
 	public boolean showAppointmentDialog(Appointment appointment, String header, int HOUR, int MINUTES,
-			boolean onlyPatient) {
+			boolean partialAppointment, boolean onlyPatient) {
 		try {
 			// Load the fxml file and create a new stage for the popup dialog.
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("AppointmentDialog.fxml"));
@@ -274,7 +269,7 @@ public class AppointmentCalendarController {
 			// Set the appointment into the controller.
 			AppointmentDialogController controller = loader.getController();
 			controller.setDialogStage(dialogStage);
-			controller.setAppointment(appointment, true);
+			controller.setAppointment(appointment, partialAppointment);
 			controller.setHeader(header);
 			if (onlyPatient)
 				controller.onlyPatient();
@@ -303,7 +298,7 @@ public class AppointmentCalendarController {
 		appointment.setDoctorID(calendar.getDoctorID());
 		appointment.setDate(dateTime);
 
-		if (showAppointmentDialog(appointment, "Add Appointment", HOUR, MINUTES, true)) {
+		if (showAppointmentDialog(appointment, header, HOUR, MINUTES, true, true)) {
 			if (AppointmentSql.addAppointment(appointment) > 0) {
 				String appointID = AppointmentSql.getIdOfLastAppointment();
 				if (appointID != null && !appointID.equals("")) {
@@ -314,6 +309,20 @@ public class AppointmentCalendarController {
 				Main.appointmentOverviewController.getObservableList().add(appointment);
 				appointmentTable.refresh();
 			}
+		}
+	}
+
+	public void handleEdit(final int HOUR, final int MINUTES, String header) {
+		LocalDateTime dateTime = LocalDateTime.of(selectedDate, LocalTime.of(HOUR, MINUTES));
+		AppointmentCalendar calendar = doctorTable.getSelectionModel().getSelectedItem();
+		Appointment appointment = null;
+		appointment = Main.appointmentOverviewController.getAppointment(calendar.getIds().get(dateTime));
+
+		if (showAppointmentDialog(appointment, header, HOUR, MINUTES, false, true)) {
+			if (AppointmentSql.updateAppointment(appointment) > 0) {
+				calendar.getAppointments().put(dateTime, appointment.getPatientID());
+			}
+			appointmentTable.refresh();
 		}
 	}
 
