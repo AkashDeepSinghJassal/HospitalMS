@@ -32,6 +32,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -135,7 +136,7 @@ public class AppointmentCalendarController {
 									@Override
 									public void handle(MouseEvent event) {
 										if (event.getButton() == MouseButton.SECONDARY) {
-											if (cell.getText() == null || cell.getText().equals("")) {
+											if (cell.getText().equals("")) {
 												ContextMenu newContextMenu = new ContextMenu();
 												MenuItem newMI = new MenuItem("New");
 												newContextMenu.getItems().add(newMI);
@@ -189,6 +190,18 @@ public class AppointmentCalendarController {
 		}
 		appointmentTable.getColumns().addAll(hours);
 		appointmentTable.getSelectionModel().setCellSelectionEnabled(true);
+
+		appointmentTable.setOnKeyPressed(e -> {
+			if (e.getCode() == KeyCode.DELETE) {
+				String hour = appointmentTable.getSelectionModel().getSelectedCells().get(0).getTableColumn()
+						.getParentColumn().getText();
+				final int HOURS = Integer.parseInt(hour.substring(0, hour.length() - 3));
+				String minutes = appointmentTable.getSelectionModel().getSelectedCells().get(0).getTableColumn()
+						.getText();
+				final int MINUTES = Integer.parseInt(minutes);
+				handleDelete(HOURS, MINUTES);
+			}
+		});
 
 		/* Selection Binding */
 		doctorTable.getSelectionModel().selectedIndexProperty().addListener((obs, oldVal, newVal) -> {
@@ -338,11 +351,13 @@ public class AppointmentCalendarController {
 		AppointmentCalendar calendar = doctorTable.getSelectionModel().getSelectedItem();
 		Appointment appointment = null;
 		appointment = Main.appointmentOverviewController.getAppointment(calendar.getIds().get(dateTime));
-		if (AppointmentSql.removeAppointment(appointment) > 0) {
-			Main.appointmentOverviewController.getObservableList().remove(appointment);
-			calendar.getAppointments().remove(dateTime);
-			calendar.getIds().remove(dateTime);
-			appointmentTable.refresh();
+		if (appointment != null) {
+			if (AppointmentSql.removeAppointment(appointment) > 0) {
+				Main.appointmentOverviewController.getObservableList().remove(appointment);
+				calendar.getAppointments().remove(dateTime);
+				calendar.getIds().remove(dateTime);
+				appointmentTable.refresh();
+			}
 		}
 	}
 }
