@@ -48,6 +48,30 @@ public class AppointmentOverviewController {
 	private SortedList<Appointment> sortedList = null;
 	public AnchorPane overlay = null;
 
+	public ObservableList<Appointment> getObservableList() {
+		return this.observableList;
+	}
+
+	public void setObservableList(ObservableList<Appointment> observableList) {
+		this.observableList = observableList;
+	}
+
+	public FilteredList<Appointment> getFilteredList() {
+		return this.filteredList;
+	}
+
+	public void setFilteredList(FilteredList<Appointment> filteredList) {
+		this.filteredList = filteredList;
+	}
+
+	public SortedList<Appointment> getSortedList() {
+		return this.sortedList;
+	}
+
+	public void setSortedList(SortedList<Appointment> sortedList) {
+		this.sortedList = sortedList;
+	}
+
 	@FXML
 	private TableView<Appointment> tableView;
 	@FXML

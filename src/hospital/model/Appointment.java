@@ -1,6 +1,7 @@
 package hospital.model;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -78,4 +79,22 @@ public class Appointment {
 	public SimpleObjectProperty<LocalDateTime> dateProperty() {
 		return date;
 	}
+
+	@Override
+	public String toString() {
+		return "{" + " id='" + getId() + "'" + ", patientID='" + getPatientID() + "'" + ", doctorID='" + getDoctorID()
+				+ "'" + ", date='" + getDate() + "'" + "}";
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o == this)
+			return true;
+		if (!(o instanceof Appointment)) {
+			return false;
+		}
+		Appointment appointment = (Appointment) o;
+		return Objects.equals(id.getValue(), appointment.id.getValue());
+	}
+
 }

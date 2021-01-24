@@ -1,5 +1,7 @@
 package hospital.model;
 
+import java.util.Objects;
+
 import javafx.beans.property.SimpleStringProperty;
 
 public class Doctor extends Person {
@@ -44,4 +46,16 @@ public class Doctor extends Person {
 		return "Doctor [getId()=" + getId() + ", getSpeciality()=" + getSpeciality() + ", getName()=" + getName()
 				+ ", getAge()=" + getAge() + ", getAddress()=" + getAddress() + ", getContact()=" + getContact() + "]";
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o == this)
+			return true;
+		if (!(o instanceof Doctor)) {
+			return false;
+		}
+		Doctor doctor = (Doctor) o;
+		return Objects.equals(id.getValue(), doctor.id.getValue());
+	}
+
 }

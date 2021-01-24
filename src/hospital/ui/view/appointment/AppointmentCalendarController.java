@@ -6,8 +6,11 @@ import java.time.LocalTime;
 
 import com.jfoenix.controls.JFXComboBox;
 
+import hospital.model.Appointment;
 import hospital.model.AppointmentCalendar;
 import hospital.services.AppointmentCalendarSql;
+import hospital.services.AppointmentSql;
+import hospital.ui.main.Main;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
@@ -130,7 +133,7 @@ public class AppointmentCalendarController {
 												newMI.setOnAction(new EventHandler<ActionEvent>() {
 													@Override
 													public void handle(ActionEvent event) {
-														System.out.println(LocalDateTime.of(selectedDate,
+														System.out.println("new: " + LocalDateTime.of(selectedDate,
 																LocalTime.of(HOUR, MINUTES)));
 													}
 												});
@@ -146,7 +149,7 @@ public class AppointmentCalendarController {
 												editMI.setOnAction(new EventHandler<ActionEvent>() {
 													@Override
 													public void handle(ActionEvent event) {
-														System.out.println(LocalDateTime.of(selectedDate,
+														System.out.println("edit:" + LocalDateTime.of(selectedDate,
 																LocalTime.of(HOUR, MINUTES)));
 													}
 												});
@@ -154,8 +157,9 @@ public class AppointmentCalendarController {
 												deleteMI.setOnAction(new EventHandler<ActionEvent>() {
 													@Override
 													public void handle(ActionEvent event) {
-														System.out.println(LocalDateTime.of(selectedDate,
+														System.out.println("delete: " + LocalDateTime.of(selectedDate,
 																LocalTime.of(HOUR, MINUTES)));
+														handleDelete(HOUR, MINUTES);
 													}
 												});
 
@@ -235,6 +239,21 @@ public class AppointmentCalendarController {
 			firstScrollBar.setPrefWidth(0);
 			firstScrollBar.setVisible(false);
 			firstScrollBar.setOpacity(0);
+		}
+
+	}
+
+	public void handleDelete(final int HOUR, final int MINUTES) {
+		LocalDateTime dateTime = LocalDateTime.of(selectedDate, LocalTime.of(HOUR, MINUTES));
+		AppointmentCalendar calendar = doctorTable.getSelectionModel().getSelectedItem();
+		Appointment appointment = new Appointment();
+		appointment.setId(calendar.getIds().get(dateTime));
+
+		if (AppointmentSql.removeAppointment(appointment) > 0) {
+			Main.appointmentOverviewController.getObservableList().remove(appointment);
+			calendar.getAppointments().remove(dateTime);
+			calendar.getIds().remove(dateTime);
+			appointmentTable.refresh();
 		}
 
 	}

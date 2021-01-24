@@ -2,6 +2,7 @@ package hospital.model;
 
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
+import java.util.Objects;
 
 import javafx.beans.property.SimpleStringProperty;
 
@@ -49,6 +50,17 @@ public class AppointmentCalendar {
 	public String toString() {
 		return "{" + " doctorID='" + getDoctorID() + "'" + ", appointments='" + getAppointments() + "'" + ", ids='"
 				+ getIds() + "'" + "}";
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o == this)
+			return true;
+		if (!(o instanceof AppointmentCalendar)) {
+			return false;
+		}
+		AppointmentCalendar appointmentCalendar = (AppointmentCalendar) o;
+		return Objects.equals(doctorID.getValue(), appointmentCalendar.doctorID.getValue());
 	}
 
 }
