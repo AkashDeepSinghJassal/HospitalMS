@@ -69,6 +69,30 @@ public class AppointmentCalendarController {
 		this.Day = Day;
 	}
 
+	public ObservableList<AppointmentCalendar> getObservableList() {
+		return this.observableList;
+	}
+
+	public void setObservableList(ObservableList<AppointmentCalendar> observableList) {
+		this.observableList = observableList;
+	}
+
+	public FilteredList<AppointmentCalendar> getFilteredList() {
+		return this.filteredList;
+	}
+
+	public void setFilteredList(FilteredList<AppointmentCalendar> filteredList) {
+		this.filteredList = filteredList;
+	}
+
+	public SortedList<AppointmentCalendar> getSortedList() {
+		return this.sortedList;
+	}
+
+	public void setSortedList(SortedList<AppointmentCalendar> sortedList) {
+		this.sortedList = sortedList;
+	}
+
 	@FXML
 	private TextField filterTF;
 	@FXML
@@ -499,5 +523,10 @@ public class AppointmentCalendarController {
 		overlay.toFront();
 		dialogStage.showAndWait();
 		overlay.toBack();
+	}
+
+	public void refresh() {
+		doctorTable.refresh();
+		appointmentTable.refresh();
 	}
 }

@@ -1,7 +1,10 @@
 package hospital.ui.view.doctor;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.LinkedHashMap;
 
+import hospital.model.AppointmentCalendar;
 import hospital.model.Doctor;
 import hospital.model.GENDER;
 import hospital.services.DoctorSql;
@@ -184,8 +187,13 @@ public class DoctorOverviewController {
 		Doctor doctor = new Doctor();
 		if (showDoctorDialog(doctor, "Add Doctor")) {
 			if (DoctorSql.addDoctor(doctor) == 1) {
-				doctor.setId(DoctorSql.getIdOfLastDoctor());
+				String id = DoctorSql.getIdOfLastDoctor();
+				doctor.setId(id);
 				observableList.add(doctor);
+				AppointmentCalendar calendar = new AppointmentCalendar(id, new LinkedHashMap<LocalDateTime, String>(),
+						new LinkedHashMap<LocalDateTime, String>());
+				Main.appointmentCalendarController.getObservableList().add(calendar);
+				Main.appointmentCalendarController.refresh();
 				showDoctorDetails(doctor);
 			}
 		}
@@ -198,6 +206,9 @@ public class DoctorOverviewController {
 			if (DoctorSql.removeDoctor(deletedDoctor.getId()) == 1) {
 				int visibleIndex = tableView.getSelectionModel().getSelectedIndex();
 				int sourceIndex = sortedList.getSourceIndexFor(observableList, visibleIndex);
+				AppointmentCalendar calendar = new AppointmentCalendar(deletedDoctor.getId(), null, null);
+				Main.appointmentCalendarController.getObservableList().remove(calendar);
+				Main.appointmentCalendarController.refresh();
 				observableList.remove(sourceIndex);
 			}
 		} else {
