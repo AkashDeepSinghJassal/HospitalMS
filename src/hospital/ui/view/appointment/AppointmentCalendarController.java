@@ -9,9 +9,13 @@ import com.jfoenix.controls.JFXComboBox;
 
 import hospital.model.Appointment;
 import hospital.model.AppointmentCalendar;
+import hospital.model.Doctor;
+import hospital.model.Patient;
 import hospital.services.AppointmentCalendarSql;
 import hospital.services.AppointmentSql;
 import hospital.ui.main.Main;
+import hospital.ui.view.doctor.DoctorDetailsController;
+import hospital.ui.view.patient.PatientDetailsController;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
@@ -140,11 +144,19 @@ public class AppointmentCalendarController {
 												ContextMenu newContextMenu = new ContextMenu();
 												MenuItem newMI = new MenuItem("New");
 												newContextMenu.getItems().add(newMI);
+												MenuItem doctorMI = new MenuItem("Doctor Details");
+												newContextMenu.getItems().add(doctorMI);
 
 												newMI.setOnAction(new EventHandler<ActionEvent>() {
 													@Override
 													public void handle(ActionEvent event) {
 														handleAdd(HOUR, MINUTES, "Add Appointment");
+													}
+												});
+												doctorMI.setOnAction(new EventHandler<ActionEvent>() {
+													@Override
+													public void handle(ActionEvent event) {
+														handleDoctorDetails();
 													}
 												});
 
@@ -155,6 +167,10 @@ public class AppointmentCalendarController {
 												existingContextMenu.getItems().add(editMI);
 												MenuItem deleteMI = new MenuItem("Delete");
 												existingContextMenu.getItems().add(deleteMI);
+												MenuItem patientMI = new MenuItem("Patient Details");
+												existingContextMenu.getItems().add(patientMI);
+												MenuItem doctorMI = new MenuItem("Doctor Details");
+												existingContextMenu.getItems().add(doctorMI);
 
 												editMI.setOnAction(new EventHandler<ActionEvent>() {
 													@Override
@@ -167,6 +183,20 @@ public class AppointmentCalendarController {
 													@Override
 													public void handle(ActionEvent event) {
 														handleDelete(HOUR, MINUTES);
+													}
+												});
+
+												patientMI.setOnAction(new EventHandler<ActionEvent>() {
+													@Override
+													public void handle(ActionEvent event) {
+														handlePatientDetails(cell.getItem());
+													}
+												});
+
+												doctorMI.setOnAction(new EventHandler<ActionEvent>() {
+													@Override
+													public void handle(ActionEvent event) {
+														handleDoctorDetails();
 													}
 												});
 
@@ -359,5 +389,79 @@ public class AppointmentCalendarController {
 				appointmentTable.refresh();
 			}
 		}
+	}
+
+	public void handlePatientDetails(String userId) {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../patient/PatientDetails.fxml"));
+		Patient patient = Main.patientOverviewController.getPatient(userId);
+		PatientDetailsController controller = new PatientDetailsController(patient);
+		loader.setController(controller);
+
+		AnchorPane pane = null;
+		try {
+			pane = loader.load();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+
+		Stage dialogStage = new Stage();
+		dialogStage.initStyle(StageStyle.TRANSPARENT);
+		dialogStage.initOwner(Main.stage);
+		dialogStage.focusedProperty().addListener((obv, wasFocused, isNowFocused) -> {
+			if (!isNowFocused)
+				dialogStage.close();
+		});
+
+		Scene scene = new Scene(pane);
+		scene.setFill(Color.TRANSPARENT);
+		scene.setOnKeyPressed(event -> {
+			dialogStage.close();
+		});
+		scene.setOnMouseClicked(event -> {
+			dialogStage.close();
+		});
+		dialogStage.setScene(scene);
+
+		overlay.toFront();
+		dialogStage.showAndWait();
+		overlay.toBack();
+	}
+
+	public void handleDoctorDetails() {
+		AppointmentCalendar calendar = doctorTable.getSelectionModel().getSelectedItem();
+		String userId = calendar.getDoctorID();
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../doctor/DoctorDetails.fxml"));
+		Doctor doctor = Main.doctorOverviewController.getDoctor(userId);
+		DoctorDetailsController controller = new DoctorDetailsController(doctor);
+		loader.setController(controller);
+
+		AnchorPane pane = null;
+		try {
+			pane = loader.load();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+
+		Stage dialogStage = new Stage();
+		dialogStage.initStyle(StageStyle.TRANSPARENT);
+		dialogStage.initOwner(Main.stage);
+		dialogStage.focusedProperty().addListener((obv, wasFocused, isNowFocused) -> {
+			if (!isNowFocused)
+				dialogStage.close();
+		});
+
+		Scene scene = new Scene(pane);
+		scene.setFill(Color.TRANSPARENT);
+		scene.setOnKeyPressed(event -> {
+			dialogStage.close();
+		});
+		scene.setOnMouseClicked(event -> {
+			dialogStage.close();
+		});
+		dialogStage.setScene(scene);
+
+		overlay.toFront();
+		dialogStage.showAndWait();
+		overlay.toBack();
 	}
 }
