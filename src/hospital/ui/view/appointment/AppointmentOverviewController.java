@@ -1,7 +1,11 @@
 package hospital.ui.view.appointment;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.function.Predicate;
+
+import com.jfoenix.controls.JFXComboBox;
 
 import hospital.model.Appointment;
 import hospital.model.Doctor;
@@ -11,6 +15,7 @@ import hospital.ui.main.Main;
 import hospital.ui.view.doctor.DoctorDetailsController;
 import hospital.ui.view.patient.PatientDetailsController;
 import hospital.util.DateTimeUtil;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -44,6 +49,10 @@ import javafx.stage.StageStyle;
 
 public class AppointmentOverviewController {
 
+	private final String rangeAll = "All";
+	private final String rangeUpcoming = "Upcoming";
+	private final String rangeToday = "Today";
+	private final String rangePast = "Past";
 	private ObservableList<Appointment> observableList = FXCollections.observableArrayList();
 	private FilteredList<Appointment> filteredList = null;
 	private SortedList<Appointment> sortedList = null;
@@ -97,6 +106,8 @@ public class AppointmentOverviewController {
 	private Button edit;
 	@FXML
 	private ButtonBar buttonBar;
+	@FXML
+	private JFXComboBox<String> filterCB;
 
 	public AppointmentOverviewController() {
 		observableList.addAll(AppointmentSql.getAppointments());
@@ -123,22 +134,55 @@ public class AppointmentOverviewController {
 			return dateTimeCellFactory();
 		});
 
+		filterCB.getItems().add(rangeAll);
+		filterCB.getItems().add(rangeUpcoming);
+		filterCB.getItems().add(rangeToday);
+		filterCB.getItems().add(rangePast);
+		filterCB.setValue(rangeAll);
+
+		ObjectProperty<Predicate<Appointment>> tfFilter = new SimpleObjectProperty<>();
+		tfFilter.bind(Bindings.createObjectBinding(() -> appointment -> {
+			if (filterTF.getText() == null || filterTF.getText().isEmpty())
+				return true;
+			String filter = filterTF.getText().toLowerCase();
+			if (appointment.getId().toLowerCase().contains(filter))
+				return true;
+			if (appointment.getDoctorID().toLowerCase().contains(filter))
+				return true;
+			if (appointment.getPatientID().toLowerCase().contains(filter))
+				return true;
+			return false;
+		}, filterTF.textProperty()));
+
+		ObjectProperty<Predicate<Appointment>> cbFilter = new SimpleObjectProperty<>();
+		cbFilter.bind(Bindings.createObjectBinding(() -> appointment -> {
+			LocalDateTime date = appointment.getDate();
+			if (filterCB.getValue().equals(rangeAll))
+				return true;
+			if (filterCB.getValue().equals(rangeUpcoming)) {
+				if (date.toLocalDate().isAfter(LocalDate.now()) || date.toLocalDate().equals(LocalDate.now())) {
+					return true;
+				}
+			}
+			if (filterCB.getValue().equals(rangeToday)) {
+				if (date.toLocalDate().equals(LocalDate.now())) {
+					return true;
+				}
+			}
+			if (filterCB.getValue().equals(rangePast)) {
+				if (date.toLocalDate().isBefore(LocalDate.now())) {
+					return true;
+				}
+			}
+
+			return false;
+		}, filterCB.valueProperty()));
+
 		/* Filter table */
 		filteredList = new FilteredList<Appointment>(observableList, p -> true);
-		filterTF.textProperty().addListener((observable, oldValue, newValue) -> {
-			filteredList.setPredicate(appointment -> {
-				if (newValue == null || newValue.isEmpty())
-					return true;
-				String filter = newValue.toLowerCase();
-				if (appointment.getId().toLowerCase().contains(filter))
-					return true;
-				if (appointment.getDoctorID().toLowerCase().contains(filter))
-					return true;
-				if (appointment.getPatientID().toLowerCase().contains(filter))
-					return true;
-				return false;
-			});
-		});
+		filteredList.predicateProperty()
+				.bind(Bindings.createObjectBinding(() -> tfFilter.get().and(cbFilter.get()), tfFilter, cbFilter));
+
 		sortedList = new SortedList<Appointment>(filteredList);
 		sortedList.comparatorProperty().bind(tableView.comparatorProperty());
 		tableView.setItems(sortedList);
