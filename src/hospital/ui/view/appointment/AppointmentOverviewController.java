@@ -26,6 +26,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -94,6 +95,8 @@ public class AppointmentOverviewController {
 	private TextField filterTF;
 	@FXML
 	private Button edit;
+	@FXML
+	private ButtonBar buttonBar;
 
 	public AppointmentOverviewController() {
 		observableList.addAll(AppointmentSql.getAppointments());
@@ -172,6 +175,8 @@ public class AppointmentOverviewController {
 			}
 		});
 
+		/* Make view real only */
+		((AnchorPane) buttonBar.getParent()).getChildren().remove(buttonBar);
 	}
 
 	/**
@@ -422,7 +427,7 @@ public class AppointmentOverviewController {
 		};
 		cell.setOnMouseClicked(e -> {
 			if (!cell.isEmpty() && e.getClickCount() == 2) {
-				edit.fire();
+				// edit.fire();
 			}
 		});
 		return cell;
@@ -443,7 +448,7 @@ public class AppointmentOverviewController {
 		};
 		cell.setOnMouseClicked(e -> {
 			if (!cell.isEmpty() && e.getClickCount() == 2) {
-				edit.fire();
+				// edit.fire();
 			}
 		});
 		return cell;
