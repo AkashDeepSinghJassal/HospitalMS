@@ -1,3 +1,5 @@
 /bin/
 .vscode/
 /sql export/
+rdscredential.ser
+lib

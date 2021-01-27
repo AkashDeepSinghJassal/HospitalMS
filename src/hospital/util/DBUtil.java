@@ -15,15 +15,13 @@ public class DBUtil {
 		try {
 			if (offline) {
 				Class.forName("com.mysql.cj.jdbc.Driver");
-				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/emp", "root", null);
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital", "root", null);
 				// Class.forName("oracle.jdbc.driver.OracleDriver");
 				// conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe",
 				// "system", "oracle");
 			} else {
 				DriverManager.setLoginTimeout(10);
-				conn = DriverManager.getConnection(
-						"jdbc:mysql://hospital-db.cowul8deiwyt.ap-south-1.rds.amazonaws.com/hospital", "admin",
-						"hospital123");
+				conn = DriverManager.getConnection(RDSUtil.getRdsCredential());
 
 			}
 
