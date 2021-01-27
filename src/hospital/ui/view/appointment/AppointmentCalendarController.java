@@ -20,6 +20,8 @@ import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -35,6 +37,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
@@ -53,6 +56,9 @@ public class AppointmentCalendarController {
 	private ScrollBar firstScrollBar = null;
 	private ScrollBar secondScrollBar = null;
 	private LocalDate selectedDate = null;
+	private ObservableList<AppointmentCalendar> observableList = null;
+	private FilteredList<AppointmentCalendar> filteredList = null;
+	private SortedList<AppointmentCalendar> sortedList = null;
 	private int Day = 1;
 
 	public int getDay() {
@@ -63,6 +69,8 @@ public class AppointmentCalendarController {
 		this.Day = Day;
 	}
 
+	@FXML
+	private TextField filterTF;
 	@FXML
 	private JFXComboBox<LocalDate> date;
 	@FXML
@@ -81,11 +89,39 @@ public class AppointmentCalendarController {
 		doctorColumn.setCellValueFactory(new PropertyValueFactory<AppointmentCalendar, String>("doctorID"));
 		doctorColumn.getStyleClass().add("doctor-column");
 
-		// DateTimeComparator.getDateOnlyInstance().compare(first, second);
-		ObservableList<AppointmentCalendar> data = AppointmentCalendarSql.getAppointmentCalendars();
+		observableList = AppointmentCalendarSql.getAppointmentCalendars();
+		filteredList = new FilteredList<AppointmentCalendar>(observableList, p -> true);
 
-		doctorTable.setItems(data);
-		appointmentTable.setItems(data);
+		filterTF.textProperty().addListener((observable, oldValue, newValue) -> {
+			filteredList.setPredicate(appointments -> {
+				boolean predicate = false;
+				if (newValue == null || newValue.isEmpty())
+					return true;
+				String filter = newValue.toUpperCase();
+				if (appointments.getDoctorID().contains(filter))
+					return true;
+				predicate = appointments.getAppointments().keySet().stream().anyMatch(obj -> {
+					if (obj.toLocalDate().equals(selectedDate)) {
+						System.out.println(obj);
+						System.out.println(appointments.getAppointments().get(obj));
+						System.out.println();
+						if (appointments.getAppointments().get(obj).contains(filter)) {
+							return true;
+						}
+						if (appointments.getIds().get(obj).contains(filter)) {
+							return true;
+						}
+					}
+					return false;
+				});
+				return predicate;
+			});
+		});
+
+		sortedList = new SortedList<AppointmentCalendar>(filteredList);
+		sortedList.comparatorProperty().bind(appointmentTable.comparatorProperty());
+		doctorTable.setItems(sortedList);
+		appointmentTable.setItems(sortedList);
 
 		LocalDateTime selectedDateTime = LocalDateTime.now();
 		selectedDate = selectedDateTime.toLocalDate();
