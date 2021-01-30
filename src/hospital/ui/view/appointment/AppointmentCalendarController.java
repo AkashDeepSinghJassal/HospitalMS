@@ -126,9 +126,6 @@ public class AppointmentCalendarController {
 					return true;
 				predicate = appointments.getAppointments().keySet().stream().anyMatch(obj -> {
 					if (obj.toLocalDate().equals(selectedDate)) {
-						System.out.println(obj);
-						System.out.println(appointments.getAppointments().get(obj));
-						System.out.println();
 						if (appointments.getAppointments().get(obj).contains(filter)) {
 							return true;
 						}
