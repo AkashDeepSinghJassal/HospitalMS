@@ -21,6 +21,7 @@ import javafx.stage.StageStyle;
 public class Main extends Application {
 	public static Stage stage = null;
 	public static Boolean isWelcomeLoaded = true;
+	public static Boolean calendarView = true;
 	public static PatientOverviewController patientOverviewController;
 	public static AnchorPane patientViewAnchorPane;
 	public static DoctorOverviewController doctorOverviewController;

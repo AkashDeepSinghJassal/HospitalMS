@@ -19,7 +19,7 @@
 	<children>
 		<AnchorPane prefHeight="100.0" prefWidth="1920.0" styleClass="background" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 			<children>
-				<Label layoutX="842.0" layoutY="22.0" styleClass="label-header" text="Appointment Overview" AnchorPane.leftAnchor="700.0" AnchorPane.rightAnchor="700.0" />
+				<Label fx:id="viewSwitch" layoutX="842.0" layoutY="22.0" styleClass="label-header" text="Appointment Overview" AnchorPane.leftAnchor="700.0" AnchorPane.rightAnchor="700.0" />
             <JFXComboBox fx:id="filterCB" layoutX="1417.0" layoutY="45.0" prefHeight="40.0" prefWidth="200.0" promptText="Select Range" />
 			</children>
 		</AnchorPane>

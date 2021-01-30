@@ -45,6 +45,8 @@ public class HomePageController implements Initializable {
 	@FXML
 	private AnchorPane doctorView;
 	@FXML
+	private AnchorPane calendarView;
+	@FXML
 	private AnchorPane appointmentView;
 	@FXML
 	private JFXHamburger hamburger;
@@ -230,24 +232,6 @@ public class HomePageController implements Initializable {
 
 	private void initializeViews() {
 
-		AnchorPane homeRoot;
-		try {
-			homeRoot = Main.appointmentCalendarAnchorPane;
-			homeView.getChildren().setAll(homeRoot);
-			AnchorPane.setTopAnchor(homeRoot, 0.0);
-			AnchorPane.setRightAnchor(homeRoot, 0.0);
-			AnchorPane.setBottomAnchor(homeRoot, 0.0);
-			AnchorPane.setLeftAnchor(homeRoot, 0.0);
-			Platform.runLater(new Runnable() {
-				@Override
-				public void run() {
-					Main.appointmentCalendarController.setScroll();
-				}
-			});
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
 		AnchorPane patientRoot;
 		try {
 			patientRoot = Main.patientViewAnchorPane;
@@ -268,6 +252,24 @@ public class HomePageController implements Initializable {
 			AnchorPane.setRightAnchor(doctorRoot, 0.0);
 			AnchorPane.setBottomAnchor(doctorRoot, 0.0);
 			AnchorPane.setLeftAnchor(doctorRoot, 0.0);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		AnchorPane calendarRoot;
+		try {
+			calendarRoot = Main.appointmentCalendarAnchorPane;
+			calendarView.getChildren().setAll(calendarRoot);
+			AnchorPane.setTopAnchor(calendarRoot, 0.0);
+			AnchorPane.setRightAnchor(calendarRoot, 0.0);
+			AnchorPane.setBottomAnchor(calendarRoot, 0.0);
+			AnchorPane.setLeftAnchor(calendarRoot, 0.0);
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					Main.appointmentCalendarController.setScroll();
+				}
+			});
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -318,12 +320,16 @@ public class HomePageController implements Initializable {
 	}
 
 	public void showAppointmentView() {
-		appointmentView.toFront();
-		Main.appointmentOverviewController.clearSelection();
-		Main.appointmentOverviewController.clearFilter();
-		Main.appointmentOverviewController.setFocus();
-		Main.patientOverviewController.clearFilter();
-		Main.doctorOverviewController.clearFilter();
+		if (Main.calendarView) {
+			calendarView.toFront();
+		} else {
+			appointmentView.toFront();
+			Main.appointmentOverviewController.clearSelection();
+			Main.appointmentOverviewController.clearFilter();
+			Main.appointmentOverviewController.setFocus();
+			Main.patientOverviewController.clearFilter();
+			Main.doctorOverviewController.clearFilter();
+		}
 	}
 
 	public void showAppointmentView(String filterText) {

@@ -101,6 +101,8 @@ public class AppointmentOverviewController {
 	@FXML
 	private Label doctorIDLbl;
 	@FXML
+	private Label viewSwitch;
+	@FXML
 	private TextField filterTF;
 	@FXML
 	private Button edit;
@@ -221,6 +223,11 @@ public class AppointmentOverviewController {
 
 		/* Make view real only */
 		((AnchorPane) buttonBar.getParent()).getChildren().remove(buttonBar);
+
+		viewSwitch.setOnMouseClicked(e-> {
+			Main.calendarView = true;
+			Main.homePageController.showAppointmentView();
+		});
 	}
 
 	/**
