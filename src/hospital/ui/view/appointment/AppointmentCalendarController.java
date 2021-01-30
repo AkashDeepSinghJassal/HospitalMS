@@ -30,6 +30,7 @@ import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
@@ -93,6 +94,8 @@ public class AppointmentCalendarController {
 		this.sortedList = sortedList;
 	}
 
+	@FXML
+	private Label viewSwitch;
 	@FXML
 	private TextField filterTF;
 	@FXML
@@ -316,6 +319,10 @@ public class AppointmentCalendarController {
 			doctorTable.getSelectionModel().select(newVal.intValue());
 		});
 
+		viewSwitch.setOnMouseClicked(e -> {
+			Main.calendarView = false;
+			Main.homePageController.showAppointmentView();
+		});
 	}
 
 	@FXML
