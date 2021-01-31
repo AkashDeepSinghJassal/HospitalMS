@@ -74,6 +74,7 @@ public class HomePageController implements Initializable {
 		}
 		initializeViews();
 		loadSidePane();
+		showHome();
 		transition = new HamburgerBasicCloseTransition(hamburger);
 		drawerOverlay.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
 			triggerHamburger();
@@ -301,6 +302,7 @@ public class HomePageController implements Initializable {
 
 	public void showHome() {
 		homeView.toFront();
+		Main.homeOverviewController.updateStatistics();
 	}
 
 	public void showPatientView() {
