@@ -231,6 +231,18 @@ public class HomePageController implements Initializable {
 	}
 
 	private void initializeViews() {
+		AnchorPane homeRoot;
+		try {
+			homeRoot = Main.homeViewAnchorPane;
+			homeView.getChildren().setAll(homeRoot);
+			AnchorPane.setTopAnchor(homeRoot, 0.0);
+			AnchorPane.setRightAnchor(homeRoot, 0.0);
+			AnchorPane.setBottomAnchor(homeRoot, 0.0);
+			AnchorPane.setLeftAnchor(homeRoot, 0.0);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 
 		AnchorPane patientRoot;
 		try {

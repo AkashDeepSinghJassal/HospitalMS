@@ -7,6 +7,7 @@ import hospital.ui.homePage.HomePageController;
 import hospital.ui.view.appointment.AppointmentCalendarController;
 import hospital.ui.view.appointment.AppointmentOverviewController;
 import hospital.ui.view.doctor.DoctorOverviewController;
+import hospital.ui.view.home.HomeOverviewController;
 import hospital.ui.view.patient.PatientOverviewController;
 import hospital.util.DBUtil;
 import javafx.application.Application;
@@ -31,6 +32,8 @@ public class Main extends Application {
 	public static AppointmentCalendarController appointmentCalendarController;
 	public static AnchorPane appointmentCalendarAnchorPane;
 	public static HomePageController homePageController;
+	public static AnchorPane homeViewAnchorPane;
+	public static HomeOverviewController homeOverviewController;
 
 	public static Connection conn = null;
 
@@ -39,6 +42,7 @@ public class Main extends Application {
 		stage = primaryStage;
 		Parent root;
 		conn = DBUtil.getDBConnection();
+		initHomeView();
 		initPatientView();
 		initDoctorView();
 		initAppointmentView();
@@ -132,6 +136,20 @@ public class Main extends Application {
 		}
 	}
 
+	/*
+	 * Loads fxml and controller for doctor view
+	 */
+	private void initHomeView() {
+		FXMLLoader homeOverviewFxmlLoader;
+		homeOverviewController = new HomeOverviewController();
+		homeOverviewFxmlLoader = new FXMLLoader(getClass().getResource("../view/home/HomeOverview.fxml"));
+		homeOverviewFxmlLoader.setController(homeOverviewController);
+		try {
+			homeViewAnchorPane = homeOverviewFxmlLoader.load();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
 	@Override
 	public void stop() {
 		DBUtil.closeQuietly();
