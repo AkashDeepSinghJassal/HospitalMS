@@ -6,7 +6,7 @@
     -fx-font-size: 16pt;
     -fx-font-family: "Segoe UI Semibold";
     -fx-text-fill: white;
-    -fx-opacity: 0.6;
+    -fx-opacity: 0.7;
 }
 
 .label-bright {
@@ -164,3 +164,19 @@
 	-fx-text-fill: white;
 	-fx-opacity : 1;
 }
+.sub-label{
+	-fx-font-size: 16pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-opacity: 1;
+}
+.green{
+    -fx-text-fill: #7FFF00;
+}
+.purple{
+	-fx-text-fill: #DA70D6;
+}
+.aqua{
+	-fx-text-fill: #FDFF00;
+}
+
+

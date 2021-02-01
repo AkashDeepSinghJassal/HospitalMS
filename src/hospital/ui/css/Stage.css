@@ -28,5 +28,16 @@
   -fx-font-size: 20.0px;
 }
 .default-color0.chart-bar { 
-	-fx-bar-fill: #17449d;
+	-fx-bar-fill: #2b48b3;
+	-fx-background-radius : 5px;
+}
+.chart-pie-label { /*this is what you need for labels*/
+    -fx-fill: #fff;
+    -fx-font-size: 20px;
+} 
+.data0.chart-pie {
+	-fx-pie-color: #2b48b3;
+}
+.data1.chart-pie { 
+	-fx-pie-color: aquamarine;
 }

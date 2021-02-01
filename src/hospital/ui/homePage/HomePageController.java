@@ -69,6 +69,7 @@ public class HomePageController implements Initializable {
 		Main.doctorOverviewController.overlay = overlay;
 		Main.appointmentOverviewController.overlay = overlay;
 		Main.appointmentCalendarController.overlay = overlay;
+		Main.homeOverviewController.overlay = overlay;
 		if (!Main.isWelcomeLoaded) {
 			loadWelcomePage();
 		}
@@ -302,6 +303,7 @@ public class HomePageController implements Initializable {
 
 	public void showHome() {
 		homeView.toFront();
+		Main.homeOverviewController.updateStatistics();
 	}
 
 	public void showPatientView() {

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
@@ -16,14 +17,20 @@
             <Label layoutX="783.0" layoutY="6.0" prefHeight="88.0" prefWidth="412.0" styleClass="label-header" text="Home Overview" AnchorPane.bottomAnchor="6.0" AnchorPane.topAnchor="6.0" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="980.0" prefWidth="1920.0" styleClass="background" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+      <AnchorPane fx:id="homeAnchor" layoutX="10.0" layoutY="10.0" prefHeight="980.0" prefWidth="1920.0" styleClass="background" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
          <children>
-            <Pane layoutX="275.0" layoutY="190.0" prefHeight="100.0" prefWidth="300.0" style="-fx-border-color: #fff;" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="50.0">
+            <Pane layoutX="275.0" layoutY="190.0" prefHeight="146.0" prefWidth="332.0" style="-fx-border-color: #7FFF00;" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="50.0">
                <children>
-                  <Label layoutX="27.0" layoutY="33.0" prefHeight="31.0" prefWidth="241.0" styleClass="label-bright" text="Appointment" />
+                  <Label layoutX="54.0" layoutY="29.0" prefHeight="31.0" prefWidth="241.0" styleClass="label-bright" text="Appointment" />
+                  <Label layoutX="134.0" layoutY="82.0" text="Label">
+                     <styleClass>
+                        <String fx:value="sub-label" />
+                        <String fx:value="green" />
+                     </styleClass>
+                  </Label>
                </children>
             </Pane>
-            <BarChart fx:id="barChart" barGap="20.0" layoutX="296.0" layoutY="350.0" prefHeight="700.0" prefWidth="1000.0" stylesheets="@../../css/Stage.css" title="Appointment Statistics" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="100.0">
+            <BarChart fx:id="barChart" animated="false" barGap="20.0" layoutX="296.0" layoutY="350.0" prefHeight="700.0" prefWidth="1000.0" stylesheets="@../../css/Stage.css" title="Appointment Statistics" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="100.0">
               <xAxis>
                 <CategoryAxis side="BOTTOM" tickLabelFill="WHITE" fx:id="xAxis">
                      <tickLabelFont>
@@ -37,12 +44,38 @@
                      </tickLabelFont></NumberAxis>
               </yAxis>
             </BarChart>
-            <PieChart fx:id="pieChart" layoutX="1296.0" layoutY="349.0" prefHeight="600.0" prefWidth="600.0" AnchorPane.bottomAnchor="100.0" AnchorPane.rightAnchor="100.0" />
+            <PieChart fx:id="pieChart" animated="false" clockwise="false" labelLineLength="10.0" layoutX="1296.0" layoutY="349.0" prefHeight="600.0" prefWidth="600.0" stylesheets="@../../css/Stage.css" AnchorPane.bottomAnchor="100.0" AnchorPane.rightAnchor="100.0" />
             <Label id="caption" fx:id="caption" maxWidth="30.0" minHeight="5.0" minWidth="30.0" text="hello" textFill="WHITE">
                <font>
                   <Font size="8.0" />
                </font>
             </Label>
+            <Pane layoutX="827.0" layoutY="77.0" prefHeight="146.0" prefWidth="332.0" style="-fx-border-color: #DA70D6;" AnchorPane.leftAnchor="800.0" AnchorPane.rightAnchor="800.0" AnchorPane.topAnchor="50.0">
+               <children>
+                  <Label layoutX="34.0" layoutY="23.0" prefHeight="31.0" prefWidth="241.0" styleClass="label-bright" text="Doctor" />
+                  <Label layoutX="133.0" layoutY="70.0" text="Label">
+                     <styleClass>
+                        <String fx:value="sub-label" />
+                        <String fx:value="purple" />
+                     </styleClass>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="1453.0" layoutY="76.0" prefHeight="146.0" prefWidth="332.0" style="-fx-border-color: #FDFF00;" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="50.0">
+               <children>
+                  <Label layoutX="48.0" layoutY="24.0" prefHeight="31.0" prefWidth="241.0" styleClass="label-bright" text="Patient" />
+                  <Label layoutX="145.0" layoutY="65.0" text="Label">
+                     <styleClass>
+                        <String fx:value="sub-label" />
+                        <String fx:value="aqua" />
+                     </styleClass>
+                  </Label>
+               </children>
+               <styleClass>
+                  <String fx:value="sub-label" />
+                  <String fx:value="aqua" />
+               </styleClass>
+            </Pane>
          </children></AnchorPane>
    </children>
 </AnchorPane>

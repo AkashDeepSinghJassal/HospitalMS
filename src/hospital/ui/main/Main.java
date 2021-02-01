@@ -147,7 +147,8 @@ public class Main extends Application {
 		try {
 			homeViewAnchorPane = homeOverviewFxmlLoader.load();
 		} catch (IOException e1) {
-			e1.printStackTrace();
+			System.out.println(e1);
+//			e1.printStackTrace();
 		}
 	}
 	@Override

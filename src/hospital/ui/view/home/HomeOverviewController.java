@@ -11,6 +11,7 @@ import hospital.ui.main.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Side;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.BarChart;
 
@@ -32,6 +33,9 @@ public class HomeOverviewController {
 	private PieChart pieChart;
 	@FXML
 	private Label caption;
+	@FXML
+	private AnchorPane homeAnchor;
+
 	public AnchorPane overlay = null;
 	private ObservableList<LocalDate> dayList;
 	private ObservableList<AppointmentCalendar> appointmentCalander;
@@ -42,13 +46,16 @@ public class HomeOverviewController {
 	 */
 	@FXML
 	private void initialize() {
-		updateStatistics();
-
+//		updateStatistics();
+		caption.setLayoutX(-100);
+		caption.setLayoutY(-100);
 	}
 
 	public void updateStatistics() {
+		barChart.getData().clear();
 		LocalDate nowDate = LocalDate.now();
 		dayList = FXCollections.observableArrayList();
+		System.out.println(dayList.size());
 		appointmentCalander = Main.appointmentCalendarController.getObservableList();
 		for (int i = 0; i < 7; i++) {
 			dayList.add(nowDate.plusDays(i));
@@ -90,6 +97,7 @@ public class HomeOverviewController {
 					.add(new XYChart.Data<String, Integer>(dates.get(i), appointmentCountMap.get(dayList.get(i))));
 		}
 		barChart.getData().add(series);
+		buildPieChart(series.getData().get(0).getYValue(), 100);
 		for (XYChart.Data<String, Integer> data : series.getData()) {
 			data.getNode().addEventHandler(MouseEvent.MOUSE_MOVED, e -> {
 
@@ -97,6 +105,7 @@ public class HomeOverviewController {
 				caption.setLayoutY(e.getSceneY());
 				caption.setOpacity(1);
 				caption.setText(data.getYValue().toString());
+				buildPieChart(data.getYValue(), 100);
 			});
 			data.getNode().addEventHandler(MouseEvent.MOUSE_EXITED, e -> {
 
@@ -106,5 +115,16 @@ public class HomeOverviewController {
 				caption.setOpacity(0);
 			});
 		}
+	}
+
+	private void buildPieChart(int filled, int vacant) {
+		pieChart.getData().clear();
+		homeAnchor.layout();
+		ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(new PieChart.Data("Filled", filled),
+				new PieChart.Data("Vacant", vacant));
+		pieChart.setTitle("Appointment Ratio");
+		pieChart.getData().addAll(pieChartData);
+		pieChart.setLabelLineLength(10);
+		pieChart.setLegendSide(Side.LEFT);
 	}
 }
