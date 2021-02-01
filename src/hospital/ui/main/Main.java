@@ -42,11 +42,11 @@ public class Main extends Application {
 		stage = primaryStage;
 		Parent root;
 		conn = DBUtil.getDBConnection();
-		initHomeView();
 		initPatientView();
 		initDoctorView();
 		initAppointmentView();
 		initAppointmentCalendar();
+		initHomeView();
 		homePageController = new HomePageController();
 		try {
 			root = FXMLLoader.load(getClass().getResource("../login/Login.fxml"));

@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="1080.0" prefWidth="1920.0" styleClass="appointment-column" stylesheets="@../../css/DarkTheme.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -22,15 +23,26 @@
                   <Label layoutX="27.0" layoutY="33.0" prefHeight="31.0" prefWidth="241.0" styleClass="label-bright" text="Appointment" />
                </children>
             </Pane>
-            <BarChart fx:id="barChart" layoutX="296.0" layoutY="350.0" prefHeight="700.0" prefWidth="1000.0" title="Appointment Statistics" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="100.0">
+            <BarChart fx:id="barChart" barGap="20.0" layoutX="296.0" layoutY="350.0" prefHeight="700.0" prefWidth="1000.0" stylesheets="@../../css/Stage.css" title="Appointment Statistics" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="100.0">
               <xAxis>
-                <CategoryAxis fx:id="yAxis" side="BOTTOM" />
+                <CategoryAxis side="BOTTOM" tickLabelFill="WHITE" fx:id="xAxis">
+                     <tickLabelFont>
+                        <Font size="14.0" />
+                     </tickLabelFont></CategoryAxis>
               </xAxis>
               <yAxis>
-                <NumberAxis side="LEFT" fx:id="xAxis" />
+                <NumberAxis fx:id="yAxis" side="LEFT" tickLabelFill="WHITE">
+                     <tickLabelFont>
+                        <Font size="14.0" />
+                     </tickLabelFont></NumberAxis>
               </yAxis>
             </BarChart>
             <PieChart fx:id="pieChart" layoutX="1296.0" layoutY="349.0" prefHeight="600.0" prefWidth="600.0" AnchorPane.bottomAnchor="100.0" AnchorPane.rightAnchor="100.0" />
+            <Label id="caption" fx:id="caption" maxWidth="30.0" minHeight="5.0" minWidth="30.0" text="hello" textFill="WHITE">
+               <font>
+                  <Font size="8.0" />
+               </font>
+            </Label>
          </children></AnchorPane>
    </children>
 </AnchorPane>

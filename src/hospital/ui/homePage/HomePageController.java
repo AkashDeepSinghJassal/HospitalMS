@@ -302,7 +302,6 @@ public class HomePageController implements Initializable {
 
 	public void showHome() {
 		homeView.toFront();
-		Main.homeOverviewController.updateStatistics();
 	}
 
 	public void showPatientView() {

@@ -15,6 +15,7 @@ public class RDSUtil {
 			rdsCredential = (RDSCredential) ois.readObject();
 			fis.close();
 			ois.close();
+			rdsCredential = new RDSCredential("quiz-mysql-db.mysql.database.azure.com", "hospital", "adminsql@quiz-mysql-db", "Quiz@123");
 			return rdsCredential.getCredentials();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

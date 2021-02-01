@@ -20,6 +20,6 @@ public class RDSCredential implements Serializable {
 	}
 
 	public String getCredentials() {
-		return String.format("jdbc:mysql://%s/%s?user=%s&password=%s", url, database, user, password);
+		return String.format("jdbc:mysql://%s/%s?user=%s&password=%s&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", url, database, user, password);
 	}
 }

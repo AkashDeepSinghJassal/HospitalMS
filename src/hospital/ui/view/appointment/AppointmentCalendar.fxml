@@ -13,7 +13,7 @@
 	<children>
 		<AnchorPane prefHeight="100.0" prefWidth="1920.0" styleClass="background" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 			<children>
-				<Label fx:id="viewSwitch" layoutX="842.0" layoutY="22.0" styleClass="label-header" text="Appointment Overview" AnchorPane.leftAnchor="700.0" AnchorPane.rightAnchor="700.0" />
+				<Label fx:id="viewSwitch" layoutX="842.0" layoutY="22.0" styleClass="label-header" text="Appointment Calender View" AnchorPane.leftAnchor="700.0" AnchorPane.rightAnchor="700.0" />
             <JFXComboBox fx:id="date" layoutX="207.0" layoutY="22.0" onAction="#selectedDateChange" prefHeight="48.0" prefWidth="309.0" promptText="Select Date" />
 			</children>
 		</AnchorPane>
