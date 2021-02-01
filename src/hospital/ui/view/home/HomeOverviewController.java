@@ -35,11 +35,19 @@ public class HomeOverviewController {
 	private Label caption;
 	@FXML
 	private AnchorPane homeAnchor;
+	@FXML
+    private Label appointmentLbl;
+
+    @FXML
+    private Label doctorLbl;
+
+    @FXML
+    private Label patientLbl;
 
 	public AnchorPane overlay = null;
 	private ObservableList<LocalDate> dayList;
 	private ObservableList<AppointmentCalendar> appointmentCalander;
-
+	private int totalAppointAvail;
 	/**
 	 * Initializes the controller class. This method is automatically called after
 	 * the fxml file has been loaded.
@@ -52,10 +60,20 @@ public class HomeOverviewController {
 	}
 
 	public void updateStatistics() {
+		//update label
+		int totalPatients = Main.patientOverviewController.getObservableList().size();
+		patientLbl.setText(totalPatients + "");
+		
+		int totalDoctors = Main.doctorOverviewController.getObservableList().size();
+		doctorLbl.setText(totalDoctors + "");
+		// 8 hrs per 15 min
+		totalAppointAvail = totalDoctors * 32;
+		int totalAppoint = Main.appointmentOverviewController.getObservableList().size();
+		appointmentLbl.setText(totalAppoint + "");
+		
 		barChart.getData().clear();
 		LocalDate nowDate = LocalDate.now();
 		dayList = FXCollections.observableArrayList();
-		System.out.println(dayList.size());
 		appointmentCalander = Main.appointmentCalendarController.getObservableList();
 		for (int i = 0; i < 7; i++) {
 			dayList.add(nowDate.plusDays(i));
@@ -75,7 +93,7 @@ public class HomeOverviewController {
 				}
 			}
 		}
-		appointmentCountMap.entrySet().stream().forEach(e -> System.out.println(e));
+//		appointmentCountMap.entrySet().stream().forEach(e -> System.out.println(e));
 		// configure bar chart
 		buildBarChart(appointmentCountMap);
 
@@ -97,7 +115,7 @@ public class HomeOverviewController {
 					.add(new XYChart.Data<String, Integer>(dates.get(i), appointmentCountMap.get(dayList.get(i))));
 		}
 		barChart.getData().add(series);
-		buildPieChart(series.getData().get(0).getYValue(), 100);
+		buildPieChart(series.getData().get(0).getYValue(), totalAppointAvail);
 		for (XYChart.Data<String, Integer> data : series.getData()) {
 			data.getNode().addEventHandler(MouseEvent.MOUSE_MOVED, e -> {
 
@@ -105,7 +123,7 @@ public class HomeOverviewController {
 				caption.setLayoutY(e.getSceneY());
 				caption.setOpacity(1);
 				caption.setText(data.getYValue().toString());
-				buildPieChart(data.getYValue(), 100);
+				buildPieChart(data.getYValue(), totalAppointAvail);
 			});
 			data.getNode().addEventHandler(MouseEvent.MOUSE_EXITED, e -> {
 
