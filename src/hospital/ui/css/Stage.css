@@ -25,7 +25,8 @@
 }
 .chart-title {
   -fx-text-fill: #fff;
-  -fx-font-size: 20.0px;
+  -fx-font-size: 30.0px;
+  -fx-opacity : 0.9;
 }
 .default-color0.chart-bar { 
 	-fx-bar-fill: #2b48b3;

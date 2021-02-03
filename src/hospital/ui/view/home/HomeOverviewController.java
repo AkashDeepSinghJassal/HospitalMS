@@ -36,18 +36,19 @@ public class HomeOverviewController {
 	@FXML
 	private AnchorPane homeAnchor;
 	@FXML
-    private Label appointmentLbl;
+	private Label appointmentLbl;
 
-    @FXML
-    private Label doctorLbl;
+	@FXML
+	private Label doctorLbl;
 
-    @FXML
-    private Label patientLbl;
+	@FXML
+	private Label patientLbl;
 
 	public AnchorPane overlay = null;
 	private ObservableList<LocalDate> dayList;
 	private ObservableList<AppointmentCalendar> appointmentCalander;
 	private int totalAppointAvail;
+
 	/**
 	 * Initializes the controller class. This method is automatically called after
 	 * the fxml file has been loaded.
@@ -57,20 +58,22 @@ public class HomeOverviewController {
 //		updateStatistics();
 		caption.setLayoutX(-100);
 		caption.setLayoutY(-100);
+		pieChart.setLabelLineLength(10);
+		pieChart.setLegendSide(Side.LEFT);
 	}
 
 	public void updateStatistics() {
-		//update label
+		// update label
 		int totalPatients = Main.patientOverviewController.getObservableList().size();
 		patientLbl.setText(totalPatients + "");
-		
+
 		int totalDoctors = Main.doctorOverviewController.getObservableList().size();
 		doctorLbl.setText(totalDoctors + "");
 		// 8 hrs per 15 min
 		totalAppointAvail = totalDoctors * 32;
 		int totalAppoint = Main.appointmentOverviewController.getObservableList().size();
 		appointmentLbl.setText(totalAppoint + "");
-		
+
 		barChart.getData().clear();
 		LocalDate nowDate = LocalDate.now();
 		dayList = FXCollections.observableArrayList();
@@ -115,34 +118,47 @@ public class HomeOverviewController {
 					.add(new XYChart.Data<String, Integer>(dates.get(i), appointmentCountMap.get(dayList.get(i))));
 		}
 		barChart.getData().add(series);
-		buildPieChart(series.getData().get(0).getYValue(), totalAppointAvail);
+		buildPieChart(series.getData().get(0).getYValue(), totalAppointAvail, series.getData().get(0).getXValue());
 		for (XYChart.Data<String, Integer> data : series.getData()) {
 			data.getNode().addEventHandler(MouseEvent.MOUSE_MOVED, e -> {
 
+				caption.setMinWidth(30);
 				caption.setLayoutX(e.getSceneX());
-				caption.setLayoutY(e.getSceneY());
-				caption.setOpacity(1);
+				caption.setLayoutY(e.getSceneY() - 75);
 				caption.setText(data.getYValue().toString());
-				buildPieChart(data.getYValue(), totalAppointAvail);
+//				buildPieChart(data.getYValue(), totalAppointAvail);
+			});
+			data.getNode().addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+				buildPieChart(data.getYValue(), totalAppointAvail, data.getXValue());
 			});
 			data.getNode().addEventHandler(MouseEvent.MOUSE_EXITED, e -> {
 
 				caption.setLayoutX(-100);
 				caption.setLayoutY(-100);
 				caption.setText("");
-				caption.setOpacity(0);
 			});
 		}
 	}
 
-	private void buildPieChart(int filled, int vacant) {
+	private void buildPieChart(int filled, int vacant, String dataTitle) {
 		pieChart.getData().clear();
 		homeAnchor.layout();
-		ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(new PieChart.Data("Filled", filled),
-				new PieChart.Data("Vacant", vacant));
-		pieChart.setTitle("Appointment Ratio");
+		ObservableList<PieChart.Data> pieChartData = FXCollections
+				.observableArrayList(new PieChart.Data("Filled", filled), new PieChart.Data("Vacant", vacant));
+		pieChart.setTitle(dataTitle);
 		pieChart.getData().addAll(pieChartData);
-		pieChart.setLabelLineLength(10);
-		pieChart.setLegendSide(Side.LEFT);
+		int total = filled + vacant;
+		for (PieChart.Data data : pieChart.getData()) {
+			data.getNode().addEventHandler(MouseEvent.MOUSE_MOVED, e -> {
+				caption.setLayoutX(e.getSceneX());
+				caption.setLayoutY(e.getSceneY());
+				caption.setText(String.format("%.1f %s", (double) data.getPieValue() * 100 / total, "%"));
+				caption.setMinWidth(75);
+			});
+			data.getNode().addEventHandler(MouseEvent.MOUSE_EXITED, e -> {
+				caption.setLayoutX(-100);
+				caption.setLayoutY(-100);
+			});
+		}
 	}
 }

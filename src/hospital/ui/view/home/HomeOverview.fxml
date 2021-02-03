@@ -14,7 +14,7 @@
    <children>
       <AnchorPane prefHeight="100.0" prefWidth="1920.0" styleClass="background" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label layoutX="783.0" layoutY="6.0" prefHeight="88.0" prefWidth="412.0" styleClass="label-header" text="Home Overview" AnchorPane.bottomAnchor="6.0" AnchorPane.topAnchor="6.0" />
+            <Label layoutX="783.0" layoutY="6.0" prefHeight="88.0" prefWidth="412.0" styleClass="label-header" text="Dashboard" AnchorPane.bottomAnchor="6.0" AnchorPane.topAnchor="6.0" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="homeAnchor" layoutX="10.0" layoutY="10.0" prefHeight="980.0" prefWidth="1920.0" styleClass="background" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
@@ -63,7 +63,7 @@
             </Pane>
             <Pane layoutX="1453.0" layoutY="76.0" prefHeight="146.0" prefWidth="332.0" style="-fx-border-color: #FDFF00;" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="50.0">
                <children>
-                  <Label layoutX="48.0" layoutY="24.0" prefHeight="31.0" prefWidth="241.0" styleClass="label-bright" text="Patient" />
+                  <Label layoutX="46.0" layoutY="18.0" prefHeight="31.0" prefWidth="241.0" styleClass="label-bright" text="Patient" />
                   <Label fx:id="patientLbl" layoutX="141.0" layoutY="68.0" text="Label">
                      <styleClass>
                         <String fx:value="sub-label" />
