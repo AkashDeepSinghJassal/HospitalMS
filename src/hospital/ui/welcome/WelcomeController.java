@@ -25,7 +25,7 @@ public class WelcomeController implements Initializable {
 		primaryStage = Main.stage;
 		imageView.fitWidthProperty().bind(primaryStage.widthProperty());
 		imageView.fitHeightProperty().bind(primaryStage.heightProperty());
-		fullName.setText("Welcome, HSM");
+		fullName.setText("Welcome");
 	}
 
 }
