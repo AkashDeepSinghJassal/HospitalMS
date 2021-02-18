@@ -78,10 +78,11 @@ public class HomeOverviewController {
 		LocalDate nowDate = LocalDate.now();
 		dayList = FXCollections.observableArrayList();
 		appointmentCalander = Main.appointmentCalendarController.getObservableList();
+		HashMap<LocalDate, Integer> appointmentCountMap = new HashMap<LocalDate, Integer>();
 		for (int i = 0; i < 7; i++) {
 			dayList.add(nowDate.plusDays(i));
+			appointmentCountMap.put(nowDate.plusDays(i), 0);
 		}
-		HashMap<LocalDate, Integer> appointmentCountMap = new HashMap<LocalDate, Integer>();
 		for (AppointmentCalendar calender : appointmentCalander) {
 			LinkedHashMap<LocalDateTime, String> appointmentMap = calender.getAppointments();
 			for (LocalDateTime localDateTime : appointmentMap.keySet()) {
@@ -118,7 +119,9 @@ public class HomeOverviewController {
 					.add(new XYChart.Data<String, Integer>(dates.get(i), appointmentCountMap.get(dayList.get(i))));
 		}
 		barChart.getData().add(series);
-		buildPieChart(series.getData().get(0).getYValue(), totalAppointAvail, series.getData().get(0).getXValue());
+		if(!series.getData().isEmpty()) {
+			buildPieChart(series.getData().get(0).getYValue(), totalAppointAvail, series.getData().get(0).getXValue());			
+		}
 		for (XYChart.Data<String, Integer> data : series.getData()) {
 			data.getNode().addEventHandler(MouseEvent.MOUSE_MOVED, e -> {
 
