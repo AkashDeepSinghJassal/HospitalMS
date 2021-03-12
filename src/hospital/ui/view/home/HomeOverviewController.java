@@ -12,9 +12,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Side;
-import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.BarChart;
-
+import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
@@ -55,7 +54,7 @@ public class HomeOverviewController {
 	 */
 	@FXML
 	private void initialize() {
-//		updateStatistics();
+		// updateStatistics();
 		caption.setLayoutX(-100);
 		caption.setLayoutY(-100);
 		pieChart.setLabelLineLength(10);
@@ -97,7 +96,7 @@ public class HomeOverviewController {
 				}
 			}
 		}
-//		appointmentCountMap.entrySet().stream().forEach(e -> System.out.println(e));
+		// appointmentCountMap.entrySet().stream().forEach(e -> System.out.println(e));
 		// configure bar chart
 		buildBarChart(appointmentCountMap);
 
@@ -115,12 +114,16 @@ public class HomeOverviewController {
 		XYChart.Series<String, Integer> series = new XYChart.Series<>();
 		series.setName("Appointments");
 		for (int i = 0; i < dayList.size(); i++) {
-			series.getData()
-					.add(new XYChart.Data<String, Integer>(dates.get(i), appointmentCountMap.get(dayList.get(i))));
+			if (appointmentCountMap.get(dayList.get(i)) == null) {
+				series.getData().add(new XYChart.Data<String, Integer>(dates.get(i), 0));
+			} else {
+				series.getData()
+						.add(new XYChart.Data<String, Integer>(dates.get(i), appointmentCountMap.get(dayList.get(i))));
+			}
 		}
 		barChart.getData().add(series);
-		if(!series.getData().isEmpty()) {
-			buildPieChart(series.getData().get(0).getYValue(), totalAppointAvail, series.getData().get(0).getXValue());			
+		if (!series.getData().isEmpty()) {
+			buildPieChart(series.getData().get(0).getYValue(), totalAppointAvail, series.getData().get(0).getXValue());
 		}
 		for (XYChart.Data<String, Integer> data : series.getData()) {
 			data.getNode().addEventHandler(MouseEvent.MOUSE_MOVED, e -> {
@@ -129,7 +132,7 @@ public class HomeOverviewController {
 				caption.setLayoutX(e.getSceneX());
 				caption.setLayoutY(e.getSceneY() - 75);
 				caption.setText(data.getYValue().toString());
-//				buildPieChart(data.getYValue(), totalAppointAvail);
+				// buildPieChart(data.getYValue(), totalAppointAvail);
 			});
 			data.getNode().addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
 				buildPieChart(data.getYValue(), totalAppointAvail, data.getXValue());
